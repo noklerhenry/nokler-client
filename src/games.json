@@ -1,0 +1,124 @@
+{
+  "results": [
+      {
+        "id": 3498,
+        "name": "Grand Theft Auto V",
+        "image": "https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg",
+        "price": 60
+      },
+      {
+        "id": 3328,
+        "name": "The Witcher 3: Wild Hunt",
+        "image": "https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg",
+        "price": 40
+      },
+      {
+        "id": 4200,
+        "name": "Portal 2",
+        "image": "https://media.rawg.io/media/games/328/3283617cb7d75d67257fc58339188742.jpg",
+        "price": 20
+      },
+      {
+        "id": 5286,
+        "name": "Tomb Raider (2013)",
+        "image": "https://media.rawg.io/media/games/ad2/ad2ffdf80ba993654f31da045bc02456.jpg",
+        "price": 15
+      },
+      {
+        "id": 5679,
+        "name": "The Elder Scrolls V: Skyrim",
+        "image": "https://media.rawg.io/media/games/7cf/7cfc9220b401b7a300e409e539c9afd5.jpg",
+        "price": 15
+      },
+      {
+        "id": 4291,
+        "name": "Counter-Strike: Global Offensive",
+        "image": "https://media.rawg.io/media/games/736/73619bd336c894d6941d926bfd563946.jpg",
+        "price": 0
+      },
+      {
+        "id": 12020,
+        "name": "Left 4 Dead 2",
+        "image": "https://media.rawg.io/media/games/d58/d588947d4286e7b5e0e12e1bea7d9844.jpg",
+        "price": 14
+      },
+      {
+        "id": 13536,
+        "name": "Portal",
+        "image": "https://media.rawg.io/media/games/7fa/7fa0b586293c5861ee32490e953a4996.jpg",
+        "price": 10
+      },
+      {
+        "id": 4062,
+        "name": "BioShock Infinite",
+        "image": "https://media.rawg.io/media/games/fc1/fc1307a2774506b5bd65d7e8424664a7.jpg",
+        "price": 22
+      },
+      {
+        "id": 3439,
+        "name": "Life is Strange",
+        "image": "https://media.rawg.io/media/games/562/562553814dd54e001a541e4ee83a591c.jpg",
+        "price": 25
+      },
+      {
+        "id": 802,
+        "name": "Borderlands 2",
+        "image": "https://media.rawg.io/media/games/588/588c6bdff3d4baf66ec36b1c05b793bf.jpg",
+        "price": 30
+      },
+      {
+        "id": 28,
+        "name": "Red Dead Redemption 2",
+        "image": "https://media.rawg.io/media/games/511/5118aff5091cb3efec399c808f8c598f.jpg",
+        "price": 65
+      },
+      {
+        "id": 13537,
+        "name": "Half-Life 2",
+        "image": "https://media.rawg.io/media/games/b8c/b8c243eaa0fbac8115e0cdccac3f91dc.jpg",
+        "price": 10
+      },
+      {
+        "id": 4286,
+        "name": "BioShock",
+        "image": "https://media.rawg.io/media/games/bc0/bc06a29ceac58652b684deefe7d56099.jpg",
+        "price": 10
+      },
+      {
+        "id": 1030,
+        "name": "Limbo",
+        "image": "https://media.rawg.io/media/games/942/9424d6bb763dc38d9378b488603c87fa.jpg",
+        "price": 30
+      },
+      {
+        "id": 2454,
+        "name": "DOOM (2016)",
+        "image": "https://media.rawg.io/media/games/c4b/c4b0cab189e73432de3a250d8cf1c84e.jpg",
+        "price": 30
+      },
+      {
+        "id": 3070,
+        "name": "Fallout 4",
+        "image": "https://media.rawg.io/media/games/d82/d82990b9c67ba0d2d09d4e6fa88885a7.jpg",
+        "price": 30
+      },
+      {
+        "id": 32,
+        "name": "Destiny 2",
+        "image": "https://media.rawg.io/media/games/34b/34b1f1850a1c06fd971bc6ab3ac0ce0e.jpg",
+        "price": 30
+      },
+      {
+        "id": 11859,
+        "name": "Team Fortress 2",
+        "image": "https://media.rawg.io/media/games/46d/46d98e6910fbc0706e2948a7cc9b10c5.jpg",
+        "price": 2
+      },
+      {
+        "id": 3939,
+        "name": "PAYDAY 2",
+        "image": "https://media.rawg.io/media/games/73e/73eecb8909e0c39fb246f457b5d6cbbe.jpg",
+        "price": 24
+      }
+  ]
+}

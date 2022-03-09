@@ -1,0 +1,25 @@
+.container {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 650px;
+    border-radius: 5px;
+    color: #000;
+    background: rgb(196, 196, 196);
+}
+
+.button {
+    border: none;
+    background-color: rgb(255, 43, 43);
+    border-radius: 2px;
+    height: 30px;
+    width: 30px;
+}
+
+.button:hover {
+    transition: .3s;
+    background-color: rgb(255, 71, 71);
+}

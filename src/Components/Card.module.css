@@ -1,0 +1,23 @@
+.img {
+    width: 500px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgb(173, 173, 173);
+    border-radius: 5px;
+    padding: 5px;
+    margin: 10px;
+}
+
+.button {
+    border: none;
+    border-radius: 2px;
+    background-color: rgb(107, 107, 107);
+}
+
+.button:hover {
+    transition: .2s;
+    background-color: rgb(175, 175, 175);
+}
