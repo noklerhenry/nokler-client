@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { CardElement, useStripe, useElements, PaymentElement } from "@stripe/react-stripe-js";
+import {
+  CardElement,
+  useStripe,
+  useElements,
+  PaymentElement,
+} from "@stripe/react-stripe-js";
 import { Container, Button } from "@chakra-ui/react";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 
 export const CheckoutForm = ({ amount }) => {
+  const cardElementOpts = {
+    iconStyle: "solid",
+    hidePostalCode: true,
+  };
   const [state, setState] = useState({
     city: "",
     line1: "",
@@ -74,7 +83,7 @@ export const CheckoutForm = ({ amount }) => {
   return (
     <Container>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <PaymentElement />
+        <CardElement options={cardElementOpts} />
         <label>*city:</label>
         <input
           type="text"
