@@ -107,6 +107,8 @@ export default function Detail() {
         </SimpleGrid>
       </HStack>
 
+      <Divider borderColor="gray.200" />
+
       <h2>Screenshots</h2>
 
       <Divider borderColor="gray.200" />
