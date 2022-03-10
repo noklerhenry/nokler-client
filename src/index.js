@@ -14,8 +14,8 @@ ReactDOM.render(
     <ChakraProvider theme={theme}>
     <React.StrictMode>
       <Auth0Provider
-      domain='dev-4dwzec6x.us.auth0.com'
-      clientId='oDVbYUSJ60qpeBqm9h0OHLNsrTygI24q'
+      domain='nokler.us.auth0.com'
+      clientId='Z0NS1usLidRY7BSA5rz1KPYU8MQalTvh'
       redirectUri={window.location.origin}>
         <App />
       </Auth0Provider>
