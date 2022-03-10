@@ -28,13 +28,13 @@ export const Card = ({ id, name, price, image }) => {
   return (
     <Box margin="10px" w="290px" h={{ base: "100%", sm: "400px", lg: "600px" }}>
       <Image
-        w={"100%"}
+        w="100%"
         h={{ base: "100%", sm: "400px", lg: "450px" }}
         src={image}
         alt="img not found"
-        rounded={"md"}
-        fit={"cover"}
-        align={"center"}
+        rounded="md"
+        fit="cover"
+        align="center"
         boxShadow="5px 5px 15px #111111"
         mb="15px"
       />
