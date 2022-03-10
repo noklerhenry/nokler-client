@@ -17,15 +17,33 @@ import {
   VisuallyHidden,
   List,
   ListItem,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
 } from "@chakra-ui/react";
-import React from "react";
-//import { useParams, useHistory, Link } from "react-router-dom";
-//import { useDispatch, useSelector } from "react-redux";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useParams, useHistory, Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import Screenshots from "./Screenshots";
 
 export default function Detail() {
+  const OverlayOne = () => {
+    return <ModalOverlay />;
+  };
+  const OverlayTwo = () => {
+    return <ModalOverlay />;
+  };
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [overlay, setOverlay] = useState(<OverlayOne />);
+
   return (
-    <Container maxW={"7xl"}>
+    <Container maxW={"7xl"} mt="150px" mb="150px">
       <SimpleGrid
         columns={{ base: 1, md: 2, lg: 2 }}
         spacing={{ base: 8, md: 10 }}
@@ -33,17 +51,17 @@ export default function Detail() {
       >
         <Flex>
           <Image
-            rounded={"md"}
             src="https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
+            rounded={"md"}
             alt="Game.jpg"
             fit={"cover"}
             align={"center"}
             w={"100%"}
-            h={{ base: "100%", sm: "400px", lg: "500px" }}
+            h={{ base: "100%", sm: "300px", lg: "500px" }}
           />
         </Flex>
 
-        <Stack divider={<StackDivider borderColor="gray.200" />}>
+        <Stack divider={<StackDivider borderColor="gray.400" />}>
           <Box as="header">
             <Heading
               lineHeight={1.1}
@@ -54,7 +72,7 @@ export default function Detail() {
             </Heading>
           </Box>
 
-          <SimpleGrid columns={{ base: 1, md: 2 }}>
+          <SimpleGrid columns={{ base: 1, md: 2 }} marginTop={"20px"}>
             <List>
               <ListItem>
                 <Text as={"span"} fontWeight={"bold"}>
@@ -74,49 +92,106 @@ export default function Detail() {
             <List>
               <ListItem>
                 <Text as={"span"} fontWeight={"bold"}>
-                  OS:
+                  Region:
                 </Text>{" "}
-                Windows
+                Latinoamérica
               </ListItem>
 
               <ListItem>
                 <Text as={"span"} fontWeight={"bold"}>
-                  Region:
+                  OS:
                 </Text>{" "}
-                Latinoamérica
+                Windows
               </ListItem>
             </List>
           </SimpleGrid>
         </Stack>
       </SimpleGrid>
 
-      <Divider borderColor="gray.200" />
+      <Divider borderColor="gray.400" />
 
-      <HStack>
-        <SimpleGrid columns="2">
+      <SimpleGrid columns={"2"} margin={"20px"}>
+        <HStack>
           <Box>
-            Price: $ 479.99
-            <Button size="lg">Add to cart</Button>
+            Price:
+            <Box fontSize={"x-large"}>
+              $ 479.99
+              <Button
+                onClick={() => {
+                  setOverlay(<OverlayOne />);
+                  onOpen();
+                }}
+                ml="4"
+              >
+                Add to cart
+              </Button>
+              <Modal
+                isCentered
+                onClose={onClose}
+                isOpen={isOpen}
+                motionPreset="slideInBottom"
+              >
+                {overlay}
+                <ModalContent>
+                  <ModalHeader>Added to cart</ModalHeader>
+                  <ModalCloseButton />
+                  <ModalBody>Im in a modal!</ModalBody>
+                  <ModalFooter>
+                    <Button mr={3} onClick={onClose}>
+                      Continue Browsing
+                    </Button>
+                    <Button>Checkout now!</Button>
+                  </ModalFooter>
+                </ModalContent>
+              </Modal>
+            </Box>
           </Box>
-        </SimpleGrid>
-        <SimpleGrid columns="2">
+        </HStack>
+        <HStack>
           <Box>
-            Premium price: $ 431.99
-            <Button>Pay with premium!</Button>
+            Premium price:
+            <Box fontSize={"x-large"}>
+              $ 431.99
+              <Button>Pay with premium!</Button>
+            </Box>
           </Box>
-        </SimpleGrid>
-      </HStack>
+        </HStack>
+      </SimpleGrid>
 
-      <Divider borderColor="gray.200" />
+      <Divider borderColor="gray.400" />
 
-      <h2>Screenshots</h2>
+      <Box margin={"20px"}>
+        <Button
+          onClick={() => {
+            setOverlay(<OverlayTwo />);
+            onOpen();
+          }}
+        >
+          Screenshots+
+        </Button>
+        <Modal
+          onClose={onClose}
+          size={"6xl"}
+          isOpen={isOpen}
+          motionPreset="slideInBottom"
+        >
+          {overlay}
+          <ModalContent>
+            <ModalHeader>Screenshots</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Screenshots />
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+      </Box>
 
-      <Divider borderColor="gray.200" />
+      <Divider borderColor="gray.400" />
 
-      <div>
+      <VStack margin={"20px"}>
         Description:
-        <div>
-          <p>
+        <Text>
+          <Box>
             The third game in a series, it holds nothing back from the player.
             Open world adventures of the renowned monster slayer Geralt of Rivia
             are now even on a larger scale. Following the source material more
@@ -125,37 +200,37 @@ export default function Detail() {
             the side. Great attention to the world building above all creates an
             immersive story, where your decisions will shape the world around
             you.
-          </p>
-          <p>
+          </Box>
+          <Box>
             CD Project Red are infamous for the amount of work they put into
             their games, and it shows, because aside from classic third-person
             action RPG base game they provided 2 massive DLCs with unique
             questlines and 16 smaller DLCs, containing extra quests and items.
-          </p>
-          <p>
+          </Box>
+          <Box>
             Players praise the game for its atmosphere and a wide open world
             that finds the balance between fantasy elements and realistic and
             believable mechanics, and the game deserved numerous awards for
             every aspect of the game, from music to direction.
-          </p>
-        </div>
-      </div>
+          </Box>
+        </Text>
+      </VStack>
 
-      <Divider borderColor="gray.200" />
+      <Divider borderColor="gray.400" />
 
-      <div>
+      <Box margin={"10px"}>
         System requirements:
-        <div>
-          <p>
+        <HStack marginRight={"20px"} marginTop={"20px"}>
+          <Box>
             minimum: "Core 2 Duo/Athlon X2 2 ГГц,1 Гб памяти,GeForce 7600/Radeon
             X800,10 Гб на винчестере,интернет-соединение"
-          </p>
-          <p>
+          </Box>
+          <Box>
             recommended: "Core 2 Duo/Athlon X2 2.5 ГГц,2 Гб памяти,GeForce GTX
             280/Radeon HD 2600,10 Гб на винчестере,интернет-соединение"
-          </p>
-        </div>
-      </div>
+          </Box>
+        </HStack>
+      </Box>
     </Container>
   );
 }

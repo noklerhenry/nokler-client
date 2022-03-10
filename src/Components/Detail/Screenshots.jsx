@@ -73,26 +73,20 @@ export default function Screenshots() {
   };
 
   return (
-    <Flex
-      w="full"
-      bg={useColorModeValue("gray.200", "gray.600")}
-      p={10}
-      alignItems="center"
-      justifyContent="center"
-    >
+    <Flex w="full" p={10} alignItems="center" justifyContent="center">
       <Flex w="full" h="full" overflow="hidden" pos="relative">
         <Flex h="full" w="full" {...carouselStyle}>
           <Box key={`slide-1`} boxSize="full" shadow="md" flex="none">
             <Text
               color="white"
-              fontSize="xs"
+              fontSize="md"
               p="8px 12px"
               pos="absolute"
               top="0"
             >
               1 / {slidesCount}
             </Text>
-            <AspectRatio maxW="80%" maxH="50%">
+            <AspectRatio maxH="720px" maxW="1280px">
               <iframe
                 src={trailer.video}
                 title="YouTube video player"
@@ -104,10 +98,16 @@ export default function Screenshots() {
           </Box>
 
           {slides.map((slide, sid) => (
-            <Box key={`slide-${sid}`} boxSize="full" shadow="md" flex="none">
+            <Box
+              key={`slide-${sid}`}
+              boxSize="full"
+              shadow="md"
+              flex="none"
+              alignContent="center"
+            >
               <Text
                 color="white"
-                fontSize="xs"
+                fontSize="md"
                 p="8px 12px"
                 pos="absolute"
                 top="0"
@@ -119,6 +119,8 @@ export default function Screenshots() {
                 alt="carousel image"
                 boxSize="full"
                 backgroundSize="cover"
+                maxH="720px"
+                maxW="1280px"
               />
             </Box>
           ))}
