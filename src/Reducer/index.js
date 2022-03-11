@@ -1,4 +1,5 @@
-import { ADD_TO_CART, CLEAR_CART, REMOVE_TO_CART, LOAD_CART } from "../Actions";
+import { act } from "react-dom/test-utils";
+import { ADD_TO_CART, CLEAR_CART, REMOVE_TO_CART, LOAD_CART, GET_GAME_DETAILS, REMOVE_DETAIL_CACHE, FILTER_GENRES_RESULTS, FILTER_PLATFORM_RESULTS, FILTER_REGION_RESULTS, FILTER_STORE_RESULTS } from "../Actions";
 import json from '../games.json'
 
 const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -6,7 +7,9 @@ const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
 const initalState = {
     games: json.results,
     cart: cartFromLocalStorage,
-    totalPrice: 0
+    totalPrice: 0,
+    videogame: [],
+    gamesFiltered: []
 };
 
 const reducer = (state = initalState, action) => {
@@ -44,6 +47,36 @@ const reducer = (state = initalState, action) => {
             return {
                 ...state,
                 cart: action.payload
+            }
+        case GET_GAME_DETAILS:
+            return {
+                ...state,
+                videogame: action.payload
+            }
+        case REMOVE_DETAIL_CACHE:
+            return {
+                ...state,
+                videogame: []
+            }
+        case FILTER_GENRES_RESULTS:
+            return {
+                ...state,
+                gamesFiltered: action.payload
+            }
+        case FILTER_PLATFORM_RESULTS:
+            return {
+                ...state,
+                gamesFiltered: action.payload
+            }
+        case FILTER_REGION_RESULTS:
+            return {
+                ...state,
+                gamesFiltered: action.payload
+            }
+        case FILTER_STORE_RESULTS:
+            return {
+                ...state,
+                gamesFiltered: action.payload
             }
         default:
             return state;

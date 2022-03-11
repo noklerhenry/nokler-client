@@ -12,14 +12,14 @@ import '@fontsource/anton/400.css'
 ReactDOM.render(
   <Provider store={store}>
     <ChakraProvider theme={theme}>
-    <React.StrictMode>
-      <Auth0Provider
-      domain='dev-4dwzec6x.us.auth0.com'
-      clientId='oDVbYUSJ60qpeBqm9h0OHLNsrTygI24q'
-      redirectUri={window.location.origin}>
-        <App />
-      </Auth0Provider>
-    </React.StrictMode>
+      <React.StrictMode>
+        <Auth0Provider
+        domain='dev-4dwzec6x.us.auth0.com'
+        clientId='oDVbYUSJ60qpeBqm9h0OHLNsrTygI24q'
+        redirectUri={window.location.origin}>
+          <App />
+        </Auth0Provider>
+      </React.StrictMode>
     </ChakraProvider>
   </Provider>,
 

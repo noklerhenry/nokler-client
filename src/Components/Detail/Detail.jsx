@@ -1,143 +1,152 @@
-import React from "react";
+import React , {useEffect} from "react";
 //import { useParams, useHistory, Link } from "react-router-dom";
-//import { useDispatch, useSelector } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {Box, Image, Heading, AspectRatio, Text, Button} from "@chakra-ui/react"
+import { getGameDetails, removeDetailCache } from "../../Actions";
 
 export default function Detail() {
 
+  const dispatch = useDispatch();
   const videogame = useSelector((state) => state.videogame);
 
+  useEffect(() => {
+      dispatch(getGameDetails(props.match.params.id));
+      return () => {
+          dispatch(removeDetailCache())
+      }
+  }, [dispatch])
+
   return (
-    <div>
-      <div>
-        <div>
-          <img
+    <Box>
+      <Box>
+        <Box>
+          <Image
             src={videogame.background_image}
             alt={`${videogame.background_image}.jpg`}
           />
-        </div>
+        </Box>
 
-        <h2> {videogame.name} </h2>
+        <Heading> {videogame.name} </Heading>
 
-        <div>Platform: {videogame.platform}</div>
+        <Box>Platform: {videogame.platform}</Box>
 
-        <div>Region: {videogame.region}</div>
+        <Box>Region: {videogame.region}</Box>
 
-        <div>
+        <Box>
           Digital key:
-          <div>This is a digital edition of the product (CD-KEY)</div>
-        </div>
+          <Box>This is a digital edition of the product (CD-KEY)</Box>
+        </Box>
 
-        <div>OS: {videogame.os}</div>
+        <Box>OS: {videogame.os}</Box>
 
-        <div>
-          <div>
+        <Box>
+          <Box>
             Price:
             {videogame.price}
-            <button>Add to cart</button>
-          </div>
-          <div>
+            <Button>Add to cart</Button>
+          </Box>
+          <Box>
             Premium price:
             {videogame.price}
-            <button>Get premium account pay less!</button>
-          </div>
-        </div>
+            <Button>Get premium account pay less!</Button>
+          </Box>
+        </Box>
 
-        <h2>Screenshots Gallery</h2>
+        <Heading>Screenshots Gallery</Heading>
 
-        <iframe title="Trailer" src={videogame.trailer}></iframe>
-        <div>
-          <div>
-            <div>1 / 6</div>
-            <img src={videogame.short_screenshots[1]} alt="Screenshot1.jpg" />
-          </div>
+        <AspectRatio title="Trailer" src={videogame.trailer}></AspectRatio>
+        <Box>
+          <Box>
+            <Box>1 / 6</Box>
+            <Image src={videogame.short_screenshots[1]} alt="Screenshot1.jpg" />
+          </Box>
 
-          <div>
-            <div>2 / 6</div>
-            <img src={videogame.short_screenshots[2]} alt="Screenshot2.jpg" />
-          </div>
+          <Box>
+            <Box>2 / 6</Box>
+            <Image src={videogame.short_screenshots[2]} alt="Screenshot2.jpg" />
+          </Box>
 
-          <div>
-            <div>3 / 6</div>
-            <img src={videogame.short_screenshots[3]} alt="Screenshot3.jpg" />
-          </div>
+          <Box>
+            <Box>3 / 6</Box>
+            <Image src={videogame.short_screenshots[3]} alt="Screenshot3.jpg" />
+          </Box>
 
-          <div>
-            <div>4 / 6</div>
-            <img src={videogame.short_screenshots[4]} alt="Screenshot4.jpg" />
-          </div>
+          <Box>
+            <Box>4 / 6</Box>
+            <Image src={videogame.short_screenshots[4]} alt="Screenshot4.jpg" />
+          </Box>
 
-          <div>
-            <div>5 / 6</div>
-            <img src={videogame.short_screenshots[5]} alt="Screenshot5.jpg" />
-          </div>
+          <Box>
+            <Box>5 / 6</Box>
+            <Image src={videogame.short_screenshots[5]} alt="Screenshot5.jpg" />
+          </Box>
 
-          <div>6 / 6</div>
-          <img src={videogame.short_screenshots[6]} alt="Screenshot6.jpg" />
+          <Box>6 / 6</Box>
+          <Image src={videogame.short_screenshots[6]} alt="Screenshot6.jpg" />
 
           <a onclick="plusSlides(-1)" href="<">❮</a>
           <a onclick="plusSlides(1)" href=">">❯</a>
 
-          <div>
-            <p id="caption"></p>
-          </div>
+          <Box>
+            <Text id="caption"></Text>
+          </Box>
 
-          <div>
-            <div>
-              <img
+          <Box>
+            <Box>
+              <Image
                 src={videogame.short_screenshots[1]}
                 onclick="currentSlide(1)"
                 alt="Screenshot1.jpg"
               />
-            </div>
-            <div>
-              <img
+            </Box>
+            <Box>
+              <Image
                 src={videogame.short_screenshots[2]}
                 onclick="currentSlide(2)"
                 alt="Screenshot2.jpg"
               />
-            </div>
-            <div>
-              <img
+            </Box>
+            <Box>
+              <Image
                 src={videogame.short_screenshots[3]}
                 onclick="currentSlide(3)"
                 alt="Screenshot3.jpg"
               />
-            </div>
-            <div>
-              <img
+            </Box>
+            <Box>
+              <Image
                 src={videogame.short_screenshots[4]}
                 onclick="currentSlide(4)"
                 alt="Screenshot4.jpg"
               />
-            </div>
-            <div>
-              <img
+            </Box>
+            <Box>
+              <Image
                 src={videogame.short_screenshots[5]}
                 onclick="currentSlide(5)"
                 alt="Screenshot5.jpg"
               />
-            </div>
-            <div>
-              <img
+            </Box>
+            <Box>
+              <Image
                 src={videogame.short_screenshots[6]}
                 onclick="currentSlide(6)"
                 alt="Screenshot6.jpg"
               />
-            </div>
-          </div>
-        </div>
+            </Box>
+          </Box>
+        </Box>
 
-        <div>
+        <Box>
           Description:
-          <div>{videogame.description}</div>
-        </div>
+          <Box>{videogame.description}</Box>
+        </Box>
 
-        <div>
+        <Box>
           System requirements:
-          <div>{videogame.system_requirements}</div>
-        </div>
-      </div>
-    </div>
+          <Box>{videogame.system_requirements}</Box>
+        </Box>
+      </Box>
+    </Box>
   );
 }

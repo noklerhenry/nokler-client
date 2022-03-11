@@ -1,130 +1,93 @@
-import {React} from "react"
+import React, {useEffect, useState} from "react"
+import { useDispatch, useSelector } from "react-redux";
+import {    filterGamesByGenre, 
+            filterGamesByPlatform, 
+            filterGamesByStore, 
+            filterGamesByRegion   } from "../../Actions";
+import { Checkbox,
+         CheckboxGroup, 
+         Heading, 
+         Stack, 
+         Box, 
+         useDisclosure, 
+         Button, 
+         DrawerBody, 
+         Drawer, 
+         DrawerContent,
+         DrawerOverlay,
+         DrawerHeader } from "@chakra-ui/react";
 
-
+         
+         
 export default function Filter () {
+    const dispatch = useDispatch();
+    const [placement, setPlacement] = React.useState('left')
+    const { isOpen, onOpen, onClose } = useDisclosure()
+             
+    function handleFilterPlatform(e){
+        dispatch(filterGamesByPlatform(e.target.value))
+    }
+
+    function handleFilterStore(e){
+        dispatch(filterGamesByStore(e.target.value))
+    }
+
+    function handleFilterRegion(e){
+        dispatch(filterGamesByRegion(e.target.value))
+    }
+
+    function handleFilterGenre(e){
+        dispatch(filterGamesByGenre(e.target.value))
+    }
+    
     return (
-            <div className="filters">
-                    <h5>Filter by Genre</h5>
-                        <label>Shooter</label>
-                            <input
-                                type="checkbox"                             
-                            />
-                        <label>Open World</label>
-                            <input
-                                type="checkbox"                               
-                            />
-                        <label>RPG</label>
-                            <input
-                                type="checkbox"                                    
-                            />
-                        <label>Adventure</label>
-                            <input
-                                type="checkbox"                  
-                            />
-                        <label>MMO</label>
-                            <input
-                                type="checkbox"                             
-                            />
-                        <label>MOBA</label>
-                            <input
-                                type="checkbox"
-                            />
-                        <label>Sports</label>
-                            <input
-                                type="checkbox"
-                            />
-                    <h5>Filter by Product</h5>
-                        <label>Games</label>
-                            <input
-                                type="checkbox"                             
-                            />
-                        <label>DLC's</label>
-                            <input
-                                type="checkbox"                               
-                            />
-                        <label>Gift Cards</label>
-                            <input
-                                type="checkbox"                                    
-                            />
-                        <label>Subscriptions</label>
-                            <input
-                                type="checkbox"                  
-                            />
-                        <label>Operative System</label>
-                            <input
-                                type="checkbox"                             
-                            />
-                    <h5>Filter by Platform</h5>
-                        <label>PC</label>
-                            <input
-                                type="checkbox"                             
-                            />
-                        <label>PlayStation</label>
-                            <input
-                                type="checkbox"                               
-                            />
-                        <label>Xbox</label>
-                            <input
-                                type="checkbox"                                    
-                            />
-                        <label>Nintendo</label>
-                            <input
-                                type="checkbox"                  
-                            />
-                        <label>VR</label>
-                            <input
-                                type="checkbox"                             
-                            />  
-                    <h5>Filter by Store</h5>
-                        <label>Steam</label>
-                            <input
-                                type="checkbox"                             
-                            />
-                        <label>Epic Store</label>
-                            <input
-                                type="checkbox"                               
-                            />
-                        <label>PlayStation Network</label>
-                            <input
-                                type="checkbox"                                    
-                            />
-                        <label>Microsoft Store</label>
-                            <input
-                                type="checkbox"                  
-                            />
-                        <label>Nintendo eShop</label>
-                            <input
-                                type="checkbox"                             
-                            />
-                    <h5>Filter by Region</h5>
-                        <label>Americas</label>
-                            <input
-                                type="checkbox"                             
-                            />
-                        <label>Latin America</label>
-                            <input
-                                type="checkbox"                               
-                            />
-                        <label>North America</label>
-                            <input
-                                type="checkbox"                                    
-                            />
-                        <label>Africa</label>
-                            <input
-                                type="checkbox"                  
-                            />
-                        <label>Asia</label>
-                            <input
-                                type="checkbox"                             
-                            />
-                        <label>Oceania</label>
-                            <input
-                                type="checkbox"
-                            />
-                        <label>Europe</label>
-                            <input
-                                type="checkbox"
-                            />
-            </div>
+        <>
+        <Button onClick={onOpen}>
+            Open filters
+        </Button>
+        <Drawer placement={placement} onClose={onClose} isOpen={isOpen}>
+            <DrawerOverlay />
+            <DrawerHeader borderBottomWidth='5px'>Filters</DrawerHeader>
+            <DrawerContent>
+                <Button onClick={onClose} size="xs">
+                     Close filters
+                </Button>
+                <Box>
+                    <Heading as="h5" size="md">Filter by Platform</Heading>
+                    <CheckboxGroup colorScheme="purple" onChange={e => HandleFilterPlatform(e)}>
+                        <Stack>
+                            <Checkbox>PC</Checkbox>
+                            <Checkbox>PlayStation</Checkbox>
+                            <Checkbox>Xbox</Checkbox>
+                            <Checkbox>Nintendo</Checkbox>
+                            <Checkbox>VR</Checkbox>
+                        </Stack>
+                    </CheckboxGroup>
+                    <Heading as="h5" size="md">Filter by Store</Heading>
+                    <CheckboxGroup colorScheme="purple" onChange={e => handleFilterStore(e)}>
+                        <Stack>
+                            <Checkbox value="Steam">Steam</Checkbox>
+                            <Checkbox value="PlaystationNetwork">PlayStation Network</Checkbox>
+                            <Checkbox>Microsoft Store</Checkbox>
+                            <Checkbox>Nintendo eShop</Checkbox>
+                            <Checkbox>Epic Store</Checkbox>
+                        </Stack>
+                    </CheckboxGroup>
+                    <Heading as="h5" size="md">Filter by Region</Heading>
+                    <CheckboxGroup colorScheme="purple" >
+                        <Stack>
+                            
+                        </Stack>
+                    </CheckboxGroup>
+                    <Heading as="h5" size="md">Filter by Genre</Heading>
+                    <CheckboxGroup colorScheme="purple" >
+                        <Stack>
+                            
+                        </Stack>
+                    </CheckboxGroup>
+                </Box>
+            </DrawerContent>
+        </Drawer>
+        </>
     )
 }
