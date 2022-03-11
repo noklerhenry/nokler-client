@@ -117,9 +117,9 @@ export default function Detail() {
             <Box fontSize={"x-large"}>
               $ 479.99
               <Button
-                onClick={() => {
+                onClick={(e) => {
                   setOverlay(<OverlayOne />);
-                  onOpen();
+                  onOpen(e);
                 }}
                 ml="4"
               >
@@ -160,11 +160,11 @@ export default function Detail() {
 
       <Divider borderColor="gray.400" />
 
-      <Box margin={"20px"}>
+      <Box margin={"20px"} fontSize="xl">
         <Button
-          onClick={() => {
+          onClick={(e) => {
             setOverlay(<OverlayTwo />);
-            onOpen();
+            onOpen(e);
           }}
         >
           Screenshots+
@@ -190,35 +190,28 @@ export default function Detail() {
 
       <VStack margin={"20px"}>
         Description:
-        <Text>
-          <Box>
-            The third game in a series, it holds nothing back from the player.
-            Open world adventures of the renowned monster slayer Geralt of Rivia
-            are now even on a larger scale. Following the source material more
-            accurately, this time Geralt is trying to find the child of the
-            prophecy, Ciri while making a quick coin from various contracts on
-            the side. Great attention to the world building above all creates an
-            immersive story, where your decisions will shape the world around
-            you.
-          </Box>
-          <Box>
-            CD Project Red are infamous for the amount of work they put into
-            their games, and it shows, because aside from classic third-person
-            action RPG base game they provided 2 massive DLCs with unique
-            questlines and 16 smaller DLCs, containing extra quests and items.
-          </Box>
-          <Box>
-            Players praise the game for its atmosphere and a wide open world
-            that finds the balance between fantasy elements and realistic and
-            believable mechanics, and the game deserved numerous awards for
-            every aspect of the game, from music to direction.
-          </Box>
+        <Text fontSize="xl">
+          The third game in a series, it holds nothing back from the player.
+          Open world adventures of the renowned monster slayer Geralt of Rivia
+          are now even on a larger scale. Following the source material more
+          accurately, this time Geralt is trying to find the child of the
+          prophecy, Ciri while making a quick coin from various contracts on the
+          side. Great attention to the world building above all creates an
+          immersive story, where your decisions will shape the world around you.
+          CD Project Red are infamous for the amount of work they put into their
+          games, and it shows, because aside from classic third-person action
+          RPG base game they provided 2 massive DLCs with unique questlines and
+          16 smaller DLCs, containing extra quests and items. Players praise the
+          game for its atmosphere and a wide open world that finds the balance
+          between fantasy elements and realistic and believable mechanics, and
+          the game deserved numerous awards for every aspect of the game, from
+          music to direction.
         </Text>
       </VStack>
 
       <Divider borderColor="gray.400" />
 
-      <Box margin={"10px"}>
+      <Box margin={"10px"} fontSize="xl">
         System requirements:
         <HStack marginRight={"20px"} marginTop={"20px"}>
           <Box>
