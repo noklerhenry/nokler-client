@@ -84,7 +84,7 @@ export default function Screenshots() {
               pos="absolute"
               top="0"
             >
-              1 / {slidesCount}
+              1
             </Text>
             <AspectRatio maxH="720px" maxW="1280px">
               <iframe
@@ -112,7 +112,7 @@ export default function Screenshots() {
                 pos="absolute"
                 top="0"
               >
-                {sid + 1} / {slidesCount}
+                {sid + 1}
               </Text>
               <Image
                 src={slide.img}

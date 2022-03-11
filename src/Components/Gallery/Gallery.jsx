@@ -1,0 +1,15 @@
+import React from "react";
+import { useParams, useHistory, Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Cards } from "../Cards";
+import { Container, SimpleGrid } from "@chakra-ui/react";
+
+export default function Gallery() {
+  return (
+    <Container>
+      <SimpleGrid>
+        <Cards />
+      </SimpleGrid>
+    </Container>
+  );
+}

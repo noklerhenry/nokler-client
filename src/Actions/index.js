@@ -38,15 +38,17 @@ export const loadCart = (payload) => {
   };
 };
 
-export function getGameDetails(id) {
-  return async function (dispatch) {
-    let results = await axios.get("http://localhost:3001/details/" + id);
-    dispatch({
-      type: GET_GAME_DETAILS,
-      payload: results.data,
-    });
+export const getGameDetails = (id) => async (dispatch) => {
+    try {
+      const response = await axios.get(`https://nokler-api.herokuapp.com/details/${id}`);
+      return dispatch({
+        type: GET_GAME_DETAILS,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
-}
 
 export function removeDetailCache() {
   return async (dispatch) => {

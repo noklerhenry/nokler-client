@@ -2,13 +2,23 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Checkout } from "./Components/Cart/Checkout";
 import { FirstPage } from "./Components/FirstPage/FirstPage";
+import { Home } from "./Components/Home";
+import Detail from "./Components/Detail/Detail.jsx";
+import NavBar from "./Components/NavBar/index.jsx";
+import Footer from "./Components/Footer/Footer.jsx";
 
 function App() {
   return (
     <Router>
       <Switch>
         <Route exact path="/" component={FirstPage} />
-        <Route exact path="/checkout" component={Checkout} />
+        <Route path="/">
+          <NavBar />
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/details/:id" component={Detail} />
+          <Route exact path="/checkout" component={Checkout} />
+          <Footer />
+        </Route>
       </Switch>
     </Router>
   );

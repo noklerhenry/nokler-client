@@ -24,15 +24,34 @@ import {
   ModalCloseButton,
   useDisclosure,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { getGameDetails } from "../../Actions/index.js";
 import Screenshots from "./Screenshots";
+import { FaCartPlus } from "react-icons/fa";
 
 export default function Detail() {
   const { id } = useParams();
-  const { isOpen: isCartOpen, onOpen: onCartOpen, onClose: onCartClose } = useDisclosure();
-  const { isOpen: isScreenshotOpen, onOpen: onScreenshotOpen, onClose: onScreenshotClose } = useDisclosure();
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const details = useSelector((state) => state.details);
+
+  useEffect(() => {
+    dispatch(getGameDetails(id));
+  }, [dispatch, id]);
+
+  const {
+    isOpen: isCartOpen,
+    onOpen: onCartOpen,
+    onClose: onCartClose,
+  } = useDisclosure();
+  const {
+    isOpen: isScreenshotOpen,
+    onOpen: onScreenshotOpen,
+    onClose: onScreenshotClose,
+  } = useDisclosure();
 
   /* useEffect(() => {
       dispatch(getGameDetails(props.match.params.id));
@@ -55,6 +74,7 @@ export default function Detail() {
             alt="Game.jpg"
             fit={"cover"}
             align={"center"}
+            border={"3px solid"}
             w={"100%"}
             h={{ base: "100%", sm: "300px", lg: "500px" }}
           />
@@ -71,20 +91,27 @@ export default function Detail() {
             </Heading>
           </Box>
 
+          <Box>
+            <Text as={"span"} fontWeight={"bold"}>
+              Digital key:
+            </Text>{" "}
+            This is a digital edition of the product (CD-KEY)
+          </Box>
+
           <SimpleGrid columns={{ base: 1, md: 2 }} marginTop={"20px"}>
             <List>
               <ListItem>
                 <Text as={"span"} fontWeight={"bold"}>
-                  Digital key:
+                  Rating:
                 </Text>{" "}
-                This is a digital edition of the product (CD-KEY)
+                4.75 / 5
               </ListItem>
 
               <ListItem>
                 <Text as={"span"} fontWeight={"bold"}>
                   Platform:
                 </Text>{" "}
-                PC
+                Steam
               </ListItem>
             </List>
 
@@ -98,52 +125,49 @@ export default function Detail() {
 
               <ListItem>
                 <Text as={"span"} fontWeight={"bold"}>
-                  OS:
+                  Released:
                 </Text>{" "}
-                Windows
+                2015-05-18
               </ListItem>
             </List>
           </SimpleGrid>
-        </Stack>
-      </SimpleGrid>
 
-      <Divider borderColor="gray.400" />
-
-      <SimpleGrid columns={"2"} margin={"20px"}>
-        <HStack>
-          <Box>
-            Price:
-            <Box fontSize={"xl"}>
-              $ 479.99
-              <Button
-                onClick={onCartOpen}
-                ml="4"
-              >
-                Add to cart
-              </Button>
-              <Modal
-                isCentered
-                onClose={onCartClose}
-                isOpen={isCartOpen}
-                motionPreset="slideInBottom"
-              >
-                <ModalOverlay />
-                <ModalContent>
-                  <ModalHeader>Added to cart</ModalHeader>
-                  <ModalCloseButton />
-                  <ModalBody>Im in a modal!</ModalBody>
-                  <ModalFooter>
-                    <Button mr={3} onClick={onCartClose}>
-                      Continue Browsing
-                    </Button>
-                    <Button>Checkout now!</Button>
-                  </ModalFooter>
-                </ModalContent>
-              </Modal>
-            </Box>
-          </Box>
-        </HStack>
-        {/* <HStack>
+          <SimpleGrid columns={"2"} margin={"20px"}>
+            <HStack>
+              <Box>
+                Price:
+                <Box fontSize={"xl"}>
+                  $ 479.99
+                  <Button onClick={onCartOpen} ml="4">
+                    Add to cart
+                  </Button>
+                  <Modal
+                    isCentered
+                    onClose={onCartClose}
+                    isOpen={isCartOpen}
+                    motionPreset="slideInBottom"
+                  >
+                    <ModalOverlay />
+                    <ModalContent>
+                      <ModalHeader fontSize="9xl">
+                        <FaCartPlus />
+                      </ModalHeader>
+                      <ModalCloseButton />
+                      <ModalBody fontSize="2xl">
+                        You added one item to your cart!
+                      </ModalBody>
+                      <ModalFooter>
+                        <Button mr={3} onClick={onCartClose}>
+                          Continue Browsing
+                        </Button>
+                        <Button>Checkout now!</Button>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
+                </Box>
+              </Box>
+            </HStack>
+            {/* <HStack>
           <Box>
             Premium price:
             <Box fontSize={"x-large"}>
@@ -152,21 +176,20 @@ export default function Detail() {
             </Box>
           </Box>
         </HStack> */}
+          </SimpleGrid>
+        </Stack>
       </SimpleGrid>
 
       <Divider borderColor="gray.400" />
 
       <Box margin={"20px"} fontSize="xl">
-        <Button
-          onClick={onScreenshotOpen}
-        >
-          Screenshots+
-        </Button>
+        <Button onClick={onScreenshotOpen}>Screenshots+</Button>
         <Modal
           onClose={onScreenshotClose}
           isOpen={isScreenshotOpen}
-          size={"6xl"}
+          size={"full"}
           motionPreset="slideInBottom"
+          colorScheme="black"
         >
           <ModalOverlay />
           <ModalContent>
