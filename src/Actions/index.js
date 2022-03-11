@@ -10,6 +10,9 @@ export const FILTER_GENRES_RESULTS = "FILTER_GENRES_RESULTS"
 export const FILTER_PLATFORM_RESULTS = "FILTER_PLATFORM_RESULTS"
 export const FILTER_REGION_RESULTS = "FILTER_REGION_RESULTS"
 export const FILTER_STORE_RESULTS = "FILTER_STORE_RESULTS"
+export const GET_PLATFORMS = "GET_PLATFORMS"
+export const GET_GENRES = "GET_GENRES"
+export const GET_STORES = "GET_STORES"
 
 export const addToCart = payload => {
     return {
@@ -40,7 +43,7 @@ export const loadCart = payload => {
 
 export function getGameDetails(id){
     return async function(dispatch){
-        let results = await axios.get("http://localhost:3001/details/" + id)
+        let results = await axios.get("http://localhost:3001/details/" + id);
         dispatch({
             type: GET_GAME_DETAILS,
             payload: results.data
@@ -58,7 +61,7 @@ export function removeDetailCache(){
 
 export function filterGamesByGenre(payload){
     return async function (dispatch){
-        let filterGenreResults = await axios.get("http://localhost:3001/filterAcum/")
+        let filterGenreResults = await axios.get("http://localhost:3001/filterAcum/");
         dispatch({
             type: FILTER_GENRES_RESULTS,
             payload: filterGenreResults.data
@@ -68,10 +71,10 @@ export function filterGamesByGenre(payload){
 
 export function filterGamesByPlatform(paylaod){
     return async function (dispatch){
-        let filterPlatformResults = await axios.get("http://localhost:3001/filterAcum/")
+        let filterPlatformResults = await axios.get("http://localhost:3001/filterAcum/");
         dispatch({
             type: FILTER_PLATFORM_RESULTS,
-            paylaod: filterPlatformResults
+            payload: filterPlatformResults.data
         })
     }
 }
@@ -79,26 +82,52 @@ export function filterGamesByPlatform(paylaod){
 
 export function filterGamesByRegion(paylaod){
     return async function (dispatch){
-        let filterRegionResults = await axios.get("http://localhost:3001/filterAcum/")
+        let filterRegionResults = await axios.get("http://localhost:3001/filterAcum/");
         dispatch({
             type: FILTER_REGION_RESULTS,
-            paylaod: filterRegionResults
-        })
+            payload: filterRegionResults.data
+        });
     }
 }
 
 export function filterGamesByStore(paylaod){
     return async function (dispatch){
-        let filterStoreResults = await axios.get("http://localhost:3001/filterAcum/")
+        let filterStoreResults = await axios.get("http://localhost:3001/filterAcum/");
         dispatch({
             type: FILTER_STORE_RESULTS,
-            paylaod: filterStoreResults
-        })
+            payload: filterStoreResults.data
+        });
     }
 }
 
-// export function getFilterPlatform(payload){
-//     return async function (dispatch){
-//         let platformResults = await
-//     }
-// }
+export function getPlatforms(){
+    return async (dispatch) => {
+        let platformResults = await axios.get("http://localhost:3001/platformList");
+        dispatch({
+            type: GET_PLATFORMS,
+            payload: platformResults.data
+        });
+    }
+}
+
+export const getGenres = () => async (dispatch) => {
+    try {
+      const response = await axios.get("http://localhost:3001/genreList");
+      return dispatch({
+        type: GET_GENRES,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+export function getStores(){
+    return async (dispatch) => {
+        let storeResults = await axios.get("http://localhost:3001/storeList");
+        dispatch({
+            type: GET_STORES,
+            payload: storeResults.data
+        });
+    }
+}
