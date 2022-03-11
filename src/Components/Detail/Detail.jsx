@@ -13,8 +13,6 @@ import {
   Heading,
   SimpleGrid,
   StackDivider,
-  useColorModeValue,
-  VisuallyHidden,
   List,
   ListItem,
   Modal,
@@ -25,12 +23,6 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogContent,
-  AlertDialogOverlay,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
@@ -38,15 +30,16 @@ import { useDispatch, useSelector } from "react-redux";
 import Screenshots from "./Screenshots";
 
 export default function Detail() {
+  const { id } = useParams();
   const { isOpen: isCartOpen, onOpen: onCartOpen, onClose: onCartClose } = useDisclosure();
   const { isOpen: isScreenshotOpen, onOpen: onScreenshotOpen, onClose: onScreenshotClose } = useDisclosure();
 
-  useEffect(() => {
+  /* useEffect(() => {
       dispatch(getGameDetails(props.match.params.id));
       return () => {
           dispatch(removeDetailCache())
       }
-  }, [dispatch])
+  }, [dispatch]) */
 
   return (
     <Container maxW={"7xl"} mt="150px" mb="150px">
