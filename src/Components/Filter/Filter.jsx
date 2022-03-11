@@ -17,6 +17,7 @@ import {    Checkbox,
             AccordionButton,
             AccordionPanel,
             AccordionIcon    } from "@chakra-ui/react";
+import Ordering from "../Ordering/Ordering";
 
             
 export default function Filter () {
@@ -31,17 +32,28 @@ console.log(genres)
         dispatch(getGenres());
     }, [])
 
+    useEffect(() => {
+        dispatch(getStores());
+    }, [])
+
+    useEffect(() => {
+        dispatch(getPlatforms());
+    }, [])
+
 
              
     function handleFilterPlatform(e){
+        e.preventDefault();
         dispatch(filterGamesByPlatform(e.target.value))
     }
 
     function handleFilterStore(e){
+        e.preventDefault();
         dispatch(filterGamesByStore(e.target.value))
     }
 
     function handleFilterRegion(e){
+        e.preventDefault();
         dispatch(filterGamesByRegion(e.target.value))
     }
 
@@ -81,48 +93,35 @@ console.log(genres)
                     </AccordionButton>
                 </h2>
                 <AccordionPanel>
-                <CheckboxGroup colorScheme="purple" onChange={e => HandleFilterPlatform(e)}>
-                        <Stack>
-                            <Checkbox>PC</Checkbox>
-                            <Checkbox>PlayStation</Checkbox>
-                            <Checkbox>Xbox</Checkbox>
-                            <Checkbox>Nintendo</Checkbox>
-                            <Checkbox>VR</Checkbox>
+                <CheckboxGroup colorScheme="purple" >
+                        <Stack onChange={e => handleFilterPlatform(e)}>
+                            {platforms?.map((p) => 
+                                <Checkbox key={p.name} value={p.name}>{p.name}</Checkbox>
+                            )}
                         </Stack>
                     </CheckboxGroup>
                 </AccordionPanel>
             </AccordionItem>
+            <AccordionItem>
+                <h2>
+                    <AccordionButton>
+                        <Box flex="1" textAlign="left">
+                            Filter by Store
+                        </Box>
+                        <AccordionIcon/>
+                    </AccordionButton>
+                </h2>
+                <AccordionPanel>
+                <CheckboxGroup colorScheme="purple">
+                        <Stack  onChange={e => handleFilterStore(e)}>
+                            {stores?.map((s) => 
+                                <Checkbox key={s.name} value={s.name}>{s.name}</Checkbox> 
+                            )}
+                        </Stack>
+                    </CheckboxGroup>
+                </AccordionPanel>
+            </AccordionItem>
+            <Ordering/>
         </Accordion>
     )
 }
-            // <DrawerContent>
-            //     <Button onClick={onClose} size="xs">
-            //          Close filters
-            //     </Button>
-            //     <Box>
-            //         <Heading as="h5" size="md">Filter by Platform</Heading>
-                    
-            //         <Heading as="h5" size="md">Filter by Store</Heading>
-            //         <CheckboxGroup colorScheme="purple" onChange={e => handleFilterStore(e)}>
-            //             <Stack>
-            //                 <Checkbox value="Steam">Steam</Checkbox>
-            //                 <Checkbox value="PlaystationNetwork">PlayStation Network</Checkbox>
-            //                 <Checkbox>Microsoft Store</Checkbox>
-            //                 <Checkbox>Nintendo eShop</Checkbox>
-            //                 <Checkbox>Epic Store</Checkbox>
-            //             </Stack>
-            //         </CheckboxGroup>
-            //         <Heading as="h5" size="md">Filter by Region</Heading>
-            //         <CheckboxGroup colorScheme="purple" >
-            //             <Stack>
-                            
-            //             </Stack>
-            //         </CheckboxGroup>
-            //         <Heading as="h5" size="md">Filter by Genre</Heading>
-            //         <CheckboxGroup colorScheme="purple" >
-            //             <Stack>
-                            
-            //             </Stack>
-            //         </CheckboxGroup>
-            //     </Box>
-            // </DrawerContent>

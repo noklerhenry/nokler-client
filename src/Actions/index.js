@@ -13,6 +13,9 @@ export const FILTER_STORE_RESULTS = "FILTER_STORE_RESULTS"
 export const GET_PLATFORMS = "GET_PLATFORMS"
 export const GET_GENRES = "GET_GENRES"
 export const GET_STORES = "GET_STORES"
+export const ORDER_BY_PRICE = "ORDER_BY_PRICE"
+export const ORDER_BY_RELEASE = "ORDER_BY_RELEASE"
+export const ORDER_BY_RATING = "ORDER_BY_RATING"
 
 export const addToCart = payload => {
     return {
@@ -129,5 +132,26 @@ export function getStores(){
             type: GET_STORES,
             payload: storeResults.data
         });
+    }
+}
+
+export function orderGamesByRating(payload){
+    return {
+        type: ORDER_BY_RATING,
+        payload
+    }
+}
+
+export function orderGamesByRelease(payload){
+    return {
+        type: ORDER_BY_RELEASE,
+        payload
+    }
+}
+
+export function orderGamesByPrice(payload){
+    return {
+        type: ORDER_BY_PRICE,
+        payload
     }
 }
