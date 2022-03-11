@@ -1,20 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {Box, Image} from "@chakra-ui/react"
 
 export default function Card({ id, image, name, platform, price, /* currency */}) {
   return (
-    <div>
+    <Box>
       <Link to={`/detail/${id}`}>
-        <div>
-          <img src={image} alt={name} />
-          <div>
+        <Box>
+          <Image src={image} alt={name} />
+          <Box>
             `{name} - {platform}`
-          </div>
-          <div>
+          </Box>
+          <Box>
             `{price}{/* {currency} */}`
-          </div>
-        </div>
+          </Box>
+        </Box>
       </Link>
-    </div>
+    </Box>
   );
 }

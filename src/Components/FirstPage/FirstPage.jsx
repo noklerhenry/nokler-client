@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import Filter from "../Filter/Filter";
 import Footer from "../Footer/Footer";
 import { Home } from "../Home";
 import Latest from "../Latest/Latest";

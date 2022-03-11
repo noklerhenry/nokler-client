@@ -41,6 +41,13 @@ export default function Detail() {
   const { isOpen: isCartOpen, onOpen: onCartOpen, onClose: onCartClose } = useDisclosure();
   const { isOpen: isScreenshotOpen, onOpen: onScreenshotOpen, onClose: onScreenshotClose } = useDisclosure();
 
+  useEffect(() => {
+      dispatch(getGameDetails(props.match.params.id));
+      return () => {
+          dispatch(removeDetailCache())
+      }
+  }, [dispatch])
+
   return (
     <Container maxW={"7xl"} mt="150px" mb="150px">
       <SimpleGrid
