@@ -25,6 +25,12 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogContent,
+  AlertDialogOverlay,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
@@ -32,15 +38,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Screenshots from "./Screenshots";
 
 export default function Detail() {
-  const OverlayOne = () => {
-    return <ModalOverlay />;
-  };
-  const OverlayTwo = () => {
-    return <ModalOverlay />;
-  };
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [overlay, setOverlay] = useState(<OverlayOne />);
+  const { isOpen: isCartOpen, onOpen: onCartOpen, onClose: onCartClose } = useDisclosure();
+  const { isOpen: isScreenshotOpen, onOpen: onScreenshotOpen, onClose: onScreenshotClose } = useDisclosure();
 
   return (
     <Container maxW={"7xl"} mt="150px" mb="150px">
@@ -114,30 +113,27 @@ export default function Detail() {
         <HStack>
           <Box>
             Price:
-            <Box fontSize={"x-large"}>
+            <Box fontSize={"xl"}>
               $ 479.99
               <Button
-                onClick={(e) => {
-                  setOverlay(<OverlayOne />);
-                  onOpen(e);
-                }}
+                onClick={onCartOpen}
                 ml="4"
               >
                 Add to cart
               </Button>
               <Modal
                 isCentered
-                onClose={onClose}
-                isOpen={isOpen}
+                onClose={onCartClose}
+                isOpen={isCartOpen}
                 motionPreset="slideInBottom"
               >
-                {overlay}
+                <ModalOverlay />
                 <ModalContent>
                   <ModalHeader>Added to cart</ModalHeader>
                   <ModalCloseButton />
                   <ModalBody>Im in a modal!</ModalBody>
                   <ModalFooter>
-                    <Button mr={3} onClick={onClose}>
+                    <Button mr={3} onClick={onCartClose}>
                       Continue Browsing
                     </Button>
                     <Button>Checkout now!</Button>
@@ -162,20 +158,17 @@ export default function Detail() {
 
       <Box margin={"20px"} fontSize="xl">
         <Button
-          onClick={(e) => {
-            setOverlay(<OverlayTwo />);
-            onOpen(e);
-          }}
+          onClick={onScreenshotOpen}
         >
           Screenshots+
         </Button>
         <Modal
-          onClose={onClose}
+          onClose={onScreenshotClose}
+          isOpen={isScreenshotOpen}
           size={"6xl"}
-          isOpen={isOpen}
           motionPreset="slideInBottom"
         >
-          {overlay}
+          <ModalOverlay />
           <ModalContent>
             <ModalHeader>Screenshots</ModalHeader>
             <ModalCloseButton />
