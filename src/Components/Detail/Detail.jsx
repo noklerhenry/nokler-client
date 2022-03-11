@@ -147,7 +147,7 @@ export default function Detail() {
             </Box>
           </Box>
         </HStack>
-        <HStack>
+        {/* <HStack>
           <Box>
             Premium price:
             <Box fontSize={"x-large"}>
@@ -155,7 +155,7 @@ export default function Detail() {
               <Button>Pay with premium!</Button>
             </Box>
           </Box>
-        </HStack>
+        </HStack> */}
       </SimpleGrid>
 
       <Divider borderColor="gray.400" />

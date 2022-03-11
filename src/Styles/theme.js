@@ -9,8 +9,8 @@ const theme = extendTheme({
   styles: {
     global: props => ({
       body: {
-        color: mode('#8c06f7', '#8c06f7')(props),
-        bg: mode('#ffffff', '#121019')(props),
+        color: mode('#4d194d', '#a663cc')(props),
+        bg: mode('#f1faee', '#0c0f0a')(props),
       },
     }),
   },
@@ -19,7 +19,7 @@ const theme = extendTheme({
     Drawer:{
       variants:{
       'base': (props)=> ({
-        backgroundColor: mode('#ffffff', '#121019')(props),
+        backgroundColor: mode('#f1faee', '#0c0f0a')(props),
       })
     },
       defaultProps:{
@@ -50,10 +50,10 @@ const theme = extendTheme({
         },
         'base': (props) => ({
           padding: '4px 15px',
-          backgroundColor: mode('#ffffff', '#121019')(props),
+          backgroundColor: mode('#f1faee', '#0c0f0a')(props),
           _hover:{
-          backgroundColor: mode('#8c06f7', '#8c06f7')(props),
-          color: mode('#ffffff', '#ffffff')(props)
+          backgroundColor: mode('#4d194d', '#a663cc')(props),
+          color: mode('#f1faee', '#0c0f0a')(props)
           },
         })
       },
