@@ -1,18 +1,36 @@
 import { act } from "react-dom/test-utils";
-import { ADD_TO_CART, CLEAR_CART, REMOVE_TO_CART, LOAD_CART, GET_GAME_DETAILS, REMOVE_DETAIL_CACHE, FILTER_GENRES_RESULTS, FILTER_PLATFORM_RESULTS, FILTER_REGION_RESULTS, FILTER_STORE_RESULTS } from "../Actions";
+import {    ADD_TO_CART, 
+            CLEAR_CART, 
+            REMOVE_TO_CART, 
+            LOAD_CART, 
+            GET_GAME_DETAILS, 
+            REMOVE_DETAIL_CACHE, 
+            FILTER_GENRES_RESULTS, 
+            FILTER_PLATFORM_RESULTS, 
+            FILTER_REGION_RESULTS, 
+            FILTER_STORE_RESULTS, 
+            GET_PLATFORMS, 
+            GET_GENRES, 
+            GET_STORES,
+            ORDER_BY_PRICE,
+            ORDER_BY_RELEASE,
+            ORDER_BY_RATING  } from "../Actions";
 import json from '../games.json'
 
 const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
 
-const initalState = {
+const initialState = {
     games: json.results,
     cart: cartFromLocalStorage,
     totalPrice: 0,
     videogame: [],
-    gamesFiltered: []
+    gamesFiltered: [],
+    platforms: [],
+    genres: [],
+    stores: [],
 };
 
-const reducer = (state = initalState, action) => {
+const reducer = (state = initialState, action) => {
     switch(action.type) {
         case ADD_TO_CART:
             let game = state.games.find(g => g.id === action.payload);
@@ -77,6 +95,60 @@ const reducer = (state = initalState, action) => {
             return {
                 ...state,
                 gamesFiltered: action.payload
+            }
+        case GET_PLATFORMS:
+            return {
+                ...state,
+                platforms: action.payload
+            }
+        case GET_GENRES:
+            return {
+                ...state,
+                genres: action.payload
+            }
+        case GET_STORES:
+            return {
+                ...state,
+                stores: action.payload
+            }
+        case ORDER_BY_PRICE:
+            let gameOrderPrice = action.payload === "1" ? state.games.sort(function(a, b){
+                if(a.price < b.price) return 1;
+                if(a.price > b.price) return -1;
+                    return 0
+            }):state.games.sort((a, b) => {
+                if(a.price > b.price) return 1;
+                if(a.price < b.price) return -1;
+            })
+            return {
+                ...state,
+                gamesFiltered: gameOrderPrice
+            }
+        case ORDER_BY_RATING:
+            let gameOrderRating = action.payload === "1" ? state.games.sort(function(a, b){
+                if(a.rating < b.rating) return 1;
+                if(a.rating > b.rating) return -1;
+                    return 0
+            }):state.games.sort((a, b) => {
+                    if(a.rating > b.rating) return 1;
+                    if(a.rating < b.rating) return -1;
+            })
+            return {
+                ...state,
+                gamesFiltered: gameOrderRating
+            }
+        case ORDER_BY_RELEASE:
+            let gameOrderRelease = action.payload === "1" ? state.games.sort(function(a, b){
+                if(a.released_at < b.released_at) return 1;
+                if(a.released_at > b.released_at) return -1;
+                    return 0
+            }):state.games.sort((a, b) => {
+                if(a.released_at > b.released_at) return 1;
+                if(a.released_at < b.released_at) return -1;
+            })
+            return {
+                ...state,
+                gamesFiltered: gameOrderRelease
             }
         default:
             return state;
