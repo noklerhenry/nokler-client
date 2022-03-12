@@ -51,10 +51,10 @@ export const loadCart = (payload) => {
 
 export function getGameDetails(id) {
   return async function (dispatch) {
-    let results = await axios.get("http://localhost:3001/details/" + id);
+    let results = await axios.get(`https://nokler-api.herokuapp.com/getProductById?ids=${id}`);
     dispatch({
       type: GET_GAME_DETAILS,
-      payload: results.data,
+      payload: results.data[0],
     });
   };
 }
@@ -188,7 +188,7 @@ export function removeGameFavorite(idGame) {
 export const getAllGames = () => {
     return async (dispatch) => {
         try {
-            const res = await axios.get('https://nokler-api.herokuapp.com/allGames')
+            const res = await axios.get('https://nokler-api.herokuapp.com/filterAcum')
             return dispatch({ type: GET_ALL_GAMES, payload: res.data });
         } catch (err) {
             alert('Erros All Games DB')
