@@ -37,13 +37,13 @@ export const Card = ({ id, name, price, image, store }) => {
   };
 
   return (
-    <Box margin="10px" w="290px" h={{ base: "100%", sm: "400px", lg: "600px" }}>
+    <Box margin="10px" w="250px" h={{ base: "80%", sm: "400px", lg: "500px" }}>
       <Image
         w="100%"
-        h={{ base: "100%", sm: "400px", lg: "450px" }}
+        h={{ base: "80%", sm: "300px", lg: "350px" }}
         src={image}
         alt="img not found"
-        rounded="md"
+        borderRadius='20px'
         fit="cover"
         align="center"
         boxShadow="5px 5px 15px #111111"
@@ -61,9 +61,9 @@ export const Card = ({ id, name, price, image, store }) => {
       >
         {name}
       </Heading>
-      <Text fontSize="20px" mt="10px" mb="10px">
+      {/* <Text fontSize="20px" mt="10px" mb="10px">
         ${price}
-      </Text>
+      </Text> */}
       <Button size="sm" height="24px">
         See game
       </Button>

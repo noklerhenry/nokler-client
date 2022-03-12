@@ -21,8 +21,6 @@ const CartDrawer = ({ Open }) => {
   return (
     <>
       <Button
-        bgColor={!Open ? "#000" : "#fff"}
-        color={!Open ? "" : "#0d0d0d"}
         ref={btnRef}
         onClick={onOpen}
         size="sm"
