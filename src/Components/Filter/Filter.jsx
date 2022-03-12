@@ -26,7 +26,7 @@ export default function Filter () {
     const platforms = useSelector(state => state.platforms)
     const stores = useSelector(state => state.stores)
 
-console.log(genres)
+//console.log(genres)
 
     useEffect(() => {
         dispatch(getGenres());
