@@ -292,8 +292,8 @@ const SearchBar = () => {
                     <GamesResults
                       key={index}
                       thumbnailSrc={
-                        el.background_image
-                          ? el.background_image
+                        el.img
+                          ? el.img
                           : "https://www.sinrumbofijo.com/wp-content/uploads/2016/05/default-placeholder.png"
                       }
                       name={el.name}
