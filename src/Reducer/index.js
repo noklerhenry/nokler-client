@@ -30,7 +30,7 @@ const initialState = {
   games: [],
   cart: cartFromLocalStorage,
   totalPrice: 0,
-  videogame: [],
+  videogame: {},
   gamesFiltered: [],
   platforms: [],
   genres: [],
@@ -40,8 +40,8 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
-      let game = state.games.find((g) => g.id === action.payload);
-      let item = state.cart.find((g) => g.id === game.id);
+      let game = state.games.find((g) => g.id == action.payload);
+      let item = state.cart.find((g) => g.id == game.id);
       return !item
         ? {
             ...state,

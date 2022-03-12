@@ -116,7 +116,6 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
                 <Button
                   size="sm"
                   mt="20px"
-                  bgColor="#000"
                   onClick={() => toggleColorMode()}
                 >
                   Theme
@@ -134,7 +133,6 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
                     size="sm"
                     mt="20px"
                     ml="19px"
-                    bgColor="#000"
                     onClick={loginWithPopup}
                   >
                     {" "}
