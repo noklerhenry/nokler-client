@@ -75,12 +75,12 @@ export default function Filter () {
                 </h2>
                 <AccordionPanel>
                 <CheckboxGroup colorScheme="purple">
-                        <Stack  onChange={e => handleFilterGenre(e)}>
+                        <Stack onChange={e => handleFilterGenre(e)}>
                             {genres?.map((g) => 
                                 <Checkbox key={g.name} value={g.name}>{g.name}</Checkbox> 
                             )}
                         </Stack>
-                    </CheckboxGroup>
+                    </CheckboxGroup  >
                 </AccordionPanel>
             </AccordionItem>
             <AccordionItem>
@@ -93,8 +93,8 @@ export default function Filter () {
                     </AccordionButton>
                 </h2>
                 <AccordionPanel>
-                <CheckboxGroup colorScheme="purple" >
-                        <Stack onChange={e => handleFilterPlatform(e)}>
+                <CheckboxGroup colorScheme="purple">
+                        <Stack  onChange={e => handleFilterPlatform(e)}>
                             {platforms?.map((p) => 
                                 <Checkbox key={p.name} value={p.name}>{p.name}</Checkbox>
                             )}
@@ -113,7 +113,7 @@ export default function Filter () {
                 </h2>
                 <AccordionPanel>
                 <CheckboxGroup colorScheme="purple">
-                        <Stack  onChange={e => handleFilterStore(e)}>
+                        <Stack onChange={e => handleFilterStore(e)}>
                             {stores?.map((s) => 
                                 <Checkbox key={s.name} value={s.name}>{s.name}</Checkbox> 
                             )}
