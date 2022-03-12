@@ -2,12 +2,12 @@ import React, { Fragment } from "react";
 import Footer from "../Footer/Footer";
 import { Home } from "../Home";
 import Latest from "../Latest/Latest";
-import NavBar from "../NavBar";
+import Header from '../Header'
 
 export const FirstPage = () => {
   return (
     <Fragment>
-      <NavBar />
+      <Header />
       <Home />
       <Latest />
       <Footer />

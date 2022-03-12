@@ -1,9 +1,11 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, useMediaQuery } from "@chakra-ui/react";
 
 export const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
+  const [mediaQueryNavMenu] = useMediaQuery("(max-width: 1120px)");
+
 
   function profiler (){
     if(isAuthenticated && !isLoading){
