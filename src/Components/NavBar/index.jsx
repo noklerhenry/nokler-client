@@ -5,21 +5,28 @@ import { Logout } from "../Logout.jsx";
 import CartDrawer from "./CartDrawer.jsx";
 // import { Profile } from "../Profile.jsx";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useColorMode, Button, Box, Image, Flex, useMediaQuery, IconButton } from "@chakra-ui/react";
+import {
+  useColorMode,
+  Button,
+  Box,
+  Image,
+  Flex,
+  useMediaQuery,
+  IconButton,
+} from "@chakra-ui/react";
 // import Panel from "./Sidebar/panel";
 import { FaBars } from "react-icons/fa";
-
 
 const NavBar = ({ toggle, mediaQueryNavMenu }) => {
   const { user, loginWithPopup, isAuthenticated, isLoading } = useAuth0();
 
-  const {colorMode, toggleColorMode} = useColorMode();
-  
+  const { colorMode, toggleColorMode } = useColorMode();
+
   const [mediaQueryNav] = useMediaQuery("(max-width: 960px)");
   const [mediaQueryIcon] = useMediaQuery("(max-width: 1180px)");
   const [mediaQueryIconSm] = useMediaQuery("(max-width: 330px)");
 
-//   console.log(user);
+  //   console.log(user);
 
   return (
     <>
@@ -106,7 +113,12 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
                 padding="0 1rem"
                 cursor="pointer"
               >
-                <Button size="sm" mt="20px" bgColor='#000' onClick={() => toggleColorMode()}>
+                <Button
+                  size="sm"
+                  mt="20px"
+                  bgColor="#000"
+                  onClick={() => toggleColorMode()}
+                >
                   Theme
                 </Button>
               </Box>
@@ -122,7 +134,7 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
                     size="sm"
                     mt="20px"
                     ml="19px"
-                    bgColor='#000'
+                    bgColor="#000"
                     onClick={loginWithPopup}
                   >
                     {" "}

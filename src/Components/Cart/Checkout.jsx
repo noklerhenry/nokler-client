@@ -1,12 +1,12 @@
 import { Box, Button } from "@chakra-ui/react";
 import CartDrawer from "../NavBar/CartDrawer";
-import { Logout } from '../Logout';
+import { Logout } from "../Logout";
 import React from "react";
 import { Cart } from "./Cart";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export const Checkout = () => {
-  const { loginWithPopup, isAuthenticated, isLoading } = useAuth0()
+  const { loginWithPopup, isAuthenticated, isLoading } = useAuth0();
   return (
     <div>
       <Box d="flex">

@@ -8,7 +8,7 @@ export const Card = ({ id, name, price, image, store }) => {
   const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
   const favs = useSelector((state) => state.favoriteGames);
-//   let games = useSelector((state) => state.games);
+  //   let games = useSelector((state) => state.games);
 
   const handleClick = (id) => {
     dispatch(addToCart(id));
