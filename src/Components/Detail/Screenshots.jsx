@@ -84,9 +84,9 @@ export default function Screenshots() {
               pos="absolute"
               top="0"
             >
-              1
+              1 / {slidesCount}
             </Text>
-            <AspectRatio maxH="720px" maxW="1280px">
+            <AspectRatio maxW="1280px" maxH="780px">
               <iframe
                 src={trailer.video}
                 title="YouTube video player"
@@ -112,15 +112,16 @@ export default function Screenshots() {
                 pos="absolute"
                 top="0"
               >
-                {sid + 1}
+                {sid + 2} / {slidesCount}
               </Text>
               <Image
                 src={slide.img}
                 alt="carousel image"
                 boxSize="full"
+                marginLeft="28"
                 backgroundSize="cover"
-                maxH="720px"
                 maxW="1280px"
+                maxH="780px"
               />
             </Box>
           ))}
