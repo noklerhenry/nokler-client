@@ -1,152 +1,245 @@
-import React , {useEffect} from "react";
-//import { useParams, useHistory, Link } from "react-router-dom";
+import {
+  Box,
+  chakra,
+  Container,
+  Divider,
+  Stack,
+  Text,
+  Image,
+  Flex,
+  VStack,
+  HStack,
+  Button,
+  Heading,
+  SimpleGrid,
+  StackDivider,
+  List,
+  ListItem,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+} from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { useParams, useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {Box, Image, Heading, AspectRatio, Text, Button} from "@chakra-ui/react"
-import { getGameDetails, removeDetailCache } from "../../Actions";
+import { getGameDetails } from "../../Actions/index.js";
+import Screenshots from "./Screenshots";
+import { FaCartPlus } from "react-icons/fa";
 
 export default function Detail() {
-
+  const { id } = useParams();
   const dispatch = useDispatch();
-  const videogame = useSelector((state) => state.videogame);
+  const history = useHistory();
+
+  const details = useSelector((state) => state.details);
 
   useEffect(() => {
+    dispatch(getGameDetails(id));
+  }, [dispatch, id]);
+
+  const {
+    isOpen: isCartOpen,
+    onOpen: onCartOpen,
+    onClose: onCartClose,
+  } = useDisclosure();
+  const {
+    isOpen: isScreenshotOpen,
+    onOpen: onScreenshotOpen,
+    onClose: onScreenshotClose,
+  } = useDisclosure();
+
+  /* useEffect(() => {
       dispatch(getGameDetails(props.match.params.id));
       return () => {
           dispatch(removeDetailCache())
       }
-  }, [dispatch])
+  }, [dispatch]) */
 
   return (
-    <Box>
-      <Box>
-        <Box>
+    <Container maxW={"7xl"} mt="150px" mb="150px">
+      <SimpleGrid
+        columns={{ base: 1, md: 2, lg: 2 }}
+        spacing={{ base: 8, md: 10 }}
+        py={{ base: 10, md: 18 }}
+      >
+        <Flex>
           <Image
-            src={videogame.background_image}
-            alt={`${videogame.background_image}.jpg`}
+            src="https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
+            rounded={"md"}
+            alt="Game.jpg"
+            fit={"cover"}
+            align={"center"}
+            border={"3px solid"}
+            w={"100%"}
+            h={{ base: "100%", sm: "300px", lg: "500px" }}
           />
-        </Box>
+        </Flex>
 
-        <Heading> {videogame.name} </Heading>
-
-        <Box>Platform: {videogame.platform}</Box>
-
-        <Box>Region: {videogame.region}</Box>
-
-        <Box>
-          Digital key:
-          <Box>This is a digital edition of the product (CD-KEY)</Box>
-        </Box>
-
-        <Box>OS: {videogame.os}</Box>
-
-        <Box>
-          <Box>
-            Price:
-            {videogame.price}
-            <Button>Add to cart</Button>
+        <Stack divider={<StackDivider borderColor="gray.400" />}>
+          <Box as="header">
+            <Heading
+              lineHeight={1.1}
+              fontWeight={600}
+              fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
+            >
+              The Witcher 3: Wild Hunt
+            </Heading>
           </Box>
+
+          <Box>
+            <Text as={"span"} fontWeight={"bold"}>
+              Digital key:
+            </Text>{" "}
+            This is a digital edition of the product (CD-KEY)
+          </Box>
+
+          <SimpleGrid columns={{ base: 1, md: 2 }} marginTop={"20px"}>
+            <List>
+              <ListItem>
+                <Text as={"span"} fontWeight={"bold"}>
+                  Rating:
+                </Text>{" "}
+                4.75 / 5
+              </ListItem>
+
+              <ListItem>
+                <Text as={"span"} fontWeight={"bold"}>
+                  Platform:
+                </Text>{" "}
+                Steam
+              </ListItem>
+            </List>
+
+            <List>
+              <ListItem>
+                <Text as={"span"} fontWeight={"bold"}>
+                  Region:
+                </Text>{" "}
+                Latinoamérica
+              </ListItem>
+
+              <ListItem>
+                <Text as={"span"} fontWeight={"bold"}>
+                  Released:
+                </Text>{" "}
+                2015-05-18
+              </ListItem>
+            </List>
+          </SimpleGrid>
+
+          <SimpleGrid columns={"2"} margin={"20px"}>
+            <HStack>
+              <Box>
+                Price:
+                <Box fontSize={"xl"}>
+                  $ 479.99
+                  <Button onClick={onCartOpen} ml="4">
+                    Add to cart
+                  </Button>
+                  <Modal
+                    isCentered
+                    onClose={onCartClose}
+                    isOpen={isCartOpen}
+                    motionPreset="slideInBottom"
+                  >
+                    <ModalOverlay />
+                    <ModalContent>
+                      <ModalHeader fontSize="9xl">
+                        <FaCartPlus />
+                      </ModalHeader>
+                      <ModalCloseButton />
+                      <ModalBody fontSize="2xl">
+                        You added one item to your cart!
+                      </ModalBody>
+                      <ModalFooter>
+                        <Button mr={3} onClick={onCartClose}>
+                          Continue Browsing
+                        </Button>
+                        <Button>Checkout now!</Button>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
+                </Box>
+              </Box>
+            </HStack>
+            {/* <HStack>
           <Box>
             Premium price:
-            {videogame.price}
-            <Button>Get premium account pay less!</Button>
-          </Box>
-        </Box>
-
-        <Heading>Screenshots Gallery</Heading>
-
-        <AspectRatio title="Trailer" src={videogame.trailer}></AspectRatio>
-        <Box>
-          <Box>
-            <Box>1 / 6</Box>
-            <Image src={videogame.short_screenshots[1]} alt="Screenshot1.jpg" />
-          </Box>
-
-          <Box>
-            <Box>2 / 6</Box>
-            <Image src={videogame.short_screenshots[2]} alt="Screenshot2.jpg" />
-          </Box>
-
-          <Box>
-            <Box>3 / 6</Box>
-            <Image src={videogame.short_screenshots[3]} alt="Screenshot3.jpg" />
-          </Box>
-
-          <Box>
-            <Box>4 / 6</Box>
-            <Image src={videogame.short_screenshots[4]} alt="Screenshot4.jpg" />
-          </Box>
-
-          <Box>
-            <Box>5 / 6</Box>
-            <Image src={videogame.short_screenshots[5]} alt="Screenshot5.jpg" />
-          </Box>
-
-          <Box>6 / 6</Box>
-          <Image src={videogame.short_screenshots[6]} alt="Screenshot6.jpg" />
-
-          <a onclick="plusSlides(-1)" href="<">❮</a>
-          <a onclick="plusSlides(1)" href=">">❯</a>
-
-          <Box>
-            <Text id="caption"></Text>
-          </Box>
-
-          <Box>
-            <Box>
-              <Image
-                src={videogame.short_screenshots[1]}
-                onclick="currentSlide(1)"
-                alt="Screenshot1.jpg"
-              />
-            </Box>
-            <Box>
-              <Image
-                src={videogame.short_screenshots[2]}
-                onclick="currentSlide(2)"
-                alt="Screenshot2.jpg"
-              />
-            </Box>
-            <Box>
-              <Image
-                src={videogame.short_screenshots[3]}
-                onclick="currentSlide(3)"
-                alt="Screenshot3.jpg"
-              />
-            </Box>
-            <Box>
-              <Image
-                src={videogame.short_screenshots[4]}
-                onclick="currentSlide(4)"
-                alt="Screenshot4.jpg"
-              />
-            </Box>
-            <Box>
-              <Image
-                src={videogame.short_screenshots[5]}
-                onclick="currentSlide(5)"
-                alt="Screenshot5.jpg"
-              />
-            </Box>
-            <Box>
-              <Image
-                src={videogame.short_screenshots[6]}
-                onclick="currentSlide(6)"
-                alt="Screenshot6.jpg"
-              />
+            <Box fontSize={"x-large"}>
+              $ 431.99
+              <Button>Pay with premium!</Button>
             </Box>
           </Box>
-        </Box>
+        </HStack> */}
+          </SimpleGrid>
+        </Stack>
+      </SimpleGrid>
 
-        <Box>
-          Description:
-          <Box>{videogame.description}</Box>
-        </Box>
+      <Divider borderColor="gray.400" />
 
-        <Box>
-          System requirements:
-          <Box>{videogame.system_requirements}</Box>
-        </Box>
+      <Box margin={"20px"} fontSize="xl">
+        <Button onClick={onScreenshotOpen}>Screenshots+</Button>
+        <Modal
+          onClose={onScreenshotClose}
+          isOpen={isScreenshotOpen}
+          size={"full"}
+          motionPreset="slideInBottom"
+          colorScheme="black"
+        >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Screenshots</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Screenshots />
+            </ModalBody>
+          </ModalContent>
+        </Modal>
       </Box>
-    </Box>
+
+      <Divider borderColor="gray.400" />
+
+      <VStack margin={"20px"}>
+        Description:
+        <Text fontSize="xl">
+          The third game in a series, it holds nothing back from the player.
+          Open world adventures of the renowned monster slayer Geralt of Rivia
+          are now even on a larger scale. Following the source material more
+          accurately, this time Geralt is trying to find the child of the
+          prophecy, Ciri while making a quick coin from various contracts on the
+          side. Great attention to the world building above all creates an
+          immersive story, where your decisions will shape the world around you.
+          CD Project Red are infamous for the amount of work they put into their
+          games, and it shows, because aside from classic third-person action
+          RPG base game they provided 2 massive DLCs with unique questlines and
+          16 smaller DLCs, containing extra quests and items. Players praise the
+          game for its atmosphere and a wide open world that finds the balance
+          between fantasy elements and realistic and believable mechanics, and
+          the game deserved numerous awards for every aspect of the game, from
+          music to direction.
+        </Text>
+      </VStack>
+
+      <Divider borderColor="gray.400" />
+
+      <Box margin={"10px"} fontSize="xl">
+        System requirements:
+        <HStack marginRight={"20px"} marginTop={"20px"}>
+          <Box>
+            minimum: "Core 2 Duo/Athlon X2 2 ГГц,1 Гб памяти,GeForce 7600/Radeon
+            X800,10 Гб на винчестере,интернет-соединение"
+          </Box>
+          <Box>
+            recommended: "Core 2 Duo/Athlon X2 2.5 ГГц,2 Гб памяти,GeForce GTX
+            280/Radeon HD 2600,10 Гб на винчестере,интернет-соединение"
+          </Box>
+        </HStack>
+      </Box>
+    </Container>
   );
 }

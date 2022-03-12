@@ -1,61 +1,67 @@
-import React, {useEffect, useState} from "react"
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {    filterGamesByGenre, 
-            filterGamesByPlatform, 
-            filterGamesByStore, 
-            filterGamesByRegion,   
-            getGenres,
-            getPlatforms,
-            getStores   } from "../../Actions";
+import {
+  filterGamesByGenre,
+  filterGamesByPlatform,
+  filterGamesByStore,
+  filterGamesByRegion,
+  getGenres,
+  getPlatforms,
+  getStores,
+} from "../../Actions";
 
-import {    Checkbox,
-            CheckboxGroup, 
-            Stack, 
-            Box, 
-            Accordion,
-            AccordionItem,
-            AccordionButton,
-            AccordionPanel,
-            AccordionIcon    } from "@chakra-ui/react";
+import {
+  Checkbox,
+  CheckboxGroup,
+  Stack,
+  Box,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+} from "@chakra-ui/react";
 import Ordering from "../Ordering/Ordering";
 
-            
-export default function Filter () {
-    const dispatch = useDispatch();
-    const genres = useSelector(state => state.genres)
-    const platforms = useSelector(state => state.platforms)
-    const stores = useSelector(state => state.stores)
+export default function Filter() {
+  const dispatch = useDispatch();
+  const genres = useSelector((state) => state.genres);
+  const platforms = useSelector((state) => state.platforms);
+  const stores = useSelector((state) => state.stores);
 
 //console.log(genres)
 
-    useEffect(() => {
-        dispatch(getGenres());
-    }, [])
+  useEffect(() => {
+    dispatch(getGenres());
+  }, []);
 
-    useEffect(() => {
-        dispatch(getStores());
-    }, [])
+  useEffect(() => {
+    dispatch(getStores());
+  }, []);
 
-    useEffect(() => {
-        dispatch(getPlatforms());
-    }, [])
+  useEffect(() => {
+    dispatch(getPlatforms());
+  }, []);
 
+  function handleFilterPlatform(e) {
+    e.preventDefault();
+    dispatch(filterGamesByPlatform(e.target.value));
+  }
 
-             
-    function handleFilterPlatform(e){
-        e.preventDefault();
-        dispatch(filterGamesByPlatform(e.target.value))
-    }
+  function handleFilterStore(e) {
+    e.preventDefault();
+    dispatch(filterGamesByStore(e.target.value));
+  }
 
-    function handleFilterStore(e){
-        e.preventDefault();
-        dispatch(filterGamesByStore(e.target.value))
-    }
+  function handleFilterRegion(e) {
+    e.preventDefault();
+    dispatch(filterGamesByRegion(e.target.value));
+  }
 
-    function handleFilterRegion(e){
-        e.preventDefault();
-        dispatch(filterGamesByRegion(e.target.value))
-    }
+  function handleFilterGenre(e) {
+    e.preventDefault();
+    dispatch(filterGamesByGenre(e.target.value));
+  }
 
     function handleFilterGenre(e){
         e.preventDefault();
