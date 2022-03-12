@@ -12,7 +12,6 @@ import axios from "axios";
 export const CheckoutForm = ({ amount }) => {
   const cardElementOpts = {
     iconStyle: "solid",
-    hidePostalCode: true,
   };
   const [state, setState] = useState({
     city: "",
@@ -29,8 +28,7 @@ export const CheckoutForm = ({ amount }) => {
   const validate = () => {
     !state.city ||
     !state.line1 ||
-    !state.state ||
-    !elements.getElement(CardElement)
+    !state.state
       ? setDisabled(true)
       : setDisabled(false);
   };
