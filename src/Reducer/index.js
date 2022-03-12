@@ -14,13 +14,18 @@ import {    ADD_TO_CART,
             GET_STORES,
             ORDER_BY_PRICE,
             ORDER_BY_RELEASE,
-            ORDER_BY_RATING  } from "../Actions";
+            ORDER_BY_RATING, 
+            ADD_GAME_FAVORITE,
+            REMOVE_GAME_FAVORITE,
+            GET_ALL_GAMES,
+            GET_GAME_BY_NAME  } from "../Actions";
 import json from '../games.json'
 
-const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
+const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
 
 const initialState = {
-    games: json.results,
+    // games: json.results,
+    games: [],
     cart: cartFromLocalStorage,
     totalPrice: 0,
     videogame: [],
@@ -150,6 +155,35 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 gamesFiltered: gameOrderRelease
             }
+        case GET_ALL_GAMES:
+        return {
+          ...state,
+          games: action.payload
+        };
+    case GET_GAME_BY_NAME:
+        return {
+            ...state,
+            games: action.payload
+        };
+        
+    
+    case ADD_GAME_FAVORITE:
+      const favs = state.favoriteGames;
+      return {
+        ...state,
+        favoriteGames: favs.find(
+          (el) => Number(el.id) === Number(action.payload.id)
+        )
+          ? [...favs]
+          : [...favs, action.payload],
+      };
+    case REMOVE_GAME_FAVORITE:
+      return {
+        ...state,
+        favoriteGames: state.favoriteGames.filter(
+          (el) => Number(el.id) !== Number(action.payload)
+        ),
+      };
         default:
             return state;
     }

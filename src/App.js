@@ -6,6 +6,8 @@ import { Home } from "./Components/Home";
 import Detail from "./Components/Detail/Detail.jsx";
 import NavBar from "./Components/NavBar/index.jsx";
 import Footer from "./Components/Footer/Footer.jsx";
+import Wishlist from './Components/Whishlist'
+
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
           <Route exact path="/home" component={Home} />
           <Route exact path="/details/:id" component={Detail} />
           <Route exact path="/checkout" component={Checkout} />
+          <Route exact path="/whislist" component={Wishlist} />
           <Footer />
         </Route>
       </Switch>

@@ -1,25 +1,18 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import {
-  AppContainer,
-  SearchBarContainer,
-  SearchInputContainer,
-  SearchIcon,
-  SearchInput,
-  CloseIcon,
-  ButtonSearch,
-  SearchContent,
-  LineSeperator,
-  LoadingWrapper,
-  WarningMessage,
-  AllResultsButton
-} from "./styleSearchBar.js";
+import { useDispatch, useSelector } from 'react-redux'
+// import axios from "axios";
+import { Box, Flex } from "@chakra-ui/react";
 import { IoSearch, IoClose } from "react-icons/io5";
 import { useClickOutside } from "react-click-outside-hook";
-import { AnimatePresence } from "framer-motion/dist/framer-motion";
+import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
 import FadeLoader from "react-spinners/FadeLoader";
 import useDebounce from "./useDebounce";
 import GamesResults from "./gamesResults";
+import { getGamesByName } from "../../Actions";
+
+
+const MotionBox = motion(Box);
+const MotionCloseIcon = motion(Box);
 
 const containerVariants = {
   expanded: {
@@ -41,10 +34,14 @@ const SearchBar = () => {
   const [expanded, setExpanded] = useState(false);
   const [loading, setLoading] = useState(false);
   const [ref, isClickedOutside] = useClickOutside();
-  const [gamesLoaded, setGamesLoaded] = useState([]);
+//   const [gamesLoaded, setGamesLoaded] = useState([]);
   const [noGamesFound, setNoGamesFound] = useState(false);
+  
+  const dispatch = useDispatch()
+  const games = useSelector((state) => state.games)
 
-  const isEmpty = !gamesLoaded || gamesLoaded.length === 0;
+//   const isEmpty = !gamesLoaded || gamesLoaded.length === 0;
+  const isEmpty = !games || games.length === 0;
 
   const expandContainer = () => {
     setExpanded(true);
@@ -70,7 +67,8 @@ const SearchBar = () => {
     setExpanded(false);
     setLoading(false);
     setTimeout(() => {
-      gamesLoaded?.splice(0, gamesLoaded.length);
+    //   gamesLoaded?.splice(0, gamesLoaded.length);
+      games?.splice(0, games.length);
     }, 1100);
     setNoGamesFound(false);
   };
@@ -83,54 +81,131 @@ const SearchBar = () => {
   }, [isClickedOutside]);
 
   // protect the url, denies any error of typing
-  const prepareSearchQuery = (query) => {
-    const api = `https://api.rawg.io/api/games?key=d063d7ea72004c9a8f9461144dd91d96&search=${query}&page_size=8`;
-    return encodeURI(api);
-  };
+//   const prepareSearchQuery = (query) => {
+//     const api = `https://api.rawg.io/api/games?key=c22fa2939a1146329268dbae808c1722&search=${query}&page_size=8`;
+//     return encodeURI(api);
+//   };
 
   // only is gonna running after the end of 500 milliseconds or in case the user stop typing
-  const searchGame = async () => {
+  const searchGame = () => {
     if (!inputGame || inputGame.trim() === "") {
       return; // i'm not gonna continue whit this execution
     }
     setLoading(true);
     setNoGamesFound(false);
 
-    const URL = prepareSearchQuery(inputGame);
-    const response = await axios
-      .get(URL)
-      .catch((err) => console.log("Error Api Data: ", err));
+    // const URL = prepareSearchQuery(inputGame);
+    dispatch(getGamesByName(inputGame))
+    // const response = await axios
+    //   .get(URL)
+    //   .catch((err) => console.log("Error Api Data: ", err));
 
-    if (response) {
-      console.log("Successful Response: ", response.data.results);
-      setLoading(false);
-      setGamesLoaded(response.data.results);
-      if (response.data.results && response.data.results.length === 0) {
-        setNoGamesFound(true);
-      }
+    // if (response) {
+    //   console.log("Successful Response: ", response.data.results);
+    //   setLoading(false);
+    //   setGamesLoaded(response.data.results);
+    //   if (response.data.results && response.data.results.length === 0) {
+    //     setNoGamesFound(true);
+    //   }
+    // } else {
+    //   console.log("Empty Response: ", response.data.results);
+    //   setLoading(false);
+    // }
+    
+    if(games.length){
+        console.log("Successful Response: ", games);
+        setLoading(false);
+        // setGamesLoaded(game);
+        if(games && games.length === 0){
+            setNoGamesFound(true);
+        }
     } else {
-      console.log("Empty Response: ", response.data.results);
-      setLoading(false);
+        console.log("Empty Response: ", games)
+        setLoading(false)
     }
   };
 
   useDebounce(inputGame, 500, searchGame);
 
   return (
-    <AppContainer>
-      <SearchBarContainer
+    <Box // AppContainer
+      w="100%"
+      h="100%"
+      display="inline-block"
+      justifyContent="left"
+      mt="-15px"
+      ml="-240px"
+      pos="absolute"
+    >
+      <MotionBox // SearchBarContainer
+        display="flex"
+        flexDir="column"
+        w={{
+          base: "15em",
+          sssm: "17em",
+          ssm: "17em",
+          sm: "17em",
+          md: "20em",
+          lg: "30em",
+          xl: "30em",
+        }}
+        h="1.8em"
+        bgColor="#fff"
+        overflow="hidden"
+        borderRadius="30px"
+        boxShadow="0px 2px 12px 3px rgba(0, 0, 0, 0.14)"
         animate={expanded ? "expanded" : "collapse"}
         variants={containerVariants}
         transition={transitionContainer}
         ref={ref}
       >
-        <SearchInputContainer>
-          <SearchIcon>
-            <ButtonSearch>
+        <Flex // SearchInputContainer
+          w="110%"
+          minH="2.3em"
+          align="center"
+          pos="relative"
+          p="2px 15px"
+        >
+          <Box // SearchIcon
+            as="span"
+            color="#bebebe"
+            fontSize="23px"
+            mr="10px"
+            mt="4px"
+            verticalAlign="middle"
+          >
+            <Box // ButtonSearch
+              as="button"
+              border="none"
+              bgColor="transparent"
+              p="5px"
+              fontSize="20px"
+              _hover={{
+                cursor: "pointer",
+                color: "#a214c6",
+                transition: "0.2s ease-in-out",
+              }}
+            >
               <IoSearch />
-            </ButtonSearch>
-          </SearchIcon>
-          <SearchInput
+            </Box>
+          </Box>
+          <Box // SearchInput
+            as="input"
+            w="100%"
+            h="105%"
+            outline="none"
+            border="none"
+            fontSize="16px"
+            color="#12112e"
+            fontWeight="500"
+            borderRadius="6px"
+            bgColor="transparent"
+            _focus={{ outline: "none" }}
+            _placeholder={{
+              color: "#bebebe",
+              transition: "all 250ms ease-in-out ",
+            }}
+            // aca falta un _placeholder
             placeholder="Search for Games"
             onFocus={expandContainer}
             value={inputGame}
@@ -138,7 +213,16 @@ const SearchBar = () => {
           />
           <AnimatePresence>
             {inputGame.length ? (
-              <CloseIcon
+              <MotionCloseIcon
+                as="span"
+                color="#bebebe"
+                fontSize="23px"
+                mr="45px"
+                mt="4px"
+                verticalAlign="middle"
+                // transition='all 200ms ease-in-out'
+                cursor="pointer"
+                _hover={{ color: "red" }}
                 key="close-icon"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -147,31 +231,63 @@ const SearchBar = () => {
                 onClick={clearInput}
               >
                 <IoClose />
-              </CloseIcon>
+              </MotionCloseIcon>
             ) : null}
           </AnimatePresence>
-        </SearchInputContainer>
-        {expanded && <LineSeperator />}
+        </Flex>
         {expanded && (
-          <SearchContent>
-            {loading ? (
-              <LoadingWrapper>
+          <Flex // LineSeperator
+            as="span"
+            minW="100%"
+            minH="2px"
+            bgColor="#d8d8d878"
+          />
+        )}
+        {expanded && (
+          <Flex // SearchContent
+            w="100%"
+            h="100%"
+            flexDir="column"
+            p="1em"
+            overflowY="auto"
+          >
+            {loading ? ( // LoadingWrapper
+              <Flex w="100%" h="100%" align="center" justifyContent="center">
                 <FadeLoader loading color="#000" size={50} />
-              </LoadingWrapper>
+              </Flex>
             ) : null}
-            {!loading && isEmpty && !noGamesFound && (
-              <LoadingWrapper>
-                <WarningMessage>Start Typing To Search</WarningMessage>
-              </LoadingWrapper>
-            )}
-            {!loading && noGamesFound && (
-              <LoadingWrapper>
-                <WarningMessage>No Videogames Found</WarningMessage>
-              </LoadingWrapper>
-            )}
+            {!loading &&
+              isEmpty &&
+              !noGamesFound && ( // LoadingWrapper
+                <Flex w="100%" h="100%" align="center" justifyContent="center">
+                  <Flex // WarningMessage
+                    as="span"
+                    color="#a1a1a1"
+                    fontSize="14px"
+                    alignSelf="center"
+                    justifySelf="center"
+                  >
+                    Start Typing To Search
+                  </Flex>
+                </Flex>
+              )}
+            {!loading &&
+              noGamesFound && ( // LoadingWrapper
+                <Flex w="100%" h="100%" align="center" justifyContent="center">
+                  <Flex // WarningMessage
+                    as="span"
+                    color="#a1a1a1"
+                    fontSize="14px"
+                    alignSelf="center"
+                    justifySelf="center"
+                  >
+                    No Videogames Found
+                  </Flex>
+                </Flex>
+              )}
             {!loading && !isEmpty && (
               <>
-                {gamesLoaded?.map((el, index) => {
+                {/*gamesLoaded*/ games?.map((el, index) => {
                   return (
                     <GamesResults
                       key={index}
@@ -182,18 +298,38 @@ const SearchBar = () => {
                       }
                       name={el.name}
                       rating={
-                        el.rating !== 0 ? "⭐" + el.rating + "⭐" : "No ratings"
+                        (el.rating !== 0 || el.rating === undefined) ? "⭐" + el.rating + "⭐" : "⭐ - ⭐"
                       }
                     />
                   );
                 })}
-                <AllResultsButton>See all results</AllResultsButton>
+                <Flex // AllResultsButton
+                  as="button"
+                  bgColor="#000"
+                  color="#fff"
+                  width="70%"
+                  border="none"
+                  p="8px"
+                  mt="15px"
+                  ml={["2rem", "2rem", "3rem", "3rem", "3rem", "4.5rem"]}
+                  borderRadius="15px"
+                  align="center"
+                  justifyContent="center"
+                  _hover={{
+                    cursor: "pointer",
+                    bgColor: "#A214C6",
+                    transition: "0.3s ease-in-out",
+                  }}
+                >
+                  {" "}
+                  See all results{" "}
+                </Flex>
               </>
             )}
-          </SearchContent>
+          </Flex>
         )}
-      </SearchBarContainer>
-    </AppContainer>
+      </MotionBox>
+    </Box>
   );
 };
 

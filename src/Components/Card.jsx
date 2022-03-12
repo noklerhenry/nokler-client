@@ -1,10 +1,14 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../Actions";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, addGameFavorite } from "../Actions";
 import { Button, useToast, Box, Image, Text, Heading } from "@chakra-ui/react";
+import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 
-export const Card = ({ id, name, price, image }) => {
+export const Card = ({ id, name, price, image, store }) => {
+  const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
+  const favs = useSelector((state) => state.favoriteGames);
+//   let games = useSelector((state) => state.games);
 
   const handleClick = (id) => {
     dispatch(addToCart(id));
@@ -16,13 +20,20 @@ export const Card = ({ id, name, price, image }) => {
     handleClick(id);
 
     toast({
-      isClosable: false,
+      isClosable: true,
       title: "Success!",
       description: "Game added to Cart",
-      duration: 5000,
+      duration: 2000,
       position: "bottom-right",
       status: "success",
     });
+  };
+
+  const handleFav = () => {
+    setClicked(true);
+    dispatch(addGameFavorite({ id: id, name: name /* store: store */ }));
+    console.log(favs);
+    // console.log(games)
   };
 
   return (
@@ -58,6 +69,14 @@ export const Card = ({ id, name, price, image }) => {
       </Button>
       <Button size="sm" height="24px" onClick={() => isClicked()}>
         +
+      </Button>
+      <Button
+        border="none"
+        bg="transparent"
+        _hover={{ bg: "none" }}
+        onClick={handleFav}
+      >
+        {clicked ? <HiHeart color="red" /> : <HiOutlineHeart />}
       </Button>
     </Box>
   );
