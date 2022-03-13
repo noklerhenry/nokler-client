@@ -33,7 +33,7 @@ export const Cart = ({ payMethod }) => {
           return (
             <Box key={g.id} mb="10px" pb="4">
               <Text fontSize="16px" mb="5px" fontWeight="700">
-                {g.game.name}
+                {g.game?.name}
               </Text>
               <Text>
                 ${g.price} x {g.quantity} = ${g.price * g.quantity}
