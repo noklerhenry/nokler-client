@@ -69,7 +69,7 @@ export default function Detail() {
   }, [dispatch]) */
 
   return (
-    <Container maxW={"7xl"} mt="250px" mb="150px">
+    <Container maxW={"7xl"} mt="200px" mb="150px">
       <SimpleGrid
         columns={{ base: 1, md: 2, lg: 2 }}
         spacing={{ base: 8, md: 10 }}
@@ -120,6 +120,13 @@ export default function Detail() {
                   Platform:
                 </Text>{" "}
                 {details.platform?.name}
+              </ListItem>
+
+              <ListItem>
+                <Text as={"span"} fontWeight={"bold"}>
+                  Store:
+                </Text>{" "}
+                {details.store?.name}
               </ListItem>
             </List>
 
