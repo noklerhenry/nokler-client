@@ -77,7 +77,7 @@ export default function Detail() {
       >
         <Flex>
           <Image
-            src={details.game?.image}
+            src={details?.game?.image}
             rounded={"md"}
             alt="Game.jpg"
             fit={"cover"}
@@ -95,7 +95,7 @@ export default function Detail() {
               fontWeight={600}
               fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
             >
-              {details.game?.name}
+              {details?.game?.name}
             </Heading>
           </Box>
 
@@ -112,14 +112,14 @@ export default function Detail() {
                 <Text as={"span"} fontWeight={"bold"}>
                   Rating:
                 </Text>{" "}
-                {details.game?.rating}
+                {details?.game?.rating}
               </ListItem>
 
               <ListItem>
                 <Text as={"span"} fontWeight={"bold"}>
                   Platform:
                 </Text>{" "}
-                {details.platform?.name}
+                {details?.platform?.name}
               </ListItem>
             </List>
 

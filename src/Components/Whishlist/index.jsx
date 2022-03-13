@@ -36,19 +36,9 @@ const Templete = () => {
   const toast = useToast();
 
     useEffect(() => {
-        console.log(favs)
+        localStorage.setItem("whislist", JSON.stringify(favs));
+        // console.log(favs)
     }, [favs])
-
-    // const data = [
-    //   { name: 'Grand Theft Auto V', store: [{ n: "Steam"}, {n: "Origin" }], key: 'Available' },
-    //   { name: "Portal 2", store: [{ n: "Steam"}, {n: "Origin" }, {n: 'Xbox-Live'}], key: ' Not Available'  },
-    //   { name: "The Witcher 3", store:[{ n: "Steam"}, {n: "Origin" }, {n: 'PSN'}], key: 'Available'  },
-    //   { name: "Tomb Raider", store: [{ n: "Steam"}, {n: "Origin" }, {n: 'Xbox-Live'}], key: 'Not Available'  },
-    //   { name: "Payday 2", store:[{ n: "Steam"}, {n: "Origin" }], key: 'Available'  },
-    //   { name: "Fortnite", store: [{ n: "Steam"}, {n: "Origin" }], key: 'Available'  },
-    //   { name: "The Last Of Us", store:[{ n: "Steam"}, {n: "Origin" }], key: 'Not Available'  },
-    //   { name: "Killzone: Shadow Fall", store:[{ n: "Steam"}, {n: "Origin" }], key: 'Not Available'}
-    // ];
 
   const bg = useColorModeValue("white", "gray.800");
   const bg2 = useColorModeValue("white", "gray.800");
@@ -63,13 +53,8 @@ const Templete = () => {
           p={50}
           alignItems="center"
           justifyContent="center"
-          mt="12rem"
+          mt="9rem"
         >
-          <Box pos='absolute' mt='-1020px'>
-            <Link to="/">
-              <IconButton aria-label="back home" icon={<IoHomeSharp />} />
-            </Link>
-          </Box>
           <Stack
             direction={{ base: "column" }}
             w="full"
@@ -98,7 +83,7 @@ const Templete = () => {
                       Name
                     </Box>
                     <Box as="span" ml="5px" fontWeight="bold">
-                      Store
+                      Platforms
                     </Box>
                     <Box as="span" fontWeight="bold">
                       Key
@@ -114,6 +99,7 @@ const Templete = () => {
                     py={2}
                     px={6}
                     fontWeight="hairline"
+                    fontSize={game.name.length >= 25 ? "sm" : "md"}
                   >
                     <Box as="span" mt="7px" ml="20px">
                       {game.name}
@@ -123,7 +109,7 @@ const Templete = () => {
                       overflow="hidden"
                       whiteSpace="nowrap"
                       mt="-2px"
-                      ml="10px"
+                      ml="20px"
                     >
                       <Popover>
                         <PopoverTrigger>
@@ -133,7 +119,7 @@ const Templete = () => {
                             border="none"
                             outline="0"
                             boxShadow="0"
-                            _focus={{ outline: 'none'}}
+                            _focus={{ outline: "none" }}
                           >
                             See
                           </Button>
@@ -144,9 +130,9 @@ const Templete = () => {
                           <PopoverHeader color="white">Stores :</PopoverHeader>
                           <PopoverBody>
                             <UnorderedList>
-                              {/* {game?.store?.map((el) => {
-                                return <ListItem color="white">{el.n}</ListItem>;
-                              })} */}
+                              {game.platform?.map((el) => {
+                                return <ListItem color="white">{el}</ListItem>;
+                              })}
                             </UnorderedList>
                           </PopoverBody>
                         </PopoverContent>
@@ -162,28 +148,33 @@ const Templete = () => {
                         <Box
                           as="span"
                           ml="3px"
-                            // color={
-                            //   game.key === "Available" ? "green.500" : "red.500"
-                            // }
+                          color={
+                            game.productKey.length === 0
+                              ? "red.500"
+                              : "green.500"
+                          }
                         >
-                          {/* {game.key} */}
-                          {game.id}
+                          {game.productKey.length >= 1
+                            ? "Available"
+                            : "Not Available"}
                         </Box>
                       </chakra.span>
                     </Flex>
                     <Flex mt="5px" ml="40px">
-                      <Button
-                        size="sm"
-                        variant="solid"
-                        colorScheme="purple"
-                        p="2px 40px"
-                        border="none"
-                        outline="0"
-                        boxShadow="0"
-                        _focus={{ outline: "none" }}
-                      >
-                        More Info
-                      </Button>
+                      <Link to={`/details/${game.id}`}>
+                        <Button
+                          size="sm"
+                          variant="solid"
+                          colorScheme="purple"
+                          p="2px 40px"
+                          border="none"
+                          outline="0"
+                          boxShadow="0"
+                          _focus={{ outline: "none" }}
+                        >
+                          More Info
+                        </Button>
+                      </Link>
                     </Flex>
                     <Flex justify={{ md: "end" }}>
                       <ButtonGroup
@@ -199,10 +190,10 @@ const Templete = () => {
                           border="none"
                           outline="0"
                           boxShadow="0"
-                          _focus={{ outline: 'none'}}
+                          _focus={{ outline: "none" }}
                           icon={<BsFillCartFill />}
                           onClick={() => {
-                            dispatch(addToCart(game.id));
+                            dispatch(addToCart(game.id)); // no funciona
                             toast({
                               isClosable: true,
                               title: "Success!",

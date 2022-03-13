@@ -188,7 +188,7 @@ export function removeGameFavorite(idGame) {
 export const getAllGames = () => {
     return async (dispatch) => {
         try {
-            const res = await axios.get('https://nokler-api.herokuapp.com/filterAcum')
+            const res = await axios.get('https://nokler-api.herokuapp.com/getProducts')
             return dispatch({ type: GET_ALL_GAMES, payload: res.data });
         } catch (err) {
             alert('Erros All Games DB')

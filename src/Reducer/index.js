@@ -24,6 +24,7 @@ import {
 import json from "../games.json";
 
 const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
+const whislistFromLocalStorage = JSON.parse(localStorage.getItem("whislist") || "[]");
 
 const initialState = {
   // games: json.results,
@@ -35,7 +36,7 @@ const initialState = {
   platforms: [],
   genres: [],
   stores: [],
-  favoriteGames: []
+  favoriteGames: whislistFromLocalStorage
 };
 
 const reducer = (state = initialState, action) => {
@@ -196,7 +197,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         favoriteGames: state.favoriteGames.filter(
-          (el) => Number(el.id) !== Number(action.payload)
+          (el) => el.id !== action.payload
         ),
       };
     default:

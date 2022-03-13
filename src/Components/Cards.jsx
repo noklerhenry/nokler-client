@@ -34,7 +34,9 @@ export const Cards = () => {
             id={g.id}
             name={g.name}
             image={g.img}
-            price={g.price}
+            // price={g.price}
+            platform={g.platform}
+            productKey={g.productKey}
           />
         )) : 'Loading...' }
       </SimpleGrid>
