@@ -37,14 +37,14 @@ export default function Detail() {
   const history = useHistory();
 
   const details = useSelector((state) => state.videogame);
-  const games = useSelector(state => state.games)
+  const games = useSelector((state) => state.games);
 
   console.log(details);
 
   useEffect(() => {
-    dispatch(getAllGames())
-    dispatch(getGameDetails(id))
-  },[]);
+    dispatch(getAllGames());
+    dispatch(getGameDetails(id));
+  }, []);
 
   const {
     isOpen: isCartOpen,
@@ -58,7 +58,7 @@ export default function Detail() {
   } = useDisclosure();
 
   const handleCart = (id) => {
-    dispatch(addToCart(id))
+    dispatch(addToCart(id));
   };
 
   /* useEffect(() => {
@@ -68,8 +68,8 @@ export default function Detail() {
       }
   }, [dispatch]) */
 
-  return(
-    <Container maxW={"7xl"} mt="150px" mb="150px">
+  return (
+    <Container maxW={"7xl"} mt="250px" mb="150px">
       <SimpleGrid
         columns={{ base: 1, md: 2, lg: 2 }}
         spacing={{ base: 8, md: 10 }}
@@ -128,14 +128,14 @@ export default function Detail() {
                 <Text as={"span"} fontWeight={"bold"}>
                   Region:
                 </Text>{" "}
-                Latinoamérica
+                {details?.region}
               </ListItem>
 
               <ListItem>
                 <Text as={"span"} fontWeight={"bold"}>
                   Released:
                 </Text>{" "}
-                2015-05-18
+                {details.game?.released_at.substring(0, 10)}
               </ListItem>
             </List>
           </SimpleGrid>
@@ -145,8 +145,14 @@ export default function Detail() {
               <Box>
                 Price:
                 <Box fontSize={"xl"}>
-                  $ 479.99
-                  <Button onClick={() => handleCart(details.id)} ml="4">
+                  $ {details?.price}
+                  <Button
+                    onClick={() => {
+                      onCartOpen;
+                      handleCart(details.id);
+                    }}
+                    ml="4"
+                  >
                     Add to cart
                   </Button>
                   <Modal
@@ -215,27 +221,13 @@ export default function Detail() {
       <VStack margin={"20px"}>
         Description:
         <Text fontSize="xl">
-          The third game in a series, it holds nothing back from the player.
-          Open world adventures of the renowned monster slayer Geralt of Rivia
-          are now even on a larger scale. Following the source material more
-          accurately, this time Geralt is trying to find the child of the
-          prophecy, Ciri while making a quick coin from various contracts on the
-          side. Great attention to the world building above all creates an
-          immersive story, where your decisions will shape the world around you.
-          CD Project Red are infamous for the amount of work they put into their
-          games, and it shows, because aside from classic third-person action
-          RPG base game they provided 2 massive DLCs with unique questlines and
-          16 smaller DLCs, containing extra quests and items. Players praise the
-          game for its atmosphere and a wide open world that finds the balance
-          between fantasy elements and realistic and believable mechanics, and
-          the game deserved numerous awards for every aspect of the game, from
-          music to direction.
+          {details.game?.description}
         </Text>
       </VStack>
 
       <Divider borderColor="gray.400" />
 
-      <Box margin={"10px"} fontSize="xl">
+      {/*  <Box margin={"10px"} fontSize="xl">
         System requirements:
         <HStack marginRight={"20px"} marginTop={"20px"}>
           <Box>
@@ -247,7 +239,7 @@ export default function Detail() {
             280/Radeon HD 2600,10 Гб на винчестере,интернет-соединение"
           </Box>
         </HStack>
-      </Box>
+      </Box> */}
     </Container>
   );
 }

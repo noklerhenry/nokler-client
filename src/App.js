@@ -23,7 +23,6 @@ function App() {
       <Switch>
         {/* <Route exact path="/" component={FirstPage} /> */}
         <Route path="/">
-          <NavBar />
           <Route exact path="/" component={Home} />
           <Route exact path="/details/:id" component={Detail} />
           <Route exact path="/checkout" component={Checkout} />
