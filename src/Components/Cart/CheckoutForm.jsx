@@ -65,12 +65,13 @@ export const CheckoutForm = ({ amount }) => {
       });
 
       if (!error) {
-        // const { data } = await axios.post("http://localhost:3001/checkout", {
-        //   ...paymentMethod,
-        //   amount: amount * 100,
-        // });
-        // console.log(data);
-        console.log(paymentMethod);
+        const { data } = await axios.post("https://nokler-api.herokuapp.com/checkOut", {
+          ...paymentMethod,
+          amount: amount * 100,
+        });
+        console.log(data);
+        alert(data.status);
+        // console.log(paymentMethod);
       } else alert(error.message);
       elements.getElement(CardElement).clear();
     } else {
