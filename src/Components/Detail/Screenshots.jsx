@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllGames, getGameDetails } from "../../Actions/index.js";
 import {
   Text,
   Box,
@@ -10,6 +13,17 @@ import {
 } from "@chakra-ui/react";
 
 export default function Screenshots() {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+
+  const details = useSelector((state) => state.videogame);
+  const games = useSelector((state) => state.games);
+
+  useEffect(() => {
+    dispatch(getAllGames());
+    dispatch(getGameDetails(id));
+  }, []);
+
   const arrowStyles = {
     cursor: "pointer",
     pos: "absolute",
@@ -30,27 +44,27 @@ export default function Screenshots() {
   };
 
   const trailer = {
-    video: "https://www.youtube.com/embed/HtVdAasjOgU",
+    video: details.game?.trailer,
   };
 
   const slides = [
     {
-      img: "https://media.rawg.io/media/screenshots/1ac/1ac19f31974314855ad7be266adeb500.jpg",
+      img: details.game?.screenshots[0].url,
     },
     {
-      img: "https://media.rawg.io/media/screenshots/6a0/6a08afca95261a2fe221ea9e01d28762.jpg",
+      img: details.game?.screenshots[1].url,
     },
     {
-      img: "https://media.rawg.io/media/screenshots/cdd/cdd31b6b4a687425a87b5ce231ac89d7.jpg",
+      img: details.game?.screenshots[2].url,
     },
     {
-      img: "https://media.rawg.io/media/screenshots/862/862397b153221a625922d3bb66337834.jpg",
+      img: details.game?.screenshots[3].url,
     },
     {
-      img: "https://media.rawg.io/media/screenshots/166/166787c442a45f52f4f230c33fd7d605.jpg",
+      img: details.game?.screenshots[4].url,
     },
     {
-      img: "https://media.rawg.io/media/screenshots/f63/f6373ee614046d81503d63f167181803.jpg",
+      img: details.game?.screenshots[5].url,
     },
   ];
 
@@ -118,7 +132,6 @@ export default function Screenshots() {
                 src={slide.img}
                 alt="carousel image"
                 boxSize="full"
-                marginLeft="28"
                 backgroundSize="cover"
                 maxW="1280px"
                 maxH="780px"
