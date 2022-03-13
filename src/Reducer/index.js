@@ -24,24 +24,26 @@ import {
 import json from "../games.json";
 
 const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
+const whislistFromLocalStorage = JSON.parse(localStorage.getItem("whislist") || "[]");
 
 const initialState = {
   // games: json.results,
   games: [],
   cart: cartFromLocalStorage,
   totalPrice: 0,
-  videogame: [],
+  videogame: {},
   gamesFiltered: [],
   platforms: [],
   genres: [],
   stores: [],
+  favoriteGames: whislistFromLocalStorage
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
-      let game = state.games.find((g) => g.id === action.payload);
-      let item = state.cart.find((g) => g.id === game.id);
+      let game = state.games.find((g) => g.id == action.payload);
+      let item = state.cart.find((g) => g.id == game.id);
       return !item
         ? {
             ...state,
@@ -195,7 +197,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         favoriteGames: state.favoriteGames.filter(
-          (el) => Number(el.id) !== Number(action.payload)
+          (el) => el.id !== action.payload
         ),
       };
     default:

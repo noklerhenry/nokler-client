@@ -50,10 +50,10 @@ export const loadCart = (payload) => {
 
 export function getGameDetails(id) {
   return async function (dispatch) {
-    let results = await axios.get("http://localhost:3001/details/" + id);
+    let results = await axios.get(`https://nokler-api.herokuapp.com/getProductById?ids=${id}`);
     dispatch({
       type: GET_GAME_DETAILS,
-      payload: results.data,
+      payload: results.data[0],
     });
   };
 }

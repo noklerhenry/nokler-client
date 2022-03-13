@@ -27,7 +27,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getGameDetails } from "../../Actions/index.js";
+import { addToCart, getAllGames, getGameDetails } from "../../Actions/index.js";
 import Screenshots from "./Screenshots";
 import { FaCartPlus } from "react-icons/fa";
 
@@ -36,11 +36,15 @@ export default function Detail() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const details = useSelector((state) => state.details);
+  const details = useSelector((state) => state.videogame);
+  const games = useSelector(state => state.games)
+
+  console.log(details);
 
   useEffect(() => {
-    dispatch(getGameDetails(id));
-  }, [dispatch, id]);
+    dispatch(getAllGames())
+    dispatch(getGameDetails(id))
+  },[]);
 
   const {
     isOpen: isCartOpen,
@@ -53,6 +57,10 @@ export default function Detail() {
     onClose: onScreenshotClose,
   } = useDisclosure();
 
+  const handleCart = (id) => {
+    dispatch(addToCart(id))
+  };
+
   /* useEffect(() => {
       dispatch(getGameDetails(props.match.params.id));
       return () => {
@@ -60,7 +68,7 @@ export default function Detail() {
       }
   }, [dispatch]) */
 
-  return (
+  return(
     <Container maxW={"7xl"} mt="150px" mb="150px">
       <SimpleGrid
         columns={{ base: 1, md: 2, lg: 2 }}
@@ -69,7 +77,7 @@ export default function Detail() {
       >
         <Flex>
           <Image
-            src="https://media.rawg.io/media/games/618/618c2031a07bbff6b4f611f10b6bcdbc.jpg"
+            src={details?.game?.image}
             rounded={"md"}
             alt="Game.jpg"
             fit={"cover"}
@@ -87,7 +95,7 @@ export default function Detail() {
               fontWeight={600}
               fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
             >
-              The Witcher 3: Wild Hunt
+              {details?.game?.name}
             </Heading>
           </Box>
 
@@ -104,14 +112,14 @@ export default function Detail() {
                 <Text as={"span"} fontWeight={"bold"}>
                   Rating:
                 </Text>{" "}
-                4.75 / 5
+                {details?.game?.rating}
               </ListItem>
 
               <ListItem>
                 <Text as={"span"} fontWeight={"bold"}>
                   Platform:
                 </Text>{" "}
-                Steam
+                {details?.platform?.name}
               </ListItem>
             </List>
 
@@ -138,7 +146,7 @@ export default function Detail() {
                 Price:
                 <Box fontSize={"xl"}>
                   $ 479.99
-                  <Button onClick={onCartOpen} ml="4">
+                  <Button onClick={() => handleCart(details.id)} ml="4">
                     Add to cart
                   </Button>
                   <Modal

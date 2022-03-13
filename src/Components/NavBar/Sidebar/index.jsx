@@ -13,10 +13,11 @@ import CartDrawer from "../CartDrawer.jsx";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const SideBar = ({ Open, toggle }) => {
-  const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
+  const { loginWithPopup, isAuthenticated, isLoading } = useAuth0();
   const { colorMode, toggleColorMode } = useColorMode();
 
   const [mediaQueryGrid480px] = useMediaQuery("(max-width: 480px)");
+  
 
   return (
     <Box
@@ -24,13 +25,13 @@ const SideBar = ({ Open, toggle }) => {
       isOpen={Open}
       pos="fixed"
       zIndex="999"
-      w="100%"
+      w={["100%", "100%", "100%", "100%", "40%", "25%"]}
       h="100%"
       bg="#0d0d0d"
       display="grid"
       alignItems="center"
-      top={Open ? "0" : "-100%"}
-      right="0"
+      left={Open ? "0" : "-100%"}
+      top="0"
       transition="0.3s ease-in-out"
       opacity={Open ? "100%" : "0"}
     >
@@ -45,7 +46,7 @@ const SideBar = ({ Open, toggle }) => {
       >
         <IconButton
           aria-label="Close Menu"
-          icon={<FaTimes color="#fff" font-size="1.8rem" />}
+          icon={<FaTimes color="#fff" fontSize="1.8rem" />}
           onClick={toggle}
           border="none"
           bg="#0d0d0d"
@@ -62,7 +63,20 @@ const SideBar = ({ Open, toggle }) => {
           textAlign="center"
         >
           <Box>
-            {/* <Button
+            <Link to="/">
+              <Button
+                size="sm"
+                mt="20px"
+                bgColor="#fff"
+                color="#0d0d0d"
+                onClick={toggle}
+              >
+                Home
+              </Button>
+            </Link>
+          </Box>
+          <Box>
+            <Button
               size="sm"
               mt="20px"
               bgColor="#fff"
@@ -70,13 +84,12 @@ const SideBar = ({ Open, toggle }) => {
               onClick={() => toggleColorMode()}
             >
               Theme
-            </Button> */}
-            <Button size="sm" mt="20px" bgColor="#fff" color="#0d0d0d">
-              Home
             </Button>
           </Box>
           <Box mr="7px">
-            <CartDrawer Open={Open} />
+            <Box>
+              <CartDrawer Open={Open} toggle={toggle} />
+            </Box>
           </Box>
           <Box>
             <Link to="/whislist">
@@ -86,6 +99,7 @@ const SideBar = ({ Open, toggle }) => {
                 // ml="9px"
                 bgColor="#fff"
                 color="#0d0d0d"
+                onClick={toggle}
               >
                 Whislist
               </Button>
@@ -99,12 +113,17 @@ const SideBar = ({ Open, toggle }) => {
                 // ml="9px"
                 bgColor="#F53DF5"
                 color="#fff"
-                onClick={loginWithRedirect}
+                onClick={loginWithPopup}
               >
                 Sign in
               </Button>
             ) : (
-              <Logout />
+                <Box 
+                  size="sm" 
+                  mt="100px"
+                >
+                    <Logout />
+                </Box>
             )}
           </Box>
         </Box>
