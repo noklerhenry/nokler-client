@@ -5,10 +5,11 @@ import { Button, useToast, Box, Image, Text, Heading } from "@chakra-ui/react";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 
 export const Card = ({ id, name, price, image, store }) => {
+    
   const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
   const favs = useSelector((state) => state.favoriteGames);
-  //   let games = useSelector((state) => state.games);
+  let games = useSelector((state) => state.games);
 
   const handleClick = (id) => {
     dispatch(addToCart(id));
@@ -32,7 +33,7 @@ export const Card = ({ id, name, price, image, store }) => {
   const handleFav = () => {
     setClicked(true);
     dispatch(addGameFavorite({ id: id, name: name /* store: store */ }));
-    console.log(favs);
+    // console.log(favs);
     // console.log(games)
   };
 

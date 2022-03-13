@@ -1,4 +1,3 @@
-// import { Router, Route } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Checkout } from "./Components/Cart/Checkout";
 import Admin from "./Components/Admin/Admin";
@@ -7,10 +6,9 @@ import AdminUsers from "./Components/Admin/AdminUsers";
 import EditGame from "./Components/Admin/EditGame";
 import AddProduct from "./Components/Admin/AddProduct";
 import AddGame from "./Components/Admin/AddGame";
-import { FirstPage } from "./Components/FirstPage/FirstPage";
 import { Home } from "./Components/Home";
 import Detail from "./Components/Detail/Detail.jsx";
-import NavBar from "./Components/NavBar/index.jsx";
+import Header from './Components/Header';
 import Footer from "./Components/Footer/Footer.jsx";
 import Wishlist from './Components/Whishlist'
 
@@ -18,12 +16,10 @@ import Wishlist from './Components/Whishlist'
 function App() {
   return (
     <>
-      <NavBar />
     <Router>
+      <Header />
       <Switch>
-        {/* <Route exact path="/" component={FirstPage} /> */}
         <Route path="/">
-          <NavBar />
           <Route exact path="/" component={Home} />
           <Route exact path="/details/:id" component={Detail} />
           <Route exact path="/checkout" component={Checkout} />

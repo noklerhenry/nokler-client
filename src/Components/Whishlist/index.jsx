@@ -29,24 +29,26 @@ import Landing from "./noFavsLanding";
 import { addToCart } from "../../Actions";
 
 const Templete = () => {
+    
   const favs = useSelector((state) => state.favoriteGames);
   const dispatch = useDispatch();
+  
   const toast = useToast();
 
-  //   useEffect(() => {
-  //       console.log(favs)
-  //   }, [favs])
+    useEffect(() => {
+        console.log(favs)
+    }, [favs])
 
-    const data = [
-      { name: 'Grand Theft Auto V', store: [{ n: "Steam"}, {n: "Origin" }], key: 'Available' },
-      { name: "Portal 2", store: [{ n: "Steam"}, {n: "Origin" }, {n: 'Xbox-Live'}], key: ' Not Available'  },
-      { name: "The Witcher 3", store:[{ n: "Steam"}, {n: "Origin" }, {n: 'PSN'}], key: 'Available'  },
-      { name: "Tomb Raider", store: [{ n: "Steam"}, {n: "Origin" }, {n: 'Xbox-Live'}], key: 'Not Available'  },
-      { name: "Payday 2", store:[{ n: "Steam"}, {n: "Origin" }], key: 'Available'  },
-      { name: "Fortnite", store: [{ n: "Steam"}, {n: "Origin" }], key: 'Available'  },
-      { name: "The Last Of Us", store:[{ n: "Steam"}, {n: "Origin" }], key: 'Not Available'  },
-      { name: "Killzone: Shadow Fall", store:[{ n: "Steam"}, {n: "Origin" }], key: 'Not Available'}
-    ];
+    // const data = [
+    //   { name: 'Grand Theft Auto V', store: [{ n: "Steam"}, {n: "Origin" }], key: 'Available' },
+    //   { name: "Portal 2", store: [{ n: "Steam"}, {n: "Origin" }, {n: 'Xbox-Live'}], key: ' Not Available'  },
+    //   { name: "The Witcher 3", store:[{ n: "Steam"}, {n: "Origin" }, {n: 'PSN'}], key: 'Available'  },
+    //   { name: "Tomb Raider", store: [{ n: "Steam"}, {n: "Origin" }, {n: 'Xbox-Live'}], key: 'Not Available'  },
+    //   { name: "Payday 2", store:[{ n: "Steam"}, {n: "Origin" }], key: 'Available'  },
+    //   { name: "Fortnite", store: [{ n: "Steam"}, {n: "Origin" }], key: 'Available'  },
+    //   { name: "The Last Of Us", store:[{ n: "Steam"}, {n: "Origin" }], key: 'Not Available'  },
+    //   { name: "Killzone: Shadow Fall", store:[{ n: "Steam"}, {n: "Origin" }], key: 'Not Available'}
+    // ];
 
   const bg = useColorModeValue("white", "gray.800");
   const bg2 = useColorModeValue("white", "gray.800");
@@ -54,27 +56,27 @@ const Templete = () => {
 
   return (
     <>
-      {data.length ? (
+      {favs.length ? (
         <Flex
           w="full"
           bg="#121019"
           p={50}
           alignItems="center"
           justifyContent="center"
-          mt="3rem"
+          mt="12rem"
         >
-          <Flex pos="absolute" top="-10px">
+          <Box pos='absolute' mt='-1020px'>
             <Link to="/">
               <IconButton aria-label="back home" icon={<IoHomeSharp />} />
             </Link>
-          </Flex>
+          </Box>
           <Stack
             direction={{ base: "column" }}
             w="full"
             bg={{ md: bg }}
             shadow="lg"
           >
-            {data.map((game, index) => {
+            {favs.map((game, index) => {
               return (
                 <Flex
                   direction={{ base: "row", md: "column" }}
@@ -142,9 +144,9 @@ const Templete = () => {
                           <PopoverHeader color="white">Stores :</PopoverHeader>
                           <PopoverBody>
                             <UnorderedList>
-                              {data?.store?.map((el) => {
+                              {/* {game?.store?.map((el) => {
                                 return <ListItem color="white">{el.n}</ListItem>;
-                              })}
+                              })} */}
                             </UnorderedList>
                           </PopoverBody>
                         </PopoverContent>
@@ -160,12 +162,12 @@ const Templete = () => {
                         <Box
                           as="span"
                           ml="3px"
-                            color={
-                              game.key === "Available" ? "green.500" : "red.500"
-                            }
+                            // color={
+                            //   game.key === "Available" ? "green.500" : "red.500"
+                            // }
                         >
-                          {game.key}
-                          {/* {game.id} */}
+                          {/* {game.key} */}
+                          {game.id}
                         </Box>
                       </chakra.span>
                     </Flex>

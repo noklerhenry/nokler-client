@@ -35,6 +35,7 @@ const initialState = {
   platforms: [],
   genres: [],
   stores: [],
+  favoriteGames: []
 };
 
 const reducer = (state = initialState, action) => {
