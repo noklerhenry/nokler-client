@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart, loadCart, removeToCart } from "../../Actions";
+import {
+  clearCart,
+  loadCart,
+  removeToCart,
+  getAllProducts,
+} from "../../Actions";
 import { Payment } from "./Payment";
 import { Container, Button, Box, Text } from "@chakra-ui/react";
 
@@ -26,6 +31,12 @@ export const Cart = ({ payMethod }) => {
     dispatch(clearCart());
   };
 
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, []);
+
+  console.log(cart);
+
   return (
     <div>
       <Container d="flex" flexDirection="column">
@@ -33,10 +44,10 @@ export const Cart = ({ payMethod }) => {
           return (
             <Box key={g.id} mb="10px" pb="4">
               <Text fontSize="16px" mb="5px" fontWeight="700">
-                {g.game.name}
+                {g.game?.name}
               </Text>
               <Text>
-                ${g.price} x {g.quantity} = ${g.price * g.quantity}
+                ${g?.price} x {g?.quantity} = ${g?.price * g.quantity}
               </Text>
               <Button variant="red" onClick={() => handleDelete(g.id)}>
                 X

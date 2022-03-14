@@ -20,6 +20,7 @@ export const ADD_GAME_FAVORITE = "ADD_GAME_FAVORITE";
 export const REMOVE_GAME_FAVORITE = "REMOVE_GAME_FAVORITE";
 export const GET_ALL_GAMES = "GET_ALL_GAMES";
 export const GET_GAME_BY_NAME = "GET_GAME_BY_NAME";
+export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 
 export const addToCart = (payload) => {
   return {
@@ -50,7 +51,9 @@ export const loadCart = (payload) => {
 
 export function getGameDetails(id) {
   return async function (dispatch) {
-    let results = await axios.get(`https://nokler-api.herokuapp.com/getProductById?ids=${id}`);
+    let results = await axios.get(
+      `https://nokler-api.herokuapp.com/getProductById?ids=${id}`
+    );
     dispatch({
       type: GET_GAME_DETAILS,
       payload: results.data[0],
@@ -205,4 +208,9 @@ export const getGamesByName = (name) => {
         console.log(err);
       });
   };
+};
+
+export const getAllProducts = () => async (dispatch) => {
+  const url = await axios.get("https://nokler-api.herokuapp.com/getProducts");
+  return dispatch({ type: GET_ALL_PRODUCTS, payload: url.data });
 };
