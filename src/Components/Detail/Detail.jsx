@@ -175,7 +175,7 @@ export default function Detail() {
             <SimpleGrid
         columns={{ base: 2, md: 2, lg: 3 }} mb='20px'>
             {details.map((g) => (
-              <Box key={g.id} bg={bg}  padding='11px' borderRadius='20px'>
+              <Box key={g.id} bg={bg}  padding='19px' borderRadius='20px'>
               
               <Text  mt='-7px'><Text fontSize='7px'>STORE</Text> {g.store.name}</Text>
               <Text mt='-3px'> <Text fontSize='7px'>PLATFORM</Text>{g.platform.name}</Text>
