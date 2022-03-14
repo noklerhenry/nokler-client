@@ -14,12 +14,21 @@ import {
   Flex,
   useMediaQuery,
   IconButton,
+  Menu,
+  MenuButton,
+  MenuList,
+  Avatar,
+  Center,
+  MenuDivider,
+  MenuItem
 } from "@chakra-ui/react";
 // import Panel from "./Sidebar/panel";
 import { FaBars } from "react-icons/fa";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+
 
 const NavBar = ({ toggle, mediaQueryNavMenu }) => {
-  const { user, loginWithPopup, isAuthenticated, isLoading } = useAuth0();
+  const { user, loginWithPopup, loginWithRedirect, isAuthenticated, isLoading, logout } = useAuth0();
 
   const { colorMode, toggleColorMode } = useColorMode();
 
@@ -55,8 +64,8 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
             ml={mediaQueryIcon ? "2rem" : "3rem"}
             pl={mediaQueryIconSm ? "2.8rem" : null}
           >
-            <Link to='/'>
-                <Image src={ImgLogo} alt="nokler logo" w="125px" h="35px" /> 
+            <Link to="/">
+              <Image src={ImgLogo} alt="nokler logo" w="125px" h="35px" />
             </Link>
           </Flex>
           <Flex
@@ -116,8 +125,11 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
                 padding="0 1rem"
                 cursor="pointer"
               >
-                <Button size="sm" mt="20px" onClick={() => toggleColorMode()}>
+                {/* <Button size="sm" mt="20px" onClick={() => toggleColorMode()}>
                   Theme
+                </Button> */}
+                <Button size="sm" mt="20px" onClick={toggleColorMode}>
+                  {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
                 </Button>
               </Box>
               <Box
@@ -132,13 +144,73 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
                     size="sm"
                     mt="20px"
                     ml="19px"
-                    onClick={loginWithPopup}
+                    onClick={loginWithRedirect}
                   >
                     {" "}
                     Sign in
                   </Button>
                 ) : (
-                  <Logout />
+                  //   <Logout />
+                  <Menu>
+                    <MenuButton
+                      as={Button}
+                      rounded={"full"}
+                      variant={"link"}
+                      cursor={"pointer"}
+                      minW={0}
+                      mt="20px"
+                      mr="1rem"
+                      border="none"
+                      outline="0"
+                      boxShadow="0"
+                      _focus={{ outline: "0", boxShadow: "0", border: "none" }}
+                    >
+                      <Avatar
+                        size={"sm"}
+                        src={
+                          user
+                            ? user.picture
+                            : "https://avatars.dicebear.com/api/male/username.svg"
+                        }
+                      />
+                    </MenuButton>
+                    <MenuList alignItems={"center"} bgColor="#000">
+                      <br />
+                      <Center>
+                        <Avatar
+                          size={"2xl"}
+                          src={
+                            user
+                              ? user.picture
+                              : "https://avatars.dicebear.com/api/male/username.svg"
+                          }
+                        />
+                      </Center>
+                      <br />
+                      <Center color="#fff">
+                        <p>{`Welcome ${user ? user.name : "To Nøkler"}`}</p>
+                      </Center>
+                      <br />
+                      <MenuDivider />
+                      <Link to="/admin">
+                        <MenuItem color="#fff">Admin</MenuItem>
+                      </Link>
+                      <Link to="/admin-products">
+                        <MenuItem color="#fff">Admin-Products</MenuItem>
+                      </Link>
+                      <Link to="/admin-users">
+                        <MenuItem color="#fff">Admin-Users</MenuItem>
+                      </Link>
+                      <Link to="/addgame">
+                        <MenuItem color="#fff">Add Games</MenuItem>
+                      </Link>
+                      <MenuDivider />
+                      {/* <MenuItem color="#fff">Account Settings</MenuItem> */}
+                      <MenuItem color="#fff" onClick={() => logout()}>
+                        Logout
+                      </MenuItem>
+                    </MenuList>
+                  </Menu>
                 )}
               </Box>
               <Box
