@@ -11,7 +11,7 @@ import {
 const Landing = () => {
   return (
     <>
-      <Container maxW={"3xl"}>
+      <Container maxW={"3xl"} mt='7rem'>
         <Stack
           as={Box}
           textAlign={"center"}

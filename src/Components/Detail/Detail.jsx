@@ -69,57 +69,77 @@ export default function Detail() {
   }, [dispatch]) */
 
   return (
+   
     <Container maxW={"7xl"} mt="200px" mb="150px">
       <SimpleGrid
         columns={{ base: 1, md: 2, lg: 2 }}
         spacing={{ base: 8, md: 10 }}
         py={{ base: 10, md: 18 }}
       >
-        <Flex>
+        <Flex flexDirection='column'>
           <Image
-            src={details.game?.image}
-            rounded={"md"}
+            borderRadius='35px'
+            boxShadow='3px 3px 15px #999999'
+            src={details?.game?.image}
             alt="Game.jpg"
             fit={"cover"}
             align={"center"}
-            border={"3px solid"}
             w={"100%"}
             h={{ base: "100%", sm: "300px", lg: "500px" }}
           />
+          <Box margin={"20px"} fontSize="xl">
+        <Button onClick={onScreenshotOpen}>Screenshots+</Button>
+        <Modal
+          onClose={onScreenshotClose}
+          isOpen={isScreenshotOpen}
+          size={"full"}
+          motionPreset="slideInBottom"
+          colorScheme="black"
+        >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Screenshots</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Screenshots />
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+      </Box>
         </Flex>
 
-        <Stack divider={<StackDivider borderColor="gray.400" />}>
+        <Stack >
           <Box as="header">
             <Heading
               lineHeight={1.1}
-              fontWeight={600}
+              fontWeight={400}
               fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
             >
-              {details.game?.name}
+              {details?.game?.name}
             </Heading>
           </Box>
 
-          <Box>
-            <Text as={"span"} fontWeight={"bold"}>
-              Digital key:
+          <Box padding='4px'>
+            <Text color='#888888'>
+              <b>Digital key:</b> This is a digital edition of the product (CD-KEY)
             </Text>{" "}
-            This is a digital edition of the product (CD-KEY)
+            
           </Box>
 
-          <SimpleGrid columns={{ base: 1, md: 2 }} marginTop={"20px"}>
+          <SimpleGrid columns={{ base: 1, md: 2 }} mt='30px'>
             <List>
-              <ListItem>
+              <ListItem borderBottom='1px dotted' padding='4px' mr='9px'>
                 <Text as={"span"} fontWeight={"bold"}>
                   Rating:
                 </Text>{" "}
-                {details.game?.rating}
+                {details?.game?.rating}
               </ListItem>
 
-              <ListItem>
+              <ListItem borderBottom='1px dotted' padding='4px' mr='9px'>
                 <Text as={"span"} fontWeight={"bold"}>
                   Platform:
                 </Text>{" "}
-                {details.platform?.name}
+                {details?.platform?.name}
               </ListItem>
 
               <ListItem>
@@ -131,14 +151,14 @@ export default function Detail() {
             </List>
 
             <List>
-              <ListItem>
+              <ListItem borderBottom='1px dotted' padding='4px' mr='9px'>
                 <Text as={"span"} fontWeight={"bold"}>
                   Region:
                 </Text>{" "}
                 {details?.region}
               </ListItem>
 
-              <ListItem>
+              <ListItem borderBottom='1px dotted' padding='4px' mr='9px'>
                 <Text as={"span"} fontWeight={"bold"}>
                   Released:
                 </Text>{" "}
@@ -155,7 +175,7 @@ export default function Detail() {
                   $ {details?.price}
                   <Button
                     onClick={() => {
-                      onCartOpen;
+                      onCartOpen();
                       handleCart(details.id);
                     }}
                     ml="4"
@@ -171,7 +191,7 @@ export default function Detail() {
                     <ModalOverlay />
                     <ModalContent>
                       <ModalHeader fontSize="9xl">
-                        <FaCartPlus />
+                        <FaCartPlus h='30px'/>
                       </ModalHeader>
                       <ModalCloseButton />
                       <ModalBody fontSize="2xl">
@@ -203,33 +223,13 @@ export default function Detail() {
 
       <Divider borderColor="gray.400" />
 
-      <Box margin={"20px"} fontSize="xl">
-        <Button onClick={onScreenshotOpen}>Screenshots+</Button>
-        <Modal
-          onClose={onScreenshotClose}
-          isOpen={isScreenshotOpen}
-          size={"full"}
-          motionPreset="slideInBottom"
-          colorScheme="black"
-        >
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Screenshots</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <Screenshots />
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-      </Box>
+      
 
       <Divider borderColor="gray.400" />
 
       <VStack margin={"20px"}>
         Description:
-        <Text fontSize="xl">
-          {details.game?.description}
-        </Text>
+        <Text fontSize="xl">{details.game?.description}</Text>
       </VStack>
 
       <Divider borderColor="gray.400" />
@@ -248,5 +248,7 @@ export default function Detail() {
         </HStack>
       </Box> */}
     </Container>
+  ) : (
+    <Box>Game NOT Found</Box>
   );
 }

@@ -1,4 +1,3 @@
-// import { Router, Route } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Checkout } from "./Components/Cart/Checkout";
 import Admin from "./Components/Admin/Admin";
@@ -7,11 +6,10 @@ import AdminUsers from "./Components/Admin/AdminUsers";
 import EditGame from "./Components/Admin/EditGame";
 import AddProduct from "./Components/Admin/AddProduct";
 import AddGame from "./Components/Admin/AddGame";
-import { FirstPage } from "./Components/FirstPage/FirstPage";
 import { Home } from "./Components/Home";
 import Detail from "./Components/Detail/Detail.jsx";
-//import NavBar from "./Components/NavBar/index.jsx";
 import Header from "./Components/Header";
+//import NavBar from "./Components/NavBar/index.jsx";
 import Footer from "./Components/Footer/Footer.jsx";
 import Wishlist from "./Components/Whishlist";
 import Gallery from "./Components/Gallery/Gallery.jsx";
@@ -20,7 +18,7 @@ function App() {
   return (
     <>
       <Router>
-        <Header />
+      <Header />
         <Switch>
           {/* <Route exact path="/" component={FirstPage} /> */}
           <Route path="/">

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useSelector } from 'react-redux'
 import { useEffect } from "react";
 import axios from 'axios'
+import AdminHeader from "./AdminHeader";
 import { Heading, Button, Text, Container, Box, Stat,
   StatLabel,  StatNumber,  StatHelpText,  StatArrow,  StatGroup, Divider, Link } from '@chakra-ui/react'
 
@@ -30,17 +31,15 @@ export default function Admin() {
 }, [game])
 
   return (
-    <Container p='8'>
+    <Container p='5'>
       <Box>
-      <Heading mb='20px'>Welcome, Admin</Heading>
-      <Button h='25px' mr='10px'><Link href='/admin-products'>Manage Products</Link></Button>
-      <Button h='25px'><Link href='/admin-users'>Manage Users</Link></Button>
+      <AdminHeader />
 
-      <Text fontSize='30px' mb='15px' mt='15px'>Platform Stats</Text>
+      <Text fontSize='30px' mb='15px' mt='15px'>Nokler Stats</Text>
       <Divider mb='15px'/>
       <StatGroup>
   <Stat>
-    <StatLabel>Sent</StatLabel>
+    <StatLabel>Games sold</StatLabel>
     <StatNumber>345,670</StatNumber>
     <StatHelpText>
       <StatArrow type='increase' />
@@ -49,7 +48,7 @@ export default function Admin() {
   </Stat>
 
   <Stat>
-    <StatLabel>Clicked</StatLabel>
+    <StatLabel>Page views</StatLabel>
     <StatNumber>45</StatNumber>
     <StatHelpText>
       <StatArrow type='decrease' />

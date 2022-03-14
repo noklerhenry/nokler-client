@@ -10,7 +10,7 @@ export const Home = () => {
       <Box w="100%" mt="150px">
         <Hero />
       </Box>
-      <Box w="95%" mt="50px" alignItems="center" ml="25px">
+      <Box w="95%" mt="80px" alignItems="center" ml="25px">
         <Cards />
       </Box>
       <Box>

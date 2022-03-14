@@ -13,10 +13,15 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-const CartDrawer = ({ Open }) => {
+const CartDrawer = ({ Open, toggle }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const bg = useColorModeValue("#ffffff", "#121019");
   const btnRef = React.useRef();
+  
+  /* const openCartCloseSideBar = () => {
+    onOpen()
+    toggle()
+  } */
 
   return (
     <>
@@ -26,6 +31,8 @@ const CartDrawer = ({ Open }) => {
         size="sm"
         mt="20px"
         ml="9px"
+        bgColor={Open ? "#fff" : ""}
+        color={Open ? '#000' : ''}
       >
         Cart
       </Button>

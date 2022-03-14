@@ -20,14 +20,16 @@ import {
   REMOVE_GAME_FAVORITE,
   GET_ALL_GAMES,
   GET_GAME_BY_NAME,
+  GET_ALL_PRODUCTS,
 } from "../Actions";
 import json from "../games.json";
 
 const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
+const whislistFromLocalStorage = JSON.parse(localStorage.getItem("whislist") || "[]");
 
 const initialState = {
   // games: json.results,
-  games: [],
+  products: [],
   cart: cartFromLocalStorage,
   totalPrice: 0,
   videogame: {},
@@ -35,12 +37,13 @@ const initialState = {
   platforms: [],
   genres: [],
   stores: [],
+  favoriteGames: whislistFromLocalStorage
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
-      let game = state.games.find((g) => g.id == action.payload);
+      let game = state.products.find((g) => g.id == action.payload);
       let item = state.cart.find((g) => g.id == game.id);
       return !item
         ? {
@@ -125,12 +128,12 @@ const reducer = (state = initialState, action) => {
     case ORDER_BY_PRICE:
       let gameOrderPrice =
         action.payload === "1"
-          ? state.games.sort(function (a, b) {
+          ? state.products.sort(function (a, b) {
               if (a.price < b.price) return 1;
               if (a.price > b.price) return -1;
               return 0;
             })
-          : state.games.sort((a, b) => {
+          : state.products.sort((a, b) => {
               if (a.price > b.price) return 1;
               if (a.price < b.price) return -1;
             });
@@ -141,12 +144,12 @@ const reducer = (state = initialState, action) => {
     case ORDER_BY_RATING:
       let gameOrderRating =
         action.payload === "1"
-          ? state.games.sort(function (a, b) {
+          ? state.products.sort(function (a, b) {
               if (a.rating < b.rating) return 1;
               if (a.rating > b.rating) return -1;
               return 0;
             })
-          : state.games.sort((a, b) => {
+          : state.products.sort((a, b) => {
               if (a.rating > b.rating) return 1;
               if (a.rating < b.rating) return -1;
             });
@@ -157,12 +160,12 @@ const reducer = (state = initialState, action) => {
     case ORDER_BY_RELEASE:
       let gameOrderRelease =
         action.payload === "1"
-          ? state.games.sort(function (a, b) {
+          ? state.products.sort(function (a, b) {
               if (a.released_at < b.released_at) return 1;
               if (a.released_at > b.released_at) return -1;
               return 0;
             })
-          : state.games.sort((a, b) => {
+          : state.products.sort((a, b) => {
               if (a.released_at > b.released_at) return 1;
               if (a.released_at < b.released_at) return -1;
             });
@@ -195,9 +198,14 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         favoriteGames: state.favoriteGames.filter(
-          (el) => Number(el.id) !== Number(action.payload)
+          (el) => el.id !== action.payload
         ),
       };
+    case GET_ALL_PRODUCTS:
+      return {
+        ...state,
+        products: action.payload,
+      }
     default:
       return state;
   }
