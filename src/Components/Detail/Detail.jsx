@@ -68,18 +68,17 @@ export default function Detail() {
       }
   }, [dispatch]) */
 
-  return (
-   
+  return details ? (
     <Container maxW={"7xl"} mt="200px" mb="150px">
       <SimpleGrid
         columns={{ base: 1, md: 2, lg: 2 }}
         spacing={{ base: 8, md: 10 }}
         py={{ base: 10, md: 18 }}
       >
-        <Flex flexDirection='column'>
+        <Flex flexDirection="column">
           <Image
-            borderRadius='35px'
-            boxShadow='3px 3px 15px #999999'
+            borderRadius="35px"
+            boxShadow="3px 3px 15px #999999"
             src={details?.game?.image}
             alt="Game.jpg"
             fit={"cover"}
@@ -88,27 +87,27 @@ export default function Detail() {
             h={{ base: "100%", sm: "300px", lg: "500px" }}
           />
           <Box margin={"20px"} fontSize="xl">
-        <Button onClick={onScreenshotOpen}>Screenshots+</Button>
-        <Modal
-          onClose={onScreenshotClose}
-          isOpen={isScreenshotOpen}
-          size={"full"}
-          motionPreset="slideInBottom"
-          colorScheme="black"
-        >
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Screenshots</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <Screenshots />
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-      </Box>
+            <Button onClick={onScreenshotOpen}>Screenshots+</Button>
+            <Modal
+              onClose={onScreenshotClose}
+              isOpen={isScreenshotOpen}
+              size={"full"}
+              motionPreset="slideInBottom"
+              colorScheme="black"
+            >
+              <ModalOverlay />
+              <ModalContent>
+                <ModalHeader>Screenshots</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                  <Screenshots />
+                </ModalBody>
+              </ModalContent>
+            </Modal>
+          </Box>
         </Flex>
 
-        <Stack >
+        <Stack>
           <Box as="header">
             <Heading
               lineHeight={1.1}
@@ -119,23 +118,23 @@ export default function Detail() {
             </Heading>
           </Box>
 
-          <Box padding='4px'>
-            <Text color='#888888'>
-              <b>Digital key:</b> This is a digital edition of the product (CD-KEY)
+          <Box padding="4px">
+            <Text color="#888888">
+              <b>Digital key:</b> This is a digital edition of the product
+              (CD-KEY)
             </Text>{" "}
-            
           </Box>
 
-          <SimpleGrid columns={{ base: 1, md: 2 }} mt='30px'>
+          <SimpleGrid columns={{ base: 1, md: 2 }} mt="30px">
             <List>
-              <ListItem borderBottom='1px dotted' padding='4px' mr='9px'>
+              <ListItem borderBottom="1px dotted" padding="4px" mr="9px">
                 <Text as={"span"} fontWeight={"bold"}>
                   Rating:
                 </Text>{" "}
                 {details?.game?.rating}
               </ListItem>
 
-              <ListItem borderBottom='1px dotted' padding='4px' mr='9px'>
+              <ListItem borderBottom="1px dotted" padding="4px" mr="9px">
                 <Text as={"span"} fontWeight={"bold"}>
                   Platform:
                 </Text>{" "}
@@ -151,14 +150,14 @@ export default function Detail() {
             </List>
 
             <List>
-              <ListItem borderBottom='1px dotted' padding='4px' mr='9px'>
+              <ListItem borderBottom="1px dotted" padding="4px" mr="9px">
                 <Text as={"span"} fontWeight={"bold"}>
                   Region:
                 </Text>{" "}
                 {details?.region}
               </ListItem>
 
-              <ListItem borderBottom='1px dotted' padding='4px' mr='9px'>
+              <ListItem borderBottom="1px dotted" padding="4px" mr="9px">
                 <Text as={"span"} fontWeight={"bold"}>
                   Released:
                 </Text>{" "}
@@ -191,7 +190,7 @@ export default function Detail() {
                     <ModalOverlay />
                     <ModalContent>
                       <ModalHeader fontSize="9xl">
-                        <FaCartPlus h='30px'/>
+                        <FaCartPlus h="30px" />
                       </ModalHeader>
                       <ModalCloseButton />
                       <ModalBody fontSize="2xl">
@@ -223,8 +222,6 @@ export default function Detail() {
 
       <Divider borderColor="gray.400" />
 
-      
-
       <Divider borderColor="gray.400" />
 
       <VStack margin={"20px"}>
@@ -249,6 +246,6 @@ export default function Detail() {
       </Box> */}
     </Container>
   ) : (
-    <Box>Game NOT Found</Box>
+    <Box>Game Not found</Box>
   );
 }

@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, addGameFavorite } from "../Actions";
-import { Button, useToast, Box, Image, Text, Heading, Link } from "@chakra-ui/react";
+import {
+  Button,
+  useToast,
+  Box,
+  Image,
+  Text,
+  Heading,
+  Link,
+} from "@chakra-ui/react";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 
-export const Card = ({ id, name, image, platform, productKey }) => {
-    
+export const Card = ({ id, name, image, platform, productKey, genres }) => {
   const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
   const favs = useSelector((state) => state.favoriteGames);
@@ -39,24 +46,33 @@ export const Card = ({ id, name, image, platform, productKey }) => {
 
   return (
     <Box margin="10px" w="230px" h={{ base: "100%", sm: "400px", lg: "450px" }}>
-      <Link href={'/details/'+ id}>
-      <Image
-        w="100%"
-        h={{ base: "100%", sm: "300px", lg: "350px" }}
-        src={image}
-        alt="img not found"
-        borderRadius='25px'
-        fit="cover"
-        align="center"
-        boxShadow="5px 5px 15px #111111"
-        mb="15px"
-      />
+      <Link href={"/details/" + id}>
+        <Image
+          w="100%"
+          h={{ base: "100%", sm: "300px", lg: "350px" }}
+          src={image}
+          alt="img not found"
+          borderRadius="25px"
+          fit="cover"
+          align="center"
+          boxShadow="5px 5px 15px #111111"
+          mb="15px"
+        />
       </Link>
-      
-        {genres.map((g) =>(
-          <Button size="sm" height="15px" fontSize="11px" mt="5px" padding='1px 5px' mr='5px'>{g}</Button>
-        ))}
-      
+
+      {genres?.map((g) => (
+        <Button
+          size="sm"
+          height="15px"
+          fontSize="11px"
+          mt="5px"
+          padding="1px 5px"
+          mr="5px"
+        >
+          {g}
+        </Button>
+      ))}
+
       <Heading
         fontSize="21px"
         fontWeight="300"
@@ -70,7 +86,7 @@ export const Card = ({ id, name, image, platform, productKey }) => {
         ${price}
       </Text> */}
       <Button size="sm" height="24px">
-        <Link href={'/details/'+ id}>See game</Link>
+        <Link href={"/details/" + id}>See game</Link>
       </Button>
       {/* <Button size="sm" height="24px" onClick={() => isClicked()}>
         +

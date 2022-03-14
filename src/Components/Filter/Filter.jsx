@@ -28,6 +28,7 @@ export default function Filter() {
   const genres = useSelector((state) => state.genres);
   const platforms = useSelector((state) => state.platforms);
   const stores = useSelector((state) => state.stores);
+  const [ checkbox, setCheckbox ] = useState([]);
 
   //console.log(genres)
 
@@ -43,29 +44,21 @@ export default function Filter() {
     dispatch(getPlatforms());
   }, []);
 
-  function handleFilterPlatform(e) {
-    e.preventDefault();
-    dispatch(filterGamesByPlatform(e.target.value));
-  }
+  useEffect(() => {
+    dispatch(filterGamesByGenre(checkbox));
+  }, [checkbox]);
 
-  function handleFilterStore(e) {
+  const handleChange = (e) => {
     e.preventDefault();
-    dispatch(filterGamesByStore(e.target.value));
-  }
-
-  function handleFilterRegion(e) {
-    e.preventDefault();
-    dispatch(filterGamesByRegion(e.target.value));
-  }
-
-  function handleFilterGenre(e) {
-    e.preventDefault();
-    dispatch(filterGamesByGenre(e.target.value));
-  }
-
-  function handleFilterGenre(e) {
-    e.preventDefault();
-    dispatch(filterGamesByGenre(e.target.value));
+    let variable = e.target.value;
+    let array = checkbox;
+    if(array.includes(e.target.value)) {
+      array = array.filter(e => e !== variable);
+    } else {
+      array.push(variable);
+    }
+    console.log(checkbox);
+    setCheckbox(array);
   }
 
   return (
@@ -81,7 +74,7 @@ export default function Filter() {
         </h2>
         <AccordionPanel>
           <CheckboxGroup colorScheme="purple">
-            <Stack onChange={(e) => handleFilterGenre(e)}>
+            <Stack onChange={handleChange}>
               {genres?.map((g) => (
                 <Checkbox key={g.name} value={g.name}>
                   {g.name}

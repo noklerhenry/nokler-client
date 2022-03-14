@@ -69,57 +69,67 @@ export function removeDetailCache() {
   };
 }
 
-export function filterGamesByGenre(payload) {
-  return async function (dispatch) {
-    let filterGenreResults = await axios.get(
-      "https://nokler-api.herokuapp.com/filterAcum/"
-    );
-    dispatch({
-      type: FILTER_GENRES_RESULTS,
-      payload: filterGenreResults.data,
-    });
-  };
+export const filterGamesByGenre = (array) => async (dispatch) => {
+  let arr = [...array];
+  let url = "https://nokler-api.herokuapp.com/filterAcum?";
+  while (arr.length) {
+    url = url + `&genr=${arr.shift()}`;
+  }
+  const info = await axios.get(url);
+  console.log(info.data);
+  return dispatch({
+    type: FILTER_GENRES_RESULTS,
+    payload: info.data,
+  });
+};
+
+export const filterGamesByPlatform = (array) => async (dispatch) => {
+  let arr = [...array];
+  let url = "https://nokler-api.herokuapp.com/filterAcum?";
+  while (arr.length) {
+    url = url + `&plat=${arr.shift()}`;
+  }
+  const info = await axios.get(url);
+  console.log(info.data);
+  return dispatch({
+    type: FILTER_PLATFORM_RESULTS,
+    payload: info.data,
+  });
 }
 
-export function filterGamesByPlatform(paylaod) {
-  return async function (dispatch) {
-    let filterPlatformResults = await axios.get(
-      "https://nokler-api.herokuapp.com/filterAcum/"
-    );
-    dispatch({
-      type: FILTER_PLATFORM_RESULTS,
-      payload: filterPlatformResults.data,
-    });
-  };
+export const filterGamesByRegion = (array) => async (dispatch) => {
+  let arr = [...array];
+  let url = "https://nokler-api.herokuapp.com/filterAcum?";
+  while (arr.length) {
+    url = url + `&region=${arr.shift()}`;
+  }
+  const info = await axios.get(url);
+  console.log(info.data);
+  return dispatch({
+    type: FILTER_REGION_RESULTS,
+    payload: info.data,
+  });
 }
 
-export function filterGamesByRegion(paylaod) {
-  return async function (dispatch) {
-    let filterRegionResults = await axios.get(
-      "https://nokler-api.herokuapp.com/filterAcum/"
-    );
-    dispatch({
-      type: FILTER_REGION_RESULTS,
-      payload: filterRegionResults.data,
-    });
-  };
-}
-
-export function filterGamesByStore(paylaod) {
-  return async function (dispatch) {
-    let filterStoreResults = await axios.get(
-      "https://nokler-api.herokuapp.com/filterAcum/"
-    );
-    dispatch({
-      type: FILTER_STORE_RESULTS,
-      payload: filterStoreResults.data,
-    });
-  };
+export const filterGamesByStore = (array) => async (dispatch) => {
+  let arr = [...array];
+  let url = "https://nokler-api.herokuapp.com/filterAcum?";
+  while (arr.length) {
+    url = url + `&genr=${arr.shift()}`;
+  }
+  const info = await axios.get(url);
+  console.log(info.data);
+  return dispatch({
+    type: FILTER_STORE_RESULTS,
+    payload: info.data,
+  });
 }
 
 export function getPlatforms() {
   return async (dispatch) => {
-    let platformResults = await axios.get("https://nokler-api.herokuapp.com/platformList");
+    let platformResults = await axios.get(
+      "https://nokler-api.herokuapp.com/platformList"
+    );
     dispatch({
       type: GET_PLATFORMS,
       payload: platformResults.data,
@@ -129,7 +139,9 @@ export function getPlatforms() {
 
 export const getGenres = () => async (dispatch) => {
   try {
-    const response = await axios.get("https://nokler-api.herokuapp.com/genreList");
+    const response = await axios.get(
+      "https://nokler-api.herokuapp.com/genreList"
+    );
     return dispatch({
       type: GET_GENRES,
       payload: response.data,
@@ -141,7 +153,9 @@ export const getGenres = () => async (dispatch) => {
 
 export function getStores() {
   return async (dispatch) => {
-    let storeResults = await axios.get("https://nokler-api.herokuapp.com/storeList");
+    let storeResults = await axios.get(
+      "https://nokler-api.herokuapp.com/storeList"
+    );
     dispatch({
       type: GET_STORES,
       payload: storeResults.data,

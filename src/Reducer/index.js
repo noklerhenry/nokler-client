@@ -25,7 +25,9 @@ import {
 import json from "../games.json";
 
 const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
-const whislistFromLocalStorage = JSON.parse(localStorage.getItem("whislist") || "[]");
+const whislistFromLocalStorage = JSON.parse(
+  localStorage.getItem("whislist") || "[]"
+);
 
 const initialState = {
   // games: json.results,
@@ -37,7 +39,7 @@ const initialState = {
   platforms: [],
   genres: [],
   stores: [],
-  favoriteGames: whislistFromLocalStorage
+  favoriteGames: whislistFromLocalStorage,
 };
 
 const reducer = (state = initialState, action) => {
@@ -93,7 +95,7 @@ const reducer = (state = initialState, action) => {
     case FILTER_GENRES_RESULTS:
       return {
         ...state,
-        gamesFiltered: action.payload,
+        gamesFiltered: action.payload.length ? action.payload : state.products,
       };
     case FILTER_PLATFORM_RESULTS:
       return {
@@ -205,7 +207,8 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         products: action.payload,
-      }
+        gamesFiltered: action.payload,
+      };
     default:
       return state;
   }
