@@ -75,6 +75,7 @@ export const filterGamesByGenre = (array) => async (dispatch) => {
   while (arr.length) {
     url = url + `&genr=${arr.shift()}`;
   }
+  console.log(url);
   const info = await axios.get(url);
   console.log(info.data);
   return dispatch({
@@ -117,6 +118,7 @@ export const filterGamesByStore = (array) => async (dispatch) => {
   while (arr.length) {
     url = url + `&genr=${arr.shift()}`;
   }
+  console.log(url);
   const info = await axios.get(url);
   console.log(info.data);
   return dispatch({

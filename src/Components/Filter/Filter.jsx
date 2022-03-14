@@ -49,13 +49,12 @@ export default function Filter() {
   }, [checkbox]);
 
   const handleChange = (e) => {
-    e.preventDefault();
     let variable = e.target.value;
     let array = checkbox;
     if(array.includes(e.target.value)) {
       array = array.filter(e => e !== variable);
     } else {
-      array.push(variable);
+      array = [...array, variable];
     }
     console.log(checkbox);
     setCheckbox(array);
