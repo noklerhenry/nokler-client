@@ -7,7 +7,7 @@ import { Container, SimpleGrid } from "@chakra-ui/react";
 
 export default function Gallery() {
   return (
-    <Container>
+    <Container mt="200px" mb="150px">
       <SimpleGrid>
         <Filter />
         <Cards />
