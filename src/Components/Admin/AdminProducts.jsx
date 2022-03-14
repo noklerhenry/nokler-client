@@ -9,14 +9,15 @@ import { Heading, Button, Text, Container, Box, Divider, Link, Flex, FormControl
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogContent,
-    AlertDialogOverlay, } from '@chakra-ui/react'
+    AlertDialogOverlay, } from '@chakra-ui/react';
+import AdminHeader from "./AdminHeader";
 
 export default function AdminProducts() {
 
-    const [games, setGame] = useState('')
+    const [games, setGame] = useState([])
 
   useEffect(() =>{
-    axios.get('https://nokler-api.herokuapp.com/AllGames')
+    axios.get('https://nokler-api.herokuapp.com/getProducts')
     .then((response) =>{
       setGame(response.data)
     })
@@ -70,9 +71,9 @@ function deleteGame(id){
           <Button ref={cancelRef} onClick={onClose}>
             Cancel
           </Button>
-          <Button colorScheme='red' onClick={deleteGame(deleteId)} ml={3}>
+          {/* <Button colorScheme='red' onClick={deleteGame(deleteId)} ml={3}>
             Delete
-          </Button>
+          </Button> */}
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialogOverlay>
@@ -82,13 +83,10 @@ function deleteGame(id){
 
     <Container p='8'>
       <Box>
-      <Heading mb='20px'>Welcome, Admin</Heading>
-      <Button h='25px' mr='10px'><Link href='/admin'>Back to Admin panel</Link></Button>
-
-        <Flex flexDirection='row' justifyContent='space-between' alignItems='center'>
-      <Text fontSize='30px' mb='15px' mt='15px'>Manage Products</Text>
+      <AdminHeader />
+      <Text fontSize='30px' mb='15px' mt='15px'>Manage Games</Text>
       <Button h='25px' mr='10px'  mt='10px'><Link href='/addgame'>Add New Game</Link></Button>
-      </Flex>
+      
       <Divider mb='15px'/>
       </Box>
 
@@ -97,26 +95,23 @@ function deleteGame(id){
       </FormControl>
 
       <Box mt='30px'>
-     {games.length ? 
      
-     <>{games?.map((g) => (
+     { (games.length > 2) ? games.data.map((g) => (
         <AdminCard
-          key={g.id}
-          id={g.id}
-          genres={g.genres}
-          name={g.name}
-          image={g.img}
+          key={g.game.id}
+          id={g.game.id}
+          genres={g.game.genres}
+          name={g.game.name}
+          image={g.game.image}
           price={g.price}
           buttonlink={'/edit-game/'+ g.id}
           buttontext='Edit game'
           buttondelete={<Button h='25px' mt='10px' colorScheme='red' onClick={() => deleteClick(g.id)}>Delete</Button>}
           
         />
-      ))}</> : 
+      )): 'Loading..'}
 
-      <p>Loading...</p>
-
-    }  
+    
     </Box>
 
     </Container>

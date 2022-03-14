@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, addGameFavorite } from "../Actions";
-import { Button, useToast, Box, Image, Text, Heading } from "@chakra-ui/react";
+import { Button, useToast, Box, Image, Text, Heading, Link } from "@chakra-ui/react";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 
-export const Card = ({ id, name, price, image, store }) => {
+export const Card = ({ id, name, price, image, genres }) => {
   const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
   const favs = useSelector((state) => state.favoriteGames);
@@ -37,21 +37,25 @@ export const Card = ({ id, name, price, image, store }) => {
   };
 
   return (
-    <Box margin="10px" w="290px" h={{ base: "100%", sm: "400px", lg: "600px" }}>
+    <Box margin="10px" w="230px" h={{ base: "100%", sm: "400px", lg: "450px" }}>
+      <Link href={'/details/'+ id}>
       <Image
         w="100%"
-        h={{ base: "100%", sm: "400px", lg: "450px" }}
+        h={{ base: "100%", sm: "300px", lg: "350px" }}
         src={image}
         alt="img not found"
-        rounded="md"
+        borderRadius='25px'
         fit="cover"
         align="center"
         boxShadow="5px 5px 15px #111111"
         mb="15px"
       />
-      <Button size="sm" height="15px" fontSize="11px" mt="5px">
-        CATEGORY
-      </Button>
+      </Link>
+      
+        {genres.map((g) =>(
+          <Button size="sm" height="15px" fontSize="11px" mt="5px" padding='1px 5px' mr='5px'>{g}</Button>
+        ))}
+      
       <Heading
         fontSize="21px"
         fontWeight="300"
@@ -61,15 +65,15 @@ export const Card = ({ id, name, price, image, store }) => {
       >
         {name}
       </Heading>
-      <Text fontSize="20px" mt="10px" mb="10px">
+      {/* <Text fontSize="20px" mt="10px" mb="10px">
         ${price}
-      </Text>
+      </Text> */}
       <Button size="sm" height="24px">
-        See game
+        <Link href={'/details/'+ id}>See game</Link>
       </Button>
-      <Button size="sm" height="24px" onClick={() => isClicked()}>
+      {/* <Button size="sm" height="24px" onClick={() => isClicked()}>
         +
-      </Button>
+      </Button> */}
       <Button
         border="none"
         bg="transparent"

@@ -8,7 +8,7 @@ import { Box, Flex, Heading, Button, Image } from "@chakra-ui/react";
 
 export default function Hero() {
     return (
-        <Flex w='100%' flexDirection='row' justifyContent='right' alignItems='center'>
+        <Flex w='100%' flexDirection='row' justifyContent='right' alignItems='center' paddingTop='60px'>
             <Box flexBasis='40%'>
                 <Heading fontSize='65px' fontWeight='300' lineHeight='60px' >BUY GAME KEYS<br/> FOR ANY PLATFORM</Heading>
                 <Image mt='20px' mb='20px' src={platforms} alt='platforms'/>

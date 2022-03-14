@@ -116,7 +116,6 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
                 <Button
                   size="sm"
                   mt="20px"
-                  bgColor="#000"
                   onClick={() => toggleColorMode()}
                 >
                   Theme

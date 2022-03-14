@@ -45,7 +45,7 @@ const SideBar = ({ Open, toggle }) => {
       >
         <IconButton
           aria-label="Close Menu"
-          icon={<FaTimes color="#fff" font-size="1.8rem" />}
+          icon={<FaTimes color="#fff" fontSize="1.8rem" />}
           onClick={toggle}
           border="none"
           bg="#0d0d0d"

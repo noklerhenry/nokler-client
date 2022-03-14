@@ -20,7 +20,7 @@ export default function EditGame() {
 
 
     useEffect(() =>{
-        axios.get('https://nokler-api.herokuapp.com/product?id=' + id)
+        axios.get('https://nokler-api.herokuapp.com/getProductById?ids=' + id)
       .then((response) =>{
         setGame(response.data)
         return response;
