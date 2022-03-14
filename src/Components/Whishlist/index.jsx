@@ -37,12 +37,16 @@ const Templete = () => {
 
     useEffect(() => {
         localStorage.setItem("whislist", JSON.stringify(favs));
-        // console.log(favs)
-    }, [favs])
+        console.log(favs)
+    }, [])
 
   const bg = useColorModeValue("white", "gray.800");
   const bg2 = useColorModeValue("white", "gray.800");
   const bg3 = useColorModeValue("gray.100", "gray.700");
+  
+  const handleCart = (id) => {
+    dispatch(addToCart(id))
+  }
 
   return (
     <>
@@ -130,9 +134,10 @@ const Templete = () => {
                           <PopoverHeader color="white">Stores :</PopoverHeader>
                           <PopoverBody>
                             <UnorderedList>
-                              {game.platform?.map((el) => {
-                                return <ListItem color="white">{el}</ListItem>;
-                              })}
+                              {/* {game.platform?.map((el) => { */}
+                                {/* return <ListItem color="white">{el}</ListItem>; */}
+                              <ListItem color="white">{game.platform}</ListItem>;
+                              {/* })} */}
                             </UnorderedList>
                           </PopoverBody>
                         </PopoverContent>
@@ -193,7 +198,8 @@ const Templete = () => {
                           _focus={{ outline: "none" }}
                           icon={<BsFillCartFill />}
                           onClick={() => {
-                            dispatch(addToCart(game.id)); // no funciona
+                            // dispatch(addToCart(game.id)); // no funciona
+                            handleCart(game.id)
                             toast({
                               isClosable: true,
                               title: "Success!",

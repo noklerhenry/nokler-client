@@ -5,9 +5,11 @@ import { useMediaQuery } from "@chakra-ui/react";
 
 const Header = () => {
   const [Open, setOpen] = useState(false);
+  
   const toggle = () => {
     setOpen(!Open);
   };
+  
   const [mediaQueryNavMenu] = useMediaQuery("(max-width: 1180px)");
   return (
     <>

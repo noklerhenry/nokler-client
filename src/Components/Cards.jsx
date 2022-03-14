@@ -12,9 +12,10 @@ export const Cards = () => {
   const [games, setGame] = useState('')
 
   useEffect(() =>{
-    axios.get('https://nokler-api.herokuapp.com/allGames')
+    axios.get('https://nokler-api.herokuapp.com/getProducts')
     .then((response) =>{
       setGame(response.data)
+      console.log(response.data)
     })
   }, [])
 
@@ -30,7 +31,7 @@ export const Cards = () => {
         backgroundImage=' linear-gradient(0deg, transparent 24%, rgba(140, 6, 247, .09) 25%, rgba(140, 6, 247, .09) 26%, transparent 27%, transparent 74%, rgba(140, 6, 247, .09) 75%, rgba(140, 6, 247, .05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(140, 6, 247, .09) 25%, rgba(140, 6, 247, .09) 26%, transparent 27%, transparent 74%, rgba(140, 6, 247, .09) 75%, rgba(140, 6, 247, .09) 76%, transparent 77%, transparent)' backgroundSize='25px 25px'   >
         {games ? games.map((g) => (
           <Card
-            key={g.id}
+            key={index}
             id={g.id}
             genres={g.genres}
             name={g.name}

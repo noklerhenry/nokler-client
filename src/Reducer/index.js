@@ -189,7 +189,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         favoriteGames: favs.find(
-          (el) => Number(el.id) === Number(action.payload.id)
+          (el) => el.id === action.payload.id
         )
           ? [...favs]
           : [...favs, action.payload],

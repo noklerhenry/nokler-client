@@ -33,7 +33,7 @@ export const Card = ({ id, name, image, platform, productKey, genres }) => {
   const handleFav = () => {
     setClicked(true);
     dispatch(addGameFavorite({ id, name, platform, productKey }));
-    // console.log(favs);
+    console.log(favs);
     // console.log(games)
   };
 
@@ -66,6 +66,7 @@ export const Card = ({ id, name, image, platform, productKey, genres }) => {
       >
         {name}
       </Heading>
+      <Text>{`$ ${price}`}</Text>
       {/* <Text fontSize="20px" mt="10px" mb="10px">
         ${price}
       </Text> */}
