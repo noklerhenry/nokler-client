@@ -21,6 +21,7 @@ export const REMOVE_GAME_FAVORITE = "REMOVE_GAME_FAVORITE";
 export const GET_ALL_GAMES = "GET_ALL_GAMES";
 export const GET_GAME_BY_NAME = "GET_GAME_BY_NAME";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
+export const FILTER = "FILTER";
 
 export const addToCart = (payload) => {
   return {
@@ -84,48 +85,51 @@ export const filterGamesByGenre = (array) => async (dispatch) => {
   });
 };
 
-export const filterGamesByPlatform = (array) => async (dispatch) => {
-  let arr = [...array];
-  let url = "https://nokler-api.herokuapp.com/filterAcum?";
-  while (arr.length) {
-    url = url + `&plat=${arr.shift()}`;
-  }
-  const info = await axios.get(url);
-  console.log(info.data);
-  return dispatch({
-    type: FILTER_PLATFORM_RESULTS,
-    payload: info.data,
-  });
-}
-
-export const filterGamesByRegion = (array) => async (dispatch) => {
-  let arr = [...array];
-  let url = "https://nokler-api.herokuapp.com/filterAcum?";
-  while (arr.length) {
-    url = url + `&region=${arr.shift()}`;
-  }
-  const info = await axios.get(url);
-  console.log(info.data);
-  return dispatch({
-    type: FILTER_REGION_RESULTS,
-    payload: info.data,
-  });
-}
-
-export const filterGamesByStore = (array) => async (dispatch) => {
-  let arr = [...array];
-  let url = "https://nokler-api.herokuapp.com/filterAcum?";
-  while (arr.length) {
-    url = url + `&genr=${arr.shift()}`;
-  }
-  console.log(url);
-  const info = await axios.get(url);
-  console.log(info.data);
-  return dispatch({
-    type: FILTER_STORE_RESULTS,
-    payload: info.data,
-  });
-}
+export const filterAcum =
+  (genres, platforms, regions, stores) => async (dispatch) => {
+    // let arr = [...array];
+    // let url = "https://nokler-api.herokuapp.com/filterAcum?";
+    // while (arr.length) {
+    //   url = url + `&plat=${arr.shift()}`;
+    // }
+    // const info = await axios.get(url);
+    // console.log(info.data);
+    // return dispatch({
+    //   type: FILTER_PLATFORM_RESULTS,
+    //   payload: info.data,
+    // });
+    let url = "https://nokler-api.herokuapp.com/filterAcum?";
+    if (genres.length) {
+      let arr = [...genres];
+      while (arr.length) {
+        url = url + `&genr=${arr.shift()}`;
+      }
+    }
+    if (platforms.length) {
+      let arr = [...platforms];
+      while (arr.length) {
+        url = url + `&plat=${arr.shift()}`;
+      }
+    }
+    if (regions.length) {
+      let arr = [...regions];
+      while (arr.length) {
+        url = url + `&regi=${arr.shift()}`;
+      }
+    }
+    if (stores.length) {
+      let arr = [...stores];
+      while (arr.length) {
+        url = url + `&stor=${arr.shift()}`;
+      }
+    }
+    const info = await axios.get(url);
+    console.log(info.data);
+    return dispatch({
+      type: FILTER,
+      payload: info.data,
+    });
+  };
 
 export function getPlatforms() {
   return async (dispatch) => {

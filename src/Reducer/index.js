@@ -21,6 +21,7 @@ import {
   GET_ALL_GAMES,
   GET_GAME_BY_NAME,
   GET_ALL_PRODUCTS,
+  FILTER,
 } from "../Actions";
 import json from "../games.json";
 
@@ -91,6 +92,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         videogame: [],
+      };
+    case FILTER:
+      return {
+        ...state,
+        gamesFiltered: action.payload,
       };
     case FILTER_GENRES_RESULTS:
       return {
