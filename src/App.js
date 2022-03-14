@@ -14,6 +14,7 @@ import Detail from "./Components/Detail/Detail.jsx";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer/Footer.jsx";
 import Wishlist from "./Components/Whishlist";
+import Gallery from "./Components/Gallery/Gallery.jsx";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route exact path="/edit-game/:id" component={EditGame} />
             <Route exact path="/add-product/:id" component={AddProduct} />
             <Route exact path="/addgame" component={AddGame} />
+            <Route exact path="/gallery" component={Gallery} />
           </Route>
         </Switch>
         <Footer />
