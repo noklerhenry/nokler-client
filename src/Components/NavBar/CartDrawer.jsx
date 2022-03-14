@@ -18,10 +18,10 @@ const CartDrawer = ({ Open, toggle }) => {
   const bg = useColorModeValue("#ffffff", "#121019");
   const btnRef = React.useRef();
   
-//   const openCartCloseSideBar = () => {
-//     onOpen()
-//     toggle()
-//   }
+  /* const openCartCloseSideBar = () => {
+    onOpen()
+    toggle()
+  } */
 
   return (
     <>

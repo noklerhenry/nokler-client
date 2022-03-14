@@ -68,7 +68,7 @@ export default function Detail() {
       }
   }, [dispatch]) */
 
-  return (
+  return details ? (
     <Container maxW={"7xl"} mt="200px" mb="150px">
       <SimpleGrid
         columns={{ base: 1, md: 2, lg: 2 }}
@@ -155,7 +155,7 @@ export default function Detail() {
                   $ {details?.price}
                   <Button
                     onClick={() => {
-                      onCartOpen;
+                      onCartOpen();
                       handleCart(details.id);
                     }}
                     ml="4"
@@ -227,9 +227,7 @@ export default function Detail() {
 
       <VStack margin={"20px"}>
         Description:
-        <Text fontSize="xl">
-          {details.game?.description}
-        </Text>
+        <Text fontSize="xl">{details.game?.description}</Text>
       </VStack>
 
       <Divider borderColor="gray.400" />
@@ -248,5 +246,7 @@ export default function Detail() {
         </HStack>
       </Box> */}
     </Container>
+  ) : (
+    <Box>Game NOT Found</Box>
   );
 }
