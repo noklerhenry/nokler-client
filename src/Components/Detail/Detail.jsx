@@ -14,6 +14,7 @@ import {
   SimpleGrid,
   StackDivider,
   List,
+  Link,
   ListItem,
   Modal,
   ModalOverlay,
@@ -23,27 +24,44 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  useColorMode,
+  useColorModeValue
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { useParams, useHistory, Link } from "react-router-dom";
+import axios from 'axios';
+import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, getAllGames, getGameDetails } from "../../Actions/index.js";
 import Screenshots from "./Screenshots";
 import { FaCartPlus } from "react-icons/fa";
 
 export default function Detail() {
-  const { id } = useParams();
+  const { nameid } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
 
   const details = useSelector((state) => state.videogame);
   const games = useSelector((state) => state.games);
 
-  console.log(details);
+  const [theGame, setTheGame] = useState()
+
+  const { toggleColorMode } = useColorMode()
+
+  const bg = useColorModeValue('#efefef', '#18181880')
+  //const color = useColorModeValue('white', 'gray.800')
+
+  console.log(nameid)
+  // useEffect(() => {
+  //   // axios.get('https://nokler-api.herokuapp.com/getProductByGame?game=' + nameId)
+  //   // .then((response) =>{
+  //   //   console.log(response)
+  //   //   setTheGame(response.data)
+  //   //     })
+  // }, []);
 
   useEffect(() => {
     dispatch(getAllGames());
-    dispatch(getGameDetails(id));
+    dispatch(getGameDetails(nameid));
   }, []);
 
   const {
@@ -51,6 +69,7 @@ export default function Detail() {
     onOpen: onCartOpen,
     onClose: onCartClose,
   } = useDisclosure();
+
   const {
     isOpen: isScreenshotOpen,
     onOpen: onScreenshotOpen,
@@ -61,16 +80,18 @@ export default function Detail() {
     dispatch(addToCart(id));
   };
 
-  /* useEffect(() => {
-      dispatch(getGameDetails(props.match.params.id));
-      return () => {
-          dispatch(removeDetailCache())
-      }
-  }, [dispatch]) */
+  //  useEffect(() => {
+  //     dispatch(getGameDetails(id));
+  //     return () => {
+  //         dispatch(removeDetailCache())
+  //     }
+  // }, [dispatch]) 
+
+  console.log(details)
 
   return (
    
-    <Container maxW={"7xl"} mt="200px" mb="150px">
+    <Container maxW={"7xl"} mt="200px" mb="30px">
       <SimpleGrid
         columns={{ base: 1, md: 2, lg: 2 }}
         spacing={{ base: 8, md: 10 }}
@@ -79,8 +100,8 @@ export default function Detail() {
         <Flex flexDirection='column'>
           <Image
             borderRadius='35px'
-            boxShadow='3px 3px 15px #999999'
-            src={details?.game?.image}
+            boxShadow='3px 3px 25px #8c06f770'
+            src={details[0]?.game.image}
             alt="Game.jpg"
             fit={"cover"}
             align={"center"}
@@ -88,7 +109,7 @@ export default function Detail() {
             h={{ base: "100%", sm: "300px", lg: "500px" }}
           />
           <Box margin={"20px"} fontSize="xl">
-        <Button onClick={onScreenshotOpen}>Screenshots+</Button>
+        <Button onClick={onScreenshotOpen}>Screenshots →</Button>
         <Modal
           onClose={onScreenshotClose}
           isOpen={isScreenshotOpen}
@@ -115,12 +136,12 @@ export default function Detail() {
               fontWeight={400}
               fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
             >
-              {details?.game?.name}
+              {details[0]?.game.name}
             </Heading>
           </Box>
 
           <Box padding='4px'>
-            <Text color='#888888'>
+            <Text color='#888888'  padding='1px'>
               <b>Digital key:</b> This is a digital edition of the product (CD-KEY)
             </Text>{" "}
             
@@ -130,49 +151,62 @@ export default function Detail() {
             <List>
               <ListItem borderBottom='1px dotted' padding='4px' mr='9px'>
                 <Text as={"span"} fontWeight={"bold"}>
-                  Rating:
+                &#9733; Rating:
                 </Text>{" "}
-                {details?.game?.rating}
+                {details[0]?.game.rating}
               </ListItem>
 
-              <ListItem borderBottom='1px dotted' padding='4px' mr='9px'>
-                <Text as={"span"} fontWeight={"bold"}>
-                  Platform:
-                </Text>{" "}
-                {details?.platform?.name}
-              </ListItem>
-
-              <ListItem>
-                <Text as={"span"} fontWeight={"bold"}>
-                  Store:
-                </Text>{" "}
-                {details.store?.name}
-              </ListItem>
             </List>
 
             <List>
               <ListItem borderBottom='1px dotted' padding='4px' mr='9px'>
-                <Text as={"span"} fontWeight={"bold"}>
-                  Region:
+              <Text as={"span"} fontWeight={"bold"}>
+              &#9737; Released:
                 </Text>{" "}
-                {details?.region}
+                {details[0]?.game.released_at.substring(0, 10)}
               </ListItem>
 
-              <ListItem borderBottom='1px dotted' padding='4px' mr='9px'>
-                <Text as={"span"} fontWeight={"bold"}>
-                  Released:
-                </Text>{" "}
-                {details.game?.released_at.substring(0, 10)}
-              </ListItem>
+          
             </List>
           </SimpleGrid>
 
+          <Box>
+            <Text fontSize='24px' fontWeight='700' mb='20px'>Available Keys</Text>
+            <SimpleGrid
+        columns={{ base: 2, md: 2, lg: 3 }} mb='20px'>
+            {details.map((g) => (
+              <Box key={g.id} bg={bg}  padding='11px' borderRadius='20px'>
+              
+              <Text  mt='-7px'><Text fontSize='7px'>STORE</Text> {g.store.name}</Text>
+              <Text mt='-3px'> <Text fontSize='7px'>PLATFORM</Text>{g.platform.name}</Text>
+              <Text mt='-3px'> <Text fontSize='7px'>REGION</Text>{g.region}</Text>
+              <Text fontSize='22px'><Text fontSize='7px'>PRICE</Text>$ {g.price}</Text>
+              <Button
+                    onClick={() => {
+                      onCartOpen();
+                      handleCart(g.id);
+                    }}
+                    ml="4"
+                    bg='none'
+                    padding='1px 7px'
+                    h='22px'
+                    fontSize='14px'
+                  >
+                    Add to cart
+                  </Button>
+              </Box>
+            ))}
+            </SimpleGrid>
+
+          </Box>
+
           <SimpleGrid columns={"2"} margin={"20px"}>
+
             <HStack>
               <Box>
-                Price:
+                
                 <Box fontSize={"xl"}>
-                  $ {details?.price}
+                  {/* $ {details?.price}
                   <Button
                     onClick={() => {
                       onCartOpen();
@@ -181,7 +215,7 @@ export default function Detail() {
                     ml="4"
                   >
                     Add to cart
-                  </Button>
+                  </Button> */}
                   <Modal
                     isCentered
                     onClose={onCartClose}
@@ -191,17 +225,17 @@ export default function Detail() {
                     <ModalOverlay />
                     <ModalContent>
                       <ModalHeader fontSize="9xl">
-                        <FaCartPlus h='30px'/>
+                        
                       </ModalHeader>
                       <ModalCloseButton />
                       <ModalBody fontSize="2xl">
-                        You added one item to your cart!
+                      <FaCartPlus size={23}/>You added one item to your cart!
                       </ModalBody>
                       <ModalFooter>
                         <Button mr={3} onClick={onCartClose}>
                           Continue Browsing
                         </Button>
-                        <Button>Checkout now!</Button>
+                        <Button><Link href='/checkout'>Checkout now!</Link></Button>
                       </ModalFooter>
                     </ModalContent>
                   </Modal>
@@ -217,38 +251,20 @@ export default function Detail() {
             </Box>
           </Box>
         </HStack> */}
+
           </SimpleGrid>
+          <Text fontSize="24px" fontWeight='700' mt='30px'>Description</Text>
+        <Text fontSize="xl" mt='30px'>{details[0]?.game.description}</Text>
         </Stack>
       </SimpleGrid>
 
-      <Divider borderColor="gray.400" />
+      <Divider  border='dotted #cccccc' mt='30px'/>
 
-      
+    
 
-      <Divider borderColor="gray.400" />
 
-      <VStack margin={"20px"}>
-        Description:
-        <Text fontSize="xl">{details.game?.description}</Text>
-      </VStack>
-
-      <Divider borderColor="gray.400" />
-
-      {/*  <Box margin={"10px"} fontSize="xl">
-        System requirements:
-        <HStack marginRight={"20px"} marginTop={"20px"}>
-          <Box>
-            minimum: "Core 2 Duo/Athlon X2 2 ГГц,1 Гб памяти,GeForce 7600/Radeon
-            X800,10 Гб на винчестере,интернет-соединение"
-          </Box>
-          <Box>
-            recommended: "Core 2 Duo/Athlon X2 2.5 ГГц,2 Гб памяти,GeForce GTX
-            280/Radeon HD 2600,10 Гб на винчестере,интернет-соединение"
-          </Box>
-        </HStack>
-      </Box> */}
     </Container>
-  ) : (
-    <Box>Game NOT Found</Box>
+  // ) : (
+  //   <Box>Game NOT Found</Box>
   );
 }

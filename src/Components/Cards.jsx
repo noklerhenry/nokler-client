@@ -1,6 +1,6 @@
 import React from "react";
 //import { useSelector } from "react-redux";
-import axios from "axios";
+//import axios from "axios";
 import { useEffect, useState } from "react";
 import { Card } from "./Card";
 import axios from "axios";
@@ -16,8 +16,9 @@ export const Cards = () => {
     .then((response) =>{
       setGame(response.data)
     })
-  })
+  }, [])
 
+  console.log(games)
   return (
     <>
       <Heading fontSize="55px" fontWeight="300" ml="10px" mb='30px'>

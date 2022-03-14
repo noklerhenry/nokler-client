@@ -22,13 +22,13 @@ function App() {
           {/* <Route exact path="/" component={FirstPage} /> */}
           <Route path="/">
             <Route exact path="/" component={Home} />
-            <Route exact path="/details/:id" component={Detail} />
+            <Route exact path="/details/:nameid" component={Detail} />
             <Route exact path="/checkout" component={Checkout} />
             <Route exact path="/whislist" component={Wishlist} />
             <Route exact path="/admin" component={Admin} />
             <Route exact path="/admin-products" component={AdminProducts} />
             <Route exact path="/admin-users" component={AdminUsers} />
-            <Route exact path="/edit-game/:id" component={EditGame} />
+            <Route exact path="/edit-game/:nameid" component={EditGame} />
             <Route exact path="/add-product/:id" component={AddProduct} />
             <Route exact path="/addgame" component={AddGame} />
           </Route>

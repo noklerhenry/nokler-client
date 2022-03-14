@@ -27,7 +27,7 @@ const SideBar = ({ Open, toggle }) => {
       zIndex="999"
       w={["100%", "100%", "100%", "100%", "40%", "25%"]}
       h="100%"
-      bg="#0d0d0d"
+      bg="#0d0d0d80"
       display="grid"
       alignItems="center"
       left={Open ? "0" : "-100%"}
@@ -58,61 +58,68 @@ const SideBar = ({ Open, toggle }) => {
           display="grid"
           gridTemplateColumns="1fr"
           gridTemplateRows={
-            mediaQueryGrid480px ? "repeat(3, 80px)" : "repeat(3, 80px)"
+            mediaQueryGrid480px ? "repeat(3, 60px)" : "repeat(3, 60px)"
           }
           textAlign="center"
         >
-          <Box>
+          <Box borderBottom='1px dotted #ffffff' w='90%' mt='10px'>
             <Link to="/">
               <Button
-                size="sm"
-                mt="20px"
-                bgColor="#fff"
-                color="#0d0d0d"
+                mt="0px"
+                bgColor="#ffffff00"
+                color="#ffffff"
+                border='none'
+                fontSize='25px'
+                fontWeight='700'
                 onClick={toggle}
               >
                 Home
               </Button>
             </Link>
           </Box>
-          <Box>
+          <Box borderBottom='1px dotted #ffffff' w='90%' mt='10px'>
             <Button
-              size="sm"
-              mt="20px"
-              bgColor="#fff"
-              color="#0d0d0d"
+              mt="0px"
+              bgColor="#ffffff00"
+                color="#ffffff"
+                border='none'
+                fontSize='25px'
+                fontWeight='700'
               onClick={() => toggleColorMode()}
             >
               Theme
             </Button>
           </Box>
-          <Box mr="7px">
-            <Box>
-              <CartDrawer Open={Open} toggle={toggle} />
-            </Box>
-          </Box>
-          <Box>
+          
+          <Box borderBottom='1px dotted #ffffff' w='90%' mt='10px'>
             <Link to="/whislist">
               <Button
-                size="sm"
-                mt="20px"
-                // ml="9px"
-                bgColor="#fff"
-                color="#0d0d0d"
+                mt="0px"
+                bgColor="#ffffff00"
+                color="#ffffff"
+                border='none'
+                fontSize='25px'
+                fontWeight='700'
                 onClick={toggle}
               >
-                Whislist
+                Wishlist
               </Button>
             </Link>
           </Box>
+          <Box mr="7px">
+            <Box>
+            </Box>
+          </Box>
           <Box>
+              <CartDrawer Open={Open} toggle={toggle} />
             {!isAuthenticated && !isLoading ? (
               <Button
                 size="sm"
-                mt="100px"
+                mt='20px'
+                ml='9px'
                 // ml="9px"
-                bgColor="#F53DF5"
-                color="#fff"
+                bgColor="#ffffff"
+                color="#222222"
                 onClick={loginWithPopup}
               >
                 Sign in

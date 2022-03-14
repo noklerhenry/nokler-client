@@ -17,15 +17,11 @@ export default function AdminProducts() {
     const [games, setGame] = useState([])
 
   useEffect(() =>{
-    axios.get('https://nokler-api.herokuapp.com/getProducts')
+    axios.get('https://nokler-api.herokuapp.com/allGames')
     .then((response) =>{
       setGame(response.data)
-    })
-
-    // return() => {
-    //     setGame(null)
-    // }
-}, [])
+        })
+    }, [games])
 
 console.log(games)
     
@@ -96,17 +92,16 @@ function deleteGame(id){
 
       <Box mt='30px'>
      
-     { (games.length > 2) ? games.data.map((g) => (
+     { games ? games.map((g) => (
         <AdminCard
-          key={g.game.id}
-          id={g.game.id}
-          genres={g.game.genres}
-          name={g.game.name}
-          image={g.game.image}
+          key={g.id}
+          id={g.id}
+          genres={g.genres}
+          name={g.name}
+          image={g.img}
           price={g.price}
-          buttonlink={'/edit-game/'+ g.id}
+          buttonlink={'/edit-game/'+ g.name}
           buttontext='Edit game'
-          buttondelete={<Button h='25px' mt='10px' colorScheme='red' onClick={() => deleteClick(g.id)}>Delete</Button>}
           
         />
       )): 'Loading..'}

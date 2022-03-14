@@ -4,7 +4,7 @@ import { addToCart, addGameFavorite } from "../Actions";
 import { Button, useToast, Box, Image, Text, Heading, Link } from "@chakra-ui/react";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 
-export const Card = ({ id, name, image, platform, productKey }) => {
+export const Card = ({ id, name, image, platform, productKey, genres }) => {
     
   const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ export const Card = ({ id, name, image, platform, productKey }) => {
 
   return (
     <Box margin="10px" w="230px" h={{ base: "100%", sm: "400px", lg: "450px" }}>
-      <Link href={'/details/'+ id}>
+      <Link href={'/details/'+ name}>
       <Image
         w="100%"
         h={{ base: "100%", sm: "300px", lg: "350px" }}
@@ -70,7 +70,7 @@ export const Card = ({ id, name, image, platform, productKey }) => {
         ${price}
       </Text> */}
       <Button size="sm" height="24px">
-        <Link href={'/details/'+ id}>See game</Link>
+        <Link href={'/details/'+ name}>See game</Link>
       </Button>
       {/* <Button size="sm" height="24px" onClick={() => isClicked()}>
         +

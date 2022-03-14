@@ -5,7 +5,7 @@ import {
   useElements,
   PaymentElement,
 } from "@stripe/react-stripe-js";
-import { Container, Button } from "@chakra-ui/react";
+import { Container, Button, Input, FormLabel } from "@chakra-ui/react";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 
@@ -80,32 +80,32 @@ export const CheckoutForm = ({ amount }) => {
   };
 
   return (
-    <Container>
+    <Container >
       <form onSubmit={(e) => handleSubmit(e)}>
         <CardElement options={cardElementOpts} />
-        <label>*city:</label>
-        <input
+        <FormLabel mt='30px'>City *</FormLabel>
+        <Input
           type="text"
           value={state.city}
           name="city"
           onChange={handleChange}
         />
-        <label>*line1:</label>
-        <input
+        <FormLabel>Address line1 *</FormLabel>
+        <Input
           type="text"
           value={state.line1}
           name="line1"
           onChange={handleChange}
         />
-        <label>line2</label>
-        <input
+        <FormLabel>Address line2</FormLabel>
+        <Input
           type="text"
           value={state.line2}
           name="line2"
           onChange={handleChange}
         />
-        <label>*state:</label>
-        <input
+        <FormLabel>State *</FormLabel>
+        <Input
           type="text"
           value={state.state}
           name="state"
@@ -114,6 +114,10 @@ export const CheckoutForm = ({ amount }) => {
         <Button
           background="green.400"
           color="white"
+          border='none'
+          fontSize='20px'
+          mt='20px'
+          padding='15px'
           type="submit"
           disabled={disabled}
         >

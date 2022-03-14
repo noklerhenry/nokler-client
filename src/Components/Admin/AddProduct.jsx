@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useParams }  from 'react-router'
 import axios from "axios";
 import { Heading, Container, Text, FormControl, FormLabel, Box,  Divider, Input, Button, Link, Image, Select, useToast } from '@chakra-ui/react'
+import AdminHeader from "./AdminHeader";
 
 
 export default function AddProduct() {
@@ -90,10 +91,8 @@ export default function AddProduct() {
 return(
     <>
     <Container p='6'>
-     <Heading mb='20px'>Welcome, Admin</Heading>
-      <Button h='25px' mr='10px'><Link href='/admin'>Back to Admin panel</Link></Button>
-      <Text fontSize='30px' mb='15px' mt='15px'>Add new game</Text>
-      <Divider mb='20px'/>
+     <AdminHeader />
+     <Text fontSize='30px' mb='15px' mt='15px'>Add new Game</Text>
 
       <Image src={game.img} w='200px' borderRadius='10px' float='right'/>
       <Heading fontSize='25px' fontWeight='400'>{game.name}</Heading>

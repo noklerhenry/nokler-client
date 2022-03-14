@@ -46,6 +46,9 @@ export const Cart = ({ payMethod }) => {
               <Text fontSize="16px" mb="5px" fontWeight="700">
                 {g.game?.name}
               </Text>
+              <Text fontSize="13px" mb="5px" fontWeight="500">
+                {g.store?.name} | {g.platform?.name}
+              </Text>
               <Text>
                 ${g?.price} x {g?.quantity} = ${g?.price * g.quantity}
               </Text>

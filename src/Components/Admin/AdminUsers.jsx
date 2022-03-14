@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { useEffect } from "react";
 import axios from 'axios'
 import { Heading, Button, Text, Container, Box, Divider, Link } from '@chakra-ui/react'
+import AdminHeader from "./AdminHeader";
 
 export default function AdminUsers() {
 
@@ -31,8 +32,7 @@ export default function AdminUsers() {
   return (
     <Container p='8'>
       <Box>
-      <Heading mb='20px'>Welcome, Admin</Heading>
-      <Button h='25px' mr='10px'><Link href='/admin'>Back to Admin panel</Link></Button>
+      <AdminHeader />
       <Text fontSize='30px' mb='15px' mt='15px'>Manage Users</Text>
       <Divider mb='15px'/>
       </Box>

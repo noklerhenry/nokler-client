@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useParams }  from 'react-router'
 import AdminCard from "./AdminCard";
 import axios from "axios";
-import { Heading, Container, Text, FormControl, Box,  Divider, Input, Button, Link, FormLabel, Select, Image } from '@chakra-ui/react'
+import { Heading, Container, Text, FormControl, Box,  Divider, Input, Button, Link, FormLabel, Select, Image, Switch, SimpleGrid, useColorMode, useColorModeValue } from '@chakra-ui/react'
+import AdminHeader from "./AdminHeader";
 
 
 export default function EditGame() {
-    let {id} = useParams()
+    let {nameid} = useParams()
     const [game, setGame] = useState('')
     const [input, setInput] = useState({
         "updateValues":{
@@ -18,13 +19,18 @@ export default function EditGame() {
         }
     })
 
+    const { toggleColorMode } = useColorMode()
+
+  const bg = useColorModeValue('#efefef', '#18181880')
+
 
     useEffect(() =>{
-        axios.get('https://nokler-api.herokuapp.com/getProductById?ids=' + id)
+        axios.get('https://nokler-api.herokuapp.com/getProductByGame?game=' + nameid)
       .then((response) =>{
         setGame(response.data)
         return response;
-      })})
+      })
+    }, [])
 
     let handleSubmit = async (e) => {
         e.preventDefault();
@@ -53,24 +59,56 @@ function handleSelectPlatform(e){
         platform:  e.target.value,
     })
 }
+console.log(game)
 
     return (
         <>
     <Container p='6'>
-     <Heading mb='20px'>Welcome, Admin</Heading>
-      <Button h='25px' mr='10px'><Link href='/admin'>Back to Admin panel</Link></Button>
-      <Text fontSize='30px' mb='15px' mt='15px'>Edit game</Text>
-      <Divider mb='20px'/>
-
-      <Image src={game.img} w='200px' borderRadius='10px' float='right'/>
-      <Heading fontSize='25px' fontWeight='400'>{game.name}</Heading>
+     <AdminHeader />
+        <Divider mt='20px' mb='20px'/>
+      <Image src={game[0]?.game.image} w='200px' borderRadius='10px' float='right'/>
+      <Heading fontSize='29px' fontWeight='400'>{game[0]?.game.name}</Heading>
       <Box display='flex' mt='10px'>
-        {game.genres?.map(g =>(
-          <Text float='left' borderRadius='15px' fontSize='10px' border='#777777 1px solid' padding='1px 8px' mr='2px' color='#444444' key={g.id}>{g} </Text>
+        {game[0]?.game.genres.map(g =>(
+          <Text float='left' borderRadius='15px' fontSize='10px' border='#777777 1px solid' padding='1px 8px' mr='2px' color='#444444' key={g.id}>{g.name} </Text>
         ))}
+        </Box>
+        <Box>
+            <Text fontSize='25px' mt='60px'>Available keys</Text>
+            <Divider mt='10px' mb='10px'/>
+        <SimpleGrid
+        columns={{ base: 2, md: 2, lg: 3 }} mb='20px'>
+            {game ? game.map((g) => (
+              <Box key={g.id} bg={bg}  padding='11px' borderRadius='20px'>
+              
+              <Text  mt='-7px'><Text fontSize='7px'>STORE</Text> {g.store.name}</Text>
+              <Text mt='-3px'> <Text fontSize='7px'>PLATFORM</Text>{g.platform.name}</Text>
+              <Text mt='-3px'> <Text fontSize='7px'>REGION</Text>{g.region}</Text>
+              <Text fontSize='22px'><Text fontSize='7px'>PRICE</Text>$ {g.price}</Text>
+              <Button
+                    onClick={() => {
+                      onCartOpen();
+                      handleCart(g.id);
+                    }}
+                    ml="4"
+                    bg='none'
+                    padding='1px 7px'
+                    h='22px'
+                    fontSize='14px'
+                  >
+                    Delete Key
+                  </Button>
+              </Box>
+            )) : 'loading'}
+            </SimpleGrid>
+
         </Box>
         <form onSubmit={handleSubmit}>
         <FormControl mt='45px'>
+        <FormLabel htmlFor='hide-product' mb='0'>
+            Hide Product?
+        </FormLabel>
+        <Switch id='hide-product' mb='15px'/>
             <FormLabel htmlFor='price'>New Price</FormLabel>
             <Input borderRadius='20px' mb='15px' onChange={onChange} value={input.price} name="price" type="number" placeholder='$' step="0.01"></Input>
 

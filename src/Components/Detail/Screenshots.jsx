@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 
 export default function Screenshots() {
-  const { id } = useParams();
+  const { nameid } = useParams();
   const dispatch = useDispatch();
 
   const details = useSelector((state) => state.videogame);
@@ -21,7 +21,7 @@ export default function Screenshots() {
 
   useEffect(() => {
     dispatch(getAllGames());
-    dispatch(getGameDetails(id));
+    dispatch(getGameDetails(nameid));
   }, []);
 
   const arrowStyles = {
@@ -44,27 +44,27 @@ export default function Screenshots() {
   };
 
   const trailer = {
-    video: details.game?.trailer,
+    video: details[0].game?.trailer,
   };
 
   const slides = [
     {
-      img: details.game?.screenshots[0].url,
+      img: details[0].game?.screenshots[0].url,
     },
     {
-      img: details.game?.screenshots[1].url,
+      img: details[0].game?.screenshots[1].url,
     },
     {
-      img: details.game?.screenshots[2].url,
+      img: details[0].game?.screenshots[2].url,
     },
     {
-      img: details.game?.screenshots[3].url,
+      img: details[0].game?.screenshots[3].url,
     },
     {
-      img: details.game?.screenshots[4].url,
+      img: details[0].game?.screenshots[4].url,
     },
     {
-      img: details.game?.screenshots[5].url,
+      img: details[0].game?.screenshots[5].url,
     },
   ];
 
