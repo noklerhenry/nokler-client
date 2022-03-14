@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import ImgLogo from "./Logo/footer_nokler_logo.png";
 import SearchBar from "../searchBar/index";
 import { Logout } from "../Logout.jsx";
@@ -54,7 +55,9 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
             ml={mediaQueryIcon ? "2rem" : "3rem"}
             pl={mediaQueryIconSm ? "2.8rem" : null}
           >
-            <Image src={ImgLogo} alt="nokler logo" w="125px" h="35px" />
+            <Link to='/'>
+                <Image src={ImgLogo} alt="nokler logo" w="125px" h="35px" /> 
+            </Link>
           </Flex>
           <Flex
             // display={mediaQueryIcon ? "block" : "none"}
@@ -87,7 +90,7 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
             pos="absolute"
             top={["5.3rem", "5.3rem", "5.3rem", "2.3rem", "2,3rem", "2,3rem"]}
             left={{
-              base: "17.7rem",
+              base: "17.3rem",
               sssm: "19rem",
               ssm: "21.5rem",
               sm: "27.5rem",
@@ -113,11 +116,7 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
                 padding="0 1rem"
                 cursor="pointer"
               >
-                <Button
-                  size="sm"
-                  mt="20px"
-                  onClick={() => toggleColorMode()}
-                >
+                <Button size="sm" mt="20px" onClick={() => toggleColorMode()}>
                   Theme
                 </Button>
               </Box>
@@ -133,7 +132,6 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
                     size="sm"
                     mt="20px"
                     ml="19px"
-                    bgColor="#000"
                     onClick={loginWithPopup}
                   >
                     {" "}

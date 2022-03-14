@@ -3,6 +3,7 @@ import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Card } from "./Card";
+import axios from "axios";
 import { SimpleGrid, Heading } from "@chakra-ui/react";
 
 export const Cards = () => {
@@ -33,9 +34,11 @@ export const Cards = () => {
             genres={g.genres}
             name={g.name}
             image={g.img}
-            price={g.price}
+            // price={g.price}
+            platform={g.platform}
+            productKey={g.productKey}
           />
-        )) : 'Loading...'}
+        )) : 'Loading...' }
       </SimpleGrid>
     </>
   );
