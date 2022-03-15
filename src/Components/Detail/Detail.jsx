@@ -31,7 +31,7 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, getAllGames, getGameDetails } from "../../Actions/index.js";
+import { addToCart, getAllGames, getAllProducts, getGameDetails } from "../../Actions/index.js";
 import Screenshots from "./Screenshots";
 import { FaCartPlus } from "react-icons/fa";
 
@@ -60,7 +60,7 @@ export default function Detail() {
   // }, []);
 
   useEffect(() => {
-    dispatch(getAllGames());
+    dispatch(getAllProducts());
     dispatch(getGameDetails(nameid));
   }, []);
 
@@ -184,6 +184,7 @@ export default function Detail() {
               <Button
                     onClick={() => {
                       onCartOpen();
+                      console.log(g.id);
                       handleCart(g.id);
                     }}
                     ml="4"
