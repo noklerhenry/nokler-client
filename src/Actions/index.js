@@ -198,7 +198,7 @@ export const getAllGames = () => {
 
 export const getGamesByName = (name) => {
   return function (dispatch) {
-    return fetch(`https://nokler-api.herokuapp.com/gameSearchDB?name=${name}`)
+    return fetch(`https://nokler-api.herokuapp.com/getProductByGame?game=${name}`)
       .then((games) => games.json())
       .then((resp) => {
         dispatch({ type: GET_GAME_BY_NAME, payload: resp });

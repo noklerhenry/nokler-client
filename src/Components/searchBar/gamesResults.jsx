@@ -14,7 +14,6 @@ const GamesResults = (props) => {
         mt="30px"
         _hover={{
           borderBottom: "2px solid violet",
-          h: "5em",
           cursor: "pointer",
           transition: "0.2s ease-in-out",
         }}

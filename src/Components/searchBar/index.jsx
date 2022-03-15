@@ -38,10 +38,14 @@ const SearchBar = () => {
   const [noGamesFound, setNoGamesFound] = useState(false);
   
   const dispatch = useDispatch()
-  const games = useSelector((state) => state.games)
+  const products = useSelector((state) => state.products)
+  
+  useEffect(() => {
+      console.log(products)
+  }, [products])
 
 //   const isEmpty = !gamesLoaded || gamesLoaded.length === 0;
-  const isEmpty = !games || games.length === 0;
+  const isEmpty = !products || products.length === 0;
 
   const expandContainer = () => {
     setExpanded(true);
@@ -68,7 +72,7 @@ const SearchBar = () => {
     setLoading(false);
     setTimeout(() => {
     //   gamesLoaded?.splice(0, gamesLoaded.length);
-      games?.splice(0, games.length);
+      products?.splice(0, products.length);
     }, 1100);
     setNoGamesFound(false);
   };
@@ -112,15 +116,15 @@ const SearchBar = () => {
     //   setLoading(false);
     // }
     
-    if(games.length){
-        console.log("Successful Response: ", games);
+    if(products.length){
+        console.log("Successful Response: ", products);
         setLoading(false);
         // setGamesLoaded(game);
-        if(games && games.length === 0){
+        if(products && products.length === 0){
             setNoGamesFound(true);
         }
     } else {
-        console.log("Empty Response: ", games)
+        console.log("Empty Response: ", products)
         setLoading(false)
     }
   };
@@ -287,18 +291,18 @@ const SearchBar = () => {
               )}
             {!loading && !isEmpty && (
               <>
-                {/*gamesLoaded*/ games?.map((el, index) => {
+                {/*gamesLoaded*/ products?.map((el, index) => {
                   return (
                     <GamesResults
                       key={index}
                       thumbnailSrc={
-                        el.img
-                          ? el.img
+                        el.game.image
+                          ? el.game.image
                           : "https://www.sinrumbofijo.com/wp-content/uploads/2016/05/default-placeholder.png"
                       }
-                      name={el.name}
+                      name={el.game.name}
                       rating={
-                        (el.rating !== 0 || el.rating === undefined) ? "⭐" + el.rating + "⭐" : "⭐ - ⭐"
+                        (el.game.rating !== 0 || el.game.rating === undefined) ? "⭐" + el.game.rating + "⭐" : "⭐ - ⭐"
                       }
                     />
                   );

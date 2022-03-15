@@ -173,15 +173,15 @@ const reducer = (state = initialState, action) => {
         ...state,
         gamesFiltered: gameOrderRelease,
       };
-    case GET_ALL_GAMES:
-      return {
-        ...state,
-        games: action.payload,
-      };
+    // case GET_ALL_GAMES:
+    //   return {
+    //     ...state,
+    //     games: action.payload,
+    //   };
     case GET_GAME_BY_NAME:
       return {
         ...state,
-        games: action.payload,
+        products: action.payload,
       };
 
     case ADD_GAME_FAVORITE:
