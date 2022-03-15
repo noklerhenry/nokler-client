@@ -21,7 +21,8 @@ import {
   PopoverCloseButton,
   ListItem,
   UnorderedList,
-  useToast
+  useToast,
+  Text
 } from "@chakra-ui/react";
 import { BsFillCartFill, BsFillTrashFill } from "react-icons/bs";
 import { IoHomeSharp } from 'react-icons/io5';
@@ -52,47 +53,44 @@ const Templete = () => {
     <>
       {favs.length ? (
         <Flex
-          w="full"
-          bg="#121019"
-          p={50}
-          alignItems="center"
-          justifyContent="center"
-          mt="9rem"
+        w="full"
+        alignItems="center"
+        justifyContent="center"
+        mt="180px"
+        mb='100px'
         >
           <Stack
             direction={{ base: "column" }}
             w="full"
-            bg={{ md: bg }}
-            shadow="lg"
           >
+        <Text fontSize='35px' mb='15px' mt='25px' color='444444' zIndex='200' textAlign='center'>Wishlist &#10084;</Text>
             {favs.map((game, index) => {
               return (
                 <Flex
                   direction={{ base: "row", md: "column" }}
-                  bg={bg2}
                   key={index}
                 >
                   <SimpleGrid
                     spacingY={3}
                     columns={{ base: 1, md: 5 }}
                     w={{ base: 120, md: "full" }}
-                    bg={bg3}
+                    
                     color={"gray.500"}
                     py={{ base: 1, md: 4 }}
                     px={{ base: 2, md: 10 }}
                     fontSize="md"
                     fontWeight="hairline"
                   >
-                    <Box as="span" ml="5px" fontWeight="bold">
+                    <Box as="span" ml="5px" fontWeight="bold" bg={bg3} borderRadius='20px' padding='5px 5px' >
                       Name
                     </Box>
-                    <Box as="span" ml="5px" fontWeight="bold">
+                    <Box as="span" ml="5px" fontWeight="bold" bg={bg3} borderRadius='20px' padding='5px 15px'>
                       Platforms
                     </Box>
-                    <Box as="span" fontWeight="bold">
+                    <Box as="span" fontWeight="bold" bg={bg3} borderRadius='20px' padding='5px 15px'>
                       Key
                     </Box>
-                    <Box as="span" ml="88px" fontWeight="bold">
+                    <Box as="span" fontWeight="bold" bg={bg3} borderRadius='20px' padding='5px 15px'>
                       Detail
                     </Box>
                   </SimpleGrid>
@@ -105,7 +103,7 @@ const Templete = () => {
                     fontWeight="hairline"
                     fontSize={game.name.length >= 25 ? "sm" : "md"}
                   >
-                    <Box as="span" mt="7px" ml="20px">
+                    <Box as="span" mt="7px" ml="20px" fontWeight='800' textAlign='center'>
                       {game.name}
                     </Box>
                     <chakra.span
@@ -118,12 +116,12 @@ const Templete = () => {
                       <Popover>
                         <PopoverTrigger>
                           <Button
-                            color="white"
-                            bg="transparent"
-                            border="none"
+                            h='25px'
                             outline="0"
                             boxShadow="0"
+                            mt='10px'
                             _focus={{ outline: "none" }}
+                            textAlign='center'
                           >
                             See
                           </Button>
@@ -131,28 +129,29 @@ const Templete = () => {
                         <PopoverContent>
                           <PopoverArrow />
                           <PopoverCloseButton color="white" mt="5px" />
-                          <PopoverHeader color="white">Stores :</PopoverHeader>
+                          <PopoverHeader fontWeight='700'>Stores :</PopoverHeader>
                           <PopoverBody>
                             <UnorderedList>
-                              {/* {game.platform?.map((el) => { */}
-                                {/* return <ListItem color="white">{el}</ListItem>; */}
-                              <ListItem color="white">{game.platform}</ListItem>;
-                              {/* })} */}
+                              {game.platform?.map((el) => {
+                                return <ListItem >{el}</ListItem>;
+                              })}
                             </UnorderedList>
                           </PopoverBody>
                         </PopoverContent>
                       </Popover>
                     </chakra.span>
-                    <Flex>
+                    <Flex textAlign='center'>
                       <chakra.span
                         textOverflow="ellipsis"
                         overflow="hidden"
                         whiteSpace="nowrap"
                         mt="9px"
+                        
                       >
                         <Box
                           as="span"
                           ml="3px"
+                          fontWeight='700'
                           color={
                             game.productKey.length === 0
                               ? "red.500"
@@ -166,7 +165,7 @@ const Templete = () => {
                       </chakra.span>
                     </Flex>
                     <Flex mt="5px" ml="40px">
-                      <Link to={`/details/${game.id}`}>
+                      <Link to={`/details/${game.name}`}>
                         <Button
                           size="sm"
                           variant="solid"
@@ -177,18 +176,18 @@ const Templete = () => {
                           boxShadow="0"
                           _focus={{ outline: "none" }}
                         >
-                          More Info
+                          See game
                         </Button>
                       </Link>
                     </Flex>
-                    <Flex justify={{ md: "end" }}>
+                    <Flex >
                       <ButtonGroup
                         variant="solid"
                         size="sm"
-                        spacing={3}
-                        mr="20px"
+                        spacing={1}
+                        mr="90px"
                       >
-                        <IconButton
+                        {/* <IconButton
                           mt="5px"
                           BgColor="grey"
                           color="white"
@@ -209,7 +208,7 @@ const Templete = () => {
                               status: "success",
                             });
                           }}
-                        />
+                        /> */}
                         <IconButton
                           colorScheme="red"
                           mt="5px"

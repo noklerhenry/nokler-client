@@ -32,7 +32,7 @@ const initialState = {
   products: [],
   cart: cartFromLocalStorage,
   totalPrice: 0,
-  videogame: {},
+  videogame: [],
   gamesFiltered: [],
   platforms: [],
   genres: [],

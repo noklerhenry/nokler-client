@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AdminCard from "./AdminCard";
 import axios from "axios";
 import { Heading, Container, Text, FormControl, Box,  Divider, Input, Button, Link } from '@chakra-ui/react'
+import AdminHeader from "./AdminHeader";
 
 
 export default function AddGame() {
@@ -36,10 +37,8 @@ console.log(games)
 return (
     <>
     <Container p='8'>
-    <Heading mb='20px'>Welcome, Admin</Heading>
-      <Button h='25px' mr='10px'><Link href='/admin'>Back to Admin panel</Link></Button>
-      <Text fontSize='30px' mb='15px' mt='15px'>Add new game</Text>
-      <Divider />
+    <AdminHeader />
+    <Text fontSize='30px' mb='15px' mt='15px'>Add Games</Text>
     <FormControl mt='25px' onSubmit={() =>handleSubmit()}>
     <Input id='searchGame' type='text' borderRadius='20px' mb='15px' placeholder='Type the game name...' value={search} onChange={handleInputChange}/>
        

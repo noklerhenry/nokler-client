@@ -23,9 +23,7 @@ import {
   MenuItem
 } from "@chakra-ui/react";
 // import Panel from "./Sidebar/panel";
-import { FaBars } from "react-icons/fa";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-
+import { FaBars, FaMoon, FaSun, FaUser } from "react-icons/fa";
 
 const NavBar = ({ toggle, mediaQueryNavMenu }) => {
   const { user, loginWithPopup, loginWithRedirect, isAuthenticated, isLoading, logout } = useAuth0();
@@ -118,10 +116,10 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
             textAlign="center"
           >
             <Flex as="li" h="80px">
-              <Box
+            <Box
                 pos="absolute"
                 top="2"
-                right="17rem"
+                right="19rem"
                 padding="0 1rem"
                 cursor="pointer"
               >
@@ -132,6 +130,7 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
                   {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
                 </Button>
               </Box>
+              
               <Box
                 pos="absolute"
                 top="2"
@@ -143,11 +142,12 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
                   <Button
                     size="sm"
                     mt="20px"
-                    ml="19px"
-                    onClick={loginWithRedirect}
+                    ml="14px"
+                    border='none'
+                    onClick={loginWithPopup}
                   >
                     {" "}
-                    Sign in
+                    <FaUser size='18' />
                   </Button>
                 ) : (
                   //   <Logout />
@@ -216,7 +216,18 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
               <Box
                 pos="absolute"
                 top="2"
-                right="3.5rem"
+                right="13.5rem"
+                padding="0 1rem"
+                cursor="pointer"
+              >
+                <Button size="sm" mt="20px" border='none' onClick={() => toggleColorMode()}>
+                <FaMoon size='18'/>  <FaSun size='18' /> 
+                </Button>
+              </Box>
+              <Box
+                pos="absolute"
+                top="2"
+                right="6rem"
                 padding="0 1rem"
                 cursor="pointer"
               >
