@@ -24,6 +24,7 @@ import {
 } from "@chakra-ui/react";
 // import Panel from "./Sidebar/panel";
 import { FaBars, FaMoon, FaSun, FaUser } from "react-icons/fa";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 const NavBar = ({ toggle, mediaQueryNavMenu }) => {
   const { user, loginWithPopup, loginWithRedirect, isAuthenticated, isLoading, logout } = useAuth0();
@@ -119,15 +120,15 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
             <Box
                 pos="absolute"
                 top="2"
-                right="19rem"
+                right="14.8rem"
                 padding="0 1rem"
                 cursor="pointer"
               >
                 {/* <Button size="sm" mt="20px" onClick={() => toggleColorMode()}>
                   Theme
                 </Button> */}
-                <Button size="sm" mt="20px" onClick={toggleColorMode}>
-                  {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+                <Button size="sm" mt="20px" onClick={toggleColorMode} border='none'>
+                  {colorMode === "light" ? <MoonIcon fontSize='21'/> : <SunIcon fontSize='21' />}
                 </Button>
               </Box>
               
@@ -212,17 +213,6 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
                     </MenuList>
                   </Menu>
                 )}
-              </Box>
-              <Box
-                pos="absolute"
-                top="2"
-                right="13.5rem"
-                padding="0 1rem"
-                cursor="pointer"
-              >
-                <Button size="sm" mt="20px" border='none' onClick={() => toggleColorMode()}>
-                <FaMoon size='18'/>  <FaSun size='18' /> 
-                </Button>
               </Box>
               <Box
                 pos="absolute"

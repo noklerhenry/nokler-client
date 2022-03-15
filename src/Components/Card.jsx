@@ -66,7 +66,7 @@ export const Card = ({ id, name, image, platform, productKey, genres }) => {
       >
         {name}
       </Heading>
-      <Text>{`$ ${price}`}</Text>
+      {/* <Text>{`$ ${price}`}</Text> */}
       {/* <Text fontSize="20px" mt="10px" mb="10px">
         ${price}
       </Text> */}
