@@ -89,15 +89,14 @@ export default function Detail() {
 
   console.log(details)
 
-  return (
-   
+  return details ? (
     <Container maxW={"7xl"} mt="200px" mb="30px">
       <SimpleGrid
         columns={{ base: 1, md: 2, lg: 2 }}
         spacing={{ base: 8, md: 10 }}
         py={{ base: 10, md: 18 }}
       >
-        <Flex flexDirection='column'>
+        <Flex flexDirection="column">
           <Image
             borderRadius='35px'
             boxShadow='3px 3px 25px #8c06f770'
@@ -129,7 +128,7 @@ export default function Detail() {
       </Box>
         </Flex>
 
-        <Stack >
+        <Stack>
           <Box as="header">
             <Heading
               lineHeight={1.1}
@@ -144,12 +143,11 @@ export default function Detail() {
             <Text color='#888888'  padding='1px'>
               <b>Digital key:</b> This is a digital edition of the product (CD-KEY)
             </Text>{" "}
-            
           </Box>
 
-          <SimpleGrid columns={{ base: 1, md: 2 }} mt='30px'>
+          <SimpleGrid columns={{ base: 1, md: 2 }} mt="30px">
             <List>
-              <ListItem borderBottom='1px dotted' padding='4px' mr='9px'>
+              <ListItem borderBottom="1px dotted" padding="4px" mr="9px">
                 <Text as={"span"} fontWeight={"bold"}>
                 &#9733; Rating:
                 </Text>{" "}
@@ -265,7 +263,7 @@ export default function Detail() {
 
 
     </Container>
-  // ) : (
-  //   <Box>Game NOT Found</Box>
+  ) : (
+    <Box>Game Not found</Box>
   );
 }

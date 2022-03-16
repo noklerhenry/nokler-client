@@ -3,7 +3,6 @@ import React from "react";
 //import axios from "axios";
 import { useEffect, useState } from "react";
 import { Card } from "./Card";
-import axios from "axios";
 import { SimpleGrid, Heading } from "@chakra-ui/react";
 
 export const Cards = () => {

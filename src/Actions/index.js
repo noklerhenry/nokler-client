@@ -21,6 +21,7 @@ export const REMOVE_GAME_FAVORITE = "REMOVE_GAME_FAVORITE";
 export const GET_ALL_GAMES = "GET_ALL_GAMES";
 export const GET_GAME_BY_NAME = "GET_GAME_BY_NAME";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
+export const FILTER = "FILTER";
 
 export const addToCart = (payload) => {
   return {
@@ -72,57 +73,72 @@ export function removeDetailCache() {
   };
 }
 
-export function filterGamesByGenre(payload) {
-  return async function (dispatch) {
-    let filterGenreResults = await axios.get(
-      "https://nokler-api.herokuapp.com/filterAcum/"
-    );
-    dispatch({
-      type: FILTER_GENRES_RESULTS,
-      payload: filterGenreResults.data,
-    });
-  };
-}
+export const filterGamesByGenre = (array) => async (dispatch) => {
+  let arr = [...array];
+  let url = "https://nokler-api.herokuapp.com/filterAcum?";
+  while (arr.length) {
+    url = url + `&genr=${arr.shift()}`;
+  }
+  console.log(url);
+  const info = await axios.get(url);
+  console.log(info.data);
+  return dispatch({
+    type: FILTER_GENRES_RESULTS,
+    payload: info.data,
+  });
+};
 
-export function filterGamesByPlatform(paylaod) {
-  return async function (dispatch) {
-    let filterPlatformResults = await axios.get(
-      "https://nokler-api.herokuapp.com/filterAcum/"
-    );
-    dispatch({
-      type: FILTER_PLATFORM_RESULTS,
-      payload: filterPlatformResults.data,
+export const filterAcum =
+  (genres, platforms, regions, stores) => async (dispatch) => {
+    // let arr = [...array];
+    // let url = "https://nokler-api.herokuapp.com/filterAcum?";
+    // while (arr.length) {
+    //   url = url + `&plat=${arr.shift()}`;
+    // }
+    // const info = await axios.get(url);
+    // console.log(info.data);
+    // return dispatch({
+    //   type: FILTER_PLATFORM_RESULTS,
+    //   payload: info.data,
+    // });
+    let url = "https://nokler-api.herokuapp.com/filterAcum?";
+    if (genres.length) {
+      let arr = [...genres];
+      while (arr.length) {
+        url = url + `&genr=${arr.shift()}`;
+      }
+    }
+    if (platforms.length) {
+      let arr = [...platforms];
+      while (arr.length) {
+        url = url + `&plat=${arr.shift()}`;
+      }
+    }
+    if (regions.length) {
+      let arr = [...regions];
+      while (arr.length) {
+        url = url + `&regi=${arr.shift()}`;
+      }
+    }
+    if (stores.length) {
+      let arr = [...stores];
+      while (arr.length) {
+        url = url + `&stor=${arr.shift()}`;
+      }
+    }
+    const info = await axios.get(url);
+    console.log(info.data);
+    return dispatch({
+      type: FILTER,
+      payload: info.data,
     });
   };
-}
-
-export function filterGamesByRegion(paylaod) {
-  return async function (dispatch) {
-    let filterRegionResults = await axios.get(
-      "https://nokler-api.herokuapp.com/filterAcum/"
-    );
-    dispatch({
-      type: FILTER_REGION_RESULTS,
-      payload: filterRegionResults.data,
-    });
-  };
-}
-
-export function filterGamesByStore(paylaod) {
-  return async function (dispatch) {
-    let filterStoreResults = await axios.get(
-      "https://nokler-api.herokuapp.com/filterAcum/"
-    );
-    dispatch({
-      type: FILTER_STORE_RESULTS,
-      payload: filterStoreResults.data,
-    });
-  };
-}
 
 export function getPlatforms() {
   return async (dispatch) => {
-    let platformResults = await axios.get("https://nokler-api.herokuapp.com/platformList");
+    let platformResults = await axios.get(
+      "https://nokler-api.herokuapp.com/platformList"
+    );
     dispatch({
       type: GET_PLATFORMS,
       payload: platformResults.data,
@@ -132,7 +148,9 @@ export function getPlatforms() {
 
 export const getGenres = () => async (dispatch) => {
   try {
-    const response = await axios.get("https://nokler-api.herokuapp.com/genreList");
+    const response = await axios.get(
+      "https://nokler-api.herokuapp.com/genreList"
+    );
     return dispatch({
       type: GET_GENRES,
       payload: response.data,
@@ -144,7 +162,9 @@ export const getGenres = () => async (dispatch) => {
 
 export function getStores() {
   return async (dispatch) => {
-    let storeResults = await axios.get("https://nokler-api.herokuapp.com/storeList");
+    let storeResults = await axios.get(
+      "https://nokler-api.herokuapp.com/storeList"
+    );
     dispatch({
       type: GET_STORES,
       payload: storeResults.data,

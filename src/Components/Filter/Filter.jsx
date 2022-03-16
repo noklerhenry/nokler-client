@@ -8,6 +8,7 @@ import {
   getGenres,
   getPlatforms,
   getStores,
+  filterAcum,
 } from "../../Actions";
 
 import {
@@ -28,6 +29,10 @@ export default function Filter() {
   const genres = useSelector((state) => state.genres);
   const platforms = useSelector((state) => state.platforms);
   const stores = useSelector((state) => state.stores);
+  const [genre, setGenre] = useState([]);
+  const [platform, setPlatform] = useState([]);
+  const [region, setRegion] = useState([]);
+  const [store, setStore] = useState([]);
 
   //console.log(genres)
 
@@ -43,30 +48,61 @@ export default function Filter() {
     dispatch(getPlatforms());
   }, []);
 
-  function handleFilterPlatform(e) {
-    e.preventDefault();
-    dispatch(filterGamesByPlatform(e.target.value));
-  }
+  // useEffect(() => {
+  //   dispatch(filterGamesByGenre(checkbox));
+  // }, [checkbox]);
 
-  function handleFilterStore(e) {
-    e.preventDefault();
-    dispatch(filterGamesByStore(e.target.value));
-  }
+  // const handleChange = (e) => {
+  //   let variable = e.target.value;
+  //   let array = checkbox;
+  //   if(array.includes(e.target.value)) {
+  //     array = array.filter(e => e !== variable);
+  //   } else {
+  //     array = [...array, variable];
+  //   }
+  //   console.log(checkbox);
+  //   setCheckbox(array);
+  // }
 
-  function handleFilterRegion(e) {
-    e.preventDefault();
-    dispatch(filterGamesByRegion(e.target.value));
-  }
+  useEffect(() => {
+    dispatch(filterAcum(genre, platform, region, store));
+  }, [genre, platform, region, store]);
 
-  function handleFilterGenre(e) {
-    e.preventDefault();
-    dispatch(filterGamesByGenre(e.target.value));
-  }
+  const handleGenre = (e) => {
+    let variable = e.target.value;
+    let array = genre;
+    if (array.includes(e.target.value)) {
+      array = array.filter((e) => e !== variable);
+    } else {
+      array = [...array, variable];
+    }
+    setGenre(array);
+    console.log(genre);
+  };
 
-  function handleFilterGenre(e) {
-    e.preventDefault();
-    dispatch(filterGamesByGenre(e.target.value));
-  }
+  const handlePlatform = (e) => {
+    let variable = e.target.value;
+    let array = platform;
+    if (array.includes(e.target.value)) {
+      array = array.filter((e) => e !== variable);
+    } else {
+      array = [...array, variable];
+    }
+    setPlatform(array);
+    console.log(platform);
+  };
+
+  const handleStore = (e) => {
+    let variable = e.target.value;
+    let array = platform;
+    if (array.includes(e.target.value)) {
+      array = array.filter((e) => e !== variable);
+    } else {
+      array = [...array, variable];
+    }
+    setStore(array);
+    console.log(platform);
+  };
 
   return (
     <Accordion allowToggle>
@@ -81,7 +117,7 @@ export default function Filter() {
         </h2>
         <AccordionPanel>
           <CheckboxGroup colorScheme="purple">
-            <Stack onChange={(e) => handleFilterGenre(e)}>
+            <Stack onChange={handleGenre}>
               {genres?.map((g) => (
                 <Checkbox key={g.name} value={g.name}>
                   {g.name}
@@ -102,7 +138,7 @@ export default function Filter() {
         </h2>
         <AccordionPanel>
           <CheckboxGroup colorScheme="purple">
-            <Stack onChange={(e) => handleFilterPlatform(e)}>
+            <Stack onChange={handlePlatform}>
               {platforms?.map((p) => (
                 <Checkbox key={p.name} value={p.name}>
                   {p.name}
@@ -123,7 +159,7 @@ export default function Filter() {
         </h2>
         <AccordionPanel>
           <CheckboxGroup colorScheme="purple">
-            <Stack onChange={(e) => handleFilterStore(e)}>
+            <Stack onChange={handleStore}>
               {stores?.map((s) => (
                 <Checkbox key={s.name} value={s.name}>
                   {s.name}

@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, addGameFavorite } from "../Actions";
-import { Button, useToast, Box, Image, Text, Heading, Link } from "@chakra-ui/react";
+import {
+  Button,
+  useToast,
+  Box,
+  Image,
+  Text,
+  Heading,
+  Link,
+} from "@chakra-ui/react";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 
 export const Card = ({ id, name, image, platform, productKey, genres }) => {
@@ -52,11 +60,20 @@ export const Card = ({ id, name, image, platform, productKey, genres }) => {
         mb="15px"
       />
       </Link>
-      
-        {genres.map((g) =>(
-          <Button size="sm" height="15px" fontSize="11px" mt="5px" padding='1px 5px' mr='5px'>{g}</Button>
-        ))}
-      
+
+      {genres?.map((g) => (
+        <Button
+          size="sm"
+          height="15px"
+          fontSize="11px"
+          mt="5px"
+          padding="1px 5px"
+          mr="5px"
+        >
+          {g}
+        </Button>
+      ))}
+
       <Heading
         fontSize="21px"
         fontWeight="300"
