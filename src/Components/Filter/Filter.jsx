@@ -94,14 +94,14 @@ export default function Filter() {
 
   const handleStore = (e) => {
     let variable = e.target.value;
-    let array = platform;
+    let array = store;
     if (array.includes(e.target.value)) {
       array = array.filter((e) => e !== variable);
     } else {
       array = [...array, variable];
     }
     setStore(array);
-    console.log(platform);
+    console.log(store);
   };
 
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 //import { useSelector } from "react-redux";
-//import axios from "axios";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { Card } from "./Card";
 import { SimpleGrid, Heading } from "@chakra-ui/react";
