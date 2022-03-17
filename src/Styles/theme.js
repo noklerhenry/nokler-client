@@ -20,7 +20,7 @@ const theme = extendTheme({
     global: (props) => ({
       body: {
         color: mode("#8c06f7", "#8c06f7")(props),
-        bg: mode("#ffffff", "#121019")(props),
+        bg: mode("#edf2f4", "#0c0f0a")(props),
       },
     }),
   },
@@ -29,7 +29,7 @@ const theme = extendTheme({
     Drawer: {
       variants: {
         base: (props) => ({
-          backgroundColor: mode("#ffffff", "#121019")(props),
+          backgroundColor: mode("#edf2f4", "#0c0f0a")(props),
         }),
       },
       defaultProps: {
@@ -47,7 +47,7 @@ const theme = extendTheme({
       variants: {
         red: {
           bg: "red.400",
-          color: "#ffffff",
+          color: "#edf2f4",
           fontSize: "10px",
           borderRadius: "20px",
           border: "none",
@@ -59,10 +59,10 @@ const theme = extendTheme({
         },
         base: (props) => ({
           padding: "4px 15px",
-          backgroundColor: mode("#ffffff", "#121019")(props),
+          backgroundColor: mode("#edf2f4", "#0c0f0a")(props),
           _hover: {
             backgroundColor: mode("#8c06f7", "#8c06f7")(props),
-            color: mode("#ffffff", "#ffffff")(props),
+            color: mode("#edf2f4", "#edf2f4")(props),
           },
         }),
       },
