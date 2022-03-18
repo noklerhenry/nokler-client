@@ -19,7 +19,7 @@ const theme = extendTheme({
   styles: {
     global: (props) => ({
       body: {
-        color: mode("#8c06f7", "#8c06f7")(props),
+        color: mode("#733EF8", "#733EF8")(props),
         bg: mode("#edf2f4", "#0c0f0a")(props),
       },
     }),
@@ -41,7 +41,7 @@ const theme = extendTheme({
         fontWeight: "500",
         borderRadius: "50px",
 
-        border: "1px solid #8c06f7",
+        border: "1px solid #733EF8",
       }),
 
       variants: {
@@ -61,7 +61,7 @@ const theme = extendTheme({
           padding: "4px 15px",
           backgroundColor: mode("#edf2f4", "#0c0f0a")(props),
           _hover: {
-            backgroundColor: mode("#8c06f7", "#8c06f7")(props),
+            backgroundColor: mode("#733EF8", "#733EF8")(props),
             color: mode("#edf2f4", "#edf2f4")(props),
           },
         }),
