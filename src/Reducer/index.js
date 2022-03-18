@@ -196,9 +196,7 @@ const reducer = (state = initialState, action) => {
       const favs = state.favoriteGames;
       return {
         ...state,
-        favoriteGames: favs.find(
-          (el) => el.id === action.payload.id
-        )
+        favoriteGames: favs.find((el) => el.id === action.payload.id)
           ? [...favs]
           : [...favs, action.payload],
       };
