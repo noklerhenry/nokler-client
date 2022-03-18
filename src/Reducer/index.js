@@ -13,12 +13,10 @@ import {
   GET_PLATFORMS,
   GET_GENRES,
   GET_STORES,
-  ORDER_BY_PRICE,
-  ORDER_BY_RELEASE,
-  ORDER_BY_RATING,
+  ORDER_BY,
   ADD_GAME_FAVORITE,
   REMOVE_GAME_FAVORITE,
-  GET_ALL_GAMES,
+  // GET_ALL_GAMES,
   GET_GAME_BY_NAME,
   GET_ALL_PRODUCTS,
   FILTER,
@@ -43,10 +41,10 @@ const initialState = {
   favoriteGames: whislistFromLocalStorage,
 };
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
+const reducer = (state = initialState, { type, payload }) => {
+  switch (type) {
     case ADD_TO_CART:
-      let game = state.products.find((g) => g.id == action.payload);
+      let game = state.products.find((g) => g.id == payload);
       let item = state.cart.find((g) => g.id == game.id);
       return !item
         ? {
@@ -60,7 +58,7 @@ const reducer = (state = initialState, action) => {
             ),
           };
     case REMOVE_TO_CART:
-      let remove = state.cart.find((g) => g.id === action.payload);
+      let remove = state.cart.find((g) => g.id === payload);
       let index = state.cart.indexOf(remove);
       return remove.quantity > 1
         ? {
@@ -81,12 +79,12 @@ const reducer = (state = initialState, action) => {
     case LOAD_CART:
       return {
         ...state,
-        cart: action.payload,
+        cart: payload,
       };
     case GET_GAME_DETAILS:
       return {
         ...state,
-        videogame: action.payload,
+        videogame: payload,
       };
     case REMOVE_DETAIL_CACHE:
       return {
@@ -96,122 +94,123 @@ const reducer = (state = initialState, action) => {
     case FILTER:
       return {
         ...state,
-        gamesFiltered: action.payload,
+        gamesFiltered: payload,
       };
     case FILTER_GENRES_RESULTS:
       return {
         ...state,
-        gamesFiltered: action.payload.length ? action.payload : state.products,
+        gamesFiltered: payload.length ? payload : state.products,
       };
     case FILTER_PLATFORM_RESULTS:
       return {
         ...state,
-        gamesFiltered: action.payload,
+        gamesFiltered: payload,
       };
     case FILTER_REGION_RESULTS:
       return {
         ...state,
-        gamesFiltered: action.payload,
+        gamesFiltered: payload,
       };
     case FILTER_STORE_RESULTS:
       return {
         ...state,
-        gamesFiltered: action.payload,
+        gamesFiltered: payload,
       };
     case GET_PLATFORMS:
       return {
         ...state,
-        platforms: action.payload,
+        platforms: payload,
       };
     case GET_GENRES:
       return {
         ...state,
-        genres: action.payload,
+        genres: payload,
       };
     case GET_STORES:
       return {
         ...state,
-        stores: action.payload,
+        stores: payload,
       };
-    case ORDER_BY_PRICE:
-      let gameOrderPrice =
-        action.payload === "1"
-          ? state.products.sort(function (a, b) {
+    case ORDER_BY: {
+      const orderBy =
+        payload === "HighRating"
+          ? [...state.products].sort((a, b) => {
+              if (a.game.rating < b.game.rating) return 1;
+              if (a.game.rating > b.game.rating) return -1;
+              return 0;
+            })
+          : payload === "LowRating"
+          ? [...state.products].sort((a, b) => {
+              if (a.game.rating > b.game.rating) return 1;
+              if (a.game.rating < b.game.rating) return -1;
+              return 0;
+            })
+          : payload === "HighPrice"
+          ? [...state.products].sort((a, b) => {
               if (a.price < b.price) return 1;
               if (a.price > b.price) return -1;
               return 0;
             })
-          : state.products.sort((a, b) => {
+          : payload === "LowPrice"
+          ? [...state.products].sort((a, b) => {
               if (a.price > b.price) return 1;
               if (a.price < b.price) return -1;
-            });
-      return {
-        ...state,
-        gamesFiltered: gameOrderPrice,
-      };
-    case ORDER_BY_RATING:
-      let gameOrderRating =
-        action.payload === "1"
-          ? state.products.sort(function (a, b) {
-              if (a.rating < b.rating) return 1;
-              if (a.rating > b.rating) return -1;
               return 0;
             })
-          : state.products.sort((a, b) => {
-              if (a.rating > b.rating) return 1;
-              if (a.rating < b.rating) return -1;
-            });
-      return {
-        ...state,
-        gamesFiltered: gameOrderRating,
-      };
-    case ORDER_BY_RELEASE:
-      let gameOrderRelease =
-        action.payload === "1"
-          ? state.products.sort(function (a, b) {
-              if (a.released_at < b.released_at) return 1;
-              if (a.released_at > b.released_at) return -1;
+          : payload === "NewRelease"
+          ? [...state.products].sort((a, b) => {
+              if (a.game.released_at < b.game.released_at) return 1;
+              if (a.game.released_at > b.game.released_at) return -1;
               return 0;
             })
-          : state.products.sort((a, b) => {
-              if (a.released_at > b.released_at) return 1;
-              if (a.released_at < b.released_at) return -1;
-            });
+          : payload === "OldRelease"
+          ? [...state.products].sort((a, b) => {
+              if (a.game.released_at > b.game.released_at) return 1;
+              if (a.game.released_at < b.game.released_at) return -1;
+              return 0;
+            })
+          : payload === "A-Z"
+          ? [...state.products].sort((a, b) => {
+              if (a.game.name < b.game.name) return -1;
+              if (a.game.name > b.game.name) return 1;
+              return 0;
+            })
+          : payload === "Z-A"
+          ? [...state.products].sort((a, b) => {
+              if (a.game.name > b.game.name) return -1;
+              if (a.game.name < b.game.name) return 1;
+              return 0;
+            })
+          : [...state.products];
       return {
         ...state,
-        gamesFiltered: gameOrderRelease,
+        gamesFiltered: orderBy,
       };
-    // case GET_ALL_GAMES:
-    //   return {
-    //     ...state,
-    //     games: action.payload,
-    //   };
+    }
     case GET_GAME_BY_NAME:
       return {
         ...state,
-        products: action.payload,
+        products: payload,
       };
 
     case ADD_GAME_FAVORITE:
       const favs = state.favoriteGames;
       return {
         ...state,
-        favoriteGames: favs.find((el) => el.id === action.payload.id)
+        favoriteGames: favs.find((el) => el.id === payload.id)
           ? [...favs]
-          : [...favs, action.payload],
+          : [...favs, payload],
       };
     case REMOVE_GAME_FAVORITE:
       return {
         ...state,
-        favoriteGames: state.favoriteGames.filter(
-          (el) => el.id !== action.payload
-        ),
+        favoriteGames: state.favoriteGames.filter((el) => el.id !== payload),
       };
     case GET_ALL_PRODUCTS:
       return {
         ...state,
-        products: action.payload,
-        gamesFiltered: action.payload,
+        products: payload,
+        gamesFiltered: payload,
       };
     default:
       return state;
