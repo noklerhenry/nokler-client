@@ -90,7 +90,7 @@ export default function Detail() {
   //     }
   // }, [dispatch]) 
 
-//   console.log(details)
+  console.log(details)
 
   return (
     <Container maxW={"7xl"} mt="200px" mb="30px">

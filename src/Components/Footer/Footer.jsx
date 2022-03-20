@@ -37,10 +37,10 @@ const SocialButton = ({ children, label, href }) => {
       transition={"background 0.3s ease"}
       _hover={
         label === "Twitter"
-          ? { bg: "#47BCFF" }
+          ? { bg: "#47BCFF", color: "#fff" }
           : label === "YouTube"
-          ? { bg: "#FF0000" }
-          : { bg: "#E617D9" }
+          ? { bg: "#FF0000", color: "#fff" }
+          : { bg: "#E617D9", color: "#fff" }
       }
     >
       <VisuallyHidden>{label}</VisuallyHidden>
