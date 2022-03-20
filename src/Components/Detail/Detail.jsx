@@ -25,13 +25,18 @@ import {
   ModalCloseButton,
   useDisclosure,
   useColorMode,
-  useColorModeValue
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, getAllGames, getAllProducts, getGameDetails } from "../../Actions/index.js";
+import {
+  addToCart,
+  getAllGames,
+  getAllProducts,
+  getGameDetails,
+} from "../../Actions/index.js";
 import Screenshots from "./Screenshots";
 import { FaCartPlus } from "react-icons/fa";
 import ImagesGallery from "../ImageSlider/index.jsx";
@@ -44,15 +49,17 @@ export default function Detail() {
 
   const details = useSelector((state) => state.videogame);
   const games = useSelector((state) => state.games);
+  const cart = useSelector((state) => state.cart);
 
-  const [theGame, setTheGame] = useState()
+  const [theGame, setTheGame] = useState();
+  const [disabled, setDisabled] = useState(false);
 
-  const { toggleColorMode } = useColorMode()
+  const { toggleColorMode } = useColorMode();
 
-  const bg = useColorModeValue('#efefef', '#18181880')
+  const bg = useColorModeValue("#efefef", "#18181880");
   //const color = useColorModeValue('white', 'gray.800')
 
-//   console.log(nameid)
+  //   console.log(nameid)
   // useEffect(() => {
   //   // axios.get('https://nokler-api.herokuapp.com/getProductByGame?game=' + nameId)
   //   // .then((response) =>{
@@ -66,6 +73,10 @@ export default function Detail() {
     dispatch(getGameDetails(nameid));
     // console.log(details)
   }, []);
+
+  useEffect(() => {
+    validate();
+  }, [cart, details]);
 
   const {
     isOpen: isCartOpen,
@@ -83,14 +94,27 @@ export default function Detail() {
     dispatch(addToCart(id));
   };
 
+  const validate = () => {
+    const product = cart.find((e) => e.id === details[0]?.id);
+    console.log(details[0]?.key?.length);
+    console.log(product);
+    if (!product && details[0]?.key?.length) {
+      setDisabled(false);
+    } else {
+      product?.quantity < details[0]?.key?.length
+        ? setDisabled(false)
+        : setDisabled(true);
+    }
+  };
+
   //  useEffect(() => {
   //     dispatch(getGameDetails(id));
   //     return () => {
   //         dispatch(removeDetailCache())
   //     }
-  // }, [dispatch]) 
+  // }, [dispatch])
 
-  console.log(details)
+  console.log(details);
 
   return (
     <Container maxW={"7xl"} mt="200px" mb="30px">
@@ -233,9 +257,10 @@ export default function Detail() {
                     <Text fontSize="7px">PRICE</Text>$ {g.price}
                   </Text>
                   <Button
+                    disabled={disabled}
                     onClick={() => {
                       onCartOpen();
-                    //   console.log(g.id);
+                      //   console.log(g.id);
                       handleCart(g.id);
                     }}
                     ml="4"
@@ -311,10 +336,13 @@ export default function Detail() {
         {details[0]?.game.description}
       </Text>
       <Divider border="dotted #cccccc" mt="30px" />
-      <Flex justify='center' fontSize="xl">
-        <Text fontWeight="bold" mt='50px'>{`${details[0]?.game?.name} Videos`}</Text>
+      <Flex justify="center" fontSize="xl">
+        <Text
+          fontWeight="bold"
+          mt="50px"
+        >{`${details[0]?.game?.name} Videos`}</Text>
       </Flex>
-      <Box mt='-115px'>
+      <Box mt="-115px">
         <VideoPlayer details={details} />
       </Box>
     </Container>
