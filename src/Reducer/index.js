@@ -20,6 +20,7 @@ import {
   GET_GAME_BY_NAME,
   GET_ALL_PRODUCTS,
   FILTER,
+  GET_ORDERS,
 } from "../Actions";
 import json from "../games.json";
 
@@ -212,6 +213,12 @@ const reducer = (state = initialState, { type, payload }) => {
         products: payload,
         gamesFiltered: payload,
       };
+    case GET_ORDERS: {
+      return {
+        ...state,
+        orders: payload,
+      }
+    }
     default:
       return state;
   }
