@@ -135,54 +135,54 @@ const reducer = (state = initialState, { type, payload }) => {
     case ORDER_BY: {
       const orderBy =
         payload === "HighRating"
-          ? [...state.products].sort((a, b) => {
+          ? [...state.gamesFiltered].sort((a, b) => {
               if (a.game.rating < b.game.rating) return 1;
               if (a.game.rating > b.game.rating) return -1;
               return 0;
             })
           : payload === "LowRating"
-          ? [...state.products].sort((a, b) => {
+          ? [...state.gamesFiltered].sort((a, b) => {
               if (a.game.rating > b.game.rating) return 1;
               if (a.game.rating < b.game.rating) return -1;
               return 0;
             })
           : payload === "HighPrice"
-          ? [...state.products].sort((a, b) => {
+          ? [...state.gamesFiltered].sort((a, b) => {
               if (a.price < b.price) return 1;
               if (a.price > b.price) return -1;
               return 0;
             })
           : payload === "LowPrice"
-          ? [...state.products].sort((a, b) => {
+          ? [...state.gamesFiltered].sort((a, b) => {
               if (a.price > b.price) return 1;
               if (a.price < b.price) return -1;
               return 0;
             })
           : payload === "NewRelease"
-          ? [...state.products].sort((a, b) => {
+          ? [...state.gamesFiltered].sort((a, b) => {
               if (a.game.released_at < b.game.released_at) return 1;
               if (a.game.released_at > b.game.released_at) return -1;
               return 0;
             })
           : payload === "OldRelease"
-          ? [...state.products].sort((a, b) => {
+          ? [...state.gamesFiltered].sort((a, b) => {
               if (a.game.released_at > b.game.released_at) return 1;
               if (a.game.released_at < b.game.released_at) return -1;
               return 0;
             })
           : payload === "A-Z"
-          ? [...state.products].sort((a, b) => {
+          ? [...state.gamesFiltered].sort((a, b) => {
               if (a.game.name < b.game.name) return -1;
               if (a.game.name > b.game.name) return 1;
               return 0;
             })
           : payload === "Z-A"
-          ? [...state.products].sort((a, b) => {
+          ? [...state.gamesFiltered].sort((a, b) => {
               if (a.game.name > b.game.name) return -1;
               if (a.game.name < b.game.name) return 1;
               return 0;
             })
-          : [...state.products];
+          : [...state.gamesFiltered];
       return {
         ...state,
         gamesFiltered: orderBy,
