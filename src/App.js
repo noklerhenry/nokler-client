@@ -9,7 +9,6 @@ import AddGame from "./Components/Admin/AddGame";
 import { Home } from "./Components/Home";
 import Detail from "./Components/Detail/Detail.jsx";
 import Header from "./Components/Header";
-//import NavBar from "./Components/NavBar/index.jsx";
 import Footer from "./Components/Footer/Footer.jsx";
 import Wishlist from "./Components/Whishlist";
 
@@ -17,7 +16,7 @@ function App() {
   return (
     <>
       <Router>
-      <Header />
+        <Header />
         <Switch>
           {/* <Route exact path="/" component={FirstPage} /> */}
           <Route path="/">

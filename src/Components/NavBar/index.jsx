@@ -1,10 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import ImgLogo from "./Logo/footer_nokler_logo.png";
 import SearchBar from "../searchBar/index";
-import { Logout } from "../Logout.jsx";
 import CartDrawer from "./CartDrawer.jsx";
-// import { Profile } from "../Profile.jsx";
 import { useAuth0 } from "@auth0/auth0-react";
 import {
   useColorMode,
@@ -22,8 +20,7 @@ import {
   MenuDivider,
   MenuItem
 } from "@chakra-ui/react";
-// import Panel from "./Sidebar/panel";
-import { FaBars, FaMoon, FaSun, FaUser } from "react-icons/fa";
+import { FaBars, FaUser } from "react-icons/fa";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 const NavBar = ({ toggle, mediaQueryNavMenu }) => {
@@ -34,21 +31,41 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
   const [mediaQueryNav] = useMediaQuery("(max-width: 960px)");
   const [mediaQueryIcon] = useMediaQuery("(max-width: 1180px)");
   const [mediaQueryIconSm] = useMediaQuery("(max-width: 330px)");
-
-  //   console.log(user);
-
+  
+  const [backgroundNav, setBackgroundNav] = useState(false);
+  
+  const changeBackground = () => {
+    window.scrollY >= 90 ? setBackgroundNav(true) : setBackgroundNav(false)
+  }
+  
+  useEffect(() => {
+      changeBackground()
+      window.addEventListener('scroll', changeBackground)
+  })
+  
   return (
     <>
       <Flex
         as="nav"
         h={["140px", "140px", "140px", "90px", "90px", "90px"]}
-        mt="-165px"
+        mt="-150px"
         justifyContent="space-between"
         fontSize="1rem"
         pos="sticky"
         top="0"
         zIndex="10"
-        transition={mediaQueryNav ? "0.8s all ease" : null}
+        transition={
+          mediaQueryNav || backgroundNav || !backgroundNav
+            ? "0.5s all ease"
+            : null
+        }
+        bg={
+          backgroundNav && colorMode === "dark"
+            ? "#000"
+            : backgroundNav && colorMode === "light"
+            ? "#DFDCDC"
+            : ""
+        }
       >
         <Flex
           justifyContent="space-between"
@@ -68,15 +85,6 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
             </Link>
           </Flex>
           <Flex
-            // display={mediaQueryIcon ? "block" : "none"}
-            // pos={mediaQueryIcon ? "absolute" : null}
-            // top={mediaQueryIcon ? "-5" : null}
-            // right={mediaQueryIcon ? "-5" : null}
-            // transform={mediaQueryIcon ? "translate(-100%, 80%)" : null}
-            // fontSize={mediaQueryIcon ? "1.8rem" : null}
-            // cursor={mediaQueryIcon ? "pointer" : null}
-            // onClick={toggle}
-            // w={mediaQueryIcon || mediaQueryIconSm ? "51%" : null}
             display="block"
             pos="absolute"
             top="-5"
@@ -85,7 +93,6 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
             fontSize="1.8rem"
             cursor="pointer"
             onClick={toggle}
-            // w={mediaQueryIcon || mediaQueryIconSm ? "51%" : null}
           >
             <IconButton
               aria-label="Open Menu"
@@ -117,21 +124,27 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
             textAlign="center"
           >
             <Flex as="li" h="80px">
-            <Box
+              <Box
                 pos="absolute"
                 top="2"
                 right="14.8rem"
                 padding="0 1rem"
                 cursor="pointer"
               >
-                {/* <Button size="sm" mt="20px" onClick={() => toggleColorMode()}>
-                  Theme
-                </Button> */}
-                <Button size="sm" mt="20px" onClick={toggleColorMode} border='none'>
-                  {colorMode === "light" ? <MoonIcon fontSize='21'/> : <SunIcon fontSize='21' />}
+                <Button
+                  size="sm"
+                  mt="20px"
+                  onClick={toggleColorMode}
+                  border="none"
+                >
+                  {colorMode === "light" ? (
+                    <MoonIcon fontSize="21" />
+                  ) : (
+                    <SunIcon fontSize="21" />
+                  )}
                 </Button>
               </Box>
-              
+
               <Box
                 pos="absolute"
                 top="2"
@@ -144,14 +157,13 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
                     size="sm"
                     mt="20px"
                     ml="14px"
-                    border='none'
+                    border="none"
                     onClick={loginWithPopup}
                   >
                     {" "}
-                    <FaUser size='18' />
+                    <FaUser size="18" />
                   </Button>
                 ) : (
-                  //   <Logout />
                   <Menu>
                     <MenuButton
                       as={Button}
@@ -206,7 +218,6 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
                         <MenuItem color="#fff">Add Games</MenuItem>
                       </Link>
                       <MenuDivider />
-                      {/* <MenuItem color="#fff">Account Settings</MenuItem> */}
                       <MenuItem color="#fff" onClick={() => logout()}>
                         Logout
                       </MenuItem>
@@ -228,60 +239,6 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
         </Flex>
       </Flex>
     </>
-    // <>
-    //   <header>
-    //     <Flex
-    //       h="80px"
-    //       alignItems="center"
-    //       justifyContent="space-around"
-    //       wrap="wrap"
-    //       ml="15px"
-    //       mr="15px"
-    //       p="10px"
-    //       position="fixed"
-    //       w="95%"
-    //       zIndex="1"
-    //       mt="-150px"
-    //     >
-    //       <Box pos="fixed" w="95%" h='38px'>
-    //         <Panel />
-    //       </Box>
-    //       <Box
-    //         alignItems="center"
-    //         mr="8rem"
-    //         // ml={["-94px", "-25px", "-60px", "-50px", "16rem", "0"]}
-    //         // pl={mediaQueryIconSm ? "0.5rem" : null}
-    //       >
-    //         <Image src={ImgLogo} alt="nokler logo" w="125px" h="35px" />
-    //       </Box>
-    //       <Box mr={mediaQuerySearchBar ? "150px" : "90px"}>
-    //         <SearchBar />
-    //       </Box>
-    //       <Box>
-    //         <Box d={mediaQueryNavMenu ? "none" : "inline-block"}>
-    //           <Button size="sm" mt="20px" onClick={() => toggleColorMode()}>
-    //             {" "}
-    //             Theme
-    //           </Button>
-    //         </Box>
-    //         <Box d={mediaQueryNavMenu ? "none" : "inline-block"}>
-    //           {!isAuthenticated && !isLoading ? (
-    //             <Button size="sm" mt="20px" ml="19px" onClick={loginWithPopup}>
-    //               {" "}
-    //               Sign in
-    //             </Button>
-    //           ) : (
-    //             <Logout />
-    //           )}
-    //         </Box>
-    //         <Box ml="15px" d={mediaQueryNavMenu ? "none" : "inline-block"}>
-    //           <CartDrawer />
-    //         </Box>
-    //       </Box>
-    //       {/* <Profile /> */}
-    //     </Flex>
-    //   </header>
-    // </>
   );
 };
 
