@@ -22,7 +22,6 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from "@chakra-ui/react";
-import Ordering from "../Ordering/Ordering";
 
 export default function Filter() {
   const dispatch = useDispatch();
@@ -169,7 +168,6 @@ export default function Filter() {
           </CheckboxGroup>
         </AccordionPanel>
       </AccordionItem>
-      <Ordering />
     </Accordion>
   );
 }

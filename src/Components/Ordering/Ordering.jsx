@@ -15,7 +15,7 @@ import {    orderGamesByPrice,
 
 
 export default function Ordering(){
-    const [value, setValue] = useState('0')
+    const [value, setValue] = useState('')
     const dispatch = useDispatch();
 
     function handleOrderRelease(e){
