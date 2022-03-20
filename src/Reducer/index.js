@@ -133,49 +133,49 @@ const reducer = (state = initialState, action) => {
       };
     case ORDER_BY: {
       const orderBy =
-        payload === "HighRating"
+        action.payload === "HighRating"
           ? [...state.products].sort((a, b) => {
               if (a.game.rating < b.game.rating) return 1;
               if (a.game.rating > b.game.rating) return -1;
               return 0;
             })
-          : payload === "LowRating"
+          : action.payload === "LowRating"
           ? [...state.products].sort((a, b) => {
               if (a.game.rating > b.game.rating) return 1;
               if (a.game.rating < b.game.rating) return -1;
               return 0;
             })
-          : payload === "HighPrice"
+          : action.payload === "HighPrice"
           ? [...state.products].sort((a, b) => {
               if (a.price < b.price) return 1;
               if (a.price > b.price) return -1;
               return 0;
             })
-          : payload === "LowPrice"
+          : action.payload === "LowPrice"
           ? [...state.products].sort((a, b) => {
               if (a.price > b.price) return 1;
               if (a.price < b.price) return -1;
               return 0;
             })
-          : payload === "NewRelease"
+          : action.payload === "NewRelease"
           ? [...state.products].sort((a, b) => {
               if (a.game.released_at < b.game.released_at) return 1;
               if (a.game.released_at > b.game.released_at) return -1;
               return 0;
             })
-          : payload === "OldRelease"
+          : action.payload === "OldRelease"
           ? [...state.products].sort((a, b) => {
               if (a.game.released_at > b.game.released_at) return 1;
               if (a.game.released_at < b.game.released_at) return -1;
               return 0;
             })
-          : payload === "A-Z"
+          : action.payload === "A-Z"
           ? [...state.products].sort((a, b) => {
               if (a.game.name < b.game.name) return -1;
               if (a.game.name > b.game.name) return 1;
               return 0;
             })
-          : payload === "Z-A"
+          : action.payload === "Z-A"
           ? [...state.products].sort((a, b) => {
               if (a.game.name > b.game.name) return -1;
               if (a.game.name < b.game.name) return 1;
