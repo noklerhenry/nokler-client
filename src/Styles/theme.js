@@ -8,6 +8,8 @@ const breakpoints = createBreakpoints({
   md: "540px",
   lg: "790px",
   xl: "1100px",
+  xxl: "1350",
+  xxxl: "1550px",
   "2xl": "1536px",
 }); 
 
