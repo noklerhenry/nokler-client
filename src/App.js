@@ -11,6 +11,7 @@ import Detail from "./Components/Detail/Detail.jsx";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer/Footer.jsx";
 import Wishlist from "./Components/Whishlist";
+import ContactForm from "./Components/Contact";
 
 function App() {
   return (
@@ -18,7 +19,6 @@ function App() {
       <Router>
         <Header />
         <Switch>
-          {/* <Route exact path="/" component={FirstPage} /> */}
           <Route path="/">
             <Route exact path="/" component={Home} />
             <Route exact path="/details/:nameid" component={Detail} />
@@ -30,6 +30,7 @@ function App() {
             <Route exact path="/edit-game/:nameid" component={EditGame} />
             <Route exact path="/add-product/:id" component={AddProduct} />
             <Route exact path="/addgame" component={AddGame} />
+            <Route exact path="/contact" component={ContactForm} />
           </Route>
         </Switch>
         <Footer />
