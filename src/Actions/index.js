@@ -13,9 +13,7 @@ export const FILTER_STORE_RESULTS = "FILTER_STORE_RESULTS";
 export const GET_PLATFORMS = "GET_PLATFORMS";
 export const GET_GENRES = "GET_GENRES";
 export const GET_STORES = "GET_STORES";
-export const ORDER_BY_PRICE = "ORDER_BY_PRICE";
-export const ORDER_BY_RELEASE = "ORDER_BY_RELEASE";
-export const ORDER_BY_RATING = "ORDER_BY_RATING";
+export const ORDER_BY = "ORDER_BY";
 export const ADD_GAME_FAVORITE = "ADD_GAME_FAVORITE";
 export const REMOVE_GAME_FAVORITE = "REMOVE_GAME_FAVORITE";
 export const GET_ALL_GAMES = "GET_ALL_GAMES";
@@ -172,23 +170,9 @@ export function getStores() {
   };
 }
 
-export function orderGamesByRating(payload) {
+export function orderBy(payload) {
   return {
-    type: ORDER_BY_RATING,
-    payload,
-  };
-}
-
-export function orderGamesByRelease(payload) {
-  return {
-    type: ORDER_BY_RELEASE,
-    payload,
-  };
-}
-
-export function orderGamesByPrice(payload) {
-  return {
-    type: ORDER_BY_PRICE,
+    type: "ORDER_BY",
     payload,
   };
 }
