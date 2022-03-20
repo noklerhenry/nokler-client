@@ -9,7 +9,8 @@ import { Heading, Button, Text, Container, Box, Divider, Link, Flex, FormControl
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogContent,
-    AlertDialogOverlay, } from '@chakra-ui/react';
+    AlertDialogOverlay,
+  SimpleGrid } from '@chakra-ui/react';
 import AdminHeader from "./AdminHeader";
 
 export default function AdminProducts() {
@@ -77,20 +78,22 @@ function deleteGame(id){
 
 
 
-    <Container p='8'>
+    <Container  w='950px'>
       <Box>
       <AdminHeader />
+      <Flex flexDirection='row' alignItems='center' justifyContent='space-between'>
       <Text fontSize='30px' mb='15px' mt='15px'>Manage Games</Text>
-      <Button h='25px' mr='10px'  mt='10px'><Link href='/addgame'>Add New Game</Link></Button>
+      <Button h='25px' mr='10px'  mt='3px'><Link href='/addgame'>Add New Game +</Link></Button>
+      </Flex>
       
-      <Divider mb='15px'/>
+      <Divider mb='15px' mt='10px'/>
       </Box>
 
       <FormControl>
           <Input  id='searchGame' type='text' borderRadius='20px' mb='15px' placeholder='Type the game name...'></Input>
       </FormControl>
 
-      <Box mt='30px'>
+      <SimpleGrid mt='30px' columns={2} spacing={3}>
      
      { games ? games.map((g) => (
         <AdminCard
@@ -107,7 +110,7 @@ function deleteGame(id){
       )): 'Loading..'}
 
     
-    </Box>
+    </SimpleGrid>
 
     </Container>
     </>

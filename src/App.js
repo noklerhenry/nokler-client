@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { Checkout } from "./Components/Cart/Checkout";
 import Admin from "./Components/Admin/Admin";
 import AdminProducts from "./Components/Admin/AdminProducts";
@@ -12,8 +12,15 @@ import Header from "./Components/Header";
 //import NavBar from "./Components/NavBar/index.jsx";
 import Footer from "./Components/Footer/Footer.jsx";
 import Wishlist from "./Components/Whishlist";
+import UserProfile from "./Components/Admin/UserProfile";
+import { useAuth0 } from "@auth0/auth0-react";
+import UserOut from "./Components/Admin/UserOut";
+
 
 function App() {
+
+  const { isAuthenticated, isLoading } = useAuth0();
+
   return (
     <>
       <Router>
@@ -31,6 +38,11 @@ function App() {
             <Route exact path="/edit-game/:nameid" component={EditGame} />
             <Route exact path="/add-product/:id" component={AddProduct} />
             <Route exact path="/addgame" component={AddGame} />
+            <Route exact path="/user-out" component={UserOut} />
+            <Route exact path="/profile" component={UserProfile} />
+
+            {/* {  <Route exact path="/profile" component={UserProfile} /> && isAuthenticated ? <Route exact path="/profile" component={UserProfile} /> : <Redirect to="/user-out" /> } */}
+            
           </Route>
         </Switch>
         <Footer />
