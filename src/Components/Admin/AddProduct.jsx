@@ -6,15 +6,19 @@ import { Heading, Container, Text, FormControl, FormLabel, Box,  Divider, Input,
 import AdminHeader from "./AdminHeader";
 
 
+
 export default function AddProduct() {
 
    // let history = useHistory()
     let {id} = useParams()
     const [game, setGame] = useState('')
 
+    const [keys, setKeys] = useState([{key: ''}])
+
+
     const [input, setInput] = useState({
         price: '',
-        key: '',
+        key: keys,
         store: '',
 	    platform: '',
 	    userId: 1,
@@ -61,14 +65,14 @@ export default function AddProduct() {
     let handleSubmit = async (e) => {
         e.preventDefault();
         const sendGame = await axios.post('https://nokler-api.herokuapp.com/product', input)
-        console.log('game sent')
+        console.log('Game Created')
         //history.push('/addgame')
     }
 
     function onChange(event) {
         setInput({
             ...input,
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.value,
         })
     }
 
@@ -84,6 +88,19 @@ export default function AddProduct() {
             ...input, 
             platform:  e.target.value,
         })
+    }
+
+    function addKey(){
+        setKeys([...keys, {key: ''}])
+        //e.preventDefault();
+        //addedKeys.push(input.key);
+    }
+
+    function handleKeyChange(e, index){
+        const {name, value} = e.target;
+        const list = [...keys];
+        list[index][name] = value;
+        setKeys(list)
     }
     
     //console.log(game)
@@ -101,15 +118,33 @@ return(
           <Text float='left' borderRadius='15px' fontSize='10px' border='#777777 1px solid' padding='1px 8px' mr='2px' color='#444444' key={g.id}>{g} </Text>
         ))}
         </Box>
+
+
         <form onSubmit={handleSubmit}>
         <FormControl mt='45px'>
             <FormLabel htmlFor='price'>Price</FormLabel>
             <Input borderRadius='20px' mb='15px' onChange={onChange} value={input.price} name="price" type="number" placeholder='$' step="0.01"></Input>
 
             <FormLabel htmlFor='key'>Game Key</FormLabel>
-            <Input borderRadius='20px' mb='15px' onChange={onChange} value={input.key} name="key" type="text" ></Input>
 
-            <FormLabel htmlFor='region'>Key Region</FormLabel>
+            {keys.map((singlekey, index) => (
+                <div key={index}>
+                <Input borderRadius='20px' mb='15px' onChange={(e) => handleKeyChange(e, index)} value={singlekey.key} name="key" type="text" ></Input>
+                
+
+                 {keys.length -1 === index && (<Button type='button' h='20px' fontSize='13px' border='none' bg='#eaeaea' onClick={() => addKey()}> Add game Key</Button>)} 
+                
+                </div>
+
+            ))}
+            
+            {/* <Text color='#777777' fontSize='14px' mt='10px'>
+            {keys.length > 1 ? keys.map(e => (
+                {e}
+            )): 'No keys added'}
+            </Text> */}
+
+            <FormLabel htmlFor='region' mt='15px'>Key Region</FormLabel>
             <Input borderRadius='20px' mb='15px' onChange={onChange} value={input.region} name="region" type="text"></Input>
 
             <FormLabel htmlFor='store' mt='10px'>Game Store</FormLabel>
