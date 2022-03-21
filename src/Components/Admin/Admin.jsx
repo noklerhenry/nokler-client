@@ -67,10 +67,10 @@ export default function Admin() {
         <Divider mb="15px" />
         <StatGroup>
           <Stat>
-            <StatLabel>Games sold</StatLabel>
+            <StatLabel>Keys sold</StatLabel>
             <StatNumber>{orders?.length}</StatNumber>
             <StatHelpText>
-              <StatArrow type="increase" />
+              <StatArrow/>
               {todayOrders}
             </StatHelpText>
           </Stat>
@@ -79,7 +79,7 @@ export default function Admin() {
             <StatLabel>Page views</StatLabel>
             <StatNumber>45</StatNumber>
             <StatHelpText>
-              <StatArrow type="decrease" />
+              <StatArrow />
               9.05%
             </StatHelpText>
           </Stat>
