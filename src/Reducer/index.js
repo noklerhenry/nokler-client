@@ -133,49 +133,49 @@ const reducer = (state = initialState, { type, payload }) => {
       };
     case ORDER_BY: {
       const orderBy =
-        action.payload === "HighRating"
+        payload === "HighRating"
           ? [...state.gamesFiltered].sort((a, b) => {
               if (a.game.rating < b.game.rating) return 1;
               if (a.game.rating > b.game.rating) return -1;
               return 0;
             })
-          : action.payload === "LowRating"
+          : payload === "LowRating"
           ? [...state.gamesFiltered].sort((a, b) => {
               if (a.game.rating > b.game.rating) return 1;
               if (a.game.rating < b.game.rating) return -1;
               return 0;
             })
-          : action.payload === "HighPrice"
+          : payload === "HighPrice"
           ? [...state.gamesFiltered].sort((a, b) => {
               if (a.price < b.price) return 1;
               if (a.price > b.price) return -1;
               return 0;
             })
-          : action.payload === "LowPrice"
+          : payload === "LowPrice"
           ? [...state.gamesFiltered].sort((a, b) => {
               if (a.price > b.price) return 1;
               if (a.price < b.price) return -1;
               return 0;
             })
-          : action.payload === "NewRelease"
+          : payload === "NewRelease"
           ? [...state.gamesFiltered].sort((a, b) => {
               if (a.game.released_at < b.game.released_at) return 1;
               if (a.game.released_at > b.game.released_at) return -1;
               return 0;
             })
-          : action.payload === "OldRelease"
+          : payload === "OldRelease"
           ? [...state.gamesFiltered].sort((a, b) => {
               if (a.game.released_at > b.game.released_at) return 1;
               if (a.game.released_at < b.game.released_at) return -1;
               return 0;
             })
-          : action.payload === "A-Z"
+          : payload === "A-Z"
           ? [...state.gamesFiltered].sort((a, b) => {
               if (a.game.name < b.game.name) return -1;
               if (a.game.name > b.game.name) return 1;
               return 0;
             })
-          : action.payload === "Z-A"
+          : payload === "Z-A"
           ? [...state.gamesFiltered].sort((a, b) => {
               if (a.game.name > b.game.name) return -1;
               if (a.game.name < b.game.name) return 1;
@@ -190,7 +190,7 @@ const reducer = (state = initialState, { type, payload }) => {
     // case GET_ALL_GAMES:
     //   return {
     //     ...state,
-    //     games: action.payload,
+    //     games: payload,
     //   };
     case GET_GAME_BY_NAME:
       return {
@@ -202,7 +202,7 @@ const reducer = (state = initialState, { type, payload }) => {
       const favs = state.favoriteGames;
       return {
         ...state,
-        favoriteGames: favs.find((el) => el.id === action.payload.id)
+        favoriteGames: favs.find((el) => el.id === payload.id)
           ? [...favs]
           : [...favs, payload],
       };
