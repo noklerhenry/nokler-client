@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { Checkout } from "./Components/Cart/Checkout";
 import Admin from "./Components/Admin/Admin";
 import AdminProducts from "./Components/Admin/AdminProducts";
@@ -9,18 +9,24 @@ import AddGame from "./Components/Admin/AddGame";
 import { Home } from "./Components/Home";
 import Detail from "./Components/Detail/Detail.jsx";
 import Header from "./Components/Header";
-//import NavBar from "./Components/NavBar/index.jsx";
 import Footer from "./Components/Footer/Footer.jsx";
 import Wishlist from "./Components/Whishlist";
 import Gallery from "./Components/Gallery/Gallery.jsx";
+import ContactForm from "./Components/Contact";
+import UserProfile from "./Components/Admin/UserProfile";
+import { useAuth0 } from "@auth0/auth0-react";
+import UserOut from "./Components/Admin/UserOut";
+
 
 function App() {
+
+  const { isAuthenticated, isLoading } = useAuth0();
+
   return (
     <>
       <Router>
-      <Header />
+        <Header />
         <Switch>
-          {/* <Route exact path="/" component={FirstPage} /> */}
           <Route path="/">
             <Route exact path="/" component={Home} />
             <Route exact path="/details/:nameid" component={Detail} />
@@ -33,6 +39,12 @@ function App() {
             <Route exact path="/add-product/:id" component={AddProduct} />
             <Route exact path="/addgame" component={AddGame} />
             <Route exact path="/gallery" component={Gallery} />
+            <Route exact path="/contact" component={ContactForm} />
+            <Route exact path="/user-out" component={UserOut} />
+            <Route exact path="/profile" component={UserProfile} />
+
+            {/* {  <Route exact path="/profile" component={UserProfile} /> && isAuthenticated ? <Route exact path="/profile" component={UserProfile} /> : <Redirect to="/user-out" /> } */}
+            
           </Route>
         </Switch>
         <Footer />

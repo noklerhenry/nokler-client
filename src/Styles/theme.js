@@ -8,6 +8,8 @@ const breakpoints = createBreakpoints({
   md: "540px",
   lg: "790px",
   xl: "1100px",
+  xxl: "1350",
+  xxxl: "1550px",
   "2xl": "1536px",
 }); 
 
@@ -19,8 +21,8 @@ const theme = extendTheme({
   styles: {
     global: (props) => ({
       body: {
-        color: mode("#733EF8", "#733EF8")(props),
-        bg: mode("#edf2f4", "#0c0f0a")(props),
+        color: mode("#8c06f7", "#8c06f7")(props),
+        bg: mode("#ffffff", "#121019")(props),
       },
     }),
   },
@@ -29,7 +31,7 @@ const theme = extendTheme({
     Drawer: {
       variants: {
         base: (props) => ({
-          backgroundColor: mode("#edf2f4", "#0c0f0a")(props),
+          backgroundColor: mode("#ffffff", "#121019")(props),
         }),
       },
       defaultProps: {
@@ -41,13 +43,13 @@ const theme = extendTheme({
         fontWeight: "500",
         borderRadius: "50px",
 
-        border: "1px solid #733EF8",
+        border: "1px solid #8c06f7",
       }),
 
       variants: {
         red: {
           bg: "red.400",
-          color: "#edf2f4",
+          color: "#ffffff",
           fontSize: "10px",
           borderRadius: "20px",
           border: "none",
@@ -59,10 +61,10 @@ const theme = extendTheme({
         },
         base: (props) => ({
           padding: "4px 15px",
-          backgroundColor: mode("#edf2f4", "#0c0f0a")(props),
+          backgroundColor: mode("#ffffff", "#121019")(props),
           _hover: {
-            backgroundColor: mode("#733EF8", "#733EF8")(props),
-            color: mode("#edf2f4", "#edf2f4")(props),
+            backgroundColor: mode("#8c06f7", "#8c06f7")(props),
+            color: mode("#ffffff", "#ffffff")(props),
           },
         }),
       },

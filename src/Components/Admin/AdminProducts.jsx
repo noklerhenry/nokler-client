@@ -21,6 +21,7 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import AdminHeader from "./AdminHeader";
 
@@ -84,17 +85,23 @@ export default function AdminProducts() {
         </AlertDialogOverlay>
       </AlertDialog>
 
-      <Container p="8">
+      <Container w="950px">
         <Box>
           <AdminHeader />
-          <Text fontSize="30px" mb="15px" mt="15px">
-            Manage Games
-          </Text>
-          <Button h="25px" mr="10px" mt="10px">
-            <Link href="/addgame">Add New Game</Link>
-          </Button>
+          <Flex
+            flexDirection="row"
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <Text fontSize="30px" mb="15px" mt="15px">
+              Manage Games
+            </Text>
+            <Button h="25px" mr="10px" mt="3px">
+              <Link href="/addgame">Add New Game +</Link>
+            </Button>
+          </Flex>
 
-          <Divider mb="15px" />
+          <Divider mb="15px" mt="10px" />
         </Box>
 
         <FormControl>
@@ -107,7 +114,7 @@ export default function AdminProducts() {
           ></Input>
         </FormControl>
 
-        <Box mt="30px">
+        <SimpleGrid mt="30px" columns={2} spacing={3}>
           {games
             ? games.map((g) => (
                 <AdminCard
@@ -122,7 +129,7 @@ export default function AdminProducts() {
                 />
               ))
             : "Loading.."}
-        </Box>
+        </SimpleGrid>
       </Container>
     </>
   );

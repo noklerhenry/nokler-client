@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Select, useColorMode, useColorModeValue, } from "@chakra-ui/react";
+import { Select, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import { orderBy } from "../../Actions";
 
 export default function Ordering() {

@@ -188,6 +188,11 @@ const reducer = (state = initialState, { type, payload }) => {
         gamesFiltered: orderBy,
       };
     }
+    // case GET_ALL_GAMES:
+    //   return {
+    //     ...state,
+    //     games: action.payload,
+    //   };
     case GET_GAME_BY_NAME:
       return {
         ...state,
@@ -198,7 +203,7 @@ const reducer = (state = initialState, { type, payload }) => {
       const favs = state.favoriteGames;
       return {
         ...state,
-        favoriteGames: favs.find((el) => el.id === payload.id)
+        favoriteGames: favs.find((el) => el.id === action.payload.id)
           ? [...favs]
           : [...favs, payload],
       };
