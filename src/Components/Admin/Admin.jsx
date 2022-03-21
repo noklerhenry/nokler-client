@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 //import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import axios from "axios";
 import AdminHeader from "./AdminHeader";
+import { getOrders } from "../../Actions";
 import {
   Heading,
   Button,
@@ -21,6 +22,8 @@ import {
 } from "@chakra-ui/react";
 
 export default function Admin() {
+  const dispatch = useDispatch();
+  const orders = useSelector((state) => state.orders);
   let gamesList = useSelector((state) => state.games);
 
   const [game, setGame] = useState("");
@@ -40,6 +43,19 @@ export default function Admin() {
     };
   }, [game]);
 
+  useEffect(() => {
+    dispatch(getOrders());
+  }, [dispatch]);
+
+  const todayOrders = orders?.dateOrder?.reduce((result, order) => {
+    let day = moment(order.dateOrder).format("YYYY-MM-DD");
+    if (!result[day]) {
+      result[day] = 0;
+    }
+    result[day]++;
+    return result;
+  });
+
   return (
     <Container p="5">
       <Box>
@@ -52,10 +68,10 @@ export default function Admin() {
         <StatGroup>
           <Stat>
             <StatLabel>Games sold</StatLabel>
-            <StatNumber>345,670</StatNumber>
+            <StatNumber>{orders?.length}</StatNumber>
             <StatHelpText>
               <StatArrow type="increase" />
-              23.36%
+              {todayOrders}
             </StatHelpText>
           </Stat>
 
