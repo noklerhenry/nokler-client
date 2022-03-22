@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import Filter from "../Filter/Filter";
-import Ordering from "../Ordering/Ordering";
+//import { Link } from "react-router-dom";
+//import Filter from "../Filter/Filter";
+//import Ordering from "../Ordering/Ordering";
 import platforms from "./platforms.png";
 import Heroimg from "./hero.png";
-import { Box, Flex, Heading, Button, Image } from "@chakra-ui/react";
+import { Box, Flex, Heading, Button, Image, Link } from "@chakra-ui/react";
 
 export default function Hero() {
   return (
@@ -22,7 +22,7 @@ export default function Hero() {
         </Heading>
         <Image mt="20px" mb="20px" src={platforms} alt="platforms" />
         <Button>
-          <Link to="/gallery">See all games &#8594;</Link>
+          <Link href="/gallery">See all games &#8594;</Link>
         </Button>
       </Box>
       <Box flexBasis="50%">

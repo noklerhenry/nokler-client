@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+//import { Link } from 'react-router-dom';
 import ImgLogo from "./Logo/footer_nokler_logo.png";
 import SearchBar from "../searchBar/index";
 import CartDrawer from "./CartDrawer.jsx";
@@ -8,6 +8,7 @@ import {
   useColorMode,
   Button,
   Box,
+  Link,
   Image,
   Flex,
   useMediaQuery,
@@ -19,6 +20,7 @@ import {
   Center,
   MenuDivider,
   MenuItem,
+  useColorModeValue
 } from "@chakra-ui/react";
 import { FaBars, FaUser } from "react-icons/fa";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
@@ -36,6 +38,8 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
   } = useAuth0();
 
   const { colorMode, toggleColorMode } = useColorMode();
+
+  const bg = useColorModeValue("#ffffff", "#121019");
 
   const [mediaQueryNav] = useMediaQuery("(max-width: 960px)");
   const [mediaQueryIcon] = useMediaQuery("(max-width: 1180px)");
@@ -85,9 +89,9 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
         }
         bg={
           backgroundNav && colorMode === "dark"
-            ? "#000"
+            ? "#121019"
             : backgroundNav && colorMode === "light"
-            ? "#DFDCDC"
+            ? "#ffffff"
             : ""
         }
       >
@@ -104,7 +108,7 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
             ml={mediaQueryIcon ? "2rem" : "3rem"}
             pl={mediaQueryIconSm ? "2.8rem" : null}
           >
-            <Link to="/">
+            <Link href="/">
               <Image src={ImgLogo} alt="nokler logo" w="125px" h="35px" />
             </Link>
           </Flex>
@@ -148,10 +152,25 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
             textAlign="center"
           >
             <Flex as="li" h="80px">
+            <Box
+                pos="absolute"
+                top="2"
+                right="19.8rem"
+                padding="0 1rem"
+                cursor="pointer"
+              >
+                <Button
+                  size="sm"
+                  mt="20px"
+                >
+                  <Link href='/gallery'>All games</Link>
+                </Button>
+              </Box>
+
               <Box
                 pos="absolute"
                 top="2"
-                right="14.8rem"
+                right="14.2rem"
                 padding="0 1rem"
                 cursor="pointer"
               >
@@ -162,9 +181,9 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
                   border="none"
                 >
                   {colorMode === "light" ? (
-                    <MoonIcon fontSize="21" />
+                    <MoonIcon fontSize="20" />
                   ) : (
-                    <SunIcon fontSize="21" />
+                    <SunIcon fontSize="20" />
                   )}
                 </Button>
               </Box>
@@ -211,7 +230,7 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
                         }
                       />
                     </MenuButton>
-                    <MenuList alignItems={"center"} bgColor="#000">
+                    <MenuList alignItems={"center"} bgColor={bg} borderRadius='15px 0px 15px 15px' boxShadow='2px 2px 10px #8c06f750'>
                       <br />
                       <Center>
                         <Avatar
@@ -224,25 +243,25 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
                         />
                       </Center>
                       <br />
-                      <Center color="#fff">
-                        <p>{`Welcome ${user ? user.name : "To Nøkler"}`}</p>
+                      <Center color="#8c06f7" padding='5px 15px' >
+                        <p>Welcome <br/> <b>{` ${user ? user.name : "To Nøkler"}`}</b></p>
                       </Center>
                       <br />
+                      
+                      <Link href="/admin" _hover='#222222'>
+                        <MenuItem >Admin Home</MenuItem>
+                      </Link>
+                      <Link href="/admin-products" _hover='#222222'>
+                        <MenuItem >Manage Products</MenuItem>
+                      </Link>
+                      <Link href="/admin-users" _hover='#222222'>
+                        <MenuItem >Manage Users</MenuItem>
+                      </Link>
+                      <Link href="/addgame"_hover='#222222'>
+                        <MenuItem >Add Games</MenuItem>
+                      </Link>
                       <MenuDivider />
-                      <Link to="/admin">
-                        <MenuItem color="#fff">Admin</MenuItem>
-                      </Link>
-                      <Link to="/admin-products">
-                        <MenuItem color="#fff">Admin-Products</MenuItem>
-                      </Link>
-                      <Link to="/admin-users">
-                        <MenuItem color="#fff">Admin-Users</MenuItem>
-                      </Link>
-                      <Link to="/addgame">
-                        <MenuItem color="#fff">Add Games</MenuItem>
-                      </Link>
-                      <MenuDivider />
-                      <MenuItem color="#fff" onClick={() => logout()}>
+                      <MenuItem onClick={() => logout()} _hover='#222222'>
                         Logout
                       </MenuItem>
                     </MenuList>

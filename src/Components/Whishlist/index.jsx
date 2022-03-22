@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeGameFavorite } from "../../Actions";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import {
   chakra,
   Flex,
@@ -22,75 +22,66 @@ import {
   ListItem,
   UnorderedList,
   useToast,
-  Text
 } from "@chakra-ui/react";
-import { BsFillCartFill, BsFillTrashFill } from "react-icons/bs";
-import { IoHomeSharp } from 'react-icons/io5';
+import { BsFillTrashFill } from "react-icons/bs";
 import Landing from "./noFavsLanding";
-import { addToCart } from "../../Actions";
 
-const Templete = () => {
-    
+const WishList = () => {
   const favs = useSelector((state) => state.favoriteGames);
   const dispatch = useDispatch();
-  
-  const toast = useToast();
 
-    useEffect(() => {
-        localStorage.setItem("whislist", JSON.stringify(favs));
-        console.log(favs)
-    }, [])
+  useEffect(() => {
+    localStorage.setItem("whislist", JSON.stringify(favs));
+  }, [favs]);
 
   const bg = useColorModeValue("white", "gray.800");
   const bg2 = useColorModeValue("white", "gray.800");
   const bg3 = useColorModeValue("gray.100", "gray.700");
-  
-  const handleCart = (id) => {
-    dispatch(addToCart(id))
-  }
 
   return (
     <>
       {favs.length ? (
         <Flex
-        w="full"
-        alignItems="center"
-        justifyContent="center"
-        mt="180px"
-        mb='100px'
+          w="full"
+          p={50}
+          alignItems="center"
+          justifyContent="center"
+          mt="10rem"
         >
           <Stack
             direction={{ base: "column" }}
             w="full"
+            bg={{ md: bg }}
+            shadow="lg"
           >
-        <Text fontSize='35px' mb='15px' mt='25px' color='444444' zIndex='200' textAlign='center'>Wishlist &#10084;</Text>
             {favs.map((game, index) => {
               return (
                 <Flex
                   direction={{ base: "row", md: "column" }}
+                  bg={bg2}
                   key={index}
                 >
                   <SimpleGrid
                     spacingY={3}
                     columns={{ base: 1, md: 5 }}
                     w={{ base: 120, md: "full" }}
-                    
+                    bg={bg3}
                     color={"gray.500"}
                     py={{ base: 1, md: 4 }}
                     px={{ base: 2, md: 10 }}
                     fontSize="md"
                     fontWeight="hairline"
                   >
-                    <Box as="span" ml="5px" fontWeight="bold" bg={bg3} borderRadius='20px' padding='5px 5px' >
+                    <Box as="span" ml="5px" fontWeight="bold">
                       Name
                     </Box>
-                    <Box as="span" ml="5px" fontWeight="bold" bg={bg3} borderRadius='20px' padding='5px 15px'>
+                    <Box as="span" ml="5px" fontWeight="bold">
                       Platforms
                     </Box>
-                    <Box as="span" fontWeight="bold" bg={bg3} borderRadius='20px' padding='5px 15px'>
+                    <Box as="span" fontWeight="bold">
                       Key
                     </Box>
-                    <Box as="span" fontWeight="bold" bg={bg3} borderRadius='20px' padding='5px 15px'>
+                    <Box as="span" ml="88px" fontWeight="bold">
                       Detail
                     </Box>
                   </SimpleGrid>
@@ -103,7 +94,7 @@ const Templete = () => {
                     fontWeight="hairline"
                     fontSize={game.name.length >= 25 ? "sm" : "md"}
                   >
-                    <Box as="span" mt="7px" ml="20px" fontWeight='800' textAlign='center'>
+                    <Box as="span" mt="7px" ml="20px">
                       {game.name}
                     </Box>
                     <chakra.span
@@ -116,12 +107,12 @@ const Templete = () => {
                       <Popover>
                         <PopoverTrigger>
                           <Button
-                            h='25px'
+                            color="white"
+                            bg="transparent"
+                            border="none"
                             outline="0"
                             boxShadow="0"
-                            mt='10px'
                             _focus={{ outline: "none" }}
-                            textAlign='center'
                           >
                             See
                           </Button>
@@ -129,29 +120,28 @@ const Templete = () => {
                         <PopoverContent>
                           <PopoverArrow />
                           <PopoverCloseButton color="white" mt="5px" />
-                          <PopoverHeader fontWeight='700'>Stores :</PopoverHeader>
                           <PopoverBody>
                             <UnorderedList>
-                              {game.platform?.map((el) => {
-                                return <ListItem >{el}</ListItem>;
-                              })}
+                                {game?.platform?.map(p => {
+                                    return (
+                                        <ListItem color="white">{p}</ListItem>
+                                    )
+                                })}
                             </UnorderedList>
                           </PopoverBody>
                         </PopoverContent>
                       </Popover>
                     </chakra.span>
-                    <Flex textAlign='center'>
+                    <Flex>
                       <chakra.span
                         textOverflow="ellipsis"
                         overflow="hidden"
                         whiteSpace="nowrap"
                         mt="9px"
-                        
                       >
                         <Box
                           as="span"
                           ml="3px"
-                          fontWeight='700'
                           color={
                             game.productKey.length === 0
                               ? "red.500"
@@ -176,39 +166,17 @@ const Templete = () => {
                           boxShadow="0"
                           _focus={{ outline: "none" }}
                         >
-                          See game
+                          More Info
                         </Button>
                       </Link>
                     </Flex>
-                    <Flex >
+                    <Flex justify={{ md: "end" }}>
                       <ButtonGroup
                         variant="solid"
                         size="sm"
-                        spacing={1}
-                        mr="90px"
+                        spacing={3}
+                        mr="50px"
                       >
-                        {/* <IconButton
-                          mt="5px"
-                          BgColor="grey"
-                          color="white"
-                          border="none"
-                          outline="0"
-                          boxShadow="0"
-                          _focus={{ outline: "none" }}
-                          icon={<BsFillCartFill />}
-                          onClick={() => {
-                            // dispatch(addToCart(game.id)); // no funciona
-                            handleCart(game.id)
-                            toast({
-                              isClosable: true,
-                              title: "Success!",
-                              description: "Game added to Cart",
-                              duration: 2000,
-                              position: "bottom-right",
-                              status: "success",
-                            });
-                          }}
-                        /> */}
                         <IconButton
                           colorScheme="red"
                           mt="5px"
@@ -233,4 +201,4 @@ const Templete = () => {
   );
 };
 
-export default Templete;
+export default WishList;

@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 
-export const Card = ({ id, name, image, platform, productKey, genres }) => {
+export const Card = ({ id, name, image, genres, platform, productKey }) => {
     
   const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();

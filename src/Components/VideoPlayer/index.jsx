@@ -15,7 +15,7 @@ const VideoPlayer = ({ details }) => {
     const [videos, setVideos] = useState([]);
     
     const getVideosYT = async () => {
-       const info = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY_C}&type=video&q=${details[0]?.game?.name + " " + details[0]?.game?.released_at?.substring(0, 4) + " "}videogame trailer`);
+       const info = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY_B}&type=video&q=${details[0]?.game?.name + " " + details[0]?.game?.released_at?.substring(0, 4) + " "}videogame trailer`);
        const resp = info.data.items
        setVideos(resp)
     };
