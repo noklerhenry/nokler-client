@@ -58,15 +58,16 @@ export default function Admin() {
   }, [dispatch]);
 
   const todayOrders = orders?.dateOrder?.reduce((result, order) => {
-    const day = moment(order.dateOrder.toISOString().split('T')[0]).format("YYYY-MM-DD");
+    const day = moment(order.dateOrder.slice(0, 10)).format("YYYY-MM-DD");
     if (!result[day]) {
       result[day] = 0;
     }
     result[day]++;
     return result;
+    console.log(result);
   });
 
-  console.log(todayOrders)
+  console.log(todayOrders);
 
   return (
     <Container p="5" maxW={"8xl"}>
@@ -81,9 +82,7 @@ export default function Admin() {
           <Stat>
             <StatLabel>Keys sold</StatLabel>
             <StatNumber>{orders?.length}</StatNumber>
-            <StatHelpText>
-              
-            </StatHelpText>
+            <StatHelpText></StatHelpText>
           </Stat>
 
           <Stat>
@@ -96,28 +95,18 @@ export default function Admin() {
 
           <Stat>
             <StatLabel>Total Income</StatLabel>
-            <StatNumber>$
-              {orders?.reduce(
-                (result, order) => result + order.price,
-                0
-              )}
-              </StatNumber>
-            <StatHelpText>
-              
-            </StatHelpText>
+            <StatNumber>
+              ${orders?.reduce((result, order) => result + order.price, 0)}
+            </StatNumber>
+            <StatHelpText></StatHelpText>
           </Stat>
         </StatGroup>
 
-        <Table
-          variant="striped"
-          colorScheme="white"
-          value={scrollBehavior}
-          onChange={setScrollBehavior}
-        >
+        <Table variant="striped" colorScheme="gray">
           <TableCaption fontSize="xl">Keys sold</TableCaption>
           <Thead>
             <Tr>
-              <Th fontSize="xxl">Date</Th>
+              <Th fontSize="xxl" >Date</Th>
               <Th fontSize="xxl">Sale ID</Th>
               <Th fontSize="xxl">Mail</Th>
               <Th fontSize="xxl">Game</Th>
@@ -143,6 +132,19 @@ export default function Admin() {
               );
             })}
           </Tbody>
+          <Tfoot>
+            <Tr>
+              <Th fontSize="xxl">Date</Th>
+              <Th fontSize="xxl">Sale ID</Th>
+              <Th fontSize="xxl">Mail</Th>
+              <Th fontSize="xxl">Game</Th>
+              <Th fontSize="xxl">Store</Th>
+              <Th fontSize="xxl">Key</Th>
+              <Th fontSize="xxl" isNumeric>
+                Price
+              </Th>
+            </Tr>
+          </Tfoot>
         </Table>
       </Box>
     </Container>

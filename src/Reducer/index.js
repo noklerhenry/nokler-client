@@ -191,7 +191,7 @@ const reducer = (state = initialState, { type, payload }) => {
     // case GET_ALL_GAMES:
     //   return {
     //     ...state,
-    //     games: action.payload,
+    //     games: payload,
     //   };
     case GET_GAME_BY_NAME:
       return {
@@ -203,7 +203,7 @@ const reducer = (state = initialState, { type, payload }) => {
       const favs = state.favoriteGames;
       return {
         ...state,
-        favoriteGames: favs.find((el) => el.id === action.payload.id)
+        favoriteGames: favs.find((el) => el.id === payload.id)
           ? [...favs]
           : [...favs, payload],
       };
