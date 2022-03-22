@@ -178,6 +178,7 @@ export function orderBy(payload) {
 }
 
 export function addGameFavorite(payload) {
+  console.log(payload)  
   return {
     type: "ADD_GAME_FAVORITE",
     payload,
@@ -185,6 +186,7 @@ export function addGameFavorite(payload) {
 }
 
 export function removeGameFavorite(idGame) {
+  console.log(idGame)  
   return {
     type: "REMOVE_GAME_FAVORITE",
     payload: idGame,
@@ -223,3 +225,20 @@ export const getAllProducts = () => async (dispatch) => {
   const url = await axios.get("https://nokler-api.herokuapp.com/getProducts");
   return dispatch({ type: GET_ALL_PRODUCTS, payload: url.data });
 };
+
+
+
+export function postContactForm (payload){
+    console.log(payload)
+    return async function (dispatch){
+        try {
+          const path = await axios.post("https://nokler-api.herokuapp.com/contactMail", payload);
+          console.log(path.data)
+          return dispatch({ type: "POST_CONTACT_FORM", payload: path.data });
+        } catch (err) {
+          console.log(err)  
+          alert("Error Post Contact Form");
+        }
+    }
+};
+
