@@ -259,9 +259,9 @@ export default function Detail() {
                   <Button
                     disabled={disabled}
                     onClick={() => {
+                      handleCart(g.id);
                       onCartOpen();
                       //   console.log(g.id);
-                      handleCart(g.id);
                     }}
                     ml="4"
                     bg="none"
@@ -308,8 +308,8 @@ export default function Detail() {
                         <Button mr={3} onClick={onCartClose}>
                           Continue Browsing
                         </Button>
-                        <Button>
-                          <Link href="/checkout">Checkout now!</Link>
+                        <Button onClick={() => history.push('/checkout')}>
+                          Checkout Now!
                         </Button>
                       </ModalFooter>
                     </ModalContent>
