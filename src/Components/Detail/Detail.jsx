@@ -41,6 +41,7 @@ import Screenshots from "./Screenshots";
 import { FaCartPlus } from "react-icons/fa";
 import ImagesGallery from "../ImageSlider/index.jsx";
 import VideoPlayer from "../VideoPlayer/index.jsx";
+import { Key } from "./Key.jsx";
 
 export default function Detail() {
   const { nameid } = useParams();
@@ -74,10 +75,6 @@ export default function Detail() {
     // console.log(details)
   }, []);
 
-  useEffect(() => {
-    validate();
-  }, [cart, details]);
-
   const {
     isOpen: isCartOpen,
     onOpen: onCartOpen,
@@ -92,19 +89,6 @@ export default function Detail() {
 
   const handleCart = (id) => {
     dispatch(addToCart(id));
-  };
-
-  const validate = () => {
-    const product = cart.find((e) => e.id === details[0]?.id);
-    console.log(details[0]?.key?.length);
-    console.log(product);
-    if (!product && details[0]?.key?.length) {
-      setDisabled(false);
-    } else {
-      product?.quantity < details[0]?.key?.length
-        ? setDisabled(false)
-        : setDisabled(true);
-    }
   };
 
   //  useEffect(() => {
@@ -239,44 +223,12 @@ export default function Detail() {
             </Text>
             <SimpleGrid columns={{ base: 1, md: 1, lg: 1 }} mb="20px">
               {details.map((g) => (
-                <Flex key={g.id} bg={bg} padding="19px" borderRadius="20px" mt='10px' justifyContent='space-between' alignItems='center'>
-                  <Box mr='20px'>
-                  <Text mt="-7px">
-                    <Text fontSize="7px">STORE</Text> {g.store.name}
-                  </Text>
-                  <Text mt="-3px">
-                    {" "}
-                    <Text fontSize="7px">PLATFORM</Text>
-                    {g.platform.name}
-                  </Text>
-                  </Box>
-                  <Box mr='20px'>
-                  <Text mt="-3px">
-                    {" "}
-                    <Text fontSize="7px">REGION</Text>
-                    {g.region}
-                  </Text>
-                  <Text fontSize="13px">&#8594; {g.key.length} KEYS AVAILABLE</Text>
-                  </Box>
-                  <Text fontSize="22px" fontWeight='700'>
-                    <Text fontSize="7px" >PRICE</Text>$ {g.price}
-                  </Text>
-                  <Button
-                    disabled={disabled}
-                    onClick={() => {
-                      handleCart(g.id);
-                      onCartOpen();
-                      //   console.log(g.id);
-                    }}
-                    ml="4"
-                    bg="none"
-                    padding="1px 7px"
-                    h="22px"
-                    fontSize="14px"
-                  >
-                    Add to cart
-                  </Button>
-                </Flex>
+                <Key
+                  g={g}
+                  handleCart={handleCart}
+                  nameid={nameid}
+                  onCartOpen={onCartOpen}
+                />
               ))}
             </SimpleGrid>
           </Box>
@@ -313,7 +265,7 @@ export default function Detail() {
                         <Button mr={3} onClick={onCartClose}>
                           Continue Browsing
                         </Button>
-                        <Button onClick={() => history.push('/checkout')}>
+                        <Button onClick={() => history.push("/checkout")}>
                           Checkout Now!
                         </Button>
                       </ModalFooter>
