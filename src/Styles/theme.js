@@ -38,6 +38,15 @@ const theme = extendTheme({
         variant: "base",
       },
     },
+    Link: {
+      baseStyle: (props) => ({
+        _hover: {
+          backgroundColor: mode("#8c06f7", "#8c06f7")(props),
+          color: mode("#ffffff", "#ffffff")(props),
+        },
+      }),
+
+    },
     Button: {
       baseStyle: (props) => ({
         fontWeight: "500",

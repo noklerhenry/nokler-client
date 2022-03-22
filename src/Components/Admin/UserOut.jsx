@@ -12,7 +12,8 @@ export default function UserOut(){
     return(
         <>
         <Flex mt='180px' flexDirection='column'p={8} justifyContent='center' alignItems='center'>
-        <Heading>You are logged out, please log in to view your profile.</Heading>
+        <Heading>Wait a minute &#9995; </Heading>
+        <Text>If you are logged out, please log in to access.</Text>
         <Button onClick={loginWithPopup} w='200px' h='25px' mt='30px'>Log In</Button>
         </Flex>
         </>

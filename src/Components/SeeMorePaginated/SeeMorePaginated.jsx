@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, SimpleGrid, Flex } from "@chakra-ui/react";
 import ProductCard from "../Card/Card";
+import { Card } from "../Card";
 import Loader from "../Loader/Loader";
 
 export default function SeeMorePaginated({gamesFiltered}) {
@@ -20,10 +21,11 @@ export default function SeeMorePaginated({gamesFiltered}) {
         )
     }else {
         return(
-            <Box>
+            <Flex flexDirection='column' >
+            <SimpleGrid columns={{ base: 1, md: 2, lg: 2, xl:4 }} spacing="20px" >
             {gamesFiltered?.slice(0, visible).map((product, index) => {
                 return (
-                    <ProductCard
+                    <Card
                         key={index}
                         id={product?.id}
                         image={product.game?.image}
@@ -33,8 +35,9 @@ export default function SeeMorePaginated({gamesFiltered}) {
                     />
                 );
             })}
-            <Button onClick={showMoreProducts}>+</Button>
-            </Box>
+            </SimpleGrid>
+            <Button onClick={showMoreProducts} h='25px' mt='20px' w='200px'>Show More +</Button>
+            </Flex>
         )
     }
 }

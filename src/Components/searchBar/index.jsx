@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 // import axios from "axios";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Link } from "@chakra-ui/react";
 import { IoSearch, IoClose } from "react-icons/io5";
 import { useClickOutside } from "react-click-outside-hook";
 import { motion, AnimatePresence } from "framer-motion/dist/framer-motion";
@@ -293,6 +293,7 @@ const SearchBar = () => {
               <>
                 {/*gamesLoaded*/ products?.map((el, index) => {
                   return (
+                    <Link href={'/details/' + el.game.name} >
                     <GamesResults
                       key={index}
                       thumbnailSrc={
@@ -305,6 +306,7 @@ const SearchBar = () => {
                         (el.game.rating !== 0 || el.game.rating === undefined) ? "⭐" + el.game.rating + "⭐" : "⭐ - ⭐"
                       }
                     />
+                    </Link>
                   );
                 })}
                 <Flex // AllResultsButton

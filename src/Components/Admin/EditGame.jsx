@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams }  from 'react-router'
 import AdminCard from "./AdminCard";
 import axios from "axios";
-import { Heading, Container, Text, FormControl, Box,  Divider, Input, Button, Link, FormLabel, Select, Image, Switch, SimpleGrid, useColorMode, useColorModeValue } from '@chakra-ui/react'
+import { Heading, Container, Text, FormControl, Box,  Divider, Input, Button, Flex, FormLabel, Select, Image, Switch, SimpleGrid, useColorMode, useColorModeValue } from '@chakra-ui/react'
 import AdminHeader from "./AdminHeader";
 
 
@@ -32,10 +32,17 @@ export default function EditGame() {
       })
     }, [])
 
+    let handleDelete = async (e) => {
+        e.preventDefault();
+        const sendGame = await axios.put('https://nokler-api.herokuapp.com/deletekeK/', input)
+        console.log('key deleted')
+        //history.push('/addgame')
+    }
+
     let handleSubmit = async (e) => {
         e.preventDefault();
-        const sendGame = await axios.put('https://nokler-api.herokuapp.com/edit/' + id, input)
-        console.log('game edited')
+        const sendGame = await axios.post('https://nokler-api.herokuapp.com/product', input)
+        console.log('Game Edited')
         //history.push('/addgame')
     }
 
@@ -72,23 +79,37 @@ console.log(game)
         {game[0]?.game.genres.map(g =>(
           <Text float='left' borderRadius='15px' fontSize='10px' border='#777777 1px solid' padding='1px 8px' mr='2px' color='#444444' key={g.id}>{g.name} </Text>
         ))}
+        
         </Box>
+        <FormControl mt='20px'>
+        <FormLabel htmlFor='hide-product' mb='0'>
+            Hide Product?
+        </FormLabel>
+        <Switch id='hide-product' mb='15px'/>
+        </FormControl>
+        
         <Box>
-            <Text fontSize='25px' mt='60px'>Available keys</Text>
+            <Text fontSize='25px' mt='20px'>Available keys</Text>
             <Divider mt='10px' mb='10px'/>
         <SimpleGrid
-        columns={{ base: 2, md: 2, lg: 3 }} mb='20px'>
+        columns={{ base: 1, md: 1, lg: 1 }} mb='20px'>
             {game ? game.map((g) => (
-              <Box key={g.id} bg={bg}  padding='11px' borderRadius='20px'>
-              
+              <Flex key={g.id} bg={bg}  padding='14px' borderRadius='20px' alignItems='center' justifyContent='space-between'>
+              <Box mr='20px'>
               <Text  mt='-7px'><Text fontSize='7px'>STORE</Text> {g.store.name}</Text>
               <Text mt='-3px'> <Text fontSize='7px'>PLATFORM</Text>{g.platform.name}</Text>
+              </Box>
+              <Box mr='20px'>
               <Text mt='-3px'> <Text fontSize='7px'>REGION</Text>{g.region}</Text>
+              <Text mt='-3px'> <Text fontSize='7px'>KEYS</Text></Text>
+              {g.key.map((k) =>(
+                  <p>{JSON.stringify(k.value)}</p>
+              ))}
+              </Box>
               <Text fontSize='22px'><Text fontSize='7px'>PRICE</Text>$ {g.price}</Text>
               <Button
                     onClick={() => {
-                      onCartOpen();
-                      handleCart(g.id);
+                      handleDelete(g.id);
                     }}
                     ml="4"
                     bg='none'
@@ -98,28 +119,28 @@ console.log(game)
                   >
                     Delete Key
                   </Button>
-              </Box>
+              </Flex>
             )) : 'loading'}
             </SimpleGrid>
 
         </Box>
+
+        <Text fontSize='25px' mt='60px'>Add new key</Text>
+            <Divider mt='10px' mb='10px'/>
         <form onSubmit={handleSubmit}>
         <FormControl mt='45px'>
-        <FormLabel htmlFor='hide-product' mb='0'>
-            Hide Product?
-        </FormLabel>
-        <Switch id='hide-product' mb='15px'/>
-            <FormLabel htmlFor='price'>New Price</FormLabel>
+        
+            <FormLabel htmlFor='price'>Price</FormLabel>
             <Input borderRadius='20px' mb='15px' onChange={onChange} value={input.price} name="price" type="number" placeholder='$' step="0.01"></Input>
 
-            <FormLabel htmlFor='key'>New Game Key</FormLabel>
+            <FormLabel htmlFor='key'>Game Key</FormLabel>
             <Input borderRadius='20px' mb='15px' onChange={onChange} value={input.key} name="key" type="text" ></Input>
 
-            <FormLabel htmlFor='region'>New Key Region</FormLabel>
+            <FormLabel htmlFor='region'>Key Region</FormLabel>
             <Input borderRadius='20px' mb='15px' onChange={onChange} value={input.region} name="region" type="text"></Input>
 
-            <FormLabel htmlFor='store' mt='10px'>New Game Store</FormLabel>
-            <Select onChange={(e) => handleSelectStore(e)}>
+            <FormLabel htmlFor='store' mt='10px'>Game Store</FormLabel>
+            <Select onChange={(e) => handleSelectStore(e)} borderRadius='20px'>
                 <option value='null'>Pick one</option>
                 <option value='1'>Steam</option>
                 <option value='2'>PlayStation Store</option>
@@ -133,8 +154,8 @@ console.log(game)
                 <option value='10'>Epic Games</option>
             </Select>
 
-            <FormLabel htmlFor='title' mt='15px'>New Platform</FormLabel>
-            <Select onChange={(e) => handleSelectPlatform(e)}>
+            <FormLabel htmlFor='title' mt='15px'>Platform</FormLabel>
+            <Select onChange={(e) => handleSelectPlatform(e)} borderRadius='20px'>
                 <option value='null'>Pick one</option>
                 <option value='1'>PC</option>
                 <option value='2'>PlayStation 5</option>
@@ -182,7 +203,7 @@ console.log(game)
                 <option value='44'>SEGA Master System</option>
 
             </Select>
-            <Button name='add' type='submit' mt='30px'>Edit Product</Button>
+            <Button name='add' type='submit' mt='30px'>Add New Key</Button>
         </FormControl>
         </form>
 
