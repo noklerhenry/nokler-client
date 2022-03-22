@@ -20,6 +20,7 @@ export const GET_ALL_GAMES = "GET_ALL_GAMES";
 export const GET_GAME_BY_NAME = "GET_GAME_BY_NAME";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const FILTER = "FILTER";
+export const GET_USERS = "GET_USERS";
 
 export const addToCart = (payload) => {
   return {
@@ -222,4 +223,17 @@ export const getGamesByName = (name) => {
 export const getAllProducts = () => async (dispatch) => {
   const url = await axios.get("https://nokler-api.herokuapp.com/getProducts");
   return dispatch({ type: GET_ALL_PRODUCTS, payload: url.data });
+};
+
+export const getUsers = () => async (dispatch) => {
+  const url = await axios.get("https://nokler-api.herokuapp.com/users");
+  return dispatch({ type: GET_USERS, payload: url.data.users });
+};
+
+export const postUser = (payload) => async (dispatch) => {
+  const url = await axios.post(
+    "https://nokler-api.herokuapp.com/users",
+    payload
+  );
+  return url.data;
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import ImgLogo from "./Logo/footer_nokler_logo.png";
 import SearchBar from "../searchBar/index";
 import CartDrawer from "./CartDrawer.jsx";
@@ -18,31 +18,55 @@ import {
   Avatar,
   Center,
   MenuDivider,
-  MenuItem
+  MenuItem,
 } from "@chakra-ui/react";
 import { FaBars, FaUser } from "react-icons/fa";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers, postUser } from "../../Actions";
 
 const NavBar = ({ toggle, mediaQueryNavMenu }) => {
-  const { user, loginWithPopup, loginWithRedirect, isAuthenticated, isLoading, logout } = useAuth0();
+  const {
+    user,
+    loginWithPopup,
+    loginWithRedirect,
+    isAuthenticated,
+    isLoading,
+    logout,
+  } = useAuth0();
 
   const { colorMode, toggleColorMode } = useColorMode();
 
   const [mediaQueryNav] = useMediaQuery("(max-width: 960px)");
   const [mediaQueryIcon] = useMediaQuery("(max-width: 1180px)");
   const [mediaQueryIconSm] = useMediaQuery("(max-width: 330px)");
-  
-  const [backgroundNav, setBackgroundNav] = useState(false);
-  
-  const changeBackground = () => {
-    window.scrollY >= 90 ? setBackgroundNav(true) : setBackgroundNav(false)
-  }
-  
+
+  const users = useSelector((state) => state.users.map((u) => u.email));
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
-      changeBackground()
-      window.addEventListener('scroll', changeBackground)
-  })
-  
+    dispatch(getUsers());
+  }, []);
+
+  useEffect(() => {
+    if (user?.email) {
+      const find = users.find((u) => u == user.email);
+      !find && dispatch(postUser({email: user.email}));
+    }
+  }, [user]);
+
+  const [backgroundNav, setBackgroundNav] = useState(false);
+
+  const changeBackground = () => {
+    window.scrollY >= 90 ? setBackgroundNav(true) : setBackgroundNav(false);
+  };
+
+  useEffect(() => {
+    changeBackground();
+    window.addEventListener("scroll", changeBackground);
+  });
+
   return (
     <>
       <Flex
@@ -158,7 +182,7 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
                     mt="20px"
                     ml="14px"
                     border="none"
-                    onClick={loginWithPopup}
+                    onClick={loginWithRedirect}
                   >
                     {" "}
                     <FaUser size="18" />
