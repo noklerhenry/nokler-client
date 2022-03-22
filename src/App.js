@@ -32,18 +32,19 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route exact path="/details/:nameid" component={Detail} />
             <Route exact path="/checkout" component={Checkout} />
-            <Route exact path="/whislist" component={WishList} />
-            <Route exact path="/admin" component={Admin} />
-            <Route exact path="/admin-products" component={AdminProducts} />
-            <Route exact path="/admin-users" component={AdminUsers} />
-            <Route exact path="/edit-game/:nameid" component={EditGame} />
-            <Route exact path="/add-product/:id" component={AddProduct} />
-            <Route exact path="/addgame" component={AddGame} />
+            <Route exact path="/whislist" component={Wishlist} />
+            <Route exact path="/admin" component={isAuthenticated ? Admin : UserOut} />
+            <Route exact path="/admin-products" component={isAuthenticated ? AdminProducts : UserOut} />
+            <Route exact path="/admin-users" component={isAuthenticated ? AdminUsers : UserOut} />
+            <Route exact path="/edit-game/:nameid" component={isAuthenticated ? EditGame : UserOut} />
+            <Route exact path="/add-product/:id" component={isAuthenticated ? AddProduct : UserOut} />
+            <Route exact path="/addgame" component={isAuthenticated ? AddGame : UserOut} />
             <Route exact path="/gallery" component={Gallery} />
             <Route exact path="/contact" component={ContactForm} />
             <Route exact path="/frecuent-questions" component={FAQs} />
             <Route exact path="/user-out" component={UserOut} />
-            <Route exact path="/profile" component={UserProfile} />
+            <Route exact path="/profile" component={isAuthenticated ? UserProfile : UserOut } />
+
             {/* {  <Route exact path="/profile" component={UserProfile} /> && isAuthenticated ? <Route exact path="/profile" component={UserProfile} /> : <Redirect to="/user-out" /> } */}
           </Route>
         </Switch>

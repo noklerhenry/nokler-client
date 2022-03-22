@@ -7,12 +7,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 
 export default function UserProfile(){
-    let email = 'noklerhenry@gmail.com'
     const [usersOrders, setUsersOrders] = useState()
-
+    
     const bg = useColorModeValue('#efefef', '#222222')
-
+    
     const { user, isAuthenticated, isLoading } = useAuth0();
+    let email = user.email
 
     useEffect(() =>{
         axios.get('https://nokler-api.herokuapp.com/getOrders')
@@ -23,6 +23,7 @@ export default function UserProfile(){
       }, [])
 
       console.log(usersOrders)
+      console.log(user)
 
     return (
         <>
@@ -31,23 +32,26 @@ export default function UserProfile(){
                 <Image src={user?.picture} alt='user image' w='80px' h='80px' rounded={"full"}></Image>
                 <Text mt='20px' fontSize='30px'>Hi, {user?.nickname}</Text>
             </Flex>
-            <Divider />
-            <Flex flexDirection='row' justifyContent='space-between' alignContent='flex-end' alignItems='center' >
+            
+            <Flex flexDirection='row' justifyContent='space-between' alignContent='flex-end' alignItems='center' borderBottom='1px dotted' borderTop='1px dotted'>
                 <Text mt='10px' fontSize='16px' mb='7px' >{user?.email}</Text>
                 <Button h='25px' bg={bg} border='none' fontSize='13px'>Edit my profile</Button>
 
             </Flex>
 
-            <Divider />
-
-            <Text mt='20px' fontSize='25px'>This is your purchase history:</Text>
-
-            {usersOrders?.filter(o => o.userId === 1).map((order) =>(
+            
+            {usersOrders.length > 0 ?
+            <Text mt='20px' fontSize='25px'>You have no purchases yet</Text>
+            :
+            <>
+            <Text mt='20px' fontSize='25px'>This is your puchase history</Text>
+            {usersOrders?.filter(o => o.user.email === email).map((order) =>(
             <>
             <Flex flexDirection='row' padding='15px' bg={bg} mt='15px' borderRadius='20px' alignItems='center' justifyContent='space-between'>
             <Box >
                 <Text fontWeight='700'>{order.game}  </Text>
                 <Text>US$ {order.price} </Text>
+                <Text>{order.dateOrder.slice(0,10)} </Text>
             </Box>
                 <Box>
                 <Button bg={bg}  h='20px' fontSize='13px' mr='5px'>Ask for refund</Button>
@@ -57,6 +61,7 @@ export default function UserProfile(){
             </>
             
             ))}
+            </> }
 
         </Container>
         </>

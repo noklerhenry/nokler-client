@@ -101,10 +101,15 @@ export default function AddProduct() {
         const list = [...keys];
         list[index][name] = value;
         setKeys(list)
+        setInput({
+            ...input, 
+            key: list,
+        })
     }
     
     //console.log(game)
     console.log(input)
+    console.log(keys)
 return(
     <>
     <Container p='6'>

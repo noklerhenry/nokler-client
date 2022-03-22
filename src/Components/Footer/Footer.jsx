@@ -19,11 +19,8 @@ const SocialButton = ({ children, label, href }) => {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <chakra.button
-      bg={
-        colorMode === "dark"
-          ? useColorModeValue("blackAlpha.100", "whiteAlpha.100")
-          : "#000"
-      }
+      
+      bg='#121019'
       color="#fff"
       rounded={"full"}
       w={8}
@@ -87,7 +84,7 @@ export default function SmallCentered() {
           <Text>© 2022 Nøkler. All rights reserved</Text>
           <Stack direction={"row"} spacing={6}>
             <SocialButton label={"Twitter"} href={"#"}>
-              <FaTwitter />
+              <FaTwitter bg='#cccccc' />
             </SocialButton>
             <SocialButton label={"YouTube"} href={"#"}>
               <FaYoutube />

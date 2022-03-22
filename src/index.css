@@ -7,6 +7,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+a:hover{color: #ffffff;}
+Link:hover{color: #ffffff;}
+chakra-link:hover {color: #ffffff;}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

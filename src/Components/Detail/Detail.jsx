@@ -207,7 +207,7 @@ export default function Detail() {
           </Box>
 
           <Box padding="4px">
-            <Text color="#888888" padding="1px">
+            <Text padding="1px">
               <b>Digital key:</b> This is a digital edition of the product
               (CD-KEY)
             </Text>{" "}
@@ -237,9 +237,10 @@ export default function Detail() {
             <Text fontSize="24px" fontWeight="700" mb="20px">
               Available Keys
             </Text>
-            <SimpleGrid columns={{ base: 2, md: 2, lg: 3 }} mb="20px">
+            <SimpleGrid columns={{ base: 1, md: 1, lg: 1 }} mb="20px">
               {details.map((g) => (
-                <Box key={g.id} bg={bg} padding="19px" borderRadius="20px">
+                <Flex key={g.id} bg={bg} padding="19px" borderRadius="20px" mt='10px' justifyContent='space-between' alignItems='center'>
+                  <Box mr='20px'>
                   <Text mt="-7px">
                     <Text fontSize="7px">STORE</Text> {g.store.name}
                   </Text>
@@ -248,13 +249,17 @@ export default function Detail() {
                     <Text fontSize="7px">PLATFORM</Text>
                     {g.platform.name}
                   </Text>
+                  </Box>
+                  <Box mr='20px'>
                   <Text mt="-3px">
                     {" "}
                     <Text fontSize="7px">REGION</Text>
                     {g.region}
                   </Text>
-                  <Text fontSize="22px">
-                    <Text fontSize="7px">PRICE</Text>$ {g.price}
+                  <Text fontSize="13px">&#8594; {g.key.length} KEYS AVAILABLE</Text>
+                  </Box>
+                  <Text fontSize="22px" fontWeight='700'>
+                    <Text fontSize="7px" >PRICE</Text>$ {g.price}
                   </Text>
                   <Button
                     disabled={disabled}
@@ -271,7 +276,7 @@ export default function Detail() {
                   >
                     Add to cart
                   </Button>
-                </Box>
+                </Flex>
               ))}
             </SimpleGrid>
           </Box>
