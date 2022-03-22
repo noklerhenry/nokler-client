@@ -56,7 +56,7 @@ const FAQs = () => {
               the largest. Every gaming enthusiast will be able to find the key
               of the game they want, and at a good price! <br />
               Just pick the key of the game you want and change it in your
-              favorite store like steam, g2a, etc. <br />
+              favorite store like Steam, EpicGames, GOG, etc. <br />
               Our Support Team can help you in case you have specific questions.
               Click{" "}
               <Link to="/contact">

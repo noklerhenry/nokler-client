@@ -20,17 +20,10 @@ import { MdOutlineEmail } from "react-icons/md";
 import useForm from "./useForm";
 import Submitted from "./submitted";
 
-
 export default function ContactForm() {
-  
-  const {
-    input,
-    submitted,
-    setSubmitted,
-    handlerInputChange,
-    handlerSubmit
-  } = useForm();
-  
+  const { input, submitted, setSubmitted, handlerInputChange, handlerSubmit } =
+    useForm();
+
   return (
     <>
       {!submitted ? (

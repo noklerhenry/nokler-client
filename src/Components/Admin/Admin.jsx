@@ -88,9 +88,7 @@ export default function Admin() {
           <Stat>
             <StatLabel>Keys sold today</StatLabel>
             <StatNumber>{todayOrders}</StatNumber>
-            <StatHelpText>
-              
-            </StatHelpText>
+            <StatHelpText></StatHelpText>
           </Stat>
 
           <Stat>
@@ -106,7 +104,7 @@ export default function Admin() {
           <TableCaption fontSize="xl">Keys sold</TableCaption>
           <Thead>
             <Tr>
-              <Th fontSize="xxl" >Date</Th>
+              <Th fontSize="xxl">Date</Th>
               <Th fontSize="xxl">Sale ID</Th>
               <Th fontSize="xxl">Mail</Th>
               <Th fontSize="xxl">Game</Th>
