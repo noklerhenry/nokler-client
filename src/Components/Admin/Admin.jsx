@@ -102,7 +102,7 @@ export default function Admin() {
           </Stat>
         </StatGroup>
 
-        <Table variant="striped" colorScheme="gray">
+        <Table>
           <TableCaption fontSize="xl">Keys sold</TableCaption>
           <Thead>
             <Tr>
