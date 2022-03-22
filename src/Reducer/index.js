@@ -20,6 +20,7 @@ import {
   GET_GAME_BY_NAME,
   GET_ALL_PRODUCTS,
   FILTER,
+  GET_USERS,
 } from "../Actions";
 import json from "../games.json";
 
@@ -30,6 +31,7 @@ const whislistFromLocalStorage = JSON.parse(
 
 const initialState = {
   // games: json.results,
+  users: [],
   products: [],
   cart: cartFromLocalStorage,
   totalPrice: 0,
@@ -43,6 +45,11 @@ const initialState = {
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case GET_USERS:
+      return {
+        ...state,
+        users: payload,
+      };
     case ADD_TO_CART:
       let game = state.products.find((g) => g.id == payload);
       let item = state.cart.find((g) => g.id == game.id);

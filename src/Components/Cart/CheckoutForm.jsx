@@ -8,7 +8,8 @@ import {
 import { Container, Button, Input, FormLabel } from "@chakra-ui/react";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { clearCart } from "../../Actions";
 
 export const CheckoutForm = ({ amount }) => {
   const cardElementOpts = {
@@ -21,7 +22,8 @@ export const CheckoutForm = ({ amount }) => {
     state: "",
   });
   const cart = useSelector((state) => state.cart);
-  const [disabled, setDisabled] = useState(false);
+  const dispatch = useDispatch();
+  const [disabled, setDisabled] = useState(true);
   const stripe = useStripe();
   const elements = useElements();
 
@@ -49,33 +51,46 @@ export const CheckoutForm = ({ amount }) => {
 
     if (isAuthenticated) {
       cart.forEach(async (e) => {
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
-          type: "card",
-          card: elements.getElement(CardElement),
-          billing_details: {
-            address: state,
-            email: user.email,
-            name: user.name,
-          },
-        });
-        if (!error) {
-          const { data } = await axios.post(
-            "https://nokler-api.herokuapp.com/checkOut",
-            {
+        for (let i = 0; i < e.quantity; i++) {
+          const { error, paymentMethod } = await stripe.createPaymentMethod({
+            type: "card",
+            card: elements.getElement(CardElement),
+            billing_details: {
+              address: state,
+              email: user.email,
+              name: user.name,
+            },
+          });
+          if (!error) {
+            let array = e?.key;
+            console.log({
               ...paymentMethod,
               amount: e.price * 100,
-              product: e,
+              product: {
+                ...e,
+                key: [e?.key[i]],
+              },
+            });
+            const { data } = await axios.post(
+              "https://nokler-api.herokuapp.com/checkOut",
+              {
+                ...paymentMethod,
+                amount: e.price * 100,
+                product: {
+                  ...e,
+                  key: [e?.key[i]],
+                },
+              }
+            );
+
+            if (data.status === true) {
+              dispatch(clearCart());
             }
-          );
-          console.log({
-            ...paymentMethod,
-            amount: e.price * 100,
-            product: e,
-          })
-          console.log(data);
-          alert(data.status);
-          // console.log(paymentMethod);
-        } else alert(error.message);
+            console.log(data);
+            alert(data.status);
+            // console.log(paymentMethod);
+          } else alert(error.message);
+        }
       });
     } else {
       alert("You have to log in to make the purchase");
