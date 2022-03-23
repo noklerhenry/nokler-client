@@ -41,6 +41,7 @@ const initialState = {
   platforms: [],
   genres: [],
   stores: [],
+  refunds: [],
   favoriteGames: whislistFromLocalStorage,
 };
 
@@ -229,7 +230,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         orders: payload,
-      }
+      };
     }
     default:
       return state;

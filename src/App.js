@@ -17,6 +17,7 @@ import UserProfile from "./Components/Admin/UserProfile";
 import { useAuth0 } from "@auth0/auth0-react";
 import UserOut from "./Components/Admin/UserOut";
 import FAQs from "./Components/FAQs";
+import Refund from "./Components/Refund/Refund";
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
             <Route exact path="/frecuent-questions" component={FAQs} />
             <Route exact path="/user-out" component={UserOut} />
             <Route exact path="/profile" component={isAuthenticated ? UserProfile : UserOut } />
+            <Route exact path="/refund" component={isAuthenticated ? Refund : UserOut } />
 
             {/* {  <Route exact path="/profile" component={UserProfile} /> && isAuthenticated ? <Route exact path="/profile" component={UserProfile} /> : <Redirect to="/user-out" /> } */}
           </Route>

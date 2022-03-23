@@ -180,7 +180,7 @@ export function orderBy(payload) {
 }
 
 export function addGameFavorite(payload) {
-  console.log(payload)  
+  console.log(payload);
   return {
     type: "ADD_GAME_FAVORITE",
     payload,
@@ -188,7 +188,7 @@ export function addGameFavorite(payload) {
 }
 
 export function removeGameFavorite(idGame) {
-  console.log(idGame)  
+  console.log(idGame);
   return {
     type: "REMOVE_GAME_FAVORITE",
     payload: idGame,
@@ -258,18 +258,32 @@ export const postUser = (payload) => async (dispatch) => {
   return url.data;
 };
 
-
-export function postContactForm (payload){
-    console.log(payload)
-    return async function (dispatch){
-        try {
-          const path = await axios.post("https://nokler-api.herokuapp.com/contactMail", payload);
-          console.log(path.data)
-          return dispatch({ type: "POST_CONTACT_FORM", payload: path.data });
-        } catch (err) {
-          console.log(err)  
-          alert("Error Post Contact Form");
-        }
+export function postContactForm(payload) {
+  console.log(payload);
+  return async function (dispatch) {
+    try {
+      const path = await axios.post(
+        "https://nokler-api.herokuapp.com/contactMail",
+        payload
+      );
+      console.log(path.data);
+      return dispatch({ type: "POST_CONTACT_FORM", payload: path.data });
+    } catch (err) {
+      console.log(err);
+      alert("Error Post Contact Form");
     }
-};
+  };
+}
 
+export const postRefund = (payload) => async (dispatch) => {
+  try {
+    const url = await axios.post(
+      "https://nokler-api.herokuapp.com/checkOut/refund",
+      payload
+    );
+    return dispatch({ type: "POST_REFUND", payload: url.data });
+  } catch (error) {
+    console.log(error);
+    alert("Error Post Refund");
+  }
+};
