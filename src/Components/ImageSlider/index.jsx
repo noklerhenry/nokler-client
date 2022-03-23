@@ -55,13 +55,15 @@ export default function ImagesGallery() {
           xxl: "100%",
           xxxl: "85%"
         }}
+        
       >
         <ImageGallery
           items={img}
-          showBullets={true}
+          showBullets={false}
           showPlayButton={false}
           slideDuration={300}
           slideOnThumbnailOver={true}
+          borderRadius='20px'
         />
       </Box>
     </Flex>

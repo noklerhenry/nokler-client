@@ -21,6 +21,7 @@ import {
   PopoverCloseButton,
   ListItem,
   UnorderedList,
+  Heading,
   useToast,
 } from "@chakra-ui/react";
 import { BsFillTrashFill } from "react-icons/bs";
@@ -40,20 +41,13 @@ const WishList = () => {
 
   return (
     <>
+    <Heading mt='180px' textAlign='center' fontSize='45px' fontWeight='400'>Wishlist <span color='red'>&#10084;</span> </Heading>
       {favs.length ? (
-        <Flex
-          w="full"
-          p={50}
-          alignItems="center"
-          justifyContent="center"
-          mt="10rem"
-        >
-          <Stack
-            direction={{ base: "column" }}
-            w="full"
-            bg={{ md: bg }}
-            shadow="lg"
-          >
+
+        <Flex w="full" p={50} alignItems="center" justifyContent="center"
+          mt="10rem" >
+          <Stack direction={{ base: "column" }} w="full" bg={{ md: bg }}
+            shadow="lg" >
             {favs.map((game, index) => {
               return (
                 <Flex

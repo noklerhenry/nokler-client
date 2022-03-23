@@ -12,19 +12,32 @@ export default function UserProfile(){
     const bg = useColorModeValue('#efefef', '#222222')
     
     const { user, isAuthenticated, isLoading } = useAuth0();
-    let email = user.email
+    let authEmail = user.email
 
+    // async function getOrders(){
+    //     await axios.get('https://nokler-api.herokuapp.com/getOrders')
+    //     .then((response) =>{
+    //         setUsersOrders(response.data)
+    //         //console.log(response) ;
+    //     })
+    // }
+    
     useEffect(() =>{
-        axios.get('https://nokler-api.herokuapp.com/getOrders')
-      .then((response) =>{
-        setUsersOrders(response.data)
-        //console.log(response) ;
+         axios.get('https://nokler-api.herokuapp.com/getOrders')
+        .then((response) =>{
+            setUsersOrders(response.data)
+            //console.log(response) ;
         })
-      }, [])
+    }, [])
+    
+    
 
-      console.log(usersOrders)
-      console.log(user)
+    let filteredOrders = usersOrders?.filter(order => order.user.email == authEmail)
 
+    console.log('userOrders', usersOrders)
+    console.log(user)
+    console.log('filteredOrders',filteredOrders)
+    
     return (
         <>
         <Container p='2' mb='50px' mt='180px'>
@@ -33,21 +46,21 @@ export default function UserProfile(){
                 <Text mt='20px' fontSize='30px'>Hi, {user?.nickname}</Text>
             </Flex>
             
-            <Flex flexDirection='row' justifyContent='space-between' alignContent='flex-end' alignItems='center' borderBottom='1px dotted' borderTop='1px dotted'>
-                <Text mt='10px' fontSize='16px' mb='7px' >{user?.email}</Text>
-                <Button h='25px' bg={bg} border='none' fontSize='13px'>Edit my profile</Button>
+            <Flex flexDirection='row'   alignItems='center' borderBottom='1px dotted' borderTop='1px dotted'>
+                <Text mt='10px' fontSize='16px' mb='7px' textAlign='right'>{user?.email}</Text>
+                {/* <Button h='25px' bg={bg} border='none' fontSize='13px'>Edit my profile</Button> */}
 
             </Flex>
 
             
-            {usersOrders.length > 0 ?
+            {filteredOrders?.length == 0 ?
             <Text mt='20px' fontSize='25px'>You have no purchases yet</Text>
             :
             <>
             <Text mt='20px' fontSize='25px'>This is your puchase history</Text>
-            {usersOrders?.filter(o => o.user.email === email).map((order) =>(
+            { filteredOrders?.map((order) =>(
             <>
-            <Flex flexDirection='row' padding='15px' bg={bg} mt='15px' borderRadius='20px' alignItems='center' justifyContent='space-between'>
+            <Flex flexDirection='row' padding='15px' bg={bg} mt='15px' borderRadius='20px' alignItems='center' justifyContent='space-between' key={order.id}>
             <Box >
                 <Text fontWeight='700'>{order.game}  </Text>
                 <Text>US$ {order.price} </Text>

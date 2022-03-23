@@ -7,6 +7,7 @@ import {
   Text,
   Image,
   Flex,
+  Grid, GridItem, 
   VStack,
   HStack,
   Button,
@@ -117,72 +118,27 @@ export default function Detail() {
   console.log(details);
 
   return (
-    <Container maxW={"7xl"} mt="200px" mb="30px">
-      <SimpleGrid
-        columns={{ base: 1, md: 2, lg: 2 }}
-        spacing={{ base: 8, md: 10 }}
-        py={{ base: 10, md: 18 }}
+    <>
+    <Container maxW='1300px' mt="200px" mb="30px">
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 2 }}
+        spacing={{ base: 2, md: 2 }}
       >
         <Flex flexDirection="column">
-          <Box
-            mr="4rem"
-            mt="6px"
-            display={[
-              "none",
-              "none",
-              "none",
-              "none",
-              "flex",
-              "flex",
-              "flex",
-              "flex",
+          <Box mr="4rem" mt="6px" display={["none", "none","none", "none", "flex","flex","flex", "flex",
             ]}
           >
             <ImagesGallery />
           </Box>
-          <Image
-            borderRadius="35px"
-            boxShadow="3px 3px 25px #8c06f770"
-            src={details[0]?.game.image}
-            alt="Game.jpg"
-            fit={"cover"}
-            align={"center"}
-            w={"100%"}
-            h={{ base: "100%", sm: "300px", lg: "500px" }}
-            display={[
-              "flex",
-              "flex",
-              "flex",
-              "flex",
-              "none",
-              "none",
-              "none",
-              "none",
+          <Image borderRadius="35px" boxShadow="3px 3px 25px #8c06f770"  src={details[0]?.game.image} alt="Game.jpg" fit={"cover"} align={"center"}  w={"100%"}  h={{ base: "100%", sm: "300px", lg: "500px" }} display={[ "flex", "flex", "flex", "flex", "none",  "none", "none", "none",
             ]}
           />
           <Box margin={"20px"} fontSize="xl">
-            <Button
-              display={[
-                "flex",
-                "flex",
-                "flex",
-                "flex",
-                "none",
-                "none",
-                "none",
-                "none",
-              ]}
-              ml={["-15px", "90px", "130px", "160px", null, null, null, null]}
+            <Button display={[ "flex", "flex", "flex", "flex",  "none",  "none","none",  "none",]} ml={["-15px", "90px", "130px", "160px", null, null, null, null]}
               onClick={onScreenshotOpen}
             >
               Screenshots →
             </Button>
-            <Modal
-              onClose={onScreenshotClose}
-              isOpen={isScreenshotOpen}
-              size={"full"}
-              motionPreset="slideInBottom"
-              colorScheme="black"
+            <Modal onClose={onScreenshotClose} isOpen={isScreenshotOpen} size={"full"} motionPreset="slideInBottom" colorScheme="black"
             >
               <ModalOverlay />
               <ModalContent>
@@ -213,7 +169,7 @@ export default function Detail() {
             </Text>{" "}
           </Box>
 
-          <SimpleGrid columns={{ base: 1, md: 2 }} mt="30px">
+          <SimpleGrid columns={{ base: 1, md: 1, lg:2 }} mt="30px">
             <List>
               <ListItem borderBottom="1px dotted" padding="4px" mr="9px">
                 <Text as={"span"} fontWeight={"bold"}>
@@ -233,11 +189,22 @@ export default function Detail() {
             </List>
           </SimpleGrid>
 
-          <Box>
-            <Text fontSize="24px" fontWeight="700" mb="20px">
-              Available Keys
-            </Text>
-            <SimpleGrid columns={{ base: 1, md: 1, lg: 1 }} mb="20px">
+          <List>
+              <ListItem borderBottom="1px dotted" padding="4px" mr="9px">
+                <Text as={"span"} fontWeight={"bold"}>
+                  &#9650; Genres:
+                </Text>{" "}
+                {details[0]?.game.genres.map((g) =>(
+                  <Button float='right' display='inline-block' borderRadius='20px' fontSize='11px' h='23px' ml='5px' border='none'>{g.name}</Button>
+                ))}
+              </ListItem>
+            </List>
+
+          <Box mb='20px'>
+            <Heading fontSize="26px" fontWeight="400" mb="20px" mt='20px'>
+              AVAILABLE KEYS
+            </Heading>
+            <SimpleGrid columns={{ base: 1, md: 1, lg: 1 }} mb="30px">
               {details.map((g) => (
                 <Flex key={g.id} bg={bg} padding="19px" borderRadius="20px" mt='10px' justifyContent='space-between' alignItems='center'>
                   <Box mr='20px'>
@@ -334,23 +301,34 @@ export default function Detail() {
           </SimpleGrid>
         </Stack>
       </SimpleGrid>
-      <Text fontSize="24px" fontWeight="700" mt="-50px">
-        Description
-      </Text>
-      <Text fontSize="xl" mt="30px">
-        {details[0]?.game.description}
-      </Text>
-      <Divider border="dotted #cccccc" mt="30px" />
-      <Flex justify="center" fontSize="xl">
-        <Text
-          fontWeight="bold"
-          mt="50px"
-        >{`${details[0]?.game?.name} Videos`}</Text>
-      </Flex>
-      <Box mt="-115px">
-        <VideoPlayer details={details} />
-      </Box>
-    </Container>
+
+      <Grid templateColumns='repeat(5, 1fr)' mt="0px" mb='30px'>
+        <GridItem GridItem colSpan={{ base: 5, md: 1, lg: 2, }}>
+          <Heading fontSize="26px" fontWeight="400" mt="-0px" mb='30px'>
+            DESCRIPTION
+          </Heading>
+      </GridItem>
+      <GridItem GridItem colSpan={{ base: 5, md: 4, lg: 3, }}>
+        <Text fontSize="xl" mt="0px">
+          {details[0]?.game.description}
+        </Text>
+      </GridItem>
+      </Grid>
+      
+
+       
+        <Flex  fontSize="xl">
+        <Heading fontSize="26px" fontWeight="400" mt="-0px">
+            VIDEOS
+          </Heading>
+        </Flex>
+        <Box mt="-115px">
+          <VideoPlayer details={details} />
+        </Box>
+      
+      </Container>
+      </>
+    
     // ) : (
     //   <Box>Game NOT Found</Box>
   );

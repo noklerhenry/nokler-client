@@ -7,6 +7,7 @@ import AdminHeader from "./AdminHeader";
 
 
 export default function EditGame() {
+
     let {nameid} = useParams()
     const [game, setGame] = useState('')
     const [input, setInput] = useState({
@@ -19,6 +20,8 @@ export default function EditGame() {
         }
     })
 
+    const [keys, setKeys] = useState([{key: ''}])
+
     const { toggleColorMode } = useColorMode()
 
   const bg = useColorModeValue('#efefef', '#18181880')
@@ -30,43 +33,101 @@ export default function EditGame() {
         setGame(response.data)
         return response;
       })
+      .then((response2) =>{
+        //console.log(response2)
+      setNewInput({
+          ...newInput,
+          game: {
+              id: response2.data[0].game.id,
+              name: response2.data[0].game.name,
+              released: response2.data[0].game.released_at,
+              name: response2.data[0].game.name,
+              rating: response2.data[0].game.rating,
+              description: response2.data[0].game.description,
+              img: response2.data[0].game.image,
+              genres: response2.data[0].game.genres,
+              platform: response2.data[0].platform,
+              screenshots: response2.data[0].game.screenshots,
+              }
+      })
+    })
     }, [])
 
-    let handleDelete = async (e) => {
-        e.preventDefault();
-        const sendGame = await axios.put('https://nokler-api.herokuapp.com/deletekeK/', input)
+
+    const [newInput, setNewInput] = useState({
+        price: '',
+        key: keys,
+        store: '',
+	    platform: '',
+	    userId: 1,
+	    region: '',
+	  game: {
+		id: '',
+		name: '',
+		released: '',
+		rating:  '',
+        description:  '',
+        img:  '',
+        genres: '',
+        platform: '',
+        screenshots: '',
+        }
+    }) 
+
+    async function handleDelete (productId){
+        const sendGame = await axios.delete('https://nokler-api.herokuapp.com/delete/' + productId)
         console.log('key deleted')
         //history.push('/addgame')
     }
 
     let handleSubmit = async (e) => {
         e.preventDefault();
-        const sendGame = await axios.post('https://nokler-api.herokuapp.com/product', input)
-        console.log('Game Edited')
+        const sendGame = await axios.post('https://nokler-api.herokuapp.com/product', newInput)
+        console.log('Key Added')
         //history.push('/addgame')
     }
 
 function onChange(event) {
-    setInput({
-        ...input,
+    setNewInput({
+        ...newInput,
         [event.target.name]: event.target.value
     })
 }
 
 function handleSelectStore(e){
-    setInput({
-        ...input, 
+    setNewInput({
+        ...newInput, 
         store:  e.target.value,
     })
 }
 
 function handleSelectPlatform(e){
-    setInput({
-        ...input, 
+    setNewInput({
+        ...newInput, 
         platform:  e.target.value,
     })
 }
-console.log(game)
+
+function addKey(){
+    setKeys([...keys, {key: ''}])
+    //e.preventDefault();
+    //addedKeys.push(input.key);
+}
+
+function handleKeyChange(e, index){
+    const {name, value} = e.target;
+    const list = [...keys];
+    list[index][name] = value;
+    setKeys(list)
+    setInput({
+        ...input, 
+        key: list,
+    })
+}
+
+
+console.log('soy game:', game)
+console.log(newInput)
 
     return (
         <>
@@ -81,20 +142,20 @@ console.log(game)
         ))}
         
         </Box>
-        <FormControl mt='20px'>
+        {/* <FormControl mt='20px'>
         <FormLabel htmlFor='hide-product' mb='0'>
             Hide Product?
         </FormLabel>
         <Switch id='hide-product' mb='15px'/>
-        </FormControl>
+        </FormControl> */}
         
         <Box>
-            <Text fontSize='25px' mt='20px'>Available keys</Text>
+            <Text fontSize='25px' mt='55px'>Available keys</Text>
             <Divider mt='10px' mb='10px'/>
         <SimpleGrid
         columns={{ base: 1, md: 1, lg: 1 }} mb='20px'>
             {game ? game.map((g) => (
-              <Flex key={g.id} bg={bg}  padding='14px' borderRadius='20px' alignItems='center' justifyContent='space-between'>
+              <Flex key={g.id} bg={bg}  padding='14px' borderRadius='20px' alignItems='center' justifyContent='space-between' mt='15px'>
               <Box mr='20px'>
               <Text  mt='-7px'><Text fontSize='7px'>STORE</Text> {g.store.name}</Text>
               <Text mt='-3px'> <Text fontSize='7px'>PLATFORM</Text>{g.platform.name}</Text>
@@ -104,6 +165,7 @@ console.log(game)
               <Text mt='-3px'> <Text fontSize='7px'>KEYS</Text></Text>
               {g.key.map((k) =>(
                   <p>{JSON.stringify(k.value)}</p>
+                  
               ))}
               </Box>
               <Text fontSize='22px'><Text fontSize='7px'>PRICE</Text>$ {g.price}</Text>
@@ -134,73 +196,88 @@ console.log(game)
             <Input borderRadius='20px' mb='15px' onChange={onChange} value={input.price} name="price" type="number" placeholder='$' step="0.01"></Input>
 
             <FormLabel htmlFor='key'>Game Key</FormLabel>
-            <Input borderRadius='20px' mb='15px' onChange={onChange} value={input.key} name="key" type="text" ></Input>
+            {keys.map((singlekey, index) => (
+                <div key={index}>
+                <Input borderRadius='20px' mb='15px' onChange={(e) => handleKeyChange(e, index)} value={singlekey.key} name="key" type="text" ></Input>
+                
+
+                 {keys.length -1 === index && (<Button type='button' h='20px' fontSize='13px' border='none' bg='#eaeaea' onClick={() => addKey()}> Add game Key</Button>)} 
+                
+                </div>
+
+            ))}
+
+
+
+
+
+            {/* <Input borderRadius='20px' mb='15px' onChange={onChange} value={input.key} name="key" type="text" ></Input> */}
 
             <FormLabel htmlFor='region'>Key Region</FormLabel>
             <Input borderRadius='20px' mb='15px' onChange={onChange} value={input.region} name="region" type="text"></Input>
 
             <FormLabel htmlFor='store' mt='10px'>Game Store</FormLabel>
             <Select onChange={(e) => handleSelectStore(e)} borderRadius='20px'>
-                <option value='null'>Pick one</option>
-                <option value='1'>Steam</option>
-                <option value='2'>PlayStation Store</option>
-                <option value='3'>Xbox Store</option>
-                <option value='4'>App Store</option>
-                <option value='5'>GOG</option>
-                <option value='6'>Nintendo Store</option>
-                <option value='7'>Xbox 360 Store</option>
-                <option value='8'>Google Play</option>
-                <option value='9'>Itch.io</option>
-                <option value='10'>Epic Games</option>
+            <option value='null'>Pick one</option>
+                <option value='PlayStation Store'>PlayStation Store</option>
+                <option value='Epic Games'>Epic Games</option>
+                <option value='Steam'>Steam</option>
+                <option value='Xbox 360 Store'>Xbox 360</option>
+                <option value='Xbox Store'>Xbox Store</option>
+                <option value='App Store'>App Store</option>
+                <option value='Google Play'>Google Play</option>
+                <option value='Itch.io'>Itch.io</option>
+                <option value='GOG'>GOG</option>
+                <option value='Nintendo Store'>Nintendo Store</option>
             </Select>
 
             <FormLabel htmlFor='title' mt='15px'>Platform</FormLabel>
             <Select onChange={(e) => handleSelectPlatform(e)} borderRadius='20px'>
-                <option value='null'>Pick one</option>
-                <option value='1'>PC</option>
-                <option value='2'>PlayStation 5</option>
-                <option value='3'>PlayStation 4</option>
-                <option value='4'>Xbox One</option>
-                <option value='5'>Xbox Series S/X</option>
-                <option value='6'>Nintendo Switch</option>
-                <option value='7'>iOS</option>
-                <option value='8'>Android</option>
-                <option value='9'>Nintendo 3DS</option>
-                <option value='10'>Nintendo DS</option>
-                <option value='11'>Nintendo DSi</option>
-                <option value='12'>macOS</option>
-                <option value='13'>Linux</option>
-                <option value='14'>Xbox 360</option>
-                <option value='15'>Xbox</option>
-                <option value='16'>PlayStation 3</option>
-                <option value='17'>PlayStation 2</option>
-                <option value='18'>PlayStation</option>
-                <option value='19'>PS Vita</option>
-                <option value='20'>PSP</option>
-                <option value='21'>Wii U</option>
-                <option value='22'>Wii</option>
-                <option value='23'>GameCube</option>
-                <option value='24'>Nintendo 64</option>
-                <option value='25'>Game Boy Advance</option>
-                <option value='26'>Game Boy Color</option>
-                <option value='27'>Game Boy</option>
-                <option value='28'>SNES</option>
-                <option value='29'>NES</option>
-                <option value='30'>Classic Macintosh</option>
-                <option value='31'>Apple II</option>
-                <option value='32'>Commodore / Amiga</option>
-                <option value='33'>Atari 7800</option>
-                <option value='34'>Atari 5200</option>
-                <option value='35'>Atari 2600</option>
-                <option value='36'>Atari Flashback</option>
-                <option value='37'>Atari ST</option>
-                <option value='38'>Atari Lynx</option>
-                <option value='39'>Atari XEGS</option>
-                <option value='40'>Genesis</option>
-                <option value='41'>SEGA Saturn</option>
-                <option value='42'>SEGA CD</option>
-                <option value='43'>SEGA 32X</option>
-                <option value='44'>SEGA Master System</option>
+            <option value='null'>Pick one</option>
+                <option value='PC'>PC</option>
+                <option value='PlayStation 5'>PlayStation 5</option>
+                <option value='PlayStation 4'>PlayStation 4</option>
+                <option value='Xbox One'>Xbox One</option>
+                <option value='Xbox Series S/X'>Xbox Series S/X</option>
+                <option value='Nintendo Switch'>Nintendo Switch</option>
+                <option value='iOS'>iOS</option>
+                <option value='Android'>Android</option>
+                <option value='Nintendo 3DS'>Nintendo 3DS</option>
+                <option value='Nintendo DS'>Nintendo DS</option>
+                <option value='Nintendo DSi'>Nintendo DSi</option>
+                <option value='macOS'>macOS</option>
+                <option value='Linux'>Linux</option>
+                <option value='Xbox 360'>Xbox 360</option>
+                <option value='Xbox'>Xbox</option>
+                <option value='PlayStation 3'>PlayStation 3</option>
+                <option value='PlayStation 2'>PlayStation 2</option>
+                <option value='PlayStation'>PlayStation</option>
+                <option value='PS Vita'>PS Vita</option>
+                <option value='PSP'>PSP</option>
+                <option value='Wii U'>Wii U</option>
+                <option value='Wii'>Wii</option>
+                <option value='GameCube'>GameCube</option>
+                <option value='Nintendo 64'>Nintendo 64</option>
+                <option value='Game Boy Advance'>Game Boy Advance</option>
+                <option value='Game Boy Color'>Game Boy Color</option>
+                <option value='Game Boy'>Game Boy</option>
+                <option value='SNES'>SNES</option>
+                <option value='NES'>NES</option>
+                <option value='Classic Macintosh'>Classic Macintosh</option>
+                <option value='Apple II'>Apple II</option>
+                <option value='Commodore / Amiga'>Commodore / Amiga</option>
+                <option value='Atari 7800'>Atari 7800</option>
+                <option value='Atari 5200'>Atari 5200</option>
+                <option value='Atari 2600'>Atari 2600</option>
+                <option value='Atari Flashback'>Atari Flashback</option>
+                <option value='Atari ST'>Atari ST</option>
+                <option value='Atari Lynx'>Atari Lynx</option>
+                <option value='Atari XEGS'>Atari XEGS</option>
+                <option value='Genesis'>Genesis</option>
+                <option value='SEGA Saturn'>SEGA Saturn</option>
+                <option value='SEGA CD'>SEGA CD</option>
+                <option value='SEGA 32X'>SEGA 32X</option>
+                <option value='SEGA Master System'>SEGA Master System</option>
 
             </Select>
             <Button name='add' type='submit' mt='30px'>Add New Key</Button>
