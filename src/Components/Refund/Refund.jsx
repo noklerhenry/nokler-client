@@ -19,9 +19,10 @@ import {
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { postRefund } from "../../Actions";
 
 export default function Refund() {
-  const { user, loginWithPopup, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
 
   console.log(user);
 
@@ -29,41 +30,33 @@ export default function Refund() {
   const history = useHistory();
 
   const [input, setInput] = useState({
-    first_name: isAuthenticated ? user.given_name : "",
-    last_name: isAuthenticated ? user.family_name : "",
-    email_address: isAuthenticated ? user.email : "",
+    name: isAuthenticated ? user.given_name : "",
+    lastName: isAuthenticated ? user.family_name : "",
+    email: isAuthenticated ? user.email : "",
+    charge: "",
+    about: "",
   });
 
-  const [submitted, setSubmitted] = useState(false);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(
+      postRefund({
+        ...input,
+      })
+    );
+  };
 
-  const handlerInputChange = (e) => {
-    const { name, value } = e.target;
+  const handleInputChange = (event) => {
+    event.preventDefault();
+    const { name, value } = event.target;
     setInput({
       ...input,
       [name]: value,
     });
-    console.log(input);
-  };
-
-  const handlerSubmit = (e) => {
-    e.preventDefault();
-    dispatch(
-      postContactForm({
-        contactForm: {
-          ...input,
-        },
-      })
-    );
-    setSubmitted(true);
-    console.log(input);
-    setInput({
-      ...input,
-      message: "",
-    });
   };
 
   return (
-    <Container maxW="8xl" p="5" mt="200px">
+    <Container maxW="8xl" p="5" mt="150px">
       <Box visibility={{ base: "hidden", sm: "visible" }} aria-hidden="true">
         <Box py={5}>
           <Box
@@ -117,6 +110,7 @@ export default function Refund() {
               shadow="base"
               rounded={[null, "md"]}
               overflow={{ sm: "hidden" }}
+              onSubmit={(event) => handleSubmit(event)}
             >
               <Stack
                 px={4}
@@ -130,17 +124,15 @@ export default function Refund() {
                     <FormLabel
                       htmlFor="first_name"
                       fontSize="sm"
-                      fontWeight="md"
-                      color={useColorModeValue("gray.700", "gray.50")}
+                      color={useColorModeValue("gray.900", "gray.50")}
                     >
                       First name
                     </FormLabel>
                     <Input
                       type="text"
-                      name="first_name"
-                      id="first_name"
-                      defaultValue={input.first_name}
-                      autoComplete="given-name"
+                      name="name"
+                      id="name"
+                      defaultValue={input.name}
                       mt={1}
                       focusBorderColor="#8c06f7"
                       shadow="sm"
@@ -153,17 +145,15 @@ export default function Refund() {
                     <FormLabel
                       htmlFor="last_name"
                       fontSize="sm"
-                      fontWeight="md"
-                      color={useColorModeValue("gray.700", "gray.50")}
+                      color={useColorModeValue("gray.900", "gray.50")}
                     >
                       Last name
                     </FormLabel>
                     <Input
                       type="text"
-                      name="last_name"
-                      id="last_name"
-                      defaultValue={input.last_name}
-                      autoComplete="family-name"
+                      name="lastName"
+                      id="lastName"
+                      defaultValue={input.lastName}
                       mt={1}
                       focusBorderColor="#8c06f7"
                       shadow="sm"
@@ -172,21 +162,19 @@ export default function Refund() {
                     />
                   </FormControl>
 
-                  <FormControl as={GridItem} colSpan={[6, 4]} isRequired>
+                  <FormControl as={GridItem} colSpan={[6, 5]} isRequired>
                     <FormLabel
                       htmlFor="email_address"
                       fontSize="sm"
-                      fontWeight="md"
-                      color={useColorModeValue("gray.700", "gray.50")}
+                      color={useColorModeValue("gray.900", "gray.50")}
                     >
                       Email address
                     </FormLabel>
                     <Input
                       type="text"
-                      name="email_address"
-                      id="email_address"
-                      defaultValue={input.email_address}
-                      autoComplete="email"
+                      name="email"
+                      id="email"
+                      defaultValue={input.email}
                       mt={1}
                       focusBorderColor="#8c06f7"
                       shadow="sm"
@@ -195,22 +183,31 @@ export default function Refund() {
                     />
                   </FormControl>
 
-                  <FormControl as={GridItem} colSpan={[6, 4]} isRequired>
+                  <FormControl as={GridItem} colSpan={[6, 5]} isRequired>
                     <FormLabel
-                      htmlFor="refund_code"
+                      htmlFor="charge"
                       fontSize="sm"
-                      fontWeight="md"
-                      color={useColorModeValue("gray.700", "gray.50")}
+                      color={useColorModeValue("gray.900", "gray.50")}
                     >
                       Unique refund code
                     </FormLabel>
                     <Input
+                      type="text"
+                      name="charge"
+                      id="charge"
+                      value={input.charge}
                       mt={1}
                       focusBorderColor="#8c06f7"
                       shadow="sm"
                       w="full"
                       rounded="md"
+                      onChange={(event) => handleInputChange(event)}
                     />
+                    <FormHelperText
+                      color={useColorModeValue("gray.900", "gray.50")}
+                    >
+                      This is the code that you received in your email. For example: "ch_3KgdChKlOgZYCvia0f6CAB0v".
+                    </FormHelperText>
                   </FormControl>
 
                   <FormControl
@@ -222,19 +219,26 @@ export default function Refund() {
                   >
                     <FormLabel
                       fontSize="sm"
-                      fontWeight="md"
-                      color={useColorModeValue("gray.700", "gray.50")}
+                      color={useColorModeValue("gray.900", "gray.50")}
                     >
                       About
                     </FormLabel>
                     <Textarea
+                      type="text"
+                      name="about"
+                      id="about"
+                      value={input.about}
+                      htmlFor="about"
                       mt={1}
                       rows={3}
                       shadow="sm"
-                      focusBorderColor="brand.400"
+                      focusBorderColor="#8c06f7"
                       fontSize={{ sm: "sm" }}
+                      onChange={(event) => handleInputChange(event)}
                     />
-                    <FormHelperText>
+                    <FormHelperText
+                      color={useColorModeValue("gray.900", "gray.50")}
+                    >
                       Brief description of the reason for the refund.
                     </FormHelperText>
                   </FormControl>
@@ -246,8 +250,8 @@ export default function Refund() {
                 bg={useColorModeValue("gray.300", "gray.800")}
                 textAlign="right"
               >
-                <Button type="submit" _focus={{ shadow: "" }} fontWeight="md">
-                  Save
+                <Button type="submit" _focus={{ shadow: "" }}>
+                  Send
                 </Button>
               </Box>
             </chakra.form>

@@ -278,12 +278,23 @@ export function postContactForm(payload) {
 export const postRefund = (payload) => async (dispatch) => {
   try {
     const url = await axios.post(
-      "https://nokler-api.herokuapp.com/checkOut/refund",
+      "https://nokler-api.herokuapp.com/refundPetition",
       payload
     );
     return dispatch({ type: "POST_REFUND", payload: url.data });
+    console.log(url.data);
   } catch (error) {
     console.log(error);
     alert("Error Post Refund");
   }
 };
+
+//https://nokler-api.herokuapp.com/getRefund
+
+//https://nokler-api.herokuapp.com/updatePetition/{id}?status=PENDING
+
+
+//https://nokler-api.herokuapp.com/updatePetition/{id}?status={FINISHED por query}
+//https://nokler-api.herokuapp.com/updatePetition/{id}?status={CANCEL por query}
+
+//FINISHED Y CANCEL SI O SI EN MAYUSCULA, TAMBIEN PENDING
