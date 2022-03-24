@@ -39,13 +39,23 @@ export default function RefundAproval() {
         overflow={"hidden"}
       >
         <Text
-          color={"green.500"}
+          color={
+            refundId.status === "FINISHED"
+              ? "green.600"
+              : refundId.status === "CANCEL"
+              ? "red.600"
+              : "yellow.600"
+          }
           textTransform={"uppercase"}
           fontWeight={800}
           fontSize={"sm"}
           letterSpacing={1.1}
         >
-          {refundId.status}
+          {refundId.status === "FINISHED"
+            ? "APPROVED"
+            : refundId.status === "CANCEL"
+            ? "DENIED"
+            : "PENDING"}
         </Text>
         <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
           <Avatar
@@ -71,14 +81,16 @@ export default function RefundAproval() {
             {refundId.about}
           </Text>
         </Stack>
-        <Stack direction="row" spacing={4} mt={6}>
-          <Button colorScheme="red" variant="outline">
-            Denie
-          </Button>
-          <Button colorScheme="green" variant="outline">
-            Approve
-          </Button>
-        </Stack>
+        {refundId.status === "PENDING" ? (
+          <Stack direction="row" spacing={4} mt={6}>
+            <Button colorScheme="red" variant="ghost" size="lg">
+              Denie
+            </Button>
+            <Button colorScheme="green" variant="ghost" size="lg">
+              Approve
+            </Button>
+          </Stack>
+        ) : null}
       </Box>
     </Center>
   );
