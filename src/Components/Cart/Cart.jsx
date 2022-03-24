@@ -7,7 +7,7 @@ import {
   getAllProducts,
 } from "../../Actions";
 import { Payment } from "./Payment";
-import { Container, Button, Box, Text } from "@chakra-ui/react";
+import { Container, Button, Box, Text, Image } from "@chakra-ui/react";
 
 export const Cart = ({ payMethod }) => {
   const dispatch = useDispatch();
@@ -52,6 +52,17 @@ export const Cart = ({ payMethod }) => {
               <Text>
                 ${g?.price} x {g?.quantity} = ${g?.price * g.quantity}
               </Text>
+              <Image
+                w="100%"
+                h={{ base: "100%", sm: "300px", lg: "350px" }}
+                src={g.image}
+                alt="img not found"
+                borderRadius="25px"
+                fit="cover"
+                align="center"
+                boxShadow="5px 5px 15px #111111"
+                mb="15px"
+              />
               <Button variant="red" onClick={() => handleDelete(g.id)}>
                 X
               </Button>
@@ -62,9 +73,11 @@ export const Cart = ({ payMethod }) => {
         <Text fontSize="18px" fontWeight="700">
           Total: <b>${total}</b>
         </Text>
-        <Button onClick={handleClear} mb="20px" mt="20px">
-          Clear all
-        </Button>
+        {cart.length && (
+          <Button onClick={handleClear} mb="20px" mt="20px">
+            Clear all
+          </Button>
+        )}
         {payMethod && <Payment amount={total} />}
       </Container>
     </div>
