@@ -8,14 +8,13 @@ import {
   Heading,
   Text,
   Stack,
+  Button,
   Avatar,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { getRefundId } from "../../Actions";
 
 export default function RefundAproval() {
-  const { user } = useAuth0();
-
   const { id } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -50,8 +49,9 @@ export default function RefundAproval() {
         </Text>
         <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
           <Avatar
-            src={user.picture}
+            src="https://cdn.keyhole.co/branding/symbol/keyhole-symbol-yellow.png"
             alt={"Author"}
+            backgroundColor={"#000000"}
           />
           <Stack direction={"column"} spacing={0} fontSize={"sm"}>
             <Text fontWeight={600}>{refundId.userName}</Text>
@@ -63,13 +63,21 @@ export default function RefundAproval() {
             color={useColorModeValue("gray.700", "white")}
             fontSize={"lg"}
             fontFamily={"body"}
-            mt={4}
+            mt={6}
           >
             Code: {refundId.charge}
           </Heading>
-          <Text color={"gray.500"} fontSize={"xl"}>
+          <Text color={"gray.500"} fontSize={"xl"} mt={6}>
             {refundId.about}
           </Text>
+        </Stack>
+        <Stack direction="row" spacing={4} mt={6}>
+          <Button colorScheme="red" variant="outline">
+            Denie
+          </Button>
+          <Button colorScheme="green" variant="outline">
+            Approve
+          </Button>
         </Stack>
       </Box>
     </Center>

@@ -317,3 +317,15 @@ export const getRefundId = (id) => async (dispatch) => {
     alert("Error Get Refund Aproval");
   }
 };
+
+export const updatePetition = (id, status) => async (dispatch) => {
+  try {
+    const url = await axios.put(
+      `https://nokler-api.herokuapp.com/updatePetition/${id}?status=${status}`
+    );
+    return dispatch({ type: "UPDATE_PETITION", payload: url.data });
+  } catch (error) {
+    console.log(error);
+    alert("Error Update Petition");
+  }
+};
