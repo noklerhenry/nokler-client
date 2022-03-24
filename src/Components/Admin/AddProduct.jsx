@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-//import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useParams }  from 'react-router'
 import axios from "axios";
 import { Heading, Container, Text, FormControl, FormLabel, Box,  Divider, Input, Button, Link, Image, Select, useToast, Flex } from '@chakra-ui/react'
@@ -9,11 +9,13 @@ import AdminHeader from "./AdminHeader";
 
 export default function AddProduct() {
 
-   // let history = useHistory()
+   let history = useHistory()
     let {id} = useParams()
     const [game, setGame] = useState('')
 
     const [keys, setKeys] = useState([{key: ''}])
+
+    const toast = useToast()
 
 
     const [input, setInput] = useState({
@@ -66,7 +68,7 @@ export default function AddProduct() {
         e.preventDefault();
         const sendGame = await axios.post('https://nokler-api.herokuapp.com/product', input)
         console.log('Game Created')
-        //history.push('/addgame')
+        history.push('/addgame')
     }
 
     function onChange(event) {
@@ -218,7 +220,20 @@ return(
                 <option value='SEGA Master System'>SEGA Master System</option>
 
             </Select>
-            <Button name='add' type='submit' mt='30px'>Add Product</Button>
+
+            <Button name='add' type='submit' mt='30px'
+      onClick={() =>
+        toast({
+          title: 'Game created',
+          description: "The Game was created",
+          status: 'success',
+          duration: 4000,
+          isClosable: true,
+        })
+      }
+    >
+      Add New Game
+    </Button>
         </FormControl>
         </form>
         </Box>

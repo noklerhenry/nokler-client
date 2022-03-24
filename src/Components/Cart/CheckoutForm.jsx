@@ -132,13 +132,7 @@ export const CheckoutForm = ({ amount }) => {
       <form onSubmit={(e) => handleSubmit(e)}>
         <CardElement options={cardElementOpts} />
 
-        {/* <FormLabel mt="30px">Name *</FormLabel>
-        <Input
-          type="text"
-          value={state.name}
-          name="name"
-          onChange={handleChange}
-        /> */}
+       
         <FormLabel mt="10px">City *</FormLabel>
         <Input
           type="text"

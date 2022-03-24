@@ -29,7 +29,7 @@ const FAQs = () => {
             fontSize={{ base: "3xl", sm: "4xl", md: "6xl" }}
             lineHeight={"110%"}
           >
-            Frecuent{" "}
+            Frequently Asked{" "}
             <Text as={"span"} color={"pink.500"}>
               Questions
             </Text>

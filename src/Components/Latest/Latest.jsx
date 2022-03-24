@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Heading, Button, Image } from "@chakra-ui/react";
+import { Box, Flex, Heading, Button, Image, Link } from "@chakra-ui/react";
 import gta from "./gta.png";
 
 export default function Latest() {
@@ -12,7 +12,7 @@ export default function Latest() {
             <Button>Check it out &#8594;</Button>
         </Box>
         <Box flexBasis='50%'>
-            <Image src={gta} alt='GTA V' width='100%'/>
+            <Link href='http://localhost:3000/details/Grand%20Theft%20Auto%20V'><Image src={gta} alt='GTA V' width='100%'/></Link>
         </Box>
     </Flex>
     </>

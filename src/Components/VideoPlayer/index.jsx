@@ -80,7 +80,7 @@ const VideoPlayer = ({ details }) => {
           >
             {arr.map((el) => {
               return (
-                <MotionBox key={el.id} p="70px">
+                <MotionBox key={el.id} p="70px" >
                   <ReactPlayer
                     controls
                     url={el.url}
