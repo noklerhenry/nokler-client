@@ -13,7 +13,6 @@ import {
   Th,
   Td,
   TableCaption,
-  Link,
   Divider,
   useColorModeValue,
   Flex,
