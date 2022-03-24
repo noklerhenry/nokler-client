@@ -24,6 +24,7 @@ import {
   FILTER,
   GET_USERS,
   GET_ORDERS,
+  GET_REFUND,
 } from "../Actions";
 import json from "../games.json";
 
@@ -42,6 +43,7 @@ const initialState = {
   platforms: [],
   genres: [],
   stores: [],
+  refund: [],
   favoriteGames: whislistFromLocalStorage,
   gamesAddedToFav: favButton
 };
@@ -241,6 +243,12 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         orders: payload,
+      };
+    }
+    case GET_REFUND: {
+      return {
+        ...state,
+        refund: payload,
       }
     }
     default:

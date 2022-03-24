@@ -3,55 +3,52 @@ import { useDispatch } from "react-redux";
 import { postContactForm } from "../../Actions";
 import { useAuth0 } from "@auth0/auth0-react";
 
-
 const useForm = () => {
-    const {
-      user,
-      loginWithPopup,
-      isAuthenticated
-    } = useAuth0();
-    
-  const dispatch = useDispatch()
-  
+  const { user, loginWithPopup, isAuthenticated } = useAuth0();
+
+  const dispatch = useDispatch();
+
   const [input, setInput] = useState({
-      name: isAuthenticated ? user.name : "",
-      email: isAuthenticated ? user.email : "",
-      message: "",
+    name: isAuthenticated ? user.name : "",
+    email: isAuthenticated ? user.email : "",
+    message: "",
   });
-  
+
   const [submitted, setSubmitted] = useState(false);
-  
+
   const handlerInputChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setInput({
-        ...input,
-        [name]: value
+      ...input,
+      [name]: value,
     });
-    console.log(input)
+    console.log(input);
   };
-  
+
   const handlerSubmit = (e) => {
     e.preventDefault();
-    dispatch(postContactForm({
+    dispatch(
+      postContactForm({
         contactForm: {
-            ...input
-        }
-    }));
+          ...input,
+        },
+      })
+    );
     setSubmitted(true);
     console.log(input);
     setInput({
-        ...input,
-        message: "",
+      ...input,
+      message: "",
     });
   };
-   
+
   return {
     input,
     submitted,
     setSubmitted,
     handlerInputChange,
-    handlerSubmit
-  }
+    handlerSubmit,
+  };
 };
 
 export default useForm;

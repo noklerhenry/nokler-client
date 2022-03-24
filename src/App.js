@@ -19,7 +19,8 @@ import UserOut from "./Components/Admin/UserOut";
 import FAQs from "./Components/FAQs";
 import NotFound from "./Components/NoFound";
 import About from "./Components/About";
-
+import Refund from "./Components/Refund/Refund";
+import RefundList from "./Components/Refund/RefundList";
 
 function App() {
 
@@ -45,11 +46,9 @@ function App() {
             <Route exact path="/frecuent-questions" component={FAQs} />
             <Route exact path="/about" component={About} />
             <Route exact path="/user-out" component={UserOut} />
-            <Route
-              exact
-              path="/profile"
-              component={isAuthenticated ? UserProfile : UserOut}
-            />
+            <Route exact path="/profile" component={isAuthenticated ? UserProfile : UserOut } />
+            <Route exact path="/refund" component={isAuthenticated ? Refund : UserOut } />
+            <Route exact path="/refundlist" component={isAuthenticated ? RefundList : UserOut } />
             <Route path='*'>
                 <NotFound />
             </Route>

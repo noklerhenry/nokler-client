@@ -4,9 +4,9 @@ import ProductCard from "../Card/Card";
 import { Card } from "../Card";
 import Loader from "../Loader/Loader";
 
-export default function SeeMorePaginated({gamesFiltered}) {
-    const [visible, setVisible] = useState(4);
-    const [loading, setLoading] = useState(false)
+export default function SeeMorePaginated({ gamesFiltered }) {
+  const [visible, setVisible] = useState(4);
+  const [loading, setLoading] = useState(false);
 
     function showMoreProducts() {
         setVisible((prevValue) => prevValue + 4)

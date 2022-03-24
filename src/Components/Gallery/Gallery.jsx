@@ -21,19 +21,25 @@ export default function Gallery() {
 
   return (
     <>
-    <Heading fontSize='65px' mt='170px' fontWeight='400' ml='30px'>ALL GAMES</Heading>
-    <Flex mt="0px" mb="20px" p='20px 0px'flexDirection='row'  backgroundImage="linear-gradient(0deg, transparent 24%, rgba(140, 6, 247, .09) 25%, rgba(140, 6, 247, .09) 26%, transparent 27%, transparent 74%, rgba(140, 6, 247, .09) 75%, rgba(140, 6, 247, .05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(140, 6, 247, .09) 25%, rgba(140, 6, 247, .09) 26%, transparent 27%, transparent 74%, rgba(140, 6, 247, .09) 75%, rgba(140, 6, 247, .09) 76%, transparent 77%, transparent)"
-            backgroundSize="21px 21px">
-      <Box w='300px' ml='25px'>
-        <Filter />
-        <Ordering/>
-      </Box>
-      <Box>
-          <SeeMorePaginated
-            gamesFiltered={gamesFiltered}
-          />
-      </Box>
-    </Flex>
+      <Heading fontSize="65px" mt="170px" fontWeight="400" ml="30px">
+        ALL GAMES
+      </Heading>
+      <Flex
+        mt="0px"
+        mb="20px"
+        p="20px 0px"
+        flexDirection="row"
+        backgroundImage="linear-gradient(0deg, transparent 24%, rgba(140, 6, 247, .09) 25%, rgba(140, 6, 247, .09) 26%, transparent 27%, transparent 74%, rgba(140, 6, 247, .09) 75%, rgba(140, 6, 247, .05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(140, 6, 247, .09) 25%, rgba(140, 6, 247, .09) 26%, transparent 27%, transparent 74%, rgba(140, 6, 247, .09) 75%, rgba(140, 6, 247, .09) 76%, transparent 77%, transparent)"
+        backgroundSize="21px 21px"
+      >
+        <Box w="300px" ml="25px">
+          <Filter />
+          <Ordering />
+        </Box>
+        <Box>
+          <SeeMorePaginated gamesFiltered={gamesFiltered} />
+        </Box>
+      </Flex>
     </>
   );
 }

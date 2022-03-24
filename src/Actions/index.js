@@ -24,6 +24,7 @@ export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const FILTER = "FILTER";
 export const GET_USERS = "GET_USERS";
 export const GET_ORDERS = "GET_ORDERS";
+export const GET_REFUND = "GET_REFUND";
 
 
 
@@ -278,18 +279,52 @@ export const postUser = (payload) => async (dispatch) => {
   return url.data;
 };
 
-
-export function postContactForm (payload){
-    console.log(payload)
-    return async function (dispatch){
-        try {
-          const path = await axios.post("https://nokler-api.herokuapp.com/contactMail", payload);
-          console.log(path.data)
-          return dispatch({ type: "POST_CONTACT_FORM", payload: path.data });
-        } catch (err) {
-          console.log(err)  
-          alert("Error Post Contact Form");
-        }
+export function postContactForm(payload) {
+  console.log(payload);
+  return async function (dispatch) {
+    try {
+      const path = await axios.post(
+        "https://nokler-api.herokuapp.com/contactMail",
+        payload
+      );
+      console.log(path.data);
+      return dispatch({ type: "POST_CONTACT_FORM", payload: path.data });
+    } catch (err) {
+      console.log(err);
+      alert("Error Post Contact Form");
     }
+  };
+}
+
+export const postRefund = (payload) => async (dispatch) => {
+  try {
+    const url = await axios.post(
+      "https://nokler-api.herokuapp.com/refundPetition",
+      payload
+    );
+    return dispatch({ type: "POST_REFUND", payload: url.data });
+    console.log(url.data);
+  } catch (error) {
+    console.log(error);
+    alert("Error Post Refund");
+  }
 };
 
+//https://nokler-api.herokuapp.com/getRefund
+export const getRefund = () => async (dispatch) => {
+  try {
+    const url = await axios.get("https://nokler-api.herokuapp.com/getRefund");
+    return dispatch({ type: "GET_REFUND", payload: url.data });
+  } catch (error) {
+    console.log(error);
+    alert("Error Get Refund");
+  }
+};
+
+//https://nokler-api.herokuapp.com/updatePetition/{id}?status=PENDING
+
+
+//https://nokler-api.herokuapp.com/updatePetition/{id}?status={FINISHED por query}
+//https://nokler-api.herokuapp.com/updatePetition/{id}?status={CANCEL por query}
+
+//FINISHED Y CANCEL SI O SI EN MAYUSCULA, TAMBIEN PENDING

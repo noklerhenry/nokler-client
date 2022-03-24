@@ -232,58 +232,6 @@ export default function Detail() {
               ))}
             </SimpleGrid>
           </Box>
-
-          <SimpleGrid columns={"2"} margin={"20px"}>
-            <HStack>
-              <Box>
-                <Box fontSize={"xl"}>
-                  {/* $ {details?.price}
-                  <Button
-                    onClick={() => {
-                      onCartOpen();
-                      handleCart(details.id);
-                    }}
-                    ml="4"
-                  >
-                    Add to cart
-                  </Button> */}
-                  <Modal
-                    isCentered
-                    onClose={onCartClose}
-                    isOpen={isCartOpen}
-                    motionPreset="slideInBottom"
-                  >
-                    <ModalOverlay />
-                    <ModalContent>
-                      <ModalHeader fontSize="9xl"></ModalHeader>
-                      <ModalCloseButton />
-                      <ModalBody fontSize="2xl">
-                        <FaCartPlus size={23} />
-                        You added one item to your cart!
-                      </ModalBody>
-                      <ModalFooter>
-                        <Button mr={3} onClick={onCartClose}>
-                          Continue Browsing
-                        </Button>
-                        <Button onClick={() => history.push("/checkout")}>
-                          Checkout Now!
-                        </Button>
-                      </ModalFooter>
-                    </ModalContent>
-                  </Modal>
-                </Box>
-              </Box>
-            </HStack>
-            {/* <HStack>
-          <Box>
-            Premium price:
-            <Box fontSize={"x-large"}>
-              $ 431.99
-              <Button>Pay with premium!</Button>
-            </Box>
-          </Box>
-        </HStack> */}
-          </SimpleGrid>
         </Stack>
       </SimpleGrid>
       <Text fontSize="24px" fontWeight="700" mt="-50px">

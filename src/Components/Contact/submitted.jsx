@@ -13,8 +13,8 @@ import { Link } from "react-router-dom";
 
 export default function Submitted({ setSubmitted }) {
   const formAgain = () => {
-      setSubmitted(false)
-  }  
+    setSubmitted(false);
+  };
   return (
     <>
       <Container maxW={"3xl"} mt="5rem">
@@ -45,17 +45,17 @@ export default function Submitted({ setSubmitted }) {
             alignSelf={"center"}
             position={"relative"}
           >
-            <Link to='/'>
+            <Link to="/">
               <Button rounded={"full"} px={6}>
                 Go Back
               </Button>
             </Link>
-            <Button 
-              borderColor={"pink.500"} 
-              color={"pink.500"} 
-              rounded={"full"} 
-              onClick={() => formAgain()} 
-              _hover={{bg: 'pink.500', color: '#fff'}}
+            <Button
+              borderColor={"pink.500"}
+              color={"pink.500"}
+              rounded={"full"}
+              onClick={() => formAgain()}
+              _hover={{ bg: "pink.500", color: "#fff" }}
             >
               Another Request
             </Button>
