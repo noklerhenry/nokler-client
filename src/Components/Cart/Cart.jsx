@@ -7,7 +7,7 @@ import {
   getAllProducts,
 } from "../../Actions";
 import { Payment } from "./Payment";
-import { Container, Button, Box, Text } from "@chakra-ui/react";
+import { Container, Button, Box, Text, Flex, Image } from "@chakra-ui/react";
 
 export const Cart = ({ payMethod }) => {
   const dispatch = useDispatch();
@@ -39,11 +39,17 @@ export const Cart = ({ payMethod }) => {
 
   return (
     <div>
+      <Flex flexDirection='column'>
+      
       <Container d="flex" flexDirection="column">
         {cart?.map((g) => {
           return (
+            <Flex flexDirection='row'>
+            <Box>
+              <Image src={g.game?.image} h='90px' w='70px' objectFit='cover' mr='10px' alt='game image' borderRadius='25px' boxShadow='2px 2px 10px #88888880'/>
+            </Box>
             <Box key={g.id} mb="10px" pb="4">
-              <Text fontSize="16px" mb="5px" fontWeight="700">
+              <Text fontSize="16px" mb="5px" fontWeight="700" maxWidth='290px'>
                 {g.game?.name}
               </Text>
               <Text fontSize="13px" mb="5px" fontWeight="500">
@@ -57,6 +63,7 @@ export const Cart = ({ payMethod }) => {
               </Button>
               <hr />
             </Box>
+            </Flex>
           );
         })}
         <Text fontSize="18px" fontWeight="700">
@@ -65,8 +72,13 @@ export const Cart = ({ payMethod }) => {
         <Button onClick={handleClear} mb="20px" mt="20px">
           Clear all
         </Button>
+      </Container>
+
+      <Container>       
         {payMethod && <Payment amount={total} />}
       </Container>
+
+      </Flex>
     </div>
   );
 };

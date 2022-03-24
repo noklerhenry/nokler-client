@@ -73,7 +73,7 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
   
 
 
-  console.log('soy userData', userData)
+  //console.log('soy userData', userData)
 
   const [backgroundNav, setBackgroundNav] = useState(false);
 
@@ -259,7 +259,7 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
             <Box
                 pos="absolute"
                 top="2"
-                right="19.8rem"
+                right="18.8rem"
                 padding="0 1rem"
                 cursor="pointer"
               >
@@ -274,7 +274,7 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
               <Box
                 pos="absolute"
                 top="2"
-                right="14.2rem"
+                right="14.6rem"
                 padding="0 1rem"
                 cursor="pointer"
               >
@@ -354,7 +354,7 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
               </Box>
               <Box
                 pos="absolute"
-                top="2"
+                top="27px"
                 right="6rem"
                 padding="0 1rem"
                 cursor="pointer"

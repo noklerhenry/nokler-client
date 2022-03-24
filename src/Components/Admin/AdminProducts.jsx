@@ -104,7 +104,7 @@ export default function AdminProducts() {
           <Divider mb="15px" mt="10px" />
         </Box>
 
-        <FormControl>
+        {/* <FormControl>
           <Input
             id="searchGame"
             type="text"
@@ -112,7 +112,7 @@ export default function AdminProducts() {
             mb="15px"
             placeholder="Type the game name..."
           ></Input>
-        </FormControl>
+        </FormControl> */}
 
         <SimpleGrid mt="30px" columns={2} spacing={3}>
           {games

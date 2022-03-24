@@ -6,15 +6,19 @@ import {
   IconButton,
   Box,
   useMediaQuery,
+  useColorModeValue
 } from "@chakra-ui/react";
 import { FaTimes } from "react-icons/fa";
 import { Logout } from "../../Logout.jsx";
 import CartDrawer from "../CartDrawer.jsx";
 import { useAuth0 } from "@auth0/auth0-react";
+import { FaHome, FaUser, FaHeart, FaGamepad, FaDesktop  } from "react-icons/fa";
 
 const SideBar = ({ Open, toggle }) => {
-  const { loginWithPopup, isAuthenticated, isLoading } = useAuth0();
+  const { loginWithPopup, isAuthenticated, isLoading, logout } = useAuth0();
   const { colorMode, toggleColorMode } = useColorMode();
+
+  const bg = useColorModeValue("#ffffff", "#121019");
 
   const [mediaQueryGrid480px] = useMediaQuery("(max-width: 480px)");
   
@@ -27,11 +31,12 @@ const SideBar = ({ Open, toggle }) => {
       zIndex="999"
       w={["100%", "100%", "100%", "100%", "40%", "25%"]}
       h="100%"
-      bg="#0d0d0d80"
+      bg={bg}
       display="grid"
       alignItems="center"
       left={Open ? "0" : "-100%"}
       top="0"
+      boxShadow='0px 15px 20px #cccccc'
       transition="0.3s ease-in-out"
       opacity={Open ? "100%" : "0"}
     >
@@ -49,7 +54,7 @@ const SideBar = ({ Open, toggle }) => {
           icon={<FaTimes color="#fff" fontSize="1.8rem" />}
           onClick={toggle}
           border="none"
-          bg="#0d0d0d"
+          bg="#8c06f7"
         />
       </Box>
       <Box color="#fff">
@@ -62,77 +67,63 @@ const SideBar = ({ Open, toggle }) => {
           }
           textAlign="center"
         >
-          <Box borderBottom='1px dotted #ffffff' w='90%' mt='10px'>
+          <Box  w='90%' mt='10px'>
             <Link to="/">
-              <Button
-                mt="0px"
-                bgColor="#ffffff00"
-                color="#ffffff"
-                border='none'
-                fontSize='25px'
-                fontWeight='700'
-                onClick={toggle}
+              <Button mt="0px"  color="#8c06f7" border='none'fontSize='25px'fontWeight='300' onClick={toggle}
               >
-                Home
+                <FaHome size='21'/>&nbsp; Home
               </Button>
             </Link>
           </Box>
-          <Box borderBottom='1px dotted #ffffff' w='90%' mt='10px'>
-            <Button
-              mt="0px"
-              bgColor="#ffffff00"
-                color="#ffffff"
-                border='none'
-                fontSize='25px'
-                fontWeight='700'
+          <Box  w='90%' mt='10px'>
+            <Link to="/gallery">
+              <Button mt="0px"  color="#8c06f7" border='none'fontSize='25px'fontWeight='300' onClick={toggle}
+              >
+                <FaGamepad size='21'/>&nbsp; All games
+              </Button>
+            </Link>
+          </Box>          
+          
+          
+          <Box  w='90%' mt='10px'>
+            <Link to="/whislist">
+              <Button mt="0px"  color="#8c06f7" border='none'fontSize='25px'fontWeight='300' 
+                onClick={toggle}
+              >
+                <FaHeart size='21'/>&nbsp;Wishlist
+              </Button>
+            </Link>
+          </Box>
+
+          <Box color='#8c06f7' w='90%' mt='10px'  mb='30px' ml='-15px'>
+          <Button border='none'fontSize='25px'fontWeight='300'> <CartDrawer Open={Open} toggle={toggle} mt='-10px'/> Cart</Button>
+            </Box>
+
+          <Box  w='90%' mt='10px'>
+            <Button mt="0px"  color="#8c06f7" fontSize='16px'fontWeight='300' h='22px'
               onClick={() => toggleColorMode()}
             >
-              Theme
+              <FaDesktop size='16'/>&nbsp; Theme
             </Button>
           </Box>
+
           
-          <Box borderBottom='1px dotted #ffffff' w='90%' mt='10px'>
-            <Link to="/whislist">
-              <Button
-                mt="0px"
-                bgColor="#ffffff00"
-                color="#ffffff"
-                border='none'
-                fontSize='25px'
-                fontWeight='700'
-                onClick={toggle}
-              >
-                Wishlist
-              </Button>
-            </Link>
-          </Box>
-          <Box mr="7px">
-            <Box>
-            </Box>
-          </Box>
-          <Box>
-              <CartDrawer Open={Open} toggle={toggle} />
+          <Box w='90%' mt='10px'>
             {!isAuthenticated && !isLoading ? (
-              <Button
-                size="sm"
-                mt='20px'
-                ml='9px'
-                // ml="9px"
-                bgColor="#ffffff"
-                color="#222222"
-                onClick={loginWithPopup}
+              <Button mt="0px"  color="#8c06f7" fontSize='16px'fontWeight='300' h='22px' 
+              onClick={loginWithPopup}
               >
-                Sign in
+                <FaUser size='15'/>&nbsp; Sign in
               </Button>
             ) : (
-                <Box 
-                  size="sm" 
-                  mt="100px"
-                >
-                    <Logout />
-                </Box>
+              <Button mt="0px"  color="#8c06f7" fontSize='16px'fontWeight='300' h='22px'
+              onClick={logout}
+              >
+              <FaUser size='15'/>&nbsp; Log Out
+            </Button>
             )}
           </Box>
+          
         </Box>
       </Box>
     </Box>

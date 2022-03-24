@@ -11,6 +11,7 @@ import {
   Text,
   Container,
   Box,
+  Flex,
   Stat,
   StatLabel,
   StatNumber,
@@ -28,6 +29,7 @@ import {
   Td,
   TableCaption,
 } from "@chakra-ui/react";
+import { FaChartBar, FaUser } from "react-icons/fa";
 
 export default function Admin() {
   const dispatch = useDispatch();
@@ -70,30 +72,35 @@ export default function Admin() {
   console.log(todayOrders);
 
   return (
-    <Container p="5" maxW={"8xl"}>
+    <Flex margin='0 3%'>
       <Box>
         <AdminHeader />
 
-        <Text fontSize="30px" mb="15px" mt="15px">
+        <Flex flexDirection='row' mb="15px" mt="15px" alignItems='center'>
+        <FaChartBar size='28' mr='10px'/>
+        <Text fontSize="30px" ml='10px' >
           Nokler Stats
         </Text>
+        </Flex>
+
         <Divider mb="15px" />
-        <StatGroup>
-          <Stat>
+
+        <StatGroup w='70%'>
+          <Stat borderRight='1px solid #8c06f7' p='0 10px' >
             <StatLabel>Keys sold</StatLabel>
             <StatNumber>{orders?.length}</StatNumber>
             <StatHelpText></StatHelpText>
           </Stat>
 
-          <Stat>
+          {/* <Stat borderRight='1px solid #cccccc' p='0 10px'>
             <StatLabel>Keys sold today</StatLabel>
-            <StatNumber>{todayOrders}</StatNumber>
+            <StatNumber>#{todayOrders}</StatNumber>
             <StatHelpText>
               
             </StatHelpText>
-          </Stat>
+          </Stat> */}
 
-          <Stat>
+          <Stat borderRight='1px solid #8c06f7' p='0 10px'>
             <StatLabel>Total Income</StatLabel>
             <StatNumber>
               ${orders?.reduce((result, order) => result + order.price, 0)}
@@ -147,6 +154,6 @@ export default function Admin() {
           </Tfoot>
         </Table>
       </Box>
-    </Container>
+    </Flex>
   );
 }

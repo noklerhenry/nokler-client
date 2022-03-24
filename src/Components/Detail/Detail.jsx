@@ -195,7 +195,7 @@ export default function Detail() {
                   &#9650; Genres:
                 </Text>{" "}
                 {details[0]?.game.genres.map((g) =>(
-                  <Button float='right' display='inline-block' borderRadius='20px' fontSize='11px' h='23px' ml='5px' border='none'>{g.name}</Button>
+                  <Button float='right' display='inline-block' borderRadius='20px' fontSize='11px' h='23px' ml='5px' border='1px'>{g.name}</Button>
                 ))}
               </ListItem>
             </List>
@@ -302,7 +302,7 @@ export default function Detail() {
         </Stack>
       </SimpleGrid>
 
-      <Grid templateColumns='repeat(5, 1fr)' mt="0px" mb='30px'>
+      <Grid templateColumns='repeat(5, 1fr)' mt="-10px" mb='30px'>
         <GridItem GridItem colSpan={{ base: 5, md: 1, lg: 2, }}>
           <Heading fontSize="26px" fontWeight="400" mt="-0px" mb='30px'>
             DESCRIPTION

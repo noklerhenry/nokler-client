@@ -32,10 +32,10 @@ const CartDrawer = ({ Open, toggle }) => {
         ref={btnRef}
         onClick={onOpen}
         size="sm"
-        mt="20px"
+        mt="0px"
         ml="9px"
         border='none'
-        color={Open ? '#000' : ''}
+        color={Open ? '#8c06f7' : ''}
       >
         <FaShoppingCart size='20'/>
       </Button>
@@ -44,6 +44,7 @@ const CartDrawer = ({ Open, toggle }) => {
         placement="right"
         onClose={onClose}
         finalFocusRef={btnRef}
+        size='sm'
       >
         <DrawerOverlay />
         <DrawerContent bg={bg}>

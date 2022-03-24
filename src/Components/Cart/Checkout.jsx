@@ -10,6 +10,7 @@ export const Checkout = () => {
     <Box mt='180px' mb='100px'>
       <Text fontSize='35px' mb='15px' mt='15px' ml='3%'>Checkout</Text>
       <Divider mb='20px'/>
+      <Text fontSize='29px' mb='45px' mt='15px' textAlign='center'>&#x2780; Review your cart</Text>
       <Cart payMethod={true} />
     </Box>
   );
