@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import AdminHeader from "../Admin/AdminHeader";
 import { getRefund } from "../../Actions";
 import {
@@ -13,7 +13,6 @@ import {
   Th,
   Td,
   TableCaption,
-  Link,
   useColorModeValue,
   Flex,
   Text,
@@ -84,16 +83,19 @@ export default function RefundList() {
             {refund?.map((refund) => {
               return (
                 <Box>
-                  <Text>PETITION ID: {refund.id}</Text> 
-                  <Text>MAIL: {refund.userEmail}</Text>
-                  <Text>NAME: {refund.userName}</Text>
-                  <Text>STATUS:
-                    {refund.status === "FINISHED"
-                      ? "APPROVED"
-                      : refund.status === "CANCEL"
-                      ? "DENIED"
-                      : "PENDING"}
-                  </Text>
+                  <Link to={`/refundaproval/${refund.id}`}>
+                    <Text>PETITION ID: {refund.id}</Text>
+                    <Text>MAIL: {refund.userEmail}</Text>
+                    <Text>NAME: {refund.userName}</Text>
+                    <Text>
+                      STATUS:
+                      {refund.status === "FINISHED"
+                        ? "APPROVED"
+                        : refund.status === "CANCEL"
+                        ? "DENIED"
+                        : "PENDING"}
+                    </Text>
+                  </Link>
                 </Box>
               );
             })}

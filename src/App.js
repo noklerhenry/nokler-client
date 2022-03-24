@@ -25,6 +25,7 @@ import checkRole from "./Components/Admin/CheckProfile";
 import { useState, useEffect } from "react";
 import axios from 'axios';
 
+import RefundAproval from "./Components/Refund/RefundAproval";
 
 function App() {
 
@@ -67,6 +68,7 @@ function App() {
             <Route exact path="/profile" component={isAuthenticated ? UserProfile : UserOut } />
             <Route exact path="/refund" component={isAuthenticated ? Refund : UserOut } />
             <Route exact path="/refundlist" component={isAuthenticated ? RefundList : UserOut } />
+            <Route exact path="/refundaproval/:id" component={isAuthenticated ? RefundAproval : UserOut } />
             <Route path='*'>
                 <NotFound />
             </Route>

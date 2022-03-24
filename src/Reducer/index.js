@@ -25,6 +25,7 @@ import {
   GET_USERS,
   GET_ORDERS,
   GET_REFUND,
+  GET_REFUND_ID,
 } from "../Actions";
 import json from "../games.json";
 
@@ -44,6 +45,7 @@ const initialState = {
   genres: [],
   stores: [],
   refund: [],
+  refundId: [],
   favoriteGames: whislistFromLocalStorage,
   gamesAddedToFav: favButton
 };
@@ -249,7 +251,13 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         refund: payload,
-      }
+      };
+    }
+    case GET_REFUND_ID: {
+      return {
+        ...state,
+        refundId: payload,
+      };
     }
     default:
       return state;
