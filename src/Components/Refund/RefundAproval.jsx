@@ -59,7 +59,7 @@ export default function RefundAproval() {
         </Text>
         <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
           <Avatar
-            src="https://cdn.keyhole.co/branding/symbol/keyhole-symbol-yellow.png"
+            src="https://st2.depositphotos.com/1797936/8641/v/600/depositphotos_86419330-stock-illustration-purple-icon-isolated-on-a.jpg"
             alt={"Author"}
             backgroundColor={"#000000"}
           />
