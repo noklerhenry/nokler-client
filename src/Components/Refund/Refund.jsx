@@ -196,6 +196,7 @@ export default function Refund() {
                       name="charge"
                       id="charge"
                       value={input.charge}
+                      autoComplete="off"
                       mt={1}
                       focusBorderColor="#8c06f7"
                       shadow="sm"
@@ -229,6 +230,7 @@ export default function Refund() {
                       id="about"
                       value={input.about}
                       htmlFor="about"
+                      autoComplete="off"
                       mt={1}
                       rows={3}
                       shadow="sm"
