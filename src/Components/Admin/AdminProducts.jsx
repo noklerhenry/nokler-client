@@ -85,7 +85,7 @@ export default function AdminProducts() {
         </AlertDialogOverlay>
       </AlertDialog>
 
-      <Container w="950px">
+      <Flex flexDirection='column' w='95vw' margin='0 3%'>
         <Box>
           <AdminHeader />
           <Flex
@@ -114,7 +114,7 @@ export default function AdminProducts() {
           ></Input>
         </FormControl> */}
 
-        <SimpleGrid mt="30px" columns={2} spacing={3}>
+        <SimpleGrid mt="30px" columns={{sm:2, md:2, lg:3, xl:4}} spacing='2'>
           {games
             ? games.map((g) => (
                 <AdminCard
@@ -130,7 +130,7 @@ export default function AdminProducts() {
               ))
             : "Loading.."}
         </SimpleGrid>
-      </Container>
+      </Flex>
     </>
   );
 }

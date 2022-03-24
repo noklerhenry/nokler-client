@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AdminCard from "./AdminCard";
 import axios from "axios";
-import { Heading, Container, Text, FormControl, Box,  Divider, Input, Button, SimpleGrid } from '@chakra-ui/react'
+import { Heading, Container, Text, FormControl, Box,  Divider, Input, Button, SimpleGrid, Flex } from '@chakra-ui/react'
 import AdminHeader from "./AdminHeader";
 
 
@@ -36,14 +36,14 @@ console.log(games)
 
 return (
     <>
-    <Container p='8'>
+    <Flex flexDirection='column' w='95vw' margin='0 3%'>
     <AdminHeader />
     <Text fontSize='30px' mb='15px' mt='15px'>Add Games</Text>
     <FormControl mt='25px' onSubmit={() =>handleSubmit()}>
     <Input id='searchGame' type='text' borderRadius='20px' mb='15px' placeholder='Type the game name...' value={search} onChange={handleInputChange}/>
        
     </FormControl>
-    <SimpleGrid mt='30px' columns='2' spacing='3'>
+    <SimpleGrid mt='30px' columns={{sm:2, md:2, lg:3, xl:4}} spacing='2'>
      {games instanceof Array ? 
      
      <>{games?.map((g) => (
@@ -63,7 +63,7 @@ return (
     }  
     </SimpleGrid>
 
-    </Container>
+    </Flex>
     </>
 )
 }

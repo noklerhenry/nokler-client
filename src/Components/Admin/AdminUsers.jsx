@@ -33,14 +33,15 @@ function changeStatus(id, enable){
 console.log(usuarios)
 
   return (
-    <Container w='90%'>
+    <Flex flexDirection='column' w='95vw' margin='0 3%' alignContent='center' justifyContent='center'>
       <Box>
       <AdminHeader />
       <Text fontSize='30px' mb='15px' mt='15px'>Manage Users</Text>
-      <Divider mb='15px'/>
       </Box>
 
-      <Box>
+
+      <Box w='500px' margin='0 auto'>
+      <Divider mb='15px'/>
       {usuarios.length > 1 ? usuarios.map((u) =>
       <>
         <Flex  borderBottom='1px #444444 dotted' padding='20px 0px' flexDirection='row' justifyContent='space-between' alignContent='left' key={u.id}>
@@ -61,6 +62,6 @@ console.log(usuarios)
     }
       </Box>
 
-    </Container>
+    </Flex>
   );
 }
