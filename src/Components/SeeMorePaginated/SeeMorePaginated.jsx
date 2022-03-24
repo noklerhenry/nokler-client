@@ -22,7 +22,7 @@ export default function SeeMorePaginated({ gamesFiltered }) {
     }else {
         return(
             <Flex flexDirection='column' >
-            <SimpleGrid columns={{ base: 1, md: 2, lg: 2, xl:4 }} spacing="20px" >
+            <SimpleGrid columns={{ base: 2, md: 2, lg: 3, xl:3, xxl: 4 }} spacing="20px" >
             {gamesFiltered?.slice(0, visible).map((product, index) => {
                 return (
                   <Card

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   Box,
   chakra,
+  Button,
   Container,
   Stack,
   Image,
@@ -20,7 +21,7 @@ const SocialButton = ({ children, label, href }) => {
   return (
     <chakra.button
       
-      bg='#121019'
+      bg='#8c06f7'
       color="#fff"
       rounded={"full"}
       w={8}
@@ -49,7 +50,7 @@ const SocialButton = ({ children, label, href }) => {
 export default function SmallCentered() {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <Box color={colorMode === 'light' ? '#000' : '#fff'}>
+    <Box >
       <Container
         as={Stack}
         maxW={"6xl"}
@@ -60,10 +61,10 @@ export default function SmallCentered() {
       >
         <Image src={ImgLogo} alt="nokler logo" w="125px" h="35px" />
         <Stack direction={"row"} spacing={6}>
-          <Link to='/'>Home</Link>
-          <Link to='/about'>About</Link>
-          <Link to='/frecuent-questions'>FAQs</Link>
-          <Link to='/contact'>Contact</Link>
+          <Link to='/'><Button h='20px' fontSize='13px' border='none'>Home</Button></Link>
+          <Link to='/about'><Button h='20px' fontSize='13px' border='none'>About</Button></Link>
+          <Link to='/frecuent-questions'><Button h='20px' fontSize='13px' border='none'>FAQs</Button></Link>
+          <Link to='/contact'><Button h='20px' fontSize='13px' border='none'>Contact</Button></Link>
         </Stack>
       </Container>
 
@@ -81,7 +82,7 @@ export default function SmallCentered() {
           justify={{ base: "center", md: "space-between" }}
           align={{ base: "center", md: "center" }}
         >
-          <Text>© 2022 Nøkler. All rights reserved</Text>
+          <Text fontSize='13px'>© 2022 Nøkler. All rights reserved</Text>
           <Stack direction={"row"} spacing={6}>
             <SocialButton label={"Twitter"} href={"#"}>
               <FaTwitter bg='#cccccc' />

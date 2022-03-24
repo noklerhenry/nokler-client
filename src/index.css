@@ -9,7 +9,22 @@ body {
 }
 a:hover{color: #ffffff;}
 Link:hover{color: #ffffff;}
-chakra-link:hover {color: #ffffff;}
+/* chakra-link:hover {color: #ffffff;} */
+
+.image-gallery-left-nav .image-gallery-svg, .image-gallery-right-nav .image-gallery-svg {
+  height: 50px !important;
+  width: 50px !important;
+}
+
+.image-gallery-content .image-gallery-slide .image-gallery-image{
+  border-radius: 20px !important;
+  box-shadow: 5px 5px 15px #8c06f730 !important;
+}
+
+.image-gallery-thumbnail .image-gallery-thumbnail-image {
+  border-radius: 14px !important;
+  box-shadow: 5px 5px 15px #8c06f730 !important;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

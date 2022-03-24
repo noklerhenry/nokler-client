@@ -33,7 +33,7 @@ export default function Screenshots() {
     p: "16px",
     color: "white",
     fontWeight: "bold",
-    fontSize: "18px",
+    fontSize: "13px",
     transition: "0.6s ease",
     borderRadius: "0 3px 3px 0",
     userSelect: "none",
@@ -93,7 +93,7 @@ export default function Screenshots() {
           <Box key={`slide-1`} boxSize="full" shadow="md" flex="none">
             <Text
               color="white"
-              fontSize="md"
+              fontSize="20px"
               p="8px 12px"
               pos="absolute"
               top="0"
@@ -105,6 +105,7 @@ export default function Screenshots() {
                 src={trailer.video}
                 title="YouTube video player"
                 frameborder="0"
+                borderRadius='20px'
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
               ></iframe>
@@ -118,6 +119,7 @@ export default function Screenshots() {
               shadow="md"
               flex="none"
               alignContent="center"
+              borderRadius='20px'
             >
               <Text
                 color="white"
@@ -132,6 +134,7 @@ export default function Screenshots() {
                 src={slide.img}
                 alt="carousel image"
                 boxSize="full"
+                borderRadius='20px'
                 backgroundSize="cover"
                 maxW="1280px"
                 maxH="780px"

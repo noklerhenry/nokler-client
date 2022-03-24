@@ -11,6 +11,7 @@ import {
   Text,
   Container,
   Box,
+  Flex,
   Stat,
   StatLabel,
   StatNumber,
@@ -27,12 +28,19 @@ import {
   Th,
   Td,
   TableCaption,
+  SimpleGrid,
+  useColorModeValue
 } from "@chakra-ui/react";
+import { FaChartBar, FaUser, FaCalendar } from "react-icons/fa";
 
 export default function Admin() {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders);
   let gamesList = useSelector((state) => state.games);
+
+  const [scrollBehavior, setScrollBehavior] = useState("inside");
+
+  const bg3 = useColorModeValue("gray.100", "gray.900");
 
   const [game, setGame] = useState("");
   const [user, setUser] = useState("");
@@ -68,28 +76,35 @@ export default function Admin() {
   console.log(todayOrders);
 
   return (
-    <Container p="5" maxW={"8xl"}>
+    <Flex margin='0 3%'>
       <Box>
         <AdminHeader />
 
-        <Text fontSize="30px" mb="15px" mt="15px">
+        <Flex flexDirection='row' mb="15px" mt="15px" alignItems='center'>
+        <FaChartBar size='28' mr='10px'/>
+        <Text fontSize="30px" ml='10px' >
           Nokler Stats
         </Text>
+        </Flex>
+
         <Divider mb="15px" />
-        <StatGroup>
-          <Stat>
+
+        <StatGroup w='70%'>
+          <Stat borderRight='1px solid #8c06f7' p='0 10px' >
             <StatLabel>Keys sold</StatLabel>
             <StatNumber>{orders?.length}</StatNumber>
             <StatHelpText></StatHelpText>
           </Stat>
 
-          <Stat>
+          {/* <Stat borderRight='1px solid #cccccc' p='0 10px'>
             <StatLabel>Keys sold today</StatLabel>
-            <StatNumber>{todayOrders}</StatNumber>
-            <StatHelpText></StatHelpText>
-          </Stat>
+            <StatNumber>#{todayOrders}</StatNumber>
+            <StatHelpText>
+              
+            </StatHelpText>
+          </Stat> */}
 
-          <Stat>
+          <Stat borderRight='1px solid #8c06f7' p='0 10px'>
             <StatLabel>Total Income</StatLabel>
             <StatNumber>
               ${orders?.reduce((result, order) => result + order.price, 0)}
@@ -98,51 +113,36 @@ export default function Admin() {
           </Stat>
         </StatGroup>
 
-        <Table>
-          <TableCaption fontSize="xl">Keys sold</TableCaption>
-          <Thead>
-            <Tr>
-              <Th fontSize="xxl">Date</Th>
-              <Th fontSize="xxl">Sale ID</Th>
-              <Th fontSize="xxl">Mail</Th>
-              <Th fontSize="xxl">Game</Th>
-              <Th fontSize="xxl">Store</Th>
-              <Th fontSize="xxl">Key</Th>
-              <Th fontSize="xxl" isNumeric>
-                Price
-              </Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {orders?.map((order) => {
+          <Text fontSize='29px' mt='35px'>Latest Purchases</Text>
+          <SimpleGrid columns={{sm:1, md:2, lg:3, xl:4}} spacing='2' mt='15px' mb='45px'>
+          {orders?.map((order) => {
               return (
-                <Tr>
-                  <Td>{order.dateOrder.slice(0, 10)}</Td>
-                  <Td>{order.id}</Td>
-                  <Td>{order.user.email}</Td>
-                  <Td>{order.game}</Td>
-                  <Td>{order.store}</Td>
-                  <Td>{order.key}</Td>
-                  <Td isNumeric>${order.price}</Td>
-                </Tr>
+                <Box p='20px' bg={bg3} borderRadius='20px'>
+                  <Flex flexDirection='row' alignItems='center'>
+                  <FaCalendar size='15' />
+                  <Text flexWrap='wrap' ml='5px' fontSize='14px'>{order.dateOrder.slice(0, 10)}</Text>
+                    </Flex>
+                  
+                  <Text fontSize='21px' fontWeight='600' lineHeight='27px' mt='10px' mb='10px'>{order.game}</Text>
+                  <Flex flexDirection='row' alignItems='center' mb='10px'>
+                  <FaUser size='15' />
+                  <Text flexWrap='wrap' >{order.user.email}</Text>
+                    </Flex>
+                  
+                  <Text> <b>Order Id</b> — {order.id}</Text>
+                  <Text><b>Store</b> — {order.store}</Text>
+                  <Text><b>Key</b> —{order.key}</Text>
+                  <Text isNumeric><b>Price</b> — ${order.price}</Text>
+                </Box>
               );
             })}
-          </Tbody>
-          <Tfoot>
-            <Tr>
-              <Th fontSize="xxl">Date</Th>
-              <Th fontSize="xxl">Sale ID</Th>
-              <Th fontSize="xxl">Mail</Th>
-              <Th fontSize="xxl">Game</Th>
-              <Th fontSize="xxl">Store</Th>
-              <Th fontSize="xxl">Key</Th>
-              <Th fontSize="xxl" isNumeric>
-                Price
-              </Th>
-            </Tr>
-          </Tfoot>
-        </Table>
+
+          </SimpleGrid>
+
+
+
+        
       </Box>
-    </Container>
+    </Flex>
   );
 }

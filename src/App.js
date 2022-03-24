@@ -21,10 +21,28 @@ import NotFound from "./Components/NoFound";
 import About from "./Components/About";
 import Refund from "./Components/Refund/Refund";
 import RefundList from "./Components/Refund/RefundList";
+import checkRole from "./Components/Admin/CheckProfile";
+import { useState, useEffect } from "react";
+import axios from 'axios';
+
 
 function App() {
 
-  const { isAuthenticated, isLoading } = useAuth0();
+  const { isAuthenticated, isLoading, user } = useAuth0();
+
+  const [userData, setUserData] = useState('')
+
+  useEffect(() => {
+    
+    axios.get('https://nokler-api.herokuapp.com/getUserByEmail?email=' + user?.email)
+        .then((response) =>{
+            setUserData(response.data[0])
+            //return response;
+          })
+    
+  }, [user]);
+
+  const userRole = async() => await checkRole()
 
   return (
     <>
@@ -34,13 +52,13 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route exact path="/details/:nameid" component={Detail} />
             <Route exact path="/checkout" component={Checkout} />
-            <Route exact path="/wishlist" component={WishList} />
-            <Route exact path="/admin" component={isAuthenticated ? Admin : UserOut} />
-            <Route exact path="/admin-products" component={isAuthenticated ? AdminProducts : UserOut} />
-            <Route exact path="/admin-users" component={isAuthenticated ? AdminUsers : UserOut} />
-            <Route exact path="/edit-game/:nameid" component={isAuthenticated ? EditGame : UserOut} />
-            <Route exact path="/add-product/:id" component={isAuthenticated ? AddProduct : UserOut} />
-            <Route exact path="/addgame" component={isAuthenticated ? AddGame : UserOut} />
+            <Route exact path="/whislist" component={WishList} />
+            <Route exact path="/admin" component={isAuthenticated &&userData?.rol == 'ADMIN' ? Admin : UserOut} /> 
+            <Route exact path="/admin-products" component={isAuthenticated && userData?.rol == 'ADMIN' ? AdminProducts : UserOut} />
+            <Route exact path="/admin-users" component={isAuthenticated && userData?.rol == 'ADMIN' ? AdminUsers : UserOut} />
+            <Route exact path="/edit-game/:nameid" component={isAuthenticated && userData?.rol == 'ADMIN' ? EditGame : UserOut} />
+            <Route exact path="/add-product/:id" component={isAuthenticated && userData?.rol == 'ADMIN' ? AddProduct : UserOut} />
+            <Route exact path="/addgame" component={isAuthenticated  ? AddGame : UserOut} />
             <Route exact path="/gallery" component={Gallery} />
             <Route exact path="/contact" component={ContactForm} />
             <Route exact path="/frecuent-questions" component={FAQs} />

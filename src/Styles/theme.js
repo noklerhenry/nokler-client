@@ -5,10 +5,10 @@ const breakpoints = createBreakpoints({
   sssm: "360px",
   ssm: "420px",
   sm: "480px",
-  md: "540px",
-  lg: "790px",
+  md: "700px",
+  lg: "900px",
   xl: "1100px",
-  xxl: "1350",
+  xxl: "1350px",
   xxxl: "1550px",
   "2xl": "1536px",
 }); 

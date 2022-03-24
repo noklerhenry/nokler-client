@@ -5,16 +5,41 @@ import {
   useElements,
   PaymentElement,
 } from "@stripe/react-stripe-js";
-import { Container, Button, Input, FormLabel } from "@chakra-ui/react";
+import { Container, Button, Input, FormLabel, Text } from "@chakra-ui/react";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../../Actions";
 
 export const CheckoutForm = ({ amount }) => {
+
+  const inputStyle = {
+    iconColor: '#8c06f7',
+    color: '#8c06f7',
+    fontWeight: '500',
+    fontSize: '22px',
+    fontSmoothing: 'antialiased',
+    ':-webkit-autofill': {
+      color: '#fce883',
+    },
+    '::placeholder': {
+      color: '#888888',
+    },
+  }
+
+
+
   const cardElementOpts = {
-    iconStyle: "solid",
-  };
+    
+    style: {
+      base: inputStyle,
+    
+    }
+};
+
+ 
+
+
   const [state, setState] = useState({
     city: "",
     line1: "",
@@ -99,9 +124,18 @@ export const CheckoutForm = ({ amount }) => {
 
   return (
     <Container>
+      <Text fontSize='29px' mb='45px' mt='25px' textAlign='center' lineHeight='30px'>&#x2781; Fill in the form to complete <br/> your purchase</Text>
       <form onSubmit={(e) => handleSubmit(e)}>
         <CardElement options={cardElementOpts} />
-        <FormLabel mt="30px">City *</FormLabel>
+
+        <FormLabel mt="30px">Name *</FormLabel>
+        <Input
+          type="text"
+          value={state.name}
+          name="name"
+          onChange={handleChange}
+        />
+        <FormLabel mt="10px">City *</FormLabel>
         <Input
           type="text"
           value={state.city}

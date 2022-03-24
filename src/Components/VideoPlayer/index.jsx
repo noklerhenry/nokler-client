@@ -69,14 +69,14 @@ const VideoPlayer = ({ details }) => {
           overflow="hidden"
           borderRadius="2rem"
           justifyContent="space-between"
-          bg="rgba(65, 3, 107, 0.082)"
+          bg="#8c06f7"
           ref={container}
         >
           <MotionFlex
             drag="x"
             dragConstraints={{ right: 0, left: -width }}
             whileTap={{ cursor: "grabbing" }}
-            bg="rgba(65, 3, 107, 0.082)"
+            bg="#8c06f7"
           >
             {arr.map((el) => {
               return (

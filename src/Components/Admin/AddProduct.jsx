@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 //import { useHistory } from "react-router-dom";
 import { useParams }  from 'react-router'
 import axios from "axios";
-import { Heading, Container, Text, FormControl, FormLabel, Box,  Divider, Input, Button, Link, Image, Select, useToast } from '@chakra-ui/react'
+import { Heading, Container, Text, FormControl, FormLabel, Box,  Divider, Input, Button, Link, Image, Select, useToast, Flex } from '@chakra-ui/react'
 import AdminHeader from "./AdminHeader";
 
 
@@ -112,19 +112,21 @@ export default function AddProduct() {
     console.log(keys)
 return(
     <>
-    <Container p='6'>
+    <Flex flexDirection='column' w='95vw' margin='0 3%' alignContent='center' justifyContent='center'>
      <AdminHeader />
      <Text fontSize='30px' mb='15px' mt='15px'>Add new Game</Text>
 
-      <Image src={game.img} w='200px' borderRadius='10px' float='right'/>
-      <Heading fontSize='25px' fontWeight='400'>{game.name}</Heading>
-      <Box display='flex' mt='10px'>
-        {game.genres?.map(g =>(
-          <Text float='left' borderRadius='15px' fontSize='10px' border='#777777 1px solid' padding='1px 8px' mr='2px' color='#444444' key={g.id}>{g} </Text>
-        ))}
+        <Box w='500px' margin='0 auto'>
+        <Image src={game.img} w='200px' borderRadius='10px' float='right'/>
+        <Heading fontSize='25px' fontWeight='400'>{game.name}</Heading>
+        <Box display='flex' mt='10px'>
+            {game.genres?.map(g =>(
+            <Text float='left' borderRadius='15px' fontSize='10px' border='#777777 1px solid' padding='1px 8px' mr='2px' color='#444444' key={g.id}>{g} </Text>
+            ))}
+            </Box>
         </Box>
 
-
+        <Box w='500px' margin='0 auto'>
         <form onSubmit={handleSubmit}>
         <FormControl mt='45px'>
             <FormLabel htmlFor='price'>Price</FormLabel>
@@ -219,8 +221,9 @@ return(
             <Button name='add' type='submit' mt='30px'>Add Product</Button>
         </FormControl>
         </form>
+        </Box>
 
-    </Container>
+    </Flex>
     </>
 )
 
