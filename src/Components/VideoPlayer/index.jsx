@@ -11,11 +11,14 @@ const API_KEY_A = "AIzaSyAvC-_PQjqwUEW1fsiiZDqTuvicrVzWfLk";
 const API_KEY_B = "AIzaSyBTnTZyd_i7HebefXtW6TjiTQPfCoj5sYQ";
 const API_KEY_C = "AIzaSyDt_ArJlixuBcsYMhtnmz89eExkyJGW_DU";
 
+const API_KEY_DEMO1 = "AIzaSyAT0trHQbfhJFY9xaTuleCVZ_tB9De5-ZQ";
+const API_KEY_DEMO2 = "AIzaSyDP_JZaL59rHMVuIzE6KqO9iXt_LMYQX28";
+
 const VideoPlayer = ({ details }) => {
     const [videos, setVideos] = useState([]);
     
     const getVideosYT = async () => {
-       const info = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY_A}&type=video&q=${details[0]?.game?.name + " " + details[0]?.game?.released_at?.substring(0, 4) + " "}videogame trailer`);
+       const info = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY_DEMO1}&type=video&q=${details[0]?.game?.name + " " + details[0]?.game?.released_at?.substring(0, 4) + " "}videogame trailer`);
        const resp = info.data.items
        setVideos(resp)
     };
