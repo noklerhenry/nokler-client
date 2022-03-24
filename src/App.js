@@ -19,6 +19,7 @@ import UserOut from "./Components/Admin/UserOut";
 import FAQs from "./Components/FAQs";
 import Refund from "./Components/Refund/Refund";
 import RefundList from "./Components/Refund/RefundList";
+import RefundAproval from "./Components/Refund/RefundAproval";
 
 function App() {
 
@@ -47,6 +48,7 @@ function App() {
             <Route exact path="/profile" component={isAuthenticated ? UserProfile : UserOut } />
             <Route exact path="/refund" component={isAuthenticated ? Refund : UserOut } />
             <Route exact path="/refundlist" component={isAuthenticated ? RefundList : UserOut } />
+            <Route exact path="/refundaproval/:id" component={isAuthenticated ? RefundAproval : UserOut } />
             {/* {  <Route exact path="/profile" component={UserProfile} /> && isAuthenticated ? <Route exact path="/profile" component={UserProfile} /> : <Redirect to="/user-out" /> } */}
           </Route>
         </Switch>
