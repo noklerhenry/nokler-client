@@ -9,10 +9,10 @@ export default function Latest() {
         <Flex w='100%' flexDirection='row' justifyContent='right' alignItems='center' wrap='wrap' backgroundImage=' linear-gradient(0deg, transparent 24%, rgba(140, 6, 247, .09) 25%, rgba(140, 6, 247, .09) 26%, transparent 27%, transparent 74%, rgba(140, 6, 247, .09) 75%, rgba(140, 6, 247, .05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(140, 6, 247, .09) 25%, rgba(140, 6, 247, .09) 26%, transparent 27%, transparent 74%, rgba(140, 6, 247, .09) 75%, rgba(140, 6, 247, .09) 76%, transparent 77%, transparent)' backgroundSize='25px 25px'>
         <Box flexBasis='40%'>
             <Heading fontSize='65px' fontWeight='300' lineHeight='60px'mb='30px' >GRAND THEFT<br/> AUTO V</Heading>
-            <Button>Check it out &#8594;</Button>
+            <Button><Link href='https://nokler-noklerhenry.vercel.app/details/Grand%20Theft%20Auto%20V'>Check it out &#8594;</Link></Button>
         </Box>
         <Box flexBasis='50%'>
-            <Link href='http://localhost:3000/details/Grand%20Theft%20Auto%20V'><Image src={gta} alt='GTA V' width='100%'/></Link>
+            <Link href='https://nokler-noklerhenry.vercel.app/details/Grand%20Theft%20Auto%20V'><Image src={gta} alt='GTA V' width='100%'/></Link>
         </Box>
     </Flex>
     </>
