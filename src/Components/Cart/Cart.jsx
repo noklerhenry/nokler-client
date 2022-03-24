@@ -69,12 +69,11 @@ export const Cart = ({ payMethod }) => {
         <Text fontSize="18px" fontWeight="700">
           Total: <b>${total}</b>
         </Text>
-        <Button onClick={handleClear} mb="20px" mt="20px">
-          Clear all
-        </Button>
-      </Container>
-
-      <Container>       
+        {cart.length && (
+          <Button onClick={handleClear} mb="20px" mt="20px">
+            Clear all
+          </Button>
+        )}
         {payMethod && <Payment amount={total} />}
       </Container>
 
