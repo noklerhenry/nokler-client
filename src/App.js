@@ -52,7 +52,7 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route exact path="/details/:nameid" component={Detail} />
             <Route exact path="/checkout" component={Checkout} />
-            <Route exact path="/whislist" component={WishList} />
+            <Route exact path="/wishlist" component={WishList} />
             <Route exact path="/admin" component={isAuthenticated &&userData?.rol == 'ADMIN' ? Admin : UserOut} /> 
             <Route exact path="/admin-products" component={isAuthenticated && userData?.rol == 'ADMIN' ? AdminProducts : UserOut} />
             <Route exact path="/admin-users" component={isAuthenticated && userData?.rol == 'ADMIN' ? AdminUsers : UserOut} />

@@ -57,11 +57,11 @@ export default function Refund() {
 
   return (
     <Container maxW="8xl" p="5" mt="150px">
+      <Text fontSize='35px' mb='15px' mt='15px' ml='3%'>Refund Request</Text>
       <Box visibility={{ base: "hidden", sm: "visible" }} aria-hidden="true">
-        <Box py={5}>
+        <Box py={3}>
           <Box
-            borderTop="solid 1px"
-            borderTopColor={useColorModeValue("gray.200", "whiteAlpha.200")}
+            
           ></Box>
         </Box>
       </Box>
@@ -71,17 +71,17 @@ export default function Refund() {
           display={{ base: "initial", md: "grid" }}
           columns={{ md: 3 }}
           spacing={{ md: 6 }}
+          margin='0 3%'
         >
           <GridItem colSpan={{ md: 1 }}>
             <Box px={[4, 0]}>
-              <Heading>Refund formulary</Heading>
-              <Text mt={2} color={useColorModeValue("gray.600", "gray.400")}>
+              <Text mt={2} fontSize='26px' lineHeight='28px' mb='20px'>
                 Complete all the fields of the form to request a Key refund.
               </Text>
-              <Text mt={2} color={useColorModeValue("gray.600", "gray.400")}>
+              <Text mt={2} >
                 When will I receive my refund?
               </Text>
-              <Text mt={3} color={useColorModeValue("gray.600", "gray.400")}>
+              <Text mt={3} >
                 <Text>
                   The time it will take for you to receive your funds depends on
                   the type of payment method you used. Remember that refunds
@@ -116,7 +116,7 @@ export default function Refund() {
                 px={4}
                 py={5}
                 p={[null, 6]}
-                bg={useColorModeValue("gray.400", "gray.900")}
+                bg={useColorModeValue("#eaeaea", "gray.900")}
                 spacing={6}
               >
                 <SimpleGrid columns={6} spacing={6}>
@@ -131,6 +131,7 @@ export default function Refund() {
                     <Input
                       type="text"
                       name="name"
+                      bg='white'
                       id="name"
                       defaultValue={input.name}
                       mt={1}
@@ -153,6 +154,7 @@ export default function Refund() {
                       type="text"
                       name="lastName"
                       id="lastName"
+                      bg='white'
                       defaultValue={input.lastName}
                       mt={1}
                       focusBorderColor="#8c06f7"
@@ -174,6 +176,7 @@ export default function Refund() {
                       type="text"
                       name="email"
                       id="email"
+                      bg='white'
                       defaultValue={input.email}
                       mt={1}
                       focusBorderColor="#8c06f7"
@@ -195,6 +198,7 @@ export default function Refund() {
                       type="text"
                       name="charge"
                       id="charge"
+                      bg='white'
                       value={input.charge}
                       mt={1}
                       focusBorderColor="#8c06f7"
@@ -227,6 +231,7 @@ export default function Refund() {
                       type="text"
                       name="about"
                       id="about"
+                      bg='white'
                       value={input.about}
                       htmlFor="about"
                       mt={1}

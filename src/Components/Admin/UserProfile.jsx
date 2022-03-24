@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AdminHeader from "./AdminHeader";
-import { Heading, Container, Text, Box,  Divider, Button, SimpleGrid, Image, useColorMode,   useColorModeValue, Flex  } from '@chakra-ui/react'
+import { Heading, Container, Text, Box,  Divider, Button, SimpleGrid, Image, useColorMode,   useColorModeValue, Flex, Link  } from '@chakra-ui/react'
 import { useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -67,8 +67,8 @@ export default function UserProfile(){
                 <Text>{order.dateOrder.slice(0,10)} </Text>
             </Box>
                 <Box>
-                <Button bg={bg}  h='20px' fontSize='13px' mr='5px'>Ask for refund</Button>
-                <Button bg={bg} h='20px' fontSize='13px'>Re-send key</Button>
+                <Button bg={bg}  h='20px' fontSize='13px' mr='5px'><Link href='/refund'>Ask for refund</Link></Button>
+                
                 </Box>
             </Flex>
             </>

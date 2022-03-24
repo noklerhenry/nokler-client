@@ -254,6 +254,7 @@ const SearchBar = () => {
             flexDir="column"
             p="1em"
             overflowY="auto"
+            borderRadius='20px'
           >
             {loading ? ( // LoadingWrapper
               <Flex w="100%" h="100%" align="center" justifyContent="center">
@@ -303,13 +304,13 @@ const SearchBar = () => {
                       }
                       name={el.game.name}
                       rating={
-                        (el.game.rating !== 0 || el.game.rating === undefined) ? "⭐" + el.game.rating + "⭐" : "⭐ - ⭐"
+                        (el.game.rating !== 0 || el.game.rating === undefined) ? "⭐" + ' '+ el.game.rating : "⭐ - ⭐"
                       }
                     />
                     </Link>
                   );
                 })}
-                <Flex // AllResultsButton
+                {/* <Flex // AllResultsButton
                   as="button"
                   bgColor="#000"
                   color="#fff"
@@ -329,7 +330,7 @@ const SearchBar = () => {
                 >
                   {" "}
                   See all results{" "}
-                </Flex>
+                </Flex> */}
               </>
             )}
           </Flex>

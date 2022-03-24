@@ -42,7 +42,7 @@ export default function ContactForm() {
                 textAlign="center"
               >
                 <Text as={"span"} position={"relative"}>
-                  Have a problem ?
+                  Doubts or Issues ?
                 </Text>
                 <br />
                 <Text as={"span"} color={"pink.500"}>

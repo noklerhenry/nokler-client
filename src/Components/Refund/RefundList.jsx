@@ -14,14 +14,18 @@ import {
   Td,
   TableCaption,
   Link,
+  Divider,
   useColorModeValue,
   Flex,
   Text,
+  SimpleGrid,
 } from "@chakra-ui/react";
 
 export default function RefundList() {
   const dispatch = useDispatch();
   const refund = useSelector((state) => state.refund);
+
+  const bg3 = useColorModeValue("gray.100", "gray.900");
 
   useEffect(() => {
     dispatch(getRefund());
@@ -35,60 +39,23 @@ export default function RefundList() {
         <AdminHeader />
       </Box>
 
-      <Flex w="full" p={"5"} alignItems="center" justifyContent="center">
-        <Table
-          mt={20}
-          variant="striped"
-          w="full"
-          borderWidth="1px"
-          display={{
-            base: "block",
-            md: "table",
-          }}
-          sx={{
-            "@media print": {
-              display: "table",
-            },
-          }}
-        >
-          <TableCaption>Refund claims</TableCaption>
-          <Thead
-            display={{
-              base: "none",
-              md: "table-header-group",
-            }}
-            sx={{
-              "@media print": {
-                display: "table-header-group",
-              },
-            }}
-          >
-            <Tr>
-              <Th fontSize="xl">PETITION ID</Th>
-              <Th fontSize="xl">MAIL</Th>
-              <Th fontSize="xl">NAME</Th>
-              <Th fontSize="xl">STATUS</Th>
-            </Tr>
-          </Thead>
-          <Tbody
-            display={{
-              base: "block",
-              lg: "table-row-group",
-            }}
-            sx={{
-              "@media print": {
-                display: "table-row-group",
-              },
-            }}
-          >
+      <Flex w="full" p={"5"} alignItems="center" justifyContent="center" flexDirection='column'>
+      <Text fontSize="30px" mb="15px" mt="15px">
+              Refund petitions
+            </Text>
+            <SimpleGrid mt="30px" columns={{sm:2, md:2, lg:3, xl:4}} spacing='2'>
             {refund?.map((refund) => {
               return (
-                <Box>
-                  <Text>PETITION ID: {refund.id}</Text> 
-                  <Text>MAIL: {refund.userEmail}</Text>
-                  <Text>NAME: {refund.userName}</Text>
-                  <Text>STATUS:
-                    {refund.status === "FINISHED"
+                <Box p='20px' bg={bg3} borderRadius='20px'>
+                  <Text fontSize='10px'>PETITION ID: {refund.id}</Text>
+                   
+                  <Text fontSize='11px'>EMAIL: </Text>
+                    <Text fontSize='15px'><b>{refund.userEmail}</b></Text>
+                  <Text fontSize='12px' mt='10px'>NAME </Text>
+                    <Text>{refund.userName}</Text>
+                    <Divider />
+                  <Text fontSize='12px' mt='10px'>STATUS</Text>
+                    <Text>&#9679;  {refund.status === "FINISHED"
                       ? "APPROVED"
                       : refund.status === "CANCEL"
                       ? "DENIED"
@@ -97,8 +64,8 @@ export default function RefundList() {
                 </Box>
               );
             })}
-          </Tbody>
-        </Table>
+            </SimpleGrid>
+       
       </Flex>
     </Container>
   );

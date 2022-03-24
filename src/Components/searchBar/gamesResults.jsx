@@ -8,18 +8,20 @@ const GamesResults = (props) => {
       <Flex
         width={["150%", "135%", "120%", "105%", "93%", "93%"]}
         h="2.7em"
-        borderBottom="1px solid #d8d8d852"
         p="4px 8px"
         alignItems="center"
         mt="30px"
+        borderRadius='20px'
         _hover={{
           borderBottom: "2px solid violet",
           cursor: "pointer",
           transition: "0.2s ease-in-out",
+          color: '#ffffff',
+          borderRadius:'20px'
         }}
       >
         <Flex w="auto" h="100%" flex="0.4">
-          <Image src={thumbnailSrc} alt="gameImg" w="150%" h="100%" />
+          <Image src={thumbnailSrc} alt="gameImg" w="150%" h="100%" borderRadius='10px' />
         </Flex>
         <Box
           as="h3"
@@ -28,15 +30,16 @@ const GamesResults = (props) => {
           ml="10px"
           display="flex"
           flex="2"
-          _hover={{ cursor: "pointer" }}
+          _hover={{ cursor: "pointer", color: '#ffffff' }}
         >
           {name}
         </Box>
         <Flex
           as="span"
-          color="#a1a1a1"
+          color="#666666"
           fontSize="16px"
           flex="0.5"
+          _hover={{ cursor: "pointer", color: '#ffffff' }}
           visibility={[
             "hidden",
             "hidden",

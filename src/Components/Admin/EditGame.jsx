@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams }  from 'react-router'
 import AdminCard from "./AdminCard";
 import axios from "axios";
-import { Heading, Container, Text, FormControl, Box,  Divider, Input, Button, Flex, FormLabel, Select, Image, Switch, SimpleGrid, useColorMode, useColorModeValue } from '@chakra-ui/react'
+import { Heading, Container, Text, FormControl, Box,  Divider, Input, Button, Flex, FormLabel, Select, Image, Switch, SimpleGrid, useColorMode, useColorModeValue, useToast } from '@chakra-ui/react'
 import AdminHeader from "./AdminHeader";
 
 
@@ -10,6 +10,7 @@ export default function EditGame() {
 
     let {nameid} = useParams()
     const [game, setGame] = useState('')
+    const [change, itChange] = useState('')
     const [input, setInput] = useState({
         "updateValues":{
             price: '',
@@ -24,7 +25,9 @@ export default function EditGame() {
 
     const { toggleColorMode } = useColorMode()
 
-  const bg = useColorModeValue('#efefef', '#18181880')
+    const toast = useToast()
+
+    const bg = useColorModeValue('#efefef', '#18181880')
 
 
     useEffect(() =>{
@@ -51,7 +54,7 @@ export default function EditGame() {
               }
       })
     })
-    }, [])
+    }, [change])
 
 
     const [newInput, setNewInput] = useState({
@@ -74,9 +77,10 @@ export default function EditGame() {
         }
     }) 
 
-    async function handleDelete (productId){
-        const sendGame = await axios.delete('https://nokler-api.herokuapp.com/delete/' + productId)
-        console.log('key deleted')
+     function handleDelete (productId){
+        const delGame =  axios.delete('https://nokler-api.herokuapp.com/delete/' + productId)
+        console.log('Key deleted')
+        itChange('1')
         //history.push('/addgame')
     }
 
@@ -84,6 +88,7 @@ export default function EditGame() {
         e.preventDefault();
         const sendGame = await axios.post('https://nokler-api.herokuapp.com/product', newInput)
         console.log('Key Added')
+        itChange(2)
         //history.push('/addgame')
     }
 
@@ -126,13 +131,16 @@ function handleKeyChange(e, index){
 }
 
 
+
 console.log('soy game:', game)
 console.log(newInput)
 
     return (
         <>
-    <Container p='6'>
+    <Flex flexDirection='column' w='95vw' margin='0 3%' alignContent='center' alignItems='center'>
      <AdminHeader />
+
+        <Box w='600px'>
         <Divider mt='20px' mb='20px'/>
       <Image src={game[0]?.game.image} w='200px' borderRadius='10px' float='right'/>
       <Heading fontSize='29px' fontWeight='400'>{game[0]?.game.name}</Heading>
@@ -172,6 +180,13 @@ console.log(newInput)
               <Button
                     onClick={() => {
                       handleDelete(g.id);
+                       toast({
+          title: 'Key Deleted',
+          description: "The keys were deleted from the game",
+          status: 'error',
+          duration: 4000,
+          isClosable: true,
+        });
                     }}
                     ml="4"
                     bg='none'
@@ -206,9 +221,6 @@ console.log(newInput)
                 </div>
 
             ))}
-
-
-
 
 
             {/* <Input borderRadius='20px' mb='15px' onChange={onChange} value={input.key} name="key" type="text" ></Input> */}
@@ -280,11 +292,28 @@ console.log(newInput)
                 <option value='SEGA Master System'>SEGA Master System</option>
 
             </Select>
-            <Button name='add' type='submit' mt='30px'>Add New Key</Button>
+
+            <Button name='add' type='submit' mt='30px'
+      onClick={() =>
+        toast({
+          title: 'Key created',
+          description: "The key was added to the game",
+          status: 'success',
+          duration: 4000,
+          isClosable: true,
+        })
+      }
+    >
+      Add New Key
+    </Button>
+
+
+
+            {/* <Button name='add' type='submit' mt='30px'>Add New Key</Button> */}
         </FormControl>
         </form>
-
-    </Container>
+        </Box>
+    </Flex>
         </>
 
     )

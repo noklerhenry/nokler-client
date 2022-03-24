@@ -3,7 +3,7 @@ import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Card } from "./Card";
-import { SimpleGrid, Heading } from "@chakra-ui/react";
+import { SimpleGrid, Heading, Spinner } from "@chakra-ui/react";
 
 export const Cards = () => {
   //const games = useSelector((state) => state.games);
@@ -28,8 +28,9 @@ export const Cards = () => {
         backgroundImage=" linear-gradient(0deg, transparent 24%, rgba(140, 6, 247, .09) 25%, rgba(140, 6, 247, .09) 26%, transparent 27%, transparent 74%, rgba(140, 6, 247, .09) 75%, rgba(140, 6, 247, .05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(140, 6, 247, .09) 25%, rgba(140, 6, 247, .09) 26%, transparent 27%, transparent 74%, rgba(140, 6, 247, .09) 75%, rgba(140, 6, 247, .09) 76%, transparent 77%, transparent)"
         backgroundSize="25px 25px"
       >
+        
         {games
-          ? games.map((g) => (
+          ? games.slice(0,8).map((g) => (
               <Card
                 key={g.id}
                 id={g.id}
@@ -41,7 +42,8 @@ export const Cards = () => {
                 productKey={g.productKey}
               />
             ))
-          : "Loading..."}
+          : <Spinner />}
+          
       </SimpleGrid>
     </>
   );

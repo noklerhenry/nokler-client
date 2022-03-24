@@ -23,6 +23,7 @@ import {
   UnorderedList,
   Heading,
   Text,
+  useColorMode,
   useToast,
   Grid,
 } from "@chakra-ui/react";
@@ -33,6 +34,9 @@ const WishList = () => {
   const favs = useSelector((state) => state.favoriteGames);
   const dispatch = useDispatch();
 
+  const { colorMode, toggleColorMode } = useColorMode();
+
+
   useEffect(() => {
     localStorage.setItem("whislist", JSON.stringify(favs));
   }, [favs]);
@@ -40,6 +44,11 @@ const WishList = () => {
   const bg = useColorModeValue("white", "gray.800");
   const bg2 = useColorModeValue("white", "gray.800");
   const bg3 = useColorModeValue("gray.100", "gray.900");
+
+  const deleteGameFav = (id) => {
+    dispatch(removeClickButtonFavorite(id));
+    dispatch(removeGameFavorite(id));
+  } // -----> importanteee
 
   console.log(favs)
 
@@ -55,30 +64,49 @@ const WishList = () => {
 
                 <Box bg={bg3} padding='22px' borderRadius='20px'>
                   <Text fontSize='23px' fontWeight='600' lineHeight='35px'> {game.name}</Text>
+
                   <Popover>
+                          {/* Importanteeeeeeeeeee */}
                         <PopoverTrigger>
                           <Button
+                            color={colorMode === "dark" ? "gray.400" : ""}
+                            fontWeight={colorMode === "dark" ? "" : "bold"}
                             bg="transparent"
-                            size="sm"
+                            border="none"
                             outline="0"
                             boxShadow="0"
-                            h='25px'
-                            mr='10px'
                             _focus={{ outline: "none" }}
                           >
-                            Platforms
+                            See
                           </Button>
                         </PopoverTrigger>
                         <PopoverContent>
                           <PopoverArrow />
-                          <PopoverCloseButton color="#8c06f7" mt="5px" />
+                          <PopoverCloseButton color="white" mt="5px" />
                           <PopoverBody>
                             <UnorderedList>
-                                {game?.platform?.map(p => {
+                              {game?.productKey?.length >= 2
+                                ? game?.productKey?.map((el) => {
                                     return (
-                                        <ListItem color="#8c06f7">{p}</ListItem>
-                                    )
-                                })}
+                                      <ListItem color={colorMode === 'dark' ? 'white' : ''}>{`${
+                                        el.region +
+                                        " - $" +
+                                        el.price +
+                                        `${
+                                          el.key?.length === 0
+                                            ? " - Key Not Available"
+                                            : " - Key Available"
+                                        }`
+                                      }`}</ListItem>
+                                    );
+                                  })
+                                : game?.productKey?.map((el) => {
+                                    return (
+                                      <ListItem color={colorMode === 'dark' ? 'white' : ''}>{`${
+                                        el.region + " - $" + el.price
+                                      }`}</ListItem>
+                                    );
+                                  })}
                             </UnorderedList>
                           </PopoverBody>
                         </PopoverContent>

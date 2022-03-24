@@ -15,7 +15,7 @@ export default function AdminHeader(){
             {isAuthenticated ?  user.name : ' Admin'}</b> </Text>
             <Button h='25px' mr='10px' background={bg}><Link href='/admin-products'>Manage Products</Link></Button>
             <Button h='25px'  mr='10px' background={bg}><Link href='/admin-users'>Manage Users</Link></Button>
-            <Button h='25px' background={bg}><Link href='/admin-users'> Refunds</Link></Button>
+            <Button h='25px' background={bg}><Link href='/refundlist'> Refunds</Link></Button>
         </Box>
         </Flex>
 
