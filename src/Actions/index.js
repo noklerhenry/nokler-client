@@ -22,6 +22,7 @@ export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const FILTER = "FILTER";
 export const GET_USERS = "GET_USERS";
 export const GET_ORDERS = "GET_ORDERS";
+export const GET_REFUND = "GET_REFUND";
 
 export const addToCart = (payload) => {
   return {
@@ -290,6 +291,15 @@ export const postRefund = (payload) => async (dispatch) => {
 };
 
 //https://nokler-api.herokuapp.com/getRefund
+export const getRefund = () => async (dispatch) => {
+  try {
+    const url = await axios.get("https://nokler-api.herokuapp.com/getRefund");
+    return dispatch({ type: "GET_REFUND", payload: url.data });
+  } catch (error) {
+    console.log(error);
+    alert("Error Get Refund");
+  }
+};
 
 //https://nokler-api.herokuapp.com/updatePetition/{id}?status=PENDING
 

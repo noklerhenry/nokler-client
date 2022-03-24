@@ -34,8 +34,6 @@ export default function Admin() {
   const orders = useSelector((state) => state.orders);
   let gamesList = useSelector((state) => state.games);
 
-  const [scrollBehavior, setScrollBehavior] = useState("inside");
-
   const [game, setGame] = useState("");
   const [user, setUser] = useState("");
 

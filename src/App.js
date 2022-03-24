@@ -18,7 +18,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import UserOut from "./Components/Admin/UserOut";
 import FAQs from "./Components/FAQs";
 import Refund from "./Components/Refund/Refund";
-
+import RefundList from "./Components/Refund/RefundList";
 
 function App() {
 
@@ -46,7 +46,7 @@ function App() {
             <Route exact path="/user-out" component={UserOut} />
             <Route exact path="/profile" component={isAuthenticated ? UserProfile : UserOut } />
             <Route exact path="/refund" component={isAuthenticated ? Refund : UserOut } />
-
+            <Route exact path="/refundlist" component={isAuthenticated ? RefundList : UserOut } />
             {/* {  <Route exact path="/profile" component={UserProfile} /> && isAuthenticated ? <Route exact path="/profile" component={UserProfile} /> : <Redirect to="/user-out" /> } */}
           </Route>
         </Switch>
