@@ -17,6 +17,8 @@ import {
   ADD_GAME_FAVORITE,
   REMOVE_GAME_FAVORITE,
   // GET_ALL_GAMES,
+  ADD_ID_BUTTON_FAV,
+  REMOVE_ID_BUTTON_FAV,
   GET_GAME_BY_NAME,
   GET_ALL_PRODUCTS,
   FILTER,
@@ -26,9 +28,8 @@ import {
 import json from "../games.json";
 
 const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
-const whislistFromLocalStorage = JSON.parse(
-  localStorage.getItem("whislist") || "[]"
-);
+const whislistFromLocalStorage = JSON.parse(localStorage.getItem("whislist") || "[]");
+const favButton = JSON.parse(localStorage.getItem("favClicked") || "[]");
 
 const initialState = {
   // games: json.results,
@@ -42,6 +43,7 @@ const initialState = {
   genres: [],
   stores: [],
   favoriteGames: whislistFromLocalStorage,
+  gamesAddedToFav: favButton
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -219,6 +221,16 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         favoriteGames: state.favoriteGames.filter((el) => el.id !== payload),
       };
+    case ADD_ID_BUTTON_FAV: 
+      return {
+          ...state,
+          gamesAddedToFav: [...state.gamesAddedToFav, payload]
+      }
+    case REMOVE_ID_BUTTON_FAV:
+      return {
+          ...state,
+          gamesAddedToFav: state.gamesAddedToFav.filter(el => el !== payload)
+      }
     case GET_ALL_PRODUCTS:
       return {
         ...state,

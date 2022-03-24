@@ -16,7 +16,7 @@ export const Cards = () => {
     });
   }, []);
 
-  console.log(games);
+//   console.log(games);
   return (
     <>
       <Heading fontSize="55px" fontWeight="300" ml="10px" mb="30px">
@@ -37,7 +37,7 @@ export const Cards = () => {
                 name={g.name}
                 image={g.img}
                 // price={g.price}
-                platform={g.platform}
+                // platform={g.platform}
                 productKey={g.productKey}
               />
             ))

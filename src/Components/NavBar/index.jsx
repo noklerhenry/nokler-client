@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-//import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import ImgLogo from "./Logo/footer_nokler_logo.png";
 import SearchBar from "../searchBar/index";
 import CartDrawer from "./CartDrawer.jsx";
@@ -108,9 +108,9 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
             ml={mediaQueryIcon ? "2rem" : "3rem"}
             pl={mediaQueryIconSm ? "2.8rem" : null}
           >
-            <Link href="/">
+            <RouterLink to="/">
               <Image src={ImgLogo} alt="nokler logo" w="125px" h="35px" />
-            </Link>
+            </RouterLink>
           </Flex>
           <Flex
             display="block"
@@ -152,18 +152,15 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
             textAlign="center"
           >
             <Flex as="li" h="80px">
-            <Box
+              <Box
                 pos="absolute"
                 top="2"
                 right="19.8rem"
                 padding="0 1rem"
                 cursor="pointer"
               >
-                <Button
-                  size="sm"
-                  mt="20px"
-                >
-                  <Link href='/gallery'>All games</Link>
+                <Button size="sm" mt="20px">
+                  <Link href="/gallery">All games</Link>
                 </Button>
               </Box>
 
@@ -230,7 +227,12 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
                         }
                       />
                     </MenuButton>
-                    <MenuList alignItems={"center"} bgColor={bg} borderRadius='15px 0px 15px 15px' boxShadow='2px 2px 10px #8c06f750'>
+                    <MenuList
+                      alignItems={"center"}
+                      bgColor={bg}
+                      borderRadius="15px 0px 15px 15px"
+                      boxShadow="2px 2px 10px #8c06f750"
+                    >
                       <br />
                       <Center>
                         <Avatar
@@ -243,25 +245,28 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
                         />
                       </Center>
                       <br />
-                      <Center color="#8c06f7" padding='5px 15px' >
-                        <p>Welcome <br/> <b>{` ${user ? user.name : "To Nøkler"}`}</b></p>
+                      <Center color="#8c06f7" padding="5px 15px">
+                        <p>
+                          Welcome <br />{" "}
+                          <b>{` ${user ? user.name : "To Nøkler"}`}</b>
+                        </p>
                       </Center>
                       <br />
-                      
-                      <Link href="/admin" _hover='#222222'>
-                        <MenuItem >Admin Home</MenuItem>
+
+                      <Link href="/admin" _hover="#222222">
+                        <MenuItem>Admin Home</MenuItem>
                       </Link>
-                      <Link href="/admin-products" _hover='#222222'>
-                        <MenuItem >Manage Products</MenuItem>
+                      <Link href="/admin-products" _hover="#222222">
+                        <MenuItem>Manage Products</MenuItem>
                       </Link>
-                      <Link href="/admin-users" _hover='#222222'>
-                        <MenuItem >Manage Users</MenuItem>
+                      <Link href="/admin-users" _hover="#222222">
+                        <MenuItem>Manage Users</MenuItem>
                       </Link>
-                      <Link href="/addgame"_hover='#222222'>
-                        <MenuItem >Add Games</MenuItem>
+                      <Link href="/addgame" _hover="#222222">
+                        <MenuItem>Add Games</MenuItem>
                       </Link>
                       <MenuDivider />
-                      <MenuItem onClick={() => logout()} _hover='#222222'>
+                      <MenuItem onClick={() => logout()} _hover="#222222">
                         Logout
                       </MenuItem>
                     </MenuList>

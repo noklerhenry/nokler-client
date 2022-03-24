@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeGameFavorite } from "../../Actions";
+import { removeGameFavorite, removeClickButtonFavorite } from "../../Actions";
 import { Link } from "react-router-dom";
 import {
   chakra,
@@ -22,6 +22,7 @@ import {
   ListItem,
   UnorderedList,
   useToast,
+  useColorMode,
 } from "@chakra-ui/react";
 import { BsFillTrashFill } from "react-icons/bs";
 import Landing from "./noFavsLanding";
@@ -29,14 +30,21 @@ import Landing from "./noFavsLanding";
 const WishList = () => {
   const favs = useSelector((state) => state.favoriteGames);
   const dispatch = useDispatch();
+  
+  const { colorMode, toggleColorMode } = useColorMode();
 
   useEffect(() => {
     localStorage.setItem("whislist", JSON.stringify(favs));
   }, [favs]);
-
+  
   const bg = useColorModeValue("white", "gray.800");
   const bg2 = useColorModeValue("white", "gray.800");
   const bg3 = useColorModeValue("gray.100", "gray.700");
+  
+  const deleteGameFav = (id) => {
+    dispatch(removeClickButtonFavorite(id));
+    dispatch(removeGameFavorite(id));
+  }
 
   return (
     <>
@@ -75,8 +83,9 @@ const WishList = () => {
                     <Box as="span" ml="5px" fontWeight="bold">
                       Name
                     </Box>
-                    <Box as="span" ml="5px" fontWeight="bold">
-                      Platforms
+                    <Box as="span" ml="-15px" fontWeight="bold">
+                      {/* Platforms */}
+                      Regions / Prices
                     </Box>
                     <Box as="span" fontWeight="bold">
                       Key
@@ -91,10 +100,15 @@ const WishList = () => {
                     w="full"
                     py={2}
                     px={6}
-                    fontWeight="hairline"
-                    fontSize={game.name.length >= 25 ? "sm" : "md"}
-                  >
-                    <Box as="span" mt="7px" ml="20px">
+                    fontWeight={"hairline"}
+                    >
+                    <Box
+                      fontSize={game.name.length >= 25 ? "sm" : "md"}
+                      as="span"
+                      mt="7px"
+                      ml="20px"
+                      fontWeight={colorMode === "dark" ? "hairline" : "bold"}
+                    >
                       {game.name}
                     </Box>
                     <chakra.span
@@ -107,7 +121,8 @@ const WishList = () => {
                       <Popover>
                         <PopoverTrigger>
                           <Button
-                            color="white"
+                            color={colorMode === "dark" ? "gray.400" : ""}
+                            fontWeight={colorMode === "dark" ? "" : "bold"}
                             bg="transparent"
                             border="none"
                             outline="0"
@@ -122,11 +137,28 @@ const WishList = () => {
                           <PopoverCloseButton color="white" mt="5px" />
                           <PopoverBody>
                             <UnorderedList>
-                                {game?.platform?.map(p => {
+                              {game?.productKey?.length >= 2
+                                ? game?.productKey?.map((el) => {
                                     return (
-                                        <ListItem color="white">{p}</ListItem>
-                                    )
-                                })}
+                                      <ListItem color={colorMode === 'dark' ? 'white' : ''}>{`${
+                                        el.region +
+                                        " - $" +
+                                        el.price +
+                                        `${
+                                          el.key?.length === 0
+                                            ? " - Key Not Available"
+                                            : " - Key Available"
+                                        }`
+                                      }`}</ListItem>
+                                    );
+                                  })
+                                : game?.productKey?.map((el) => {
+                                    return (
+                                      <ListItem color={colorMode === 'dark' ? 'white' : ''}>{`${
+                                        el.region + " - $" + el.price
+                                      }`}</ListItem>
+                                    );
+                                  })}
                             </UnorderedList>
                           </PopoverBody>
                         </PopoverContent>
@@ -143,12 +175,13 @@ const WishList = () => {
                           as="span"
                           ml="3px"
                           color={
-                            game.productKey.length === 0
+                            !game?.productKey?.find((elem) => elem.key.length)
                               ? "red.500"
                               : "green.500"
                           }
+                          fontWeight={colorMode === "dark" ? "" : "bold"}
                         >
-                          {game.productKey.length >= 1
+                          {game?.productKey?.find((elem) => elem.key.length)
                             ? "Available"
                             : "Not Available"}
                         </Box>
@@ -184,7 +217,7 @@ const WishList = () => {
                           icon={<BsFillTrashFill />}
                           outline="0"
                           boxShadow="0"
-                          onClick={() => dispatch(removeGameFavorite(game.id))}
+                          onClick={() => deleteGameFav(game.id)}
                         />
                       </ButtonGroup>
                     </Flex>

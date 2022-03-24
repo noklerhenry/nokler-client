@@ -10,13 +10,15 @@ import { Home } from "./Components/Home";
 import Detail from "./Components/Detail/Detail.jsx";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer/Footer.jsx";
-import WishList from "./Components/Whishlist";
+import WishList from "./Components/WishList";
 import Gallery from "./Components/Gallery/Gallery.jsx";
 import ContactForm from "./Components/Contact";
 import UserProfile from "./Components/Admin/UserProfile";
 import { useAuth0 } from "@auth0/auth0-react";
 import UserOut from "./Components/Admin/UserOut";
 import FAQs from "./Components/FAQs";
+import NotFound from "./Components/NoFound";
+import About from "./Components/About";
 
 
 function App() {
@@ -28,11 +30,10 @@ function App() {
       <Router>
         <Header />
         <Switch>
-          <Route path="/">
             <Route exact path="/" component={Home} />
             <Route exact path="/details/:nameid" component={Detail} />
             <Route exact path="/checkout" component={Checkout} />
-            <Route exact path="/whislist" component={WishList} />
+            <Route exact path="/wishlist" component={WishList} />
             <Route exact path="/admin" component={isAuthenticated ? Admin : UserOut} />
             <Route exact path="/admin-products" component={isAuthenticated ? AdminProducts : UserOut} />
             <Route exact path="/admin-users" component={isAuthenticated ? AdminUsers : UserOut} />
@@ -42,15 +43,17 @@ function App() {
             <Route exact path="/gallery" component={Gallery} />
             <Route exact path="/contact" component={ContactForm} />
             <Route exact path="/frecuent-questions" component={FAQs} />
+            <Route exact path="/about" component={About} />
             <Route exact path="/user-out" component={UserOut} />
             <Route
               exact
               path="/profile"
               component={isAuthenticated ? UserProfile : UserOut}
             />
-
+            <Route path='*'>
+                <NotFound />
+            </Route>
             {/* {  <Route exact path="/profile" component={UserProfile} /> && isAuthenticated ? <Route exact path="/profile" component={UserProfile} /> : <Redirect to="/user-out" /> } */}
-          </Route>
         </Switch>
         <Footer />
       </Router>

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, addGameFavorite } from "../Actions";
+import { addGameFavorite, removeGameFavorite, clickedButtonFavorite, removeClickButtonFavorite } from "../Actions";
 import {
   Button,
   useToast,
@@ -12,39 +12,25 @@ import {
 } from "@chakra-ui/react";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 
-export const Card = ({ id, name, image, genres, platform, productKey }) => {
+export const Card = ({ id, name, image, genres, productKey }) => {
     
-  const [clicked, setClicked] = useState(false);
+  const favClicked = useSelector((state) => state.gamesAddedToFav)  
   const dispatch = useDispatch();
-  const favs = useSelector((state) => state.favoriteGames);
-  let games = useSelector((state) => state.games);
+  
+  useEffect(() => {
+     localStorage.setItem("favClicked", JSON.stringify(favClicked));
+   }, [favClicked]);
 
-  const handleClick = (id) => {
-    dispatch(addToCart(id));
+  const handleFav = (index) => {
+    if (favClicked.includes(index)) {
+      dispatch(removeGameFavorite(index));
+      dispatch(removeClickButtonFavorite(index))
+    } else {
+      dispatch(addGameFavorite({ id, name, productKey }));
+      dispatch(clickedButtonFavorite(index));
+    }
   };
-
-  const toast = useToast();
-
-  const isClicked = () => {
-    handleClick(id);
-
-    toast({
-      isClosable: true,
-      title: "Success!",
-      description: "Game added to Cart",
-      duration: 2000,
-      position: "bottom-right",
-      status: "success",
-    });
-  };
-
-  const handleFav = () => {
-    setClicked(true);
-    dispatch(addGameFavorite({ id, name, platform, productKey }));
-    console.log(favs);
-    // console.log(games)
-  };
-
+   
   return (
     <Box margin="10px" w="230px" h={{ base: "100%", sm: "400px", lg: "450px" }}>
       <Link href={'/details/'+ name}>
@@ -83,23 +69,20 @@ export const Card = ({ id, name, image, genres, platform, productKey }) => {
       >
         {name}
       </Heading>
-      {/* <Text>{`$ ${price}`}</Text> */}
-      {/* <Text fontSize="20px" mt="10px" mb="10px">
-        ${price}
-      </Text> */}
       <Button size="sm" height="24px">
         <Link href={'/details/'+ name}>See game</Link>
       </Button>
-      {/* <Button size="sm" height="24px" onClick={() => isClicked()}>
-        +
-      </Button> */}
       <Button
+        key={id}
         border="none"
         bg="transparent"
+        outline='0'
+        boxShadow='0'
         _hover={{ bg: "none" }}
-        onClick={handleFav}
+        _focus={{outline: '0'}}
+        onClick={() => handleFav(id)}
       >
-        {clicked ? <HiHeart color="red" /> : <HiOutlineHeart />}
+        {favClicked.includes(id) ? <HiHeart color="red" /> : <HiOutlineHeart />}
       </Button>
     </Box>
   );

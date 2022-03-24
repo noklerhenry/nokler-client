@@ -16,12 +16,16 @@ export const GET_STORES = "GET_STORES";
 export const ORDER_BY = "ORDER_BY";
 export const ADD_GAME_FAVORITE = "ADD_GAME_FAVORITE";
 export const REMOVE_GAME_FAVORITE = "REMOVE_GAME_FAVORITE";
+export const ADD_ID_BUTTON_FAV = "ADD_ID_BUTTON_FAV";
+export const REMOVE_ID_BUTTON_FAV = "REMOVE_ID_BUTTON_FAV";
 export const GET_ALL_GAMES = "GET_ALL_GAMES";
 export const GET_GAME_BY_NAME = "GET_GAME_BY_NAME";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const FILTER = "FILTER";
 export const GET_USERS = "GET_USERS";
 export const GET_ORDERS = "GET_ORDERS";
+
+
 
 export const addToCart = (payload) => {
   return {
@@ -180,18 +184,34 @@ export function orderBy(payload) {
 }
 
 export function addGameFavorite(payload) {
-  console.log(payload)  
+//   console.log(payload)  
   return {
-    type: "ADD_GAME_FAVORITE",
+    type: ADD_GAME_FAVORITE,
     payload,
   };
 }
 
 export function removeGameFavorite(idGame) {
-  console.log(idGame)  
+//   console.log(idGame)  
   return {
-    type: "REMOVE_GAME_FAVORITE",
+    type: REMOVE_GAME_FAVORITE,
     payload: idGame,
+  };
+}
+
+export function clickedButtonFavorite(id) {
+  console.log(id)  
+  return {
+    type: ADD_ID_BUTTON_FAV,
+    payload: id
+  };
+}
+
+export function removeClickButtonFavorite(id) {
+  console.log(id)  
+  return {
+    type: REMOVE_ID_BUTTON_FAV,
+    payload: id
   };
 }
 

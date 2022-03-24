@@ -92,7 +92,7 @@ const SideBar = ({ Open, toggle }) => {
           </Box>
           
           <Box borderBottom='1px dotted #ffffff' w='90%' mt='10px'>
-            <Link to="/whislist">
+            <Link to="/wishlist">
               <Button
                 mt="0px"
                 bgColor="#ffffff00"

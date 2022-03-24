@@ -24,7 +24,7 @@ const Landing = () => {
             lineHeight={"110%"}
           >
             Start looking for <br />
-            <Text as={"span"} color={"pink.400"}>
+            <Text as={"span"} color={"pink.500"}>
               your next games
             </Text>
           </Heading>
