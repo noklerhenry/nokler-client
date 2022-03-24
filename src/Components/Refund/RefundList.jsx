@@ -16,6 +16,7 @@ import {
   Link,
   useColorModeValue,
   Flex,
+  Text,
 } from "@chakra-ui/react";
 
 export default function RefundList() {

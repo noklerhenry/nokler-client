@@ -39,33 +39,35 @@ const FAQs = () => {
           </Text>
         </Stack>
       </Container>
-      <Accordion allowMultiple w="60%" m="-3rem 0 9rem 15rem">
-        <AccordionItem>
-          <h2>
-            <AccordionButton>
-              <Box flex="1" textAlign="left" fontSize={"x-large"}>
-                What is Nøkler?
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </h2>
-          <AccordionPanel pb={4}>
-            <Text color={"gray.500"}>
-              Nøkler is an online platform dedicated to the sale of digital keys
-              for games. Here you will be able to find a wide variety of action
-              games, adventures, puzzles and much more from small developers to
-              the largest. Every gaming enthusiast will be able to find the key
-              of the game they want, and at a good price! <br />
-              Just pick the key of the game you want and change it in your
-              favorite store like Steam, EpicGames, GOG, etc. <br />
-              Our Support Team can help you in case you have specific questions.
-              Click{" "}
-              <Link to="/contact">
-                <strong>Here</strong>
-              </Link>
-            </Text>
-          </AccordionPanel>
-        </AccordionItem>
+      <Flex align='center' justifyContent='center'>
+        <Accordion allowMultiple w="60%" m='-3rem 0 5rem 0'>
+          <AccordionItem>
+            <h2>
+              <AccordionButton>
+                <Box flex="1" textAlign="left" fontSize={"x-large"}>
+                  What is Nøkler?
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4}>
+              <Text color={"gray.500"}>
+                Nøkler is an online platform dedicated to the sale of digital
+                keys for games. Here you will be able to find a wide variety of
+                action games, adventures, puzzles and much more from small
+                developers to the largest. Every gaming enthusiast will be able
+                to find the key of the game they want, and at a good price!{" "}
+                <br />
+                Just pick the key of the game you want and change it in your
+                favorite store like Steam, GoG, etc. <br />
+                Our Support Team can help you in case you have specific
+                questions. Click{" "}
+                <Link to="/contact">
+                  <strong>Here</strong>
+                </Link>
+              </Text>
+            </AccordionPanel>
+          </AccordionItem>
 
           <AccordionItem>
             <h2>
