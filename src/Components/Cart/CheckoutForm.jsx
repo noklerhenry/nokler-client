@@ -10,8 +10,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../../Actions";
+import { useHistory } from "react-router-dom";
 
 export const CheckoutForm = ({ amount }) => {
+    
+  const history = useHistory();
 
   const inputStyle = {
     iconColor: '#8c06f7',
@@ -112,13 +115,14 @@ export const CheckoutForm = ({ amount }) => {
               dispatch(clearCart());
             }
             console.log(data);
-            alert(data.status);
+            // alert(data.status);
+            history.push("/success")
             // console.log(paymentMethod);
-          } else alert(error.message);
+          } else history.push("/error")
         }
       });
     } else {
-      alert("You have to log in to make the purchase");
+      history.push("/warning");
     }
   };
 
@@ -128,13 +132,13 @@ export const CheckoutForm = ({ amount }) => {
       <form onSubmit={(e) => handleSubmit(e)}>
         <CardElement options={cardElementOpts} />
 
-        <FormLabel mt="30px">Name *</FormLabel>
+        {/* <FormLabel mt="30px">Name *</FormLabel>
         <Input
           type="text"
           value={state.name}
           name="name"
           onChange={handleChange}
-        />
+        /> */}
         <FormLabel mt="10px">City *</FormLabel>
         <Input
           type="text"

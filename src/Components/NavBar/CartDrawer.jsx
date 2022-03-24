@@ -1,5 +1,8 @@
 import React from "react";
 import { Cart } from "../Cart/Cart";
+import { useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
+
 import {
   Drawer,
   DrawerBody,
@@ -9,7 +12,7 @@ import {
   DrawerContent,
   DrawerCloseButton,
   Button,
-  Link,
+//   Link,
   useDisclosure,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -20,6 +23,8 @@ const CartDrawer = ({ Open, toggle }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const bg = useColorModeValue("#ffffff", "#121019");
   const btnRef = React.useRef();
+  
+  const cart = useSelector((state) => state.cart)
   
   /* const openCartCloseSideBar = () => {
     onOpen()
@@ -34,17 +39,17 @@ const CartDrawer = ({ Open, toggle }) => {
         size="sm"
         mt="0px"
         ml="9px"
-        border='none'
-        color={Open ? '#8c06f7' : ''}
+        border="none"
+        color={Open ? "#8c06f7" : ""}
       >
-        <FaShoppingCart size='20'/>
+        <FaShoppingCart size="20" />
       </Button>
       <Drawer
         isOpen={isOpen}
         placement="right"
         onClose={onClose}
         finalFocusRef={btnRef}
-        size='sm'
+        size="sm"
       >
         <DrawerOverlay />
         <DrawerContent bg={bg}>
@@ -59,7 +64,11 @@ const CartDrawer = ({ Open, toggle }) => {
             <Button variant="outline" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button colorScheme="blue"><Link href='/checkout'>Checkout</Link></Button>
+            <Button colorScheme="blue" isDisabled={cart.length >= 1 ? false : true}>
+              <Link to={cart.length >= 1 && "/checkout"}>
+                Checkout
+              </Link>
+            </Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

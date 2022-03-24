@@ -24,6 +24,9 @@ import RefundList from "./Components/Refund/RefundList";
 import checkRole from "./Components/Admin/CheckProfile";
 import { useState, useEffect } from "react";
 import axios from 'axios';
+import SuccessMessage from "./Components/Cart/SuccessfulMessage";
+import ErrorMessage from "./Components/Cart/ErrorMessage";
+import WarningLogInMessage from "./Components/Cart/LogInMessage";
 
 
 function App() {
@@ -67,6 +70,9 @@ function App() {
             <Route exact path="/profile" component={isAuthenticated ? UserProfile : UserOut } />
             <Route exact path="/refund" component={isAuthenticated ? Refund : UserOut } />
             <Route exact path="/refundlist" component={isAuthenticated ? RefundList : UserOut } />
+            <Route exact path='/error' component={ErrorMessage}/>
+            <Route exact path='/success' component={SuccessMessage}/>
+            <Route exact path='/warning' component={WarningLogInMessage}/>
             <Route path='*'>
                 <NotFound />
             </Route>
