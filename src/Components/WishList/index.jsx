@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeGameFavorite } from "../../Actions";
+import { removeGameFavorite, removeClickButtonFavorite } from "../../Actions";
 import { Link } from "react-router-dom";
 import {
   chakra,
@@ -141,7 +141,7 @@ const WishList = () => {
                           icon={<BsFillTrashFill />}
                           outline="0"
                           boxShadow="0"
-                          onClick={() => dispatch(removeGameFavorite(game.id))}
+                          onClick={() => deleteGameFav(game.id)}
                         />
                       </ButtonGroup>
 
