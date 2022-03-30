@@ -15,7 +15,7 @@ export default function Hero() {
       alignItems="center"
       paddingTop="60px"
     >
-      <Box flexBasis="40%">
+      <Box flexBasis="40%" margin="auto">
         <Heading fontSize="65px" fontWeight="300" lineHeight="60px">
           BUY GAME KEYS
           <br /> FOR ANY PLATFORM
@@ -25,7 +25,19 @@ export default function Hero() {
           <Link href="/gallery">See all games &#8594;</Link>
         </Button>
       </Box>
-      <Box flexBasis="50%">
+      <Box
+        flexBasis="50%"
+        display={{
+          base: "none",
+          sssm: "none",
+          ssm: "none",
+          sm: "inline",
+          md: "inline",
+          lg: "inline",
+          xl: "inline",
+          xxl: "inline",
+        }}
+      >
         <img src={Heroimg} alt="Videogames" width="100%" />
       </Box>
       {/* <div className="filter-order">

@@ -32,7 +32,7 @@ export const Card = ({ id, name, image, genres, productKey }) => {
   };
    
   return (
-    <Box margin="10px" w="230px" h={{ base: "100%", sm: "400px", lg: "450px" }}>
+    <Box margin="auto" w="230px" h={{ base: "100%", sm: "400px", lg: "450px" }}>
       <Link href={'/details/'+ name}>
       <Image
         w="100%"

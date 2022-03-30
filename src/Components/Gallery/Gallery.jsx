@@ -29,7 +29,7 @@ export default function Gallery() {
         <Filter />
         <Ordering/>
       </GridItem>
-      <GridItem colSpan={{ base: 5, md: 4, lg: 4, }}>
+      <GridItem colSpan={{ base: 5, md: 4, lg: 4, }} mt='30px'>
           <SeeMorePaginated
             gamesFiltered={gamesFiltered}
           />

@@ -35,8 +35,8 @@ export default function SeeMorePaginated({ gamesFiltered }) {
     return (
       <Flex flexDirection="column">
         <SimpleGrid
-          columns={{ base: 2, md: 2, lg: 3, xl: 3, xxl: 4 }}
-          spacing="20px"
+          columns={{ base: 1, sssm: 1, ssm: 1, sm: 2, md: 2, lg: 3, xl: 3, xxl: 4 }}
+          spacing={{ base: "150px", sssm: "150px", ssm: "150px", sm: "50px", md: "50px", lg: "50px", xl: "50px" }}
         >
           {gamesFiltered?.slice(0, visible).map((product, index) => {
             return (
@@ -56,8 +56,8 @@ export default function SeeMorePaginated({ gamesFiltered }) {
             <Loader />
           </Flex>
         ) : Number(gamesFiltered.length) <= Number(visible) ? null : (
-          <Flex align="center" justify="center">
-            <Button onClick={showMoreProducts} h="25px" mt="70px" w="200px">
+          <Flex align="center" justify="center" mt={{ base: "140px", sssm: "140px", ssm: "140px", sm: "70px" }}>
+            <Button onClick={showMoreProducts} h="25px" w="200px">
               Show More +
             </Button>
           </Flex>

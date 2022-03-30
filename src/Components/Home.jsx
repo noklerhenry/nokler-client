@@ -20,7 +20,7 @@ export const Home = () => {
       <Box w="95%" mt="80px" alignItems="center" ml="25px">
         <Cards />
       </Box>
-      <Box>
+      <Box mt="170px">
         <Latest />
       </Box>
     </>
