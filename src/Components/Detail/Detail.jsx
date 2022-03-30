@@ -7,7 +7,8 @@ import {
   Text,
   Image,
   Flex,
-  Grid, GridItem, 
+  Grid,
+  GridItem,
   VStack,
   HStack,
   Button,
@@ -27,6 +28,7 @@ import {
   useDisclosure,
   useColorMode,
   useColorModeValue,
+  Skeleton,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -44,7 +46,6 @@ import ImagesGallery from "../ImageSlider/index.jsx";
 import VideoPlayer from "../VideoPlayer/index.jsx";
 import { Key } from "./Key.jsx";
 
-
 export default function Detail() {
   const { nameid } = useParams();
   const dispatch = useDispatch();
@@ -58,7 +59,7 @@ export default function Detail() {
   const [disabled, setDisabled] = useState(false);
 
   const { toggleColorMode } = useColorMode();
-  
+
   const bg = useColorModeValue("#efefef", "#18181880");
   //const color = useColorModeValue('white', 'gray.800')
 
@@ -110,22 +111,24 @@ export default function Detail() {
           spacing={{ base: 2, md: 2 }}
         >
           <Flex flexDirection="column">
-            <Box
-              mr="4rem"
-              mt="6px"
-              display={[
-                "none",
-                "none",
-                "none",
-                "none",
-                "flex",
-                "flex",
-                "flex",
-                "flex",
-              ]}
-            >
-              <ImagesGallery />
-            </Box>
+            <Skeleton isLoaded>
+              <Box
+                mr="4rem"
+                mt="6px"
+                display={[
+                  "none",
+                  "none",
+                  "none",
+                  "none",
+                  "flex",
+                  "flex",
+                  "flex",
+                  "flex",
+                ]}
+              >
+                <ImagesGallery />
+              </Box>
+            </Skeleton>
             <Image
               borderRadius="35px"
               boxShadow="3px 3px 25px #8c06f770"
