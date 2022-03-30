@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   useColorMode,
@@ -20,7 +20,7 @@ import { FaTimes } from "react-icons/fa";
 import { Logout } from "../../Logout.jsx";
 import CartDrawer from "../CartDrawer.jsx";
 import { useAuth0 } from "@auth0/auth0-react";
-import { FaHome, FaUser, FaHeart, FaGamepad, FaDesktop  } from "react-icons/fa";
+import { FaHome, FaUser, FaHeart, FaGamepad, FaDesktop } from "react-icons/fa";
 import { getUsers, postUser } from "../../../Actions";
 import axios from "axios";
 
@@ -28,26 +28,26 @@ const SideBar = ({ Open, toggle }) => {
   const {
     user,
     loginWithPopup,
-    loginWithRedirect, isAuthenticated,
+    loginWithRedirect,
+    isAuthenticated,
     isLoading,
     logout,
   } = useAuth0();
   const { colorMode, toggleColorMode } = useColorMode();
-  
+
   const dispatch = useDispatch();
 
   const bg = useColorModeValue("#ffffff", "#121019");
 
   const [mediaQueryGrid480px] = useMediaQuery("(max-width: 480px)");
   const users = useSelector((state) => state.users.map((u) => u.email));
-  
-    const [userData, setUserData] = useState("");
-    
-     useEffect(() => {
-       dispatch(getUsers());
-     }, []);
 
-  
+  const [userData, setUserData] = useState("");
+
+  useEffect(() => {
+    dispatch(getUsers());
+  }, []);
+
   useEffect(() => {
     if (user?.email) {
       const find = users.find((u) => u == user.email);
@@ -62,9 +62,9 @@ const SideBar = ({ Open, toggle }) => {
         //return response;
       });
   }, [user]);
-  
+
   let menuNav;
-  
+
   if (userData?.rol == "ADMIN") {
     menuNav = (
       <Menu>
@@ -88,9 +88,12 @@ const SideBar = ({ Open, toggle }) => {
                 ? user.picture
                 : "https://avatars.dicebear.com/api/male/username.svg"
             }
+            marginLeft="50%"
           />
         </MenuButton>
         <MenuList
+          marginLeft="-35%"
+          maxWidth="50%"
           alignItems={"center"}
           bgColor={bg}
           borderRadius="15px 0px 15px 15px"
@@ -135,13 +138,7 @@ const SideBar = ({ Open, toggle }) => {
       </Menu>
     );
   }
-  {
-    (" ");
-  }
   if (userData?.rol == "USER") {
-    (" ");
-  }
-  {
     menuNav = (
       <Menu>
         <MenuButton
@@ -202,7 +199,6 @@ const SideBar = ({ Open, toggle }) => {
       </Menu>
     );
   }
-  
 
   return (
     <Box
@@ -248,7 +244,7 @@ const SideBar = ({ Open, toggle }) => {
           }
           textAlign="center"
         >
-          <Box>
+          <Box w="90%" mt="10px">
             {!isAuthenticated && !isLoading ? (
               <Button
                 size="sm"
@@ -257,7 +253,6 @@ const SideBar = ({ Open, toggle }) => {
                 border="none"
                 onClick={loginWithRedirect}
               >
-                {" "}
                 <FaUser size="18" />
               </Button>
             ) : (
