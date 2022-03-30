@@ -44,6 +44,7 @@ import ImagesGallery from "../ImageSlider/index.jsx";
 import VideoPlayer from "../VideoPlayer/index.jsx";
 import { Key } from "./Key.jsx";
 
+
 export default function Detail() {
   const { nameid } = useParams();
   const dispatch = useDispatch();
@@ -57,7 +58,7 @@ export default function Detail() {
   const [disabled, setDisabled] = useState(false);
 
   const { toggleColorMode } = useColorMode();
-
+  
   const bg = useColorModeValue("#efefef", "#18181880");
   //const color = useColorModeValue('white', 'gray.800')
 
@@ -103,132 +104,184 @@ export default function Detail() {
 
   return (
     <>
-    <Container maxW='1300px' mt="200px" mb="30px">
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 2 }}
-        spacing={{ base: 2, md: 2 }}
-      >
-        <Flex flexDirection="column">
-          <Box mr="4rem" mt="6px" display={["none", "none","none", "none", "flex","flex","flex", "flex",
-            ]}
-          >
-            <ImagesGallery />
-          </Box>
-          <Image borderRadius="35px" boxShadow="3px 3px 25px #8c06f770"  src={details[0]?.game.image} alt="Game.jpg" fit={"cover"} align={"center"}  w={"100%"}  h={{ base: "100%", sm: "300px", lg: "500px" }} display={[ "flex", "flex", "flex", "flex", "none",  "none", "none", "none",
-            ]}
-          />
-          <Box margin={"20px"} fontSize="xl">
-            <Button display={[ "flex", "flex", "flex", "flex",  "none",  "none","none",  "none",]} ml={["-15px", "90px", "130px", "160px", null, null, null, null]}
-              onClick={onScreenshotOpen}
+      <Container maxW="1300px" mt="200px" mb="30px">
+        <SimpleGrid
+          columns={{ base: 1, md: 2, lg: 2 }}
+          spacing={{ base: 2, md: 2 }}
+        >
+          <Flex flexDirection="column">
+            <Box
+              mr="4rem"
+              mt="6px"
+              display={[
+                "none",
+                "none",
+                "none",
+                "none",
+                "flex",
+                "flex",
+                "flex",
+                "flex",
+              ]}
             >
-              Screenshots →
-            </Button>
-            <Modal onClose={onScreenshotClose} isOpen={isScreenshotOpen} size={"full"} motionPreset="slideInBottom" colorScheme="black"
-            >
-              <ModalOverlay />
-              <ModalContent>
-                <ModalHeader>Screenshots</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
-                  <Screenshots />
-                </ModalBody>
-              </ModalContent>
-            </Modal>
-          </Box>
-        </Flex>
-        <Stack>
-          <Box as="header">
-            <Heading
-              lineHeight={1.1}
-              fontWeight={400}
-              fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
-            >
-              {details[0]?.game.name}
-            </Heading>
-          </Box>
+              <ImagesGallery />
+            </Box>
+            <Image
+              borderRadius="35px"
+              boxShadow="3px 3px 25px #8c06f770"
+              src={details[0]?.game.image}
+              alt="Game.jpg"
+              fit={"cover"}
+              align={"center"}
+              w={"100%"}
+              h={{ base: "100%", sm: "300px", lg: "500px" }}
+              display={[
+                "flex",
+                "flex",
+                "flex",
+                "flex",
+                "none",
+                "none",
+                "none",
+                "none",
+              ]}
+            />
+            <Box margin={"20px"} fontSize="xl">
+              <Button
+                display={[
+                  "flex",
+                  "flex",
+                  "flex",
+                  "flex",
+                  "none",
+                  "none",
+                  "none",
+                  "none",
+                ]}
+                ml={["-15px", "90px", "130px", "160px", null, null, null, null]}
+                onClick={onScreenshotOpen}
+              >
+                Screenshots →
+              </Button>
+              <Modal
+                onClose={onScreenshotClose}
+                isOpen={isScreenshotOpen}
+                size={"full"}
+                motionPreset="slideInBottom"
+                colorScheme="black"
+              >
+                <ModalOverlay />
+                <ModalContent>
+                  <ModalHeader>Screenshots</ModalHeader>
+                  <ModalCloseButton />
+                  <ModalBody>
+                    <Screenshots />
+                  </ModalBody>
+                </ModalContent>
+              </Modal>
+            </Box>
+          </Flex>
+          <Stack>
+            <Box as="header">
+              <Heading
+                lineHeight={1.1}
+                fontWeight={400}
+                fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
+              >
+                {details[0]?.game.name}
+              </Heading>
+            </Box>
 
-          <Box padding="4px">
-            <Text padding="1px">
-              <b>Digital key:</b> This is a digital edition of the product
-              (CD-KEY)
-            </Text>{" "}
-          </Box>
+            <Box padding="4px">
+              <Text padding="1px">
+                <b>Digital key:</b> This is a digital edition of the product
+                (CD-KEY)
+              </Text>{" "}
+            </Box>
 
-          <SimpleGrid columns={{ base: 1, md: 1, lg:2 }} mt="30px">
+            <SimpleGrid columns={{ base: 1, md: 1, lg: 2 }} mt="30px">
+              <List>
+                <ListItem borderBottom="1px dotted" padding="4px" mr="9px">
+                  <Text as={"span"} fontWeight={"bold"}>
+                    &#9733; Rating:
+                  </Text>{" "}
+                  {details[0]?.game.rating}
+                </ListItem>
+              </List>
+
+              <List>
+                <ListItem borderBottom="1px dotted" padding="4px" mr="9px">
+                  <Text as={"span"} fontWeight={"bold"}>
+                    &#9737; Released:
+                  </Text>{" "}
+                  {details[0]?.game.released_at.substring(0, 10)}
+                </ListItem>
+              </List>
+            </SimpleGrid>
+
             <List>
-              <ListItem borderBottom="1px dotted" padding="4px" mr="9px">
-                <Text as={"span"} fontWeight={"bold"}>
-                  &#9733; Rating:
-                </Text>{" "}
-                {details[0]?.game.rating}
-              </ListItem>
-            </List>
-
-            <List>
-              <ListItem borderBottom="1px dotted" padding="4px" mr="9px">
-                <Text as={"span"} fontWeight={"bold"}>
-                  &#9737; Released:
-                </Text>{" "}
-                {details[0]?.game.released_at.substring(0, 10)}
-              </ListItem>
-            </List>
-          </SimpleGrid>
-
-          <List>
               <ListItem borderBottom="1px dotted" padding="4px" mr="9px">
                 <Text as={"span"} fontWeight={"bold"}>
                   &#9650; Genres:
                 </Text>{" "}
-                {details[0]?.game.genres.map((g) =>(
-                  <Button float='right' display='inline-block' borderRadius='20px' fontSize='11px' h='23px' ml='5px' border='1px'>{g.name}</Button>
+                {details[0]?.game.genres.map((g) => (
+                  <Button
+                    float="right"
+                    display="inline-block"
+                    borderRadius="20px"
+                    fontSize="11px"
+                    h="23px"
+                    ml="5px"
+                    border="1px"
+                  >
+                    {g.name}
+                  </Button>
                 ))}
               </ListItem>
             </List>
 
-          <Box mb='20px'>
-            <Heading fontSize="26px" fontWeight="400" mb="20px" mt='20px'>
-              AVAILABLE KEYS
+            <Box mb="20px">
+              <Heading fontSize="26px" fontWeight="400" mb="20px" mt="20px">
+                AVAILABLE KEYS
+              </Heading>
+              <SimpleGrid columns={{ base: 1, md: 1, lg: 1 }} mb="30px">
+                {details.map((g) => (
+                  <Key
+                    g={g}
+                    handleCart={handleCart}
+                    nameid={nameid}
+                    onCartOpen={onCartOpen}
+                  />
+                ))}
+              </SimpleGrid>
+            </Box>
+          </Stack>
+        </SimpleGrid>
+
+        <Grid templateColumns="repeat(5, 1fr)" mt="-10px" mb="30px">
+          <GridItem GridItem colSpan={{ base: 5, md: 1, lg: 2 }}>
+            <Heading fontSize="26px" fontWeight="400" mt="-0px" mb="30px">
+              DESCRIPTION
             </Heading>
-            <SimpleGrid columns={{ base: 1, md: 1, lg: 1 }} mb="30px">
-              {details.map((g) => (
-                <Key
-                  g={g}
-                  handleCart={handleCart}
-                  nameid={nameid}
-                  onCartOpen={onCartOpen}
-                />
-              ))}
-            </SimpleGrid>
-          </Box>
-        </Stack>
-      </SimpleGrid>
+          </GridItem>
+          <GridItem GridItem colSpan={{ base: 5, md: 4, lg: 3 }}>
+            <Text fontSize="xl" mt="0px">
+              {details[0]?.game.description}
+            </Text>
+          </GridItem>
+        </Grid>
 
-      <Grid templateColumns='repeat(5, 1fr)' mt="-10px" mb='30px'>
-        <GridItem GridItem colSpan={{ base: 5, md: 1, lg: 2, }}>
-          <Heading fontSize="26px" fontWeight="400" mt="-0px" mb='30px'>
-            DESCRIPTION
-          </Heading>
-      </GridItem>
-      <GridItem GridItem colSpan={{ base: 5, md: 4, lg: 3, }}>
-        <Text fontSize="xl" mt="0px">
-          {details[0]?.game.description}
-        </Text>
-      </GridItem>
-      </Grid>
-      
-
-       
-        <Flex  fontSize="xl">
-        <Heading fontSize="26px" fontWeight="400" mt="-0px">
+        <Flex fontSize="xl">
+          <Heading fontSize="26px" fontWeight="400" mt="-0px">
             VIDEOS
           </Heading>
         </Flex>
         <Box mt="-115px">
           <VideoPlayer details={details} />
         </Box>
-      
       </Container>
-      </>
-    
+    </>
+
     // ) : (
     //   <Box>Game NOT Found</Box>
   );

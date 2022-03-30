@@ -19,13 +19,15 @@ import { BsPerson } from "react-icons/bs";
 import { MdOutlineEmail } from "react-icons/md";
 import useForm from "./useForm";
 import Submitted from "./submitted";
+import useScrollTop from "../useScrollTop";
 
 export default function ContactForm() {
-  const { input, submitted, setSubmitted, handlerInputChange, handlerSubmit } =
-    useForm();
-
+  const { input, submitted, setSubmitted, handlerInputChange, handlerSubmit } = useForm();
+  const ScrollToTopOnMount = useScrollTop();
+  
   return (
     <>
+      <ScrollToTopOnMount />
       {!submitted ? (
         <Container maxW={"7xl"} mt="10rem">
           <Stack

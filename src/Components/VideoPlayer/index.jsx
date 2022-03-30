@@ -76,11 +76,11 @@ const VideoPlayer = ({ details }) => {
             drag="x"
             dragConstraints={{ right: 0, left: -width }}
             whileTap={{ cursor: "grabbing" }}
-            bg="#8c06f7"
+            bg="#261130"
           >
             {arr.map((el) => {
               return (
-                <MotionBox key={el.id} p="70px" >
+                <MotionBox key={el.id} p="70px">
                   <ReactPlayer
                     controls
                     url={el.url}
@@ -93,14 +93,14 @@ const VideoPlayer = ({ details }) => {
           </MotionFlex>
         </MotionFlex>
       ) : (
-        <SimpleGrid columns={{md: 2, lg: 2}} spacing={10} mt='10rem'>
+        <SimpleGrid columns={{ md: 2, lg: 2 }} spacing={10} mt="10rem">
           {arr.map((el) => {
             return (
               <MotionBox key={el.id}>
                 <ReactPlayer
                   controls
                   url={el.url}
-                  width={{md: "330px", lg: "365px"}}
+                  width={{ md: "330px", lg: "365px" }}
                   height="210px"
                 />
               </MotionBox>

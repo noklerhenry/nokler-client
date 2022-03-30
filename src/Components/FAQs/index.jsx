@@ -13,10 +13,14 @@ import {
   Text,
   Flex
 } from "@chakra-ui/react";
+import useScrollTop from "../useScrollTop";
+
 
 const FAQs = () => {
+  const ScrollToTopOnMount = useScrollTop();
   return (
     <>
+      <ScrollToTopOnMount />
       <Container maxW={"5xl"} mt="6rem">
         <Stack
           textAlign={"center"}
@@ -39,8 +43,8 @@ const FAQs = () => {
           </Text>
         </Stack>
       </Container>
-      <Flex align='center' justifyContent='center'>
-        <Accordion allowMultiple w="60%" m='-3rem 0 5rem 0'>
+      <Flex align="center" justifyContent="center">
+        <Accordion allowMultiple w="60%" m="-3rem 0 5rem 0">
           <AccordionItem>
             <h2>
               <AccordionButton>

@@ -14,9 +14,10 @@ import {
   SimpleGrid,
   useMediaQuery
 } from "@chakra-ui/react";
-
 import { TiSocialLinkedin, TiSocialGithub } from "react-icons/ti";
 import { GoMail } from "react-icons/go";
+import useScrollTop from "../useScrollTop";
+
 
 const About = () => { 
   const cards = [
@@ -78,8 +79,11 @@ const About = () => {
     },
   ];
   
+  const ScrollToTopOnMount = useScrollTop();
+
   return (
     <>
+      <ScrollToTopOnMount />
       <Container maxW={"5xl"} mt="5rem">
         <Stack
           textAlign={"center"}
@@ -100,96 +104,93 @@ const About = () => {
         </Stack>
       </Container>
       <SimpleGrid columns={[1, 1, 1, 1, 2, 3, 4, 4]}>
-       {cards?.map((el, index) => {
-           return (
-             <Flex
-               //   bg={useColorModeValue("#F9FAFB", "gray.600")}
-               p="20px 20px 90px 20px"
-               w="100%"
-               alignItems="center"
-               justifyContent="center"
-               mt="-4rem"
-               key={index}
-             >
-               <Box
-                 w="full"
-                 mx="auto"
-                 bg={useColorModeValue("white", "gray.800")}
-                 shadow="lg"
-                 rounded="lg"
-                 overflow="hidden"
-               >
-                 <Image
-                   w="full"
-                   h="100%"
-                   fit="cover"
-                   // objectPosition="center"
-                   objectFit="contain"
-                   src={el.img}
-                   alt="avatar"
-                 />
-                 <Box py={4} px={6}>
-                   <chakra.h1
-                     fontSize={el.name === "Maximiliano Cidron" ? "lg" : "xl"}
-                     fontWeight="bold"
-                     color={useColorModeValue("gray.800", "white")}
-                   >
-                     {el.name}
-                   </chakra.h1>
+        {cards?.map((el, index) => {
+          return (
+            <Flex
+              //   bg={useColorModeValue("#F9FAFB", "gray.600")}
+              p="20px 20px 90px 20px"
+              w="100%"
+              alignItems="center"
+              justifyContent="center"
+              mt="-4rem"
+              key={index}
+            >
+              <Box
+                w="full"
+                mx="auto"
+                bg={useColorModeValue("white", "gray.800")}
+                shadow="lg"
+                rounded="lg"
+                overflow="hidden"
+              >
+                <Image
+                  w="full"
+                  h="100%"
+                  fit="cover"
+                  // objectPosition="center"
+                  objectFit="contain"
+                  src={el.img}
+                  alt="avatar"
+                />
+                <Box py={4} px={6}>
+                  <chakra.h1
+                    fontSize={el.name === "Maximiliano Cidron" ? "lg" : "xl"}
+                    fontWeight="bold"
+                    color={useColorModeValue("gray.800", "white")}
+                  >
+                    {el.name}
+                  </chakra.h1>
 
-                   <chakra.p
-                     py={2}
-                     color={useColorModeValue("gray.700", "gray.400")}
-                   >
-                     {el.rol}
-                   </chakra.p>
+                  <chakra.p
+                    py={2}
+                    color={useColorModeValue("gray.700", "gray.400")}
+                  >
+                    {el.rol}
+                  </chakra.p>
 
-                   <Flex
-                     alignItems="center"
-                     mt={4}
-                     color={useColorModeValue("gray.700", "gray.200")}
-                   >
-                     <Icon as={TiSocialLinkedin} h={6} w={6} mr={2} size="sm" />
+                  <Flex
+                    alignItems="center"
+                    mt={4}
+                    color={useColorModeValue("gray.700", "gray.200")}
+                  >
+                    <Icon as={TiSocialLinkedin} h={6} w={6} mr={2} size="sm" />
 
-                     <chakra.h1 px={0} fontSize="sm">
-                       <Link
-                         href={el.linkedin}
-                         isExternal
-                       >
-                         <Text _hover={{ bg: "transparent" }}>Linkedin</Text>
-                       </Link>
-                     </chakra.h1>
-                   </Flex>
+                    <chakra.h1 px={0} fontSize="sm">
+                      <Link href={el.linkedin} isExternal>
+                        <Text _hover={{ bg: "transparent" }}>Linkedin</Text>
+                      </Link>
+                    </chakra.h1>
+                  </Flex>
 
-                   <Flex
-                     alignItems="center"
-                     mt={4}
-                     color={useColorModeValue("gray.700", "gray.200")}
-                   >
-                     <Icon as={TiSocialGithub} h={6} w={6} mr={2} />
+                  <Flex
+                    alignItems="center"
+                    mt={4}
+                    color={useColorModeValue("gray.700", "gray.200")}
+                  >
+                    <Icon as={TiSocialGithub} h={6} w={6} mr={2} />
 
-                     <chakra.h1 px={0} fontSize="sm">
-                       <Link href={el.github} isExternal>
-                         <Text _hover={{ bg: "transparent" }}>Github</Text>
-                       </Link>
-                     </chakra.h1>
-                   </Flex>
-                   <Flex
-                     alignItems="center"
-                     mt={4}
-                     color={useColorModeValue("gray.700", "gray.200")}
-                   >
-                     <Icon as={GoMail} h={6} w={6} mr={2} />
+                    <chakra.h1 px={0} fontSize="sm">
+                      <Link href={el.github} isExternal>
+                        <Text _hover={{ bg: "transparent" }}>Github</Text>
+                      </Link>
+                    </chakra.h1>
+                  </Flex>
+                  <Flex
+                    alignItems="center"
+                    mt={4}
+                    color={useColorModeValue("gray.700", "gray.200")}
+                  >
+                    <Icon as={GoMail} h={6} w={6} mr={2} />
 
-                     <chakra.h1 px={0} fontSize="14px">
-                       {el.mail}
-                     </chakra.h1>
-                   </Flex>
-                 </Box>
-               </Box>
-             </Flex>
-           );
-       })}
+                    <chakra.h1 px={0} fontSize="14px">
+                      {el.mail}
+                    </chakra.h1>
+                  </Flex>
+                </Box>
+              </Box>
+            </Flex>
+          );
+        })}
       </SimpleGrid>
     </>
   );
