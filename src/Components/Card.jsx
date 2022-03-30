@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addGameFavorite, removeGameFavorite, clickedButtonFavorite, removeClickButtonFavorite } from "../Actions";
+import {
+  addGameFavorite,
+  removeGameFavorite,
+  clickedButtonFavorite,
+  removeClickButtonFavorite,
+} from "../Actions";
 import {
   Button,
   useToast,
@@ -13,24 +18,23 @@ import {
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 
 export const Card = ({ id, name, image, genres, productKey }) => {
-    
-  const favClicked = useSelector((state) => state.gamesAddedToFav)  
+  const favClicked = useSelector((state) => state.gamesAddedToFav);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
-     localStorage.setItem("favClicked", JSON.stringify(favClicked));
-   }, [favClicked]);
+    localStorage.setItem("favClicked", JSON.stringify(favClicked));
+  }, [favClicked]);
 
   const handleFav = (index) => {
     if (favClicked.includes(index)) {
       dispatch(removeGameFavorite(index));
-      dispatch(removeClickButtonFavorite(index))
+      dispatch(removeClickButtonFavorite(index));
     } else {
       dispatch(addGameFavorite({ id, name, productKey }));
       dispatch(clickedButtonFavorite(index));
     }
   };
-   
+
   return (
     <Box margin="auto" w="230px" h={{ base: "100%", sm: "400px", lg: "450px" }}>
       <Link href={'/details/'+ name}>
@@ -70,16 +74,16 @@ export const Card = ({ id, name, image, genres, productKey }) => {
         {name}
       </Heading>
       <Button size="sm" height="24px">
-        <Link href={'/details/'+ name}>See game</Link>
+        <Link href={"/details/" + name}>See game</Link>
       </Button>
       <Button
         key={id}
         border="none"
         bg="transparent"
-        outline='0'
-        boxShadow='0'
+        outline="0"
+        boxShadow="0"
         _hover={{ bg: "none" }}
-        _focus={{outline: '0'}}
+        _focus={{ outline: "0" }}
         onClick={() => handleFav(id)}
       >
         {favClicked.includes(id) ? <HiHeart color="red" /> : <HiOutlineHeart />}
