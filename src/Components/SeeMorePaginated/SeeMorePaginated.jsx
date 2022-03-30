@@ -17,38 +17,43 @@ export default function SeeMorePaginated({ gamesFiltered }) {
   const [loading, setLoading] = useState(false);
 
   function showMoreProducts() {
-    setVisible((prevValue) => prevValue + 4);
     setLoading(true);
     setTimeout(() => {
+      setVisible((prevValue) => prevValue + 4);
       setLoading(false);
     }, 1000);
   }
-  if (loading) {
-    return <Loader />;
-  } else {
-    return (
-      <Flex flexDirection="column">
-        <SimpleGrid
-          columns={{ base: 2, md: 2, lg: 3, xl: 3, xxl: 4 }}
-          spacing="20px"
-        >
-          {gamesFiltered?.slice(0, visible).map((product, index) => {
-            return (
-              <Card
-                key={index}
-                id={product?.id}
-                image={product.game?.image}
-                name={product.game?.name}
-                store={product.store?.name}
-                price={product?.price}
-              />
-            );
-          })}
-        </SimpleGrid>
-        <Button onClick={showMoreProducts} h="25px" mt="20px" w="200px">
-          Show More +
-        </Button>
-      </Flex>
-    );
-  }
+
+  return (
+    <Flex flexDirection="column">
+      <SimpleGrid
+        columns={{ base: 2, md: 2, lg: 3, xl: 3, xxl: 4 }}
+        spacing="20px"
+      >
+        {gamesFiltered?.slice(0, visible).map((product, index) => {
+          return (
+            <Card
+              key={index}
+              id={product?.id}
+              image={product.game?.image}
+              name={product.game?.name}
+              store={product.store?.name}
+              price={product?.price}
+            />
+          );
+        })}
+      </SimpleGrid>
+      {loading ? (
+        <Flex justifyContent="center" alignItems="center">
+          <Loader />
+        </Flex>
+      ) : (
+        <Flex justifyContent="center" alignItems="center">
+          <Button onClick={showMoreProducts} h="25px" mt="50px" w="200px">
+            Show More +
+          </Button>
+        </Flex>
+      )}
+    </Flex>
+  );
 }
