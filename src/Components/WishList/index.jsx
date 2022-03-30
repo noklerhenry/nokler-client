@@ -54,112 +54,119 @@ const WishList = () => {
 
   return (
     <>
-    <Heading mt='180px' textAlign='center' fontSize='45px' fontWeight='400'>Wishlist <span color='red'>&#10084;</span> </Heading>
-      
-      <Flex margin='0 3%' mt='30px' mb='50px'>
       {favs.length ? (
-        <SimpleGrid columns={{sm:1, md:2, lg:3}} spacing='2'>
-          {favs.map((game, index) => {
-              return (
+        <Heading mt="180px" textAlign="center" fontSize="45px" fontWeight="400">
+          Wishlist <span color="red">&#10084;</span>{" "}
+        </Heading>
+      ) : null}
+      <Flex margin="0 3%" mt="30px" mb="50px">
+        {favs.length ? (
+          <>
+            <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} spacing="2">
+              {favs.map((game, index) => {
+                return (
+                  <Box bg={bg3} padding="22px" borderRadius="20px">
+                    <Text fontSize="23px" fontWeight="600" lineHeight="35px">
+                      {" "}
+                      {game.name}
+                    </Text>
 
-                <Box bg={bg3} padding='22px' borderRadius='20px'>
-                  <Text fontSize='23px' fontWeight='600' lineHeight='35px'> {game.name}</Text>
-
-                  <Popover>
-                          {/* Importanteeeeeeeeeee */}
-                        <PopoverTrigger>
-                          <Button
-                            color={colorMode === "dark" ? "gray.400" : ""}
-                            fontWeight={colorMode === "dark" ? "" : "bold"}
-                            bg="transparent"
-                            border="none"
-                            outline="0"
-                            boxShadow="0"
-                            _focus={{ outline: "none" }}
-                          >
-                            See
-                          </Button>
-                        </PopoverTrigger>
-                        <PopoverContent>
-                          <PopoverArrow />
-                          <PopoverCloseButton color="white" mt="5px" />
-                          <PopoverBody>
-                            <UnorderedList>
-                              {game?.productKey?.length >= 2
-                                ? game?.productKey?.map((el) => {
-                                    return (
-                                      <ListItem color={colorMode === 'dark' ? 'white' : ''}>{`${
-                                        el.region +
-                                        " - $" +
-                                        el.price +
-                                        `${
-                                          el.key?.length === 0
-                                            ? " - Key Not Available"
-                                            : " - Key Available"
-                                        }`
-                                      }`}</ListItem>
-                                    );
-                                  })
-                                : game?.productKey?.map((el) => {
-                                    return (
-                                      <ListItem color={colorMode === 'dark' ? 'white' : ''}>{`${
-                                        el.region + " - $" + el.price
-                                      }`}</ListItem>
-                                    );
-                                  })}
-                            </UnorderedList>
-                          </PopoverBody>
-                        </PopoverContent>
-                      </Popover>
-
-                      <Link to={`/details/${game.name}`}>
+                    <Popover>
+                      {/* Importanteeeeeeeeeee */}
+                      <PopoverTrigger>
                         <Button
-                          size="sm"
-                          variant="solid"
-                          colorScheme="purple"
-                          h='25px'
-                          mr='10px'
+                          color={colorMode === "dark" ? "gray.400" : ""}
+                          fontWeight={colorMode === "dark" ? "" : "bold"}
+                          bg="transparent"
                           border="none"
                           outline="0"
                           boxShadow="0"
                           _focus={{ outline: "none" }}
                         >
-                          Go to game
+                          See
                         </Button>
-                      </Link>
+                      </PopoverTrigger>
+                      <PopoverContent>
+                        <PopoverArrow />
+                        <PopoverCloseButton color="white" mt="5px" />
+                        <PopoverBody>
+                          <UnorderedList>
+                            {game?.productKey?.length >= 2
+                              ? game?.productKey?.map((el) => {
+                                  return (
+                                    <ListItem
+                                      color={
+                                        colorMode === "dark" ? "white" : ""
+                                      }
+                                    >{`${
+                                      el.region +
+                                      " - $" +
+                                      el.price +
+                                      `${
+                                        el.key?.length === 0
+                                          ? " - Key Not Available"
+                                          : " - Key Available"
+                                      }`
+                                    }`}</ListItem>
+                                  );
+                                })
+                              : game?.productKey?.map((el) => {
+                                  return (
+                                    <ListItem
+                                      color={
+                                        colorMode === "dark" ? "white" : ""
+                                      }
+                                    >{`${
+                                      el.region + " - $" + el.price
+                                    }`}</ListItem>
+                                  );
+                                })}
+                          </UnorderedList>
+                        </PopoverBody>
+                      </PopoverContent>
+                    </Popover>
 
-                      <ButtonGroup
-                        variant="solid"
+                    <Link to={`/details/${game.name}`}>
+                      <Button
                         size="sm"
-                        spacing={3}
-                        mr="50px"
+                        variant="solid"
+                        colorScheme="purple"
+                        h="25px"
+                        mr="10px"
+                        border="none"
+                        outline="0"
+                        boxShadow="0"
+                        _focus={{ outline: "none" }}
                       >
-                        <IconButton
-                          colorScheme="red"
-                          mt="5px"
-                          variant="outline"
-                          icon={<BsFillTrashFill />}
-                          outline="0"
-                          boxShadow="0"
-                          onClick={() => deleteGameFav(game.id)}
-                        />
-                      </ButtonGroup>
+                        Go to game
+                      </Button>
+                    </Link>
 
-                </Box>
-
-
-
-
-              );
-            })}
-
-        </SimpleGrid>
-  
-
-      ) : (
-        <Landing />
-      )}
-
+                    <ButtonGroup
+                      variant="solid"
+                      size="sm"
+                      spacing={3}
+                      mr="50px"
+                    >
+                      <IconButton
+                        colorScheme="red"
+                        mt="5px"
+                        variant="outline"
+                        icon={<BsFillTrashFill />}
+                        outline="0"
+                        boxShadow="0"
+                        onClick={() => deleteGameFav(game.id)}
+                      />
+                    </ButtonGroup>
+                  </Box>
+                );
+              })}
+            </SimpleGrid>
+            ``
+          </>
+        ) : (
+          <Landing />
+        )}
       </Flex>
     </>
   );
