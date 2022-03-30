@@ -57,12 +57,12 @@ export default function Refund() {
 
   return (
     <Container maxW="8xl" p="5" mt="150px">
-      <Text fontSize='35px' mb='15px' mt='15px' ml='3%'>Refund Request</Text>
+      <Text fontSize="35px" mb="15px" mt="15px" ml="3%">
+        Refund Request
+      </Text>
       <Box visibility={{ base: "hidden", sm: "visible" }} aria-hidden="true">
         <Box py={3}>
-          <Box
-            
-          ></Box>
+          <Box></Box>
         </Box>
       </Box>
 
@@ -71,17 +71,15 @@ export default function Refund() {
           display={{ base: "initial", md: "grid" }}
           columns={{ md: 3 }}
           spacing={{ md: 6 }}
-          margin='0 3%'
+          margin="0 3%"
         >
           <GridItem colSpan={{ md: 1 }}>
             <Box px={[4, 0]}>
-              <Text mt={2} fontSize='26px' lineHeight='28px' mb='20px'>
+              <Text mt={2} fontSize="26px" lineHeight="28px" mb="20px">
                 Complete all the fields of the form to request a Key refund.
               </Text>
-              <Text mt={2} >
-                When will I receive my refund?
-              </Text>
-              <Text mt={3} >
+              <Text mt={2}>When will I receive my refund?</Text>
+              <Text mt={3}>
                 <Text>
                   The time it will take for you to receive your funds depends on
                   the type of payment method you used. Remember that refunds
@@ -131,7 +129,7 @@ export default function Refund() {
                     <Input
                       type="text"
                       name="name"
-                      bg='white'
+                      bg="white"
                       id="name"
                       defaultValue={input.name}
                       mt={1}
@@ -154,7 +152,7 @@ export default function Refund() {
                       type="text"
                       name="lastName"
                       id="lastName"
-                      bg='white'
+                      bg="white"
                       defaultValue={input.lastName}
                       mt={1}
                       focusBorderColor="#8c06f7"
@@ -176,7 +174,7 @@ export default function Refund() {
                       type="text"
                       name="email"
                       id="email"
-                      bg='white'
+                      bg="white"
                       defaultValue={input.email}
                       mt={1}
                       focusBorderColor="#8c06f7"
@@ -198,7 +196,7 @@ export default function Refund() {
                       type="text"
                       name="charge"
                       id="charge"
-                      bg='white'
+                      bg="white"
                       value={input.charge}
                       autoComplete="off"
                       mt={1}
@@ -211,7 +209,8 @@ export default function Refund() {
                     <FormHelperText
                       color={useColorModeValue("gray.900", "gray.50")}
                     >
-                      This is the code that you received in your email. For example: "ch_3KgdChKlOgZYCvia0f6CAB0v".
+                      This is the code that you received in your email. For
+                      example: "ch_3KgdChKlOgZYCvia0f6CAB0v".
                     </FormHelperText>
                   </FormControl>
 
@@ -232,7 +231,7 @@ export default function Refund() {
                       type="text"
                       name="about"
                       id="about"
-                      bg='white'
+                      bg="white"
                       value={input.about}
                       htmlFor="about"
                       autoComplete="off"
