@@ -42,7 +42,7 @@ export default function ImagesGallery() {
 //   }, [img]);
 
   return (
-    <Flex w="40vw" h={[null, null, null, null, null, null, "40vw", "30vw"]} m="auto">
+    <Flex w="40vw" h={[null, null, null, null, null, null, "auto", "auto"]} m="auto">
       <Box
         w={{
           base: "220%",
@@ -55,7 +55,6 @@ export default function ImagesGallery() {
           xxl: "100%",
           xxxl: "85%"
         }}
-        
       >
         <ImageGallery
           items={img}

@@ -11,17 +11,23 @@ const GamesResults = (props) => {
         p="4px 8px"
         alignItems="center"
         mt="30px"
-        borderRadius='20px'
+        borderRadius="20px"
         _hover={{
-          borderBottom: "2px solid violet",
+          //   borderBottom: "2px solid violet",
           cursor: "pointer",
           transition: "0.2s ease-in-out",
-          color: '#ffffff',
-          borderRadius:'20px'
+          backgroundColor: "none",
+          borderRadius: "20px",
         }}
       >
         <Flex w="auto" h="100%" flex="0.4">
-          <Image src={thumbnailSrc} alt="gameImg" w="150%" h="100%" borderRadius='10px' />
+          <Image
+            src={thumbnailSrc}
+            alt="gameImg"
+            w="150%"
+            h="100%"
+            borderRadius="10px"
+          />
         </Flex>
         <Box
           as="h3"
@@ -30,7 +36,7 @@ const GamesResults = (props) => {
           ml="10px"
           display="flex"
           flex="2"
-          _hover={{ cursor: "pointer", color: '#ffffff' }}
+          _hover={{ cursor: "pointer", backgroundColor: "none" }}
         >
           {name}
         </Box>
@@ -39,7 +45,7 @@ const GamesResults = (props) => {
           color="#666666"
           fontSize="16px"
           flex="0.5"
-          _hover={{ cursor: "pointer", color: '#ffffff' }}
+          _hover={{ cursor: "pointer", backgroundColor: "none" }}
           visibility={[
             "hidden",
             "hidden",
