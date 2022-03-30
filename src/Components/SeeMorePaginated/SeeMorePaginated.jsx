@@ -13,13 +13,13 @@ import { Card } from "../Card";
 import Loader from "../Loader/Loader";
 
 export default function SeeMorePaginated({ gamesFiltered }) {
-  const [visible, setVisible] = useState(4);
+  const [visible, setVisible] = useState(8);
   const [loading, setLoading] = useState(false);
 
   function showMoreProducts() {
     setLoading(true);
     setTimeout(() => {
-      setVisible((prevValue) => prevValue + 4);
+      setVisible((prevValue) => prevValue + 8);
       setLoading(false);
     }, 1000);
   }
@@ -49,7 +49,7 @@ export default function SeeMorePaginated({ gamesFiltered }) {
         </Flex>
       ) : (
         <Flex justifyContent="center" alignItems="center">
-          <Button onClick={showMoreProducts} h="25px" mt="50px" w="200px">
+          <Button onClick={showMoreProducts} h="25px" mt="70px" w="200px">
             Show More +
           </Button>
         </Flex>
