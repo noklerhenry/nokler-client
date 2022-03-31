@@ -129,7 +129,7 @@ const WishList = () => {
                       </PopoverContent>
                     </Popover>
 
-                    <Link to={`/details/${game.name}`}>
+                    <Link to={`/details/${game.id}`}>
                       <Button
                         size="sm"
                         variant="solid"
