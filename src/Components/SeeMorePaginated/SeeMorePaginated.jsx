@@ -70,7 +70,11 @@ export default function SeeMorePaginated({ gamesFiltered }) {
         })}
       </SimpleGrid>
       {loading ? (
-        <Flex align="center" justify="center" mt="70px">
+        <Flex
+          align="center"
+          justify="center"
+          mt={{ base: "180px", sssm: "180px", ssm: "180px", sm: "110px" }}
+        >
           <Loader />
         </Flex>
       ) : Number(gamesFiltered.length) <= Number(visible) ? null : (
