@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import {
   useColorMode,
   Button,
@@ -15,6 +15,7 @@ import {
   Center,
   MenuDivider,
   MenuItem,
+  Link
 } from "@chakra-ui/react";
 import { FaTimes } from "react-icons/fa";
 import { Logout } from "../../Logout.jsx";
@@ -24,7 +25,7 @@ import { FaHome, FaUser, FaHeart, FaGamepad, FaDesktop } from "react-icons/fa";
 import { getUsers, postUser } from "../../../Actions";
 import axios from "axios";
 
-const SideBar = ({ Open, toggle }) => {
+const SideBar = ({ Open, toggle, mediaQueryNavMenu }) => {
   const {
     user,
     loginWithPopup,
@@ -40,6 +41,7 @@ const SideBar = ({ Open, toggle }) => {
   const bg = useColorModeValue("#ffffff", "#121019");
 
   const [mediaQueryGrid480px] = useMediaQuery("(max-width: 480px)");
+
   const users = useSelector((state) => state.users.map((u) => u.email));
 
   const [userData, setUserData] = useState("");
@@ -70,6 +72,7 @@ const SideBar = ({ Open, toggle }) => {
       <Menu>
         <MenuButton
           as={Button}
+          display={!mediaQueryNavMenu ? "none" : ""}
           rounded={"full"}
           variant={"link"}
           cursor={"pointer"}
@@ -143,6 +146,7 @@ const SideBar = ({ Open, toggle }) => {
       <Menu>
         <MenuButton
           as={Button}
+          display={!mediaQueryNavMenu ? "none" : ""}
           rounded={"full"}
           variant={"link"}
           cursor={"pointer"}
@@ -164,6 +168,8 @@ const SideBar = ({ Open, toggle }) => {
           />
         </MenuButton>
         <MenuList
+          marginLeft="-35%"
+          maxWidth="50%"
           alignItems={"center"}
           bgColor={bg}
           borderRadius="15px 0px 15px 15px"
@@ -244,22 +250,13 @@ const SideBar = ({ Open, toggle }) => {
           }
           textAlign="center"
         >
-          <Box w="90%" mt="10px">
-            {!isAuthenticated && !isLoading ? (
-              <Button
-                size="sm"
-                mt="20px"
-                ml="14px"
-                border="none"
-                onClick={loginWithRedirect}
-              >
-                <FaUser size="18" />
-              </Button>
-            ) : (
-              menuNav
-            )}
+          <Box w="100%" mt="-20px">
+            {!isAuthenticated && !isLoading
+              ?
+                null
+              : menuNav}
           </Box>
-          <Box w="90%" mt="10px">
+          <Box w="100%" mt="10px">
             <Link to="/">
               <Button
                 mt="0px"
@@ -274,7 +271,7 @@ const SideBar = ({ Open, toggle }) => {
               </Button>
             </Link>
           </Box>
-          <Box w="90%" mt="10px">
+          <Box w="100%" mt="10px">
             <Link to="/gallery">
               <Button
                 mt="0px"
@@ -289,7 +286,7 @@ const SideBar = ({ Open, toggle }) => {
               </Button>
             </Link>
           </Box>
-          <Box w="90%" mt="10px">
+          <Box w="100%" mt="10px">
             <Link to="/wishlist">
               <Button
                 mt="0px"
@@ -304,13 +301,13 @@ const SideBar = ({ Open, toggle }) => {
               </Button>
             </Link>
           </Box>
-          <Box color="#8c06f7" w="90%" mt="10px" mb="30px" ml="-15px">
+          <Box color="#8c06f7" w="100%" mt="10px" mb="30px" ml="-15px">
             <Button border="none" fontSize="25px" fontWeight="300">
               {" "}
               <CartDrawer Open={Open} toggle={toggle} mt="-10px" /> Cart
             </Button>
           </Box>
-          <Box w="90%" mt="10px">
+          <Box w="100%" mt="10px">
             <Button
               mt="0px"
               color="#8c06f7"
@@ -323,7 +320,7 @@ const SideBar = ({ Open, toggle }) => {
               &nbsp; Theme
             </Button>
           </Box>
-          <Box w="90%" mt="10px">
+          <Box w="100%" mt="10px">
             {!isAuthenticated && !isLoading ? (
               <Button
                 mt="0px"

@@ -17,6 +17,7 @@ const Header = () => {
       <SideBar
         Open={Open}
         toggle={toggle}
+        mediaQueryNavMenu={mediaQueryNavMenu}
       />
     </>
   );
