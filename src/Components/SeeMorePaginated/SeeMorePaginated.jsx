@@ -46,12 +46,12 @@ export default function SeeMorePaginated({ gamesFiltered }) {
           xxl: 4,
         }}
         spacing={{
-          base: "150px",
-          sssm: "150px",
-          ssm: "150px",
-          sm: "50px",
-          md: "50px",
-          lg: "50px",
+          base: "170px",
+          sssm: "170px",
+          ssm: "170px",
+          sm: "70px",
+          md: "70px",
+          lg: "70px",
           xl: "70px",
         }}
       >
