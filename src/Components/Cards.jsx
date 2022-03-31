@@ -48,18 +48,19 @@ export const Cards = () => {
         backgroundSize="25px 25px"
       >
         {games ? (
-          games.slice(games.length - 8, games.length).map((g) => (
-            <Card
-              key={g.id}
-              id={g.id}
-              genres={g.genres}
-              name={g.name}
-              image={g.img}
-              // price={g.price}
-            //   platform={g.platform.map(el => el)}
-              productKey={g.productKey}
-            />
-          ))
+          games
+            .slice(games.length - 8, games.length)
+            .map((g) => (
+              <Card
+                fav={true}
+                key={g.id}
+                id={g.id}
+                genres={g.genres}
+                name={g.name}
+                image={g.img}
+                productKey={g.productKey}
+              />
+            ))
         ) : (
           <Spinner />
         )}

@@ -17,7 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 
-export const Card = ({ id, name, image, genres, productKey }) => {
+export const Card = ({ id, name, image, genres, productKey, fav }) => {
   const favClicked = useSelector((state) => state.gamesAddedToFav);
   const dispatch = useDispatch();
 
@@ -37,18 +37,18 @@ export const Card = ({ id, name, image, genres, productKey }) => {
 
   return (
     <Box margin="auto" w="230px" h={{ base: "100%", sm: "400px", lg: "450px" }}>
-      <Link href={'/details/'+ name}>
-      <Image
-        w="100%"
-        h={{ base: "100%", sm: "300px", lg: "350px" }}
-        src={image}
-        alt="img not found"
-        borderRadius='25px'
-        fit="cover"
-        align="center"
-        boxShadow="5px 5px 15px #111111"
-        mb="15px"
-      />
+      <Link href={"/details/" + name}>
+        <Image
+          w="100%"
+          h={{ base: "100%", sm: "300px", lg: "350px" }}
+          src={image}
+          alt="img not found"
+          borderRadius="25px"
+          fit="cover"
+          align="center"
+          boxShadow="5px 5px 15px #111111"
+          mb="15px"
+        />
       </Link>
 
       {genres?.map((g) => (
@@ -76,18 +76,24 @@ export const Card = ({ id, name, image, genres, productKey }) => {
       <Button size="sm" height="24px">
         <Link href={"/details/" + name}>See game</Link>
       </Button>
-      <Button
-        key={id}
-        border="none"
-        bg="transparent"
-        outline="0"
-        boxShadow="0"
-        _hover={{ bg: "none" }}
-        _focus={{ outline: "0" }}
-        onClick={() => handleFav(id)}
-      >
-        {favClicked.includes(id) ? <HiHeart color="red" /> : <HiOutlineHeart />}
-      </Button>
+      {fav && (
+        <Button
+          key={id}
+          border="none"
+          bg="transparent"
+          outline="0"
+          boxShadow="0"
+          _hover={{ bg: "none" }}
+          _focus={{ outline: "0" }}
+          onClick={() => handleFav(id)}
+        >
+          {favClicked.includes(id) ? (
+            <HiHeart color="red" />
+          ) : (
+            <HiOutlineHeart />
+          )}
+        </Button>
+      )}
     </Box>
   );
 };

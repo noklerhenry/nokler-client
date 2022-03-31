@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import {
   useColorMode,
   Button,
@@ -15,8 +15,9 @@ import {
   Center,
   MenuDivider,
   MenuItem,
-  Link
+  Link,
 } from "@chakra-ui/react";
+import useScrollTop from "../../useScrollTop";
 import { FaTimes } from "react-icons/fa";
 import { Logout } from "../../Logout.jsx";
 import CartDrawer from "../CartDrawer.jsx";
@@ -64,6 +65,8 @@ const SideBar = ({ Open, toggle, mediaQueryNavMenu }) => {
         //return response;
       });
   }, [user]);
+
+  const ScrollToTopOnMount = useScrollTop();
 
   let menuNav;
 
@@ -207,148 +210,143 @@ const SideBar = ({ Open, toggle, mediaQueryNavMenu }) => {
   }
 
   return (
-    <Box
-      as="aside"
-      isOpen={Open}
-      pos="fixed"
-      zIndex="999"
-      w={["100%", "100%", "100%", "100%", "40%", "25%"]}
-      h="100%"
-      bg={bg}
-      display="grid"
-      alignItems="center"
-      left={Open ? "0" : "-100%"}
-      top="0"
-      boxShadow="0px 15px 20px #cccccc"
-      transition="0.3s ease-in-out"
-      opacity={Open ? "100%" : "0"}
-    >
       <Box
-        pos="absolute"
-        top="1.2rem"
-        right="1.5rem"
-        bg="transparent"
-        fontSize="2rem"
-        cursor="pointer"
-        outline="none"
+        as="aside"
+        isOpen={Open}
+        pos="fixed"
+        zIndex="999"
+        w={["100%", "100%", "100%", "100%", "40%", "25%"]}
+        h="100%"
+        bg={bg}
+        display="grid"
+        alignItems="center"
+        left={Open ? "0" : "-100%"}
+        top="0"
+        boxShadow="0px 15px 20px #cccccc"
+        transition="0.3s ease-in-out"
+        opacity={Open ? "100%" : "0"}
       >
-        <IconButton
-          aria-label="Close Menu"
-          icon={<FaTimes color="#fff" fontSize="1.8rem" />}
-          onClick={toggle}
-          border="none"
-          bg="#8c06f7"
-        />
-      </Box>
-      <Box color="#fff">
         <Box
-          as="ul"
-          display="grid"
-          gridTemplateColumns="1fr"
-          gridTemplateRows={
-            mediaQueryGrid480px ? "repeat(3, 60px)" : "repeat(3, 60px)"
-          }
-          textAlign="center"
+          pos="absolute"
+          top="1.2rem"
+          right="1.5rem"
+          bg="transparent"
+          fontSize="2rem"
+          cursor="pointer"
+          outline="none"
         >
-          <Box w="100%" mt="-20px">
-            {!isAuthenticated && !isLoading ? null : menuNav}
-          </Box>
-          <Box w="100%" mt="10px">
-            <Link href="/" _hover="#222222">
-              <Button
-                mt="0px"
-                color="#8c06f7"
-                border="none"
-                fontSize="25px"
-                fontWeight="300"
-                onClick={toggle}
-              >
-                <FaHome size="21" />
-                &nbsp;Home
-              </Button>
-            </Link>
-          </Box>
-          <Box w="100%" mt="10px">
-            <Link href="/gallery" _hover="#222222">
-              <Button
-                mt="0px"
-                color="#8c06f7"
-                border="none"
-                fontSize="25px"
-                fontWeight="300"
-                onClick={toggle}
-              >
-                <FaGamepad size="21" />
-                &nbsp;All games
-              </Button>
-            </Link>
-          </Box>
-          <Box w="100%" mt="10px">
-            <Link href="/wishlist" _hover="#222222">
-              <Button
-                mt="0px"
-                color="#8c06f7"
-                border="none"
-                fontSize="25px"
-                fontWeight="300"
-                onClick={toggle}
-              >
-                <FaHeart size="21" />
-                &nbsp;Wishlist
-              </Button>
-            </Link>
-          </Box>
-          <Box color="#8c06f7" w="100%" mt="20px" mb="30px" ml="-15px">
-            <CartDrawer
-              Open={Open}
-              toggle={toggle}
-              mt="-10px"
-              str="Cart"
-            />
-          </Box>
-          <Box w="100%" mt="10px">
-            <Button
-              mt="0px"
-              color="#8c06f7"
-              fontSize="16px"
-              fontWeight="300"
-              h="22px"
-              onClick={() => toggleColorMode()}
-            >
-              <FaDesktop size="16" />
-              &nbsp; Theme
-            </Button>
-          </Box>
-          <Box w="100%" mt="10px">
-            {!isAuthenticated && !isLoading ? (
-              <Button
-                mt="0px"
-                color="#8c06f7"
-                fontSize="16px"
-                fontWeight="300"
-                h="22px"
-                onClick={loginWithPopup}
-              >
-                <FaUser size="15" />
-                &nbsp; Sign in
-              </Button>
-            ) : (
+          <IconButton
+            aria-label="Close Menu"
+            icon={<FaTimes color="#fff" fontSize="1.8rem" />}
+            onClick={toggle}
+            border="none"
+            bg="#8c06f7"
+          />
+        </Box>
+        <Box color="#fff">
+          <Box
+            as="ul"
+            display="grid"
+            gridTemplateColumns="1fr"
+            gridTemplateRows={
+              mediaQueryGrid480px ? "repeat(3, 60px)" : "repeat(3, 60px)"
+            }
+            textAlign="center"
+          >
+            <Box w="100%" mt="-20px">
+              {!isAuthenticated && !isLoading ? null : menuNav}
+            </Box>
+            <Box w="100%" mt="10px">
+              <RouterLink to="/" _hover="#222222">
+                <Button
+                  mt="0px"
+                  color="#8c06f7"
+                  border="none"
+                  fontSize="25px"
+                  fontWeight="300"
+                  onClick={toggle}
+                >
+                  <FaHome size="21" />
+                  &nbsp;Home
+                </Button>
+              </RouterLink>
+            </Box>
+            <Box w="100%" mt="10px">
+              <Link href="/gallery" _hover="#222222">
+                <Button
+                  mt="0px"
+                  color="#8c06f7"
+                  border="none"
+                  fontSize="25px"
+                  fontWeight="300"
+                  onClick={toggle}
+                >
+                  <FaGamepad size="21" />
+                  &nbsp;All games
+                </Button>
+              </Link>
+            </Box>
+            <Box w="100%" mt="10px">
+              <RouterLink to="/wishlist" _hover="#222222">
+                <Button
+                  mt="0px"
+                  color="#8c06f7"
+                  border="none"
+                  fontSize="25px"
+                  fontWeight="300"
+                  onClick={toggle}
+                >
+                  <FaHeart size="21" />
+                  &nbsp;Wishlist
+                </Button>
+              </RouterLink>
+            </Box>
+            <Box color="#8c06f7" w="100%" mt="20px" mb="30px" ml="-15px">
+              <CartDrawer Open={Open} toggle={toggle} mt="-10px" str="Cart" />
+            </Box>
+            <Box w="100%" mt="10px">
               <Button
                 mt="0px"
                 color="#8c06f7"
                 fontSize="16px"
                 fontWeight="300"
                 h="22px"
-                onClick={logout}
+                onClick={() => toggleColorMode()}
               >
-                <FaUser size="15" />
-                &nbsp; Log Out
+                <FaDesktop size="16" />
+                &nbsp; Theme
               </Button>
-            )}
+            </Box>
+            <Box w="100%" mt="10px">
+              {!isAuthenticated && !isLoading ? (
+                <Button
+                  mt="0px"
+                  color="#8c06f7"
+                  fontSize="16px"
+                  fontWeight="300"
+                  h="22px"
+                  onClick={loginWithPopup}
+                >
+                  <FaUser size="15" />
+                  &nbsp; Sign in
+                </Button>
+              ) : (
+                <Button
+                  mt="0px"
+                  color="#8c06f7"
+                  fontSize="16px"
+                  fontWeight="300"
+                  h="22px"
+                  onClick={logout}
+                >
+                  <FaUser size="15" />
+                  &nbsp; Log Out
+                </Button>
+              )}
+            </Box>
           </Box>
         </Box>
       </Box>
-    </Box>
   );
 };
 

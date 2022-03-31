@@ -27,6 +27,7 @@ import {
   useToast,
   Grid,
 } from "@chakra-ui/react";
+import useScrollTop from "../useScrollTop";
 import { BsFillTrashFill } from "react-icons/bs";
 import Landing from "./noFavsLanding";
 
@@ -51,8 +52,11 @@ const WishList = () => {
 
   console.log(favs);
 
+  const ScrollToTopOnMount = useScrollTop();
+
   return (
     <>
+      <ScrollToTopOnMount />
       {favs.length ? (
         <Heading mt="180px" textAlign="center" fontSize="45px" fontWeight="400">
           Wishlist <span color="red">&#10084;</span>{" "}
