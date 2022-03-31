@@ -35,6 +35,7 @@ export default function SeeMorePaginated({ gamesFiltered }) {
   return (
     <Flex flexDirection="column">
       <SimpleGrid
+        marginBottom="80px"
         columns={{
           base: 1,
           sssm: 1,
