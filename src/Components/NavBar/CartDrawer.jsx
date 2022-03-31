@@ -15,11 +15,12 @@ import {
 //   Link,
   useDisclosure,
   useColorModeValue,
+  Box
 } from "@chakra-ui/react";
 import { FaBars, FaShoppingCart } from "react-icons/fa";
 
 
-const CartDrawer = ({ Open, toggle }) => {
+const CartDrawer = ({ Open, toggle, str }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const bg = useColorModeValue("#ffffff", "#121019");
   const btnRef = React.useRef();
@@ -41,8 +42,13 @@ const CartDrawer = ({ Open, toggle }) => {
         ml="9px"
         border="none"
         color={Open ? "#8c06f7" : ""}
+        fontSize="25px"
+        fontWeight="300"
       >
-        <FaShoppingCart size="20" />
+        <Box mr="10px">
+          <FaShoppingCart size="21" />
+        </Box>
+        {str}
       </Button>
       <Drawer
         isOpen={isOpen}
@@ -64,10 +70,11 @@ const CartDrawer = ({ Open, toggle }) => {
             <Button variant="outline" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button colorScheme="blue" isDisabled={cart.length >= 1 ? false : true}>
-              <Link to={cart.length >= 1 && "/checkout"}>
-                Checkout
-              </Link>
+            <Button
+              colorScheme="blue"
+              isDisabled={cart.length >= 1 ? false : true}
+            >
+              <Link to={cart.length >= 1 && "/checkout"}>Checkout</Link>
             </Button>
           </DrawerFooter>
         </DrawerContent>

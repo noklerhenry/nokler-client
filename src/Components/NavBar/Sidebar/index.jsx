@@ -251,13 +251,10 @@ const SideBar = ({ Open, toggle, mediaQueryNavMenu }) => {
           textAlign="center"
         >
           <Box w="100%" mt="-20px">
-            {!isAuthenticated && !isLoading
-              ?
-                null
-              : menuNav}
+            {!isAuthenticated && !isLoading ? null : menuNav}
           </Box>
           <Box w="100%" mt="10px">
-            <Link to="/">
+            <Link href="/" _hover="#222222">
               <Button
                 mt="0px"
                 color="#8c06f7"
@@ -267,12 +264,12 @@ const SideBar = ({ Open, toggle, mediaQueryNavMenu }) => {
                 onClick={toggle}
               >
                 <FaHome size="21" />
-                &nbsp; Home
+                &nbsp;Home
               </Button>
             </Link>
           </Box>
           <Box w="100%" mt="10px">
-            <Link to="/gallery">
+            <Link href="/gallery" _hover="#222222">
               <Button
                 mt="0px"
                 color="#8c06f7"
@@ -282,12 +279,12 @@ const SideBar = ({ Open, toggle, mediaQueryNavMenu }) => {
                 onClick={toggle}
               >
                 <FaGamepad size="21" />
-                &nbsp; All games
+                &nbsp;All games
               </Button>
             </Link>
           </Box>
           <Box w="100%" mt="10px">
-            <Link to="/wishlist">
+            <Link href="/wishlist" _hover="#222222">
               <Button
                 mt="0px"
                 color="#8c06f7"
@@ -301,11 +298,13 @@ const SideBar = ({ Open, toggle, mediaQueryNavMenu }) => {
               </Button>
             </Link>
           </Box>
-          <Box color="#8c06f7" w="100%" mt="10px" mb="30px" ml="-15px">
-            <Button border="none" fontSize="25px" fontWeight="300">
-              {" "}
-              <CartDrawer Open={Open} toggle={toggle} mt="-10px" /> Cart
-            </Button>
+          <Box color="#8c06f7" w="100%" mt="20px" mb="30px" ml="-15px">
+            <CartDrawer
+              Open={Open}
+              toggle={toggle}
+              mt="-10px"
+              str="Cart"
+            />
           </Box>
           <Box w="100%" mt="10px">
             <Button
