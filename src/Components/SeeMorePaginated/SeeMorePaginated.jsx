@@ -52,7 +52,7 @@ export default function SeeMorePaginated({ gamesFiltered }) {
           sm: "50px",
           md: "50px",
           lg: "50px",
-          xl: "50px",
+          xl: "70px",
         }}
       >
         {gamesFiltered?.slice(0, visible).map((product, index) => {
