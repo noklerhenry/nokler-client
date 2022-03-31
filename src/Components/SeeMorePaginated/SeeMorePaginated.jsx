@@ -49,10 +49,10 @@ export default function SeeMorePaginated({ gamesFiltered }) {
           base: "170px",
           sssm: "170px",
           ssm: "170px",
-          sm: "70px",
-          md: "70px",
-          lg: "70px",
-          xl: "70px",
+          sm: "80px",
+          md: "80px",
+          lg: "80px",
+          xl: "80px",
         }}
       >
         {gamesFiltered?.slice(0, visible).map((product, index) => {
