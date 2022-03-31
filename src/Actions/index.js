@@ -56,14 +56,14 @@ export const loadCart = (payload) => {
   };
 };
 
-export function getGameDetails(nameid) {
+export function getGameDetails(id) {
   return async function (dispatch) {
-    // let results = await axios.get(
-    //   `https://nokler-api.herokuapp.com/getProductById?ids=${id}`
-    // );
     let results = await axios.get(
-      `https://nokler-api.herokuapp.com/getProductByGame?game=${nameid}`
+      `https://nokler-api.herokuapp.com/getProductById?ids=${id}`
     );
+    // let results = await axios.get(
+    //   `https://nokler-api.herokuapp.com/getProductByGame?game=${nameid}`
+    // );
     dispatch({
       type: GET_GAME_DETAILS,
       payload: results.data,

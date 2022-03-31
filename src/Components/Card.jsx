@@ -30,6 +30,8 @@ export const Card = ({
   const favClicked = useSelector((state) => state.gamesAddedToFav);
   const dispatch = useDispatch();
 
+  console.log(id);
+
   useEffect(() => {
     localStorage.setItem("favClicked", JSON.stringify(favClicked));
   }, [favClicked]);
@@ -46,7 +48,7 @@ export const Card = ({
 
   return (
     <Box margin="auto" w="230px" h={{ base: "100%", sm: "400px", lg: "450px" }}>
-      <Link href={"/details/" + name}>
+      <Link href={"/details/" + id}>
         <Image
           w="100%"
           h={{ base: "100%", sm: "300px", lg: "350px" }}
@@ -108,7 +110,7 @@ export const Card = ({
         {name}
       </Heading>
       <Button size="sm" height="24px">
-        <Link href={"/details/" + name}>See game</Link>
+        <Link href={"/details/" + id}>See game</Link>
       </Button>
       {fav && (
         <Button

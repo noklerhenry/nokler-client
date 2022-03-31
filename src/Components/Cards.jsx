@@ -54,7 +54,7 @@ export const Cards = () => {
               <Card
                 fav={true}
                 key={g.id}
-                id={g.id}
+                id={g.productKey[0]?.id}
                 genres={g.genres}
                 name={g.name}
                 image={g.img}
