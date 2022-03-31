@@ -46,9 +46,9 @@ export default function SeeMorePaginated({ gamesFiltered }) {
           xxl: 4,
         }}
         spacing={{
-          base: "170px",
-          sssm: "170px",
-          ssm: "170px",
+          base: "180px",
+          sssm: "180px",
+          ssm: "180px",
           sm: "80px",
           md: "80px",
           lg: "80px",
@@ -77,7 +77,7 @@ export default function SeeMorePaginated({ gamesFiltered }) {
         <Flex
           align="center"
           justify="center"
-          mt={{ base: "140px", sssm: "140px", ssm: "140px", sm: "70px" }}
+          mt={{ base: "180px", sssm: "180px", ssm: "180px", sm: "110px" }}
         >
           <Button onClick={showMoreProducts} h="25px" w="200px">
             Show More +
