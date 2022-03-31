@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react'
-import axios from 'axios';
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import ReactPlayer from "react-player/youtube";
 import { Flex, Box, useMediaQuery, SimpleGrid } from "@chakra-ui/react";
 import { motion } from "framer-motion/dist/framer-motion";
@@ -10,59 +10,125 @@ const MotionFlex = motion(Flex);
 const API_KEY_A = "AIzaSyAvC-_PQjqwUEW1fsiiZDqTuvicrVzWfLk";
 const API_KEY_B = "AIzaSyBTnTZyd_i7HebefXtW6TjiTQPfCoj5sYQ";
 const API_KEY_C = "AIzaSyDt_ArJlixuBcsYMhtnmz89eExkyJGW_DU";
-
-const API_KEY_DEMO1 = "AIzaSyAT0trHQbfhJFY9xaTuleCVZ_tB9De5-ZQ";
-const API_KEY_DEMO2 = "AIzaSyDP_JZaL59rHMVuIzE6KqO9iXt_LMYQX28";
+const API_KEY_D = "AIzaSyAT0trHQbfhJFY9xaTuleCVZ_tB9De5-ZQ";
+const API_KEY_E = "AIzaSyDP_JZaL59rHMVuIzE6KqO9iXt_LMYQX28";
 
 const VideoPlayer = ({ details }) => {
-    const [videos, setVideos] = useState([]);
-    
-    const getVideosYT = async () => {
-       const info = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY_DEMO2}&type=video&q=${details[0]?.game?.name + " " + details[0]?.game?.released_at?.substring(0, 4) + " "}videogame trailer`);
-       const resp = info.data.items
-       setVideos(resp)
-    };
-    
-    useEffect(() => {
-        getVideosYT() 
-    }, [details])
-    
-    // console.log('videos: ', videos)
-    
-    const arr = [
-      {
-        id: videos[0]?.etag,
-        url: `https://www.youtube.com/embed/${videos[0]?.id?.videoId}`,
-      },
-      {
-        id: videos[1]?.etag,
-        url: `https://www.youtube.com/embed/${videos[1]?.id?.videoId}`,
-      },
-      {
-        id: videos[2]?.etag,
-        url: `https://www.youtube.com/embed/${videos[2]?.id?.videoId}`,
-      },
-      {
-        id: videos[3]?.etag,
-        url: `https://www.youtube.com/embed/${videos[3]?.id?.videoId}`,
-      },
-      {
-        id: videos[4]?.etag,
-        url: `https://www.youtube.com/embed/${videos[4]?.id?.videoId}`,
-      },
-    ];
-    
-    const [responsiveVideoPlayer] = useMediaQuery("(min-width: 850px)");
-    
-    const [width, setWidth] = useState(0);
-    const container = useRef();
-    
-    useEffect(() => {
-        responsiveVideoPlayer && setWidth(
-          container.current.scrollWidth - container.current.offsetWidth
+  const [videos, setVideos] = useState([]);
+
+  const getVideosYT = async () => {
+    try {
+      let info = await axios.get(
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY_A}&type=video&q=${
+          details[0]?.game?.name +
+          " " +
+          details[0]?.game?.released_at?.substring(0, 4) +
+          " "
+        }videogame trailer`
+      );
+      console.log(info.data);
+      const resp = await info.data.items;
+      setVideos(resp);
+    } catch (error) {
+      try {
+        let info = await axios.get(
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY_B}&type=video&q=${
+            details[0]?.game?.name +
+            " " +
+            details[0]?.game?.released_at?.substring(0, 4) +
+            " "
+          }videogame trailer`
         );
-    }, [])
-    
+        console.log(info.data);
+        const resp = await info.data.items;
+        setVideos(resp);
+      } catch (error) {
+        try {
+          let info = await axios.get(
+            `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY_C}&type=video&q=${
+              details[0]?.game?.name +
+              " " +
+              details[0]?.game?.released_at?.substring(0, 4) +
+              " "
+            }videogame trailer`
+          );
+          console.log(info.data);
+          const resp = await info.data.items;
+          setVideos(resp);
+        } catch (error) {
+          try {
+            let info = await axios.get(
+              `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY_D}&type=video&q=${
+                details[0]?.game?.name +
+                " " +
+                details[0]?.game?.released_at?.substring(0, 4) +
+                " "
+              }videogame trailer`
+            );
+            console.log(info.data);
+            const resp = await info.data.items;
+            setVideos(resp);
+          } catch (error) {
+            try {
+              let info = await axios.get(
+                `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${API_KEY_E}&type=video&q=${
+                  details[0]?.game?.name +
+                  " " +
+                  details[0]?.game?.released_at?.substring(0, 4) +
+                  " "
+                }videogame trailer`
+              );
+              console.log(info.data);
+              const resp = await info.data.items;
+              setVideos(resp);
+            } catch (error) {
+              console.log("ya me fundiste todas las keys");
+            }
+          }
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    getVideosYT();
+  }, [details]);
+
+  // console.log('videos: ', videos)
+
+  const arr = [
+    {
+      id: videos[0]?.etag,
+      url: `https://www.youtube.com/embed/${videos[0]?.id?.videoId}`,
+    },
+    {
+      id: videos[1]?.etag,
+      url: `https://www.youtube.com/embed/${videos[1]?.id?.videoId}`,
+    },
+    {
+      id: videos[2]?.etag,
+      url: `https://www.youtube.com/embed/${videos[2]?.id?.videoId}`,
+    },
+    {
+      id: videos[3]?.etag,
+      url: `https://www.youtube.com/embed/${videos[3]?.id?.videoId}`,
+    },
+    {
+      id: videos[4]?.etag,
+      url: `https://www.youtube.com/embed/${videos[4]?.id?.videoId}`,
+    },
+  ];
+
+  const [responsiveVideoPlayer] = useMediaQuery("(min-width: 850px)");
+
+  const [width, setWidth] = useState(0);
+  const container = useRef();
+
+  useEffect(() => {
+    responsiveVideoPlayer &&
+      setWidth(container.current.scrollWidth - container.current.offsetWidth);
+  }, []);
+
   return (
     <>
       {responsiveVideoPlayer ? (
@@ -79,11 +145,11 @@ const VideoPlayer = ({ details }) => {
             drag="x"
             dragConstraints={{ right: 0, left: -width }}
             whileTap={{ cursor: "grabbing" }}
-            bg="#8c06f7"
+            bg="#261130"
           >
             {arr.map((el) => {
               return (
-                <MotionBox key={el.id} p="70px" >
+                <MotionBox key={el.id} p="70px">
                   <ReactPlayer
                     controls
                     url={el.url}
@@ -96,14 +162,14 @@ const VideoPlayer = ({ details }) => {
           </MotionFlex>
         </MotionFlex>
       ) : (
-        <SimpleGrid columns={{md: 2, lg: 2}} spacing={10} mt='10rem'>
+        <SimpleGrid columns={{ md: 2, lg: 2 }} spacing={10} mt="10rem">
           {arr.map((el) => {
             return (
               <MotionBox key={el.id}>
                 <ReactPlayer
                   controls
                   url={el.url}
-                  width={{md: "330px", lg: "365px"}}
+                  width={{ md: "330px", lg: "365px" }}
                   height="210px"
                 />
               </MotionBox>
@@ -113,6 +179,6 @@ const VideoPlayer = ({ details }) => {
       )}
     </>
   );
-}
+};
 
 export default VideoPlayer;

@@ -186,7 +186,7 @@ const SearchBar = () => {
               fontSize="20px"
               _hover={{
                 cursor: "pointer",
-                color: "#a214c6",
+                // color: "#a214c6",
                 transition: "0.2s ease-in-out",
               }}
             >
@@ -294,7 +294,7 @@ const SearchBar = () => {
               <>
                 {/*gamesLoaded*/ products?.map((el, index) => {
                   return (
-                    <Link href={'/details/' + el.game.name} >
+                    <Link href={'/details/' + el.game.name} _hover={{backgroundColor: "none"}} colorScheme="whiteAlpha">
                     <GamesResults
                       key={index}
                       thumbnailSrc={

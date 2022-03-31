@@ -16,7 +16,7 @@ export const Cards = () => {
     });
   }, []);
 
-//   console.log(games);
+  //   console.log(games);
   return (
     <>
       <Heading fontSize="55px" fontWeight="300" ml="10px" mb="30px">
@@ -24,26 +24,45 @@ export const Cards = () => {
       </Heading>
       <SimpleGrid
         minChildWidth="250px"
-        spacing="60px"
+        columns={{
+          base: 1,
+          sssm: 1,
+          ssm: 1,
+          sm: 2,
+          md: 2,
+          lg: 3,
+          xl: 3,
+          xxl: 4,
+        }}
+        // spacing="60px"
+        spacingY={{
+          base: "200px",
+          sssm: "200px",
+          ssm: "180px",
+          sm: "80px",
+          md: "80px",
+          lg: "80px",
+          xl: "80px",
+        }}
         backgroundImage=" linear-gradient(0deg, transparent 24%, rgba(140, 6, 247, .09) 25%, rgba(140, 6, 247, .09) 26%, transparent 27%, transparent 74%, rgba(140, 6, 247, .09) 75%, rgba(140, 6, 247, .05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(140, 6, 247, .09) 25%, rgba(140, 6, 247, .09) 26%, transparent 27%, transparent 74%, rgba(140, 6, 247, .09) 75%, rgba(140, 6, 247, .09) 76%, transparent 77%, transparent)"
         backgroundSize="25px 25px"
       >
-        
-        {games
-          ? games.slice(0,8).map((g) => (
-              <Card
-                key={g.id}
-                id={g.id}
-                genres={g.genres}
-                name={g.name}
-                image={g.img}
-                // price={g.price}
-                // platform={g.platform}
-                productKey={g.productKey}
-              />
-            ))
-          : <Spinner />}
-          
+        {games ? (
+          games.slice(games.length - 8, games.length).map((g) => (
+            <Card
+              key={g.id}
+              id={g.id}
+              genres={g.genres}
+              name={g.name}
+              image={g.img}
+              // price={g.price}
+            //   platform={g.platform.map(el => el)}
+              productKey={g.productKey}
+            />
+          ))
+        ) : (
+          <Spinner />
+        )}
       </SimpleGrid>
     </>
   );
