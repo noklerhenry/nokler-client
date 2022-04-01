@@ -26,6 +26,8 @@ export const Card = ({
   fav,
   platform,
   store,
+  gameId,
+  game,
 }) => {
   const favClicked = useSelector((state) => state.gamesAddedToFav);
   const dispatch = useDispatch();
@@ -41,7 +43,15 @@ export const Card = ({
       dispatch(removeGameFavorite(index));
       dispatch(removeClickButtonFavorite(index));
     } else {
-      dispatch(addGameFavorite({ id, name, productKey }));
+      fav
+        ? dispatch(addGameFavorite({ id, name, productKey }))
+        : dispatch(
+            addGameFavorite({
+              id: gameId,
+              name: game?.name,
+              productKey,
+            })
+          );
       dispatch(clickedButtonFavorite(index));
     }
   };
@@ -112,7 +122,7 @@ export const Card = ({
       <Button size="sm" height="24px">
         <Link href={"/details/" + id}>See game</Link>
       </Button>
-      {fav && (
+      {fav ? (
         <Button
           key={id}
           border="none"
@@ -124,6 +134,23 @@ export const Card = ({
           onClick={() => handleFav(id)}
         >
           {favClicked.includes(id) ? (
+            <HiHeart color="red" />
+          ) : (
+            <HiOutlineHeart />
+          )}
+        </Button>
+      ) : (
+        <Button
+          key={gameId}
+          border="none"
+          bg="transparent"
+          outline="0"
+          boxShadow="0"
+          _hover={{ bg: "none" }}
+          _focus={{ outline: "0" }}
+          onClick={() => handleFav(gameId)}
+        >
+          {favClicked.includes(gameId) ? (
             <HiHeart color="red" />
           ) : (
             <HiOutlineHeart />

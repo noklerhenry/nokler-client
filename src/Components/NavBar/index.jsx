@@ -308,7 +308,7 @@ const NavBar = ({ toggle, mediaQueryNavMenu }) => {
                 cursor="pointer"
               >
                 <Button size="sm" mt="20px">
-                  <Link href="/gallery">All games</Link>
+                  <RouterLink to="/gallery">All games</RouterLink>
                 </Button>
               </Box>
 

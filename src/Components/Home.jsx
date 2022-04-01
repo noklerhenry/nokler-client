@@ -4,10 +4,10 @@ import { Box } from "@chakra-ui/react";
 import Hero from "./Hero/Hero";
 import Latest from "./Latest/Latest";
 import { GenreGames } from "./GenreGames";
-import useScrollTop from "./useScrollTop"
+import useScrollTop from "./useScrollTop";
 
 export const Home = () => {
-  const ScrollToTopOnMount = useScrollTop();  
+  const ScrollToTopOnMount = useScrollTop();
   return (
     <>
       <ScrollToTopOnMount />

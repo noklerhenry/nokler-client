@@ -47,7 +47,7 @@ import VideoPlayer from "../VideoPlayer/index.jsx";
 import { Key } from "./Key.jsx";
 
 export default function Detail() {
-  const { nameid } = useParams();
+  const { id } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -63,9 +63,9 @@ export default function Detail() {
   const bg = useColorModeValue("#efefef", "#18181880");
   //const color = useColorModeValue('white', 'gray.800')
 
-  //   console.log(nameid)
+  //   console.log(id)
   // useEffect(() => {
-  //   // axios.get('https://nokler-api.herokuapp.com/getProductByGame?game=' + nameId)
+  //   // axios.get('https://nokler-api.herokuapp.com/getProductByGame?game=' + id)
   //   // .then((response) =>{
   //   //   console.log(response)
   //   //   setTheGame(response.data)
@@ -74,7 +74,7 @@ export default function Detail() {
 
   useEffect(() => {
     dispatch(getAllProducts());
-    dispatch(getGameDetails(nameid));
+    dispatch(getGameDetails(id));
     // console.log(details)
   }, []);
 
@@ -252,7 +252,7 @@ export default function Detail() {
                   <Key
                     g={g}
                     handleCart={handleCart}
-                    nameid={nameid}
+                    id={id}
                     onCartOpen={onCartOpen}
                   />
                 ))}
