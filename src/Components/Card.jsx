@@ -127,7 +127,7 @@ export const Card = ({
       <Button size="sm" height="24px">
         <Link href={"/details/" + id}>See game</Link>
       </Button>
-      {fav ? (
+      {/* {fav ? ( */}
         <Button
           key={id}
           border="none"
@@ -144,8 +144,8 @@ export const Card = ({
             <HiOutlineHeart />
           )}
         </Button>
-      ) : (
-        <Button
+      {/* ) : ( */}
+        {/* <Button
           key={gameId}
           border="none"
           bg="transparent"
@@ -161,7 +161,7 @@ export const Card = ({
             <HiOutlineHeart />
           )}
         </Button>
-      )}
+      )} */}
     </Box>
   );
 };
