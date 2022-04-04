@@ -50,7 +50,7 @@ export const Card = ({
         ? dispatch(addGameFavorite({ id, name, productKey }))
         : dispatch(
             addGameFavorite({
-              id: gameId,
+              id,
               name: game?.name,
               region,
               price,
