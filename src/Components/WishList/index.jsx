@@ -112,12 +112,7 @@ const WishList = () => {
                                       }`
                                     }`}</ListItem>
                                   );
-                                }) || (
-                                  <ListItem
-                                    color={colorMode === "dark" ? "white" : ""}
-                                  >{`${game?.region + " - $" + game?.price + `${game?.arrayKey?.length === 0 ? " - Key Not Available" : " - Key Available"}`}`}
-                                  </ListItem>
-                                )
+                                })
                               : game?.productKey?.map((el) => {
                                   return (
                                     <ListItem
@@ -132,7 +127,7 @@ const WishList = () => {
                                   <ListItem
                                     color={colorMode === "dark" ? "white" : ""}
                                   >
-                                    {`${game?.region + " - $" + game?.price}`}
+                                    {`${game?.region + " - $" + game?.price + `${game?.arrayKey?.length === 0 ? " - Key Not Available" : " - Key Available"}`}`}
                                   </ListItem>
                                 )}
                           </UnorderedList>
