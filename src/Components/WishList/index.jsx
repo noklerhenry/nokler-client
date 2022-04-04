@@ -113,7 +113,7 @@ const WishList = () => {
                                     }`}</ListItem>
                                   );
                                 })
-                              : (game?.productKey?.map((el) => {
+                              : game?.productKey?.map((el) => {
                                   return (
                                     <ListItem
                                       color={
@@ -123,7 +123,13 @@ const WishList = () => {
                                       el.region + " - $" + el.price
                                     }`}</ListItem>
                                   );
-                                })) || (`${game.region + " - $" + game.price}`)}
+                                }) || (
+                                  <ListItem
+                                    color={colorMode === "dark" ? "white" : ""}
+                                  >
+                                    {`${game.region + " - $" + game.price}`}
+                                  </ListItem>
+                                )}
                           </UnorderedList>
                         </PopoverBody>
                       </PopoverContent>
