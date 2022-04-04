@@ -94,7 +94,7 @@ const WishList = () => {
                         <PopoverCloseButton color="white" mt="5px" />
                         <PopoverBody>
                           <UnorderedList>
-                            {game?.productKey?.length >= 2
+                            {game?.productKey?.length >= 1
                               ? game?.productKey?.map((el) => {
                                   return (
                                     <ListItem
