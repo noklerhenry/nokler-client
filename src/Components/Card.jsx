@@ -28,6 +28,8 @@ export const Card = ({
   store,
   gameId,
   game,
+  region,
+  price
 }) => {
   const favClicked = useSelector((state) => state.gamesAddedToFav);
   const dispatch = useDispatch();
@@ -49,7 +51,9 @@ export const Card = ({
             addGameFavorite({
               id: gameId,
               name: game?.name,
-              productKey,
+            //   productKey,
+              region,
+              price
             })
           );
       dispatch(clickedButtonFavorite(index));
