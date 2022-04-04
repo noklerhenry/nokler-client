@@ -68,7 +68,7 @@ export default function SeeMorePaginated({ gamesFiltered }) {
               platform={product?.platform?.name}
               gameId={product?.gameId}
               game={product?.game}
-            //   productKey={[product?.key]}
+              arrayKey={[product?.key]}
             />
           );
         })}
