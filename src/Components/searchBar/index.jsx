@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 // import axios from "axios";
 import { Box, Flex, Link } from "@chakra-ui/react";
 import { IoSearch, IoClose } from "react-icons/io5";
@@ -9,7 +9,6 @@ import FadeLoader from "react-spinners/FadeLoader";
 import useDebounce from "./useDebounce";
 import GamesResults from "./gamesResults";
 import { getGamesByName } from "../../Actions";
-
 
 const MotionBox = motion(Box);
 const MotionCloseIcon = motion(Box);
@@ -34,17 +33,17 @@ const SearchBar = () => {
   const [expanded, setExpanded] = useState(false);
   const [loading, setLoading] = useState(false);
   const [ref, isClickedOutside] = useClickOutside();
-//   const [gamesLoaded, setGamesLoaded] = useState([]);
+  //   const [gamesLoaded, setGamesLoaded] = useState([]);
   const [noGamesFound, setNoGamesFound] = useState(false);
-  
-  const dispatch = useDispatch()
-  const products = useSelector((state) => state.products)
-  
-  useEffect(() => {
-      console.log(products)
-  }, [products])
 
-//   const isEmpty = !gamesLoaded || gamesLoaded.length === 0;
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products);
+
+  useEffect(() => {
+    console.log(products);
+  }, [products]);
+
+  //   const isEmpty = !gamesLoaded || gamesLoaded.length === 0;
   const isEmpty = !products || products.length === 0;
 
   const expandContainer = () => {
@@ -71,7 +70,7 @@ const SearchBar = () => {
     setExpanded(false);
     setLoading(false);
     setTimeout(() => {
-    //   gamesLoaded?.splice(0, gamesLoaded.length);
+      //   gamesLoaded?.splice(0, gamesLoaded.length);
       products?.splice(0, products.length);
     }, 1100);
     setNoGamesFound(false);
@@ -85,10 +84,10 @@ const SearchBar = () => {
   }, [isClickedOutside]);
 
   // protect the url, denies any error of typing
-//   const prepareSearchQuery = (query) => {
-//     const api = `https://api.rawg.io/api/games?key=c22fa2939a1146329268dbae808c1722&search=${query}&page_size=8`;
-//     return encodeURI(api);
-//   };
+  //   const prepareSearchQuery = (query) => {
+  //     const api = `https://api.rawg.io/api/games?key=c22fa2939a1146329268dbae808c1722&search=${query}&page_size=8`;
+  //     return encodeURI(api);
+  //   };
 
   // only is gonna running after the end of 500 milliseconds or in case the user stop typing
   const searchGame = () => {
@@ -99,7 +98,7 @@ const SearchBar = () => {
     setNoGamesFound(false);
 
     // const URL = prepareSearchQuery(inputGame);
-    dispatch(getGamesByName(inputGame))
+    dispatch(getGamesByName(inputGame));
     // const response = await axios
     //   .get(URL)
     //   .catch((err) => console.log("Error Api Data: ", err));
@@ -115,17 +114,17 @@ const SearchBar = () => {
     //   console.log("Empty Response: ", response.data.results);
     //   setLoading(false);
     // }
-    
-    if(products.length){
-        console.log("Successful Response: ", products);
-        setLoading(false);
-        // setGamesLoaded(game);
-        if(products && products.length === 0){
-            setNoGamesFound(true);
-        }
+
+    if (products.length) {
+      console.log("Successful Response: ", products);
+      setLoading(false);
+      // setGamesLoaded(game);
+      if (products && products.length === 0) {
+        setNoGamesFound(true);
+      }
     } else {
-        console.log("Empty Response: ", products)
-        setLoading(false)
+      console.log("Empty Response: ", products);
+      setLoading(false);
     }
   };
 
@@ -254,7 +253,7 @@ const SearchBar = () => {
             flexDir="column"
             p="1em"
             overflowY="auto"
-            borderRadius='20px'
+            borderRadius="20px"
           >
             {loading ? ( // LoadingWrapper
               <Flex w="100%" h="100%" align="center" justifyContent="center">
@@ -292,24 +291,32 @@ const SearchBar = () => {
               )}
             {!loading && !isEmpty && (
               <>
-                {/*gamesLoaded*/ products?.map((el, index) => {
-                  return (
-                    <Link href={'/details/' + el.game.name} _hover={{backgroundColor: "none"}} colorScheme="whiteAlpha">
-                    <GamesResults
-                      key={index}
-                      thumbnailSrc={
-                        el.game.image
-                          ? el.game.image
-                          : "https://www.sinrumbofijo.com/wp-content/uploads/2016/05/default-placeholder.png"
-                      }
-                      name={el.game.name}
-                      rating={
-                        (el.game.rating !== 0 || el.game.rating === undefined) ? "⭐" + ' '+ el.game.rating : "⭐ - ⭐"
-                      }
-                    />
-                    </Link>
-                  );
-                })}
+                {
+                  /*gamesLoaded*/ products?.map((el, index) => {
+                    return (
+                      <Link
+                        href={"/details/" + el.id}
+                        _hover={{ backgroundColor: "none" }}
+                        colorScheme="whiteAlpha"
+                      >
+                        <GamesResults
+                          key={index}
+                          thumbnailSrc={
+                            el.game.image
+                              ? el.game.image
+                              : "https://www.sinrumbofijo.com/wp-content/uploads/2016/05/default-placeholder.png"
+                          }
+                          name={el.game.name}
+                          rating={
+                            el.game.rating !== 0 || el.game.rating === undefined
+                              ? "⭐" + " " + el.game.rating
+                              : "⭐ - ⭐"
+                          }
+                        />
+                      </Link>
+                    );
+                  })
+                }
                 {/* <Flex // AllResultsButton
                   as="button"
                   bgColor="#000"
