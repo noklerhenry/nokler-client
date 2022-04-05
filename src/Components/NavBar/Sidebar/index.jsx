@@ -272,7 +272,7 @@ const SideBar = ({ Open, toggle, mediaQueryNavMenu }) => {
               </RouterLink>
             </Box>
             <Box w="100%" mt="10px">
-              <Link href="/gallery" _hover="#222222">
+              <RouterLink to="/gallery" _hover="#222222">
                 <Button
                   mt="0px"
                   color="#8c06f7"
@@ -284,7 +284,7 @@ const SideBar = ({ Open, toggle, mediaQueryNavMenu }) => {
                   <FaGamepad size="21" />
                   &nbsp;All games
                 </Button>
-              </Link>
+              </RouterLink>
             </Box>
             <Box w="100%" mt="10px">
               <RouterLink to="/wishlist" _hover="#222222">

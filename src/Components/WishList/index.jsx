@@ -94,7 +94,7 @@ const WishList = () => {
                         <PopoverCloseButton color="white" mt="5px" />
                         <PopoverBody>
                           <UnorderedList>
-                            {game?.productKey?.length >= 2
+                            {game?.productKey?.length >= 1
                               ? game?.productKey?.map((el) => {
                                   return (
                                     <ListItem
@@ -123,7 +123,13 @@ const WishList = () => {
                                       el.region + " - $" + el.price
                                     }`}</ListItem>
                                   );
-                                })}
+                                }) || (
+                                  <ListItem
+                                    color={colorMode === "dark" ? "white" : ""}
+                                  >
+                                    {`${game?.region + " - $" + game?.price + `${game?.arrayKey?.length === 0 ? " - Key Not Available" : " - Key Available"}`}`}
+                                  </ListItem>
+                                )}
                           </UnorderedList>
                         </PopoverBody>
                       </PopoverContent>
@@ -165,7 +171,6 @@ const WishList = () => {
                 );
               })}
             </SimpleGrid>
-            ``
           </>
         ) : (
           <Landing />
